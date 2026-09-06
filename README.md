@@ -23,8 +23,9 @@ Revisar esto a mano, retailer por retailer, no escala. Este proyecto:
 ```
 pricetracker/
   adapters/
-    vtex.py              # PlazaVea, Promart, Oechsle (misma plataforma VTEX)
+    vtex.py              # PlazaVea, Promart, Oechsle, Claro (misma plataforma VTEX)
     falabella_nextjs.py  # Falabella, Sodimac (JSON embebido __NEXT_DATA__)
+    entel_endeca.py      # Entel (Oracle ATG/Endeca -- JSON pidiendo Accept: application/json)
   retailers.json          # qué retailer, qué plataforma, qué categorías/vendedores
   db.py                    # esquema SQLite + inserción + detección de cambios
   run.py                   # orquestador: lee config -> llama adaptador -> guarda
@@ -83,11 +84,27 @@ corrida.
    con la misma interfaz (`fetch_*` + `extract_*`), y registrarlo en el
    diccionario `ADAPTERS` de `run.py`.
 
+### Estado de los operadores móviles (investigado 06/09/2026)
+
+- **Claro**: soportado. VTEX estándar (`tienda.claro.com.pe`), mismo adaptador
+  que PlazaVea/Promart.
+- **Entel**: soportado. NO es VTEX -- corre en Oracle ATG/Endeca. La página de
+  categoría normal no trae los datos en el HTML, pero la misma URL responde
+  el catálogo completo en JSON si se pide con header `Accept:
+  application/json`. Adaptador propio: `adapters/entel_endeca.py`.
+- **Bitel**: NO soportado por ahora. `tienda.bitel.com.pe` está detrás de
+  Cloudflare y devuelve HTTP 401 a cualquier request simple, headers de
+  navegador incluidos. Necesita browser real o una herramienta tipo Bright
+  Data para pasar el challenge.
+- **Movistar**: NO soportado por ahora. Es un sitio WordPress que carga los
+  precios vía JavaScript -- no hay JSON embebido ni API pública detectada.
+  Necesita browser real (Bright Data/Playwright).
+
+Bitel y Movistar quedan en `no_soportados` dentro de `retailers.json`, con el
+motivo documentado, para no repetir la investigación desde cero más adelante.
+
 Pendientes de investigar (ver `pendientes_de_investigar` en `retailers.json`):
-Tottus, Metro, Wong, los operadores móviles (Claro, Movistar, Entel, Bitel) y
-los sitios de fabricante (Samsung, Xiaomi, Huawei Perú). Es probable que los
-operadores necesiten un método más pesado (browser real / Bright Data) porque
-suelen cargar precios vía JavaScript sin JSON embebido ni API pública.
+Tottus, Metro, Wong y los sitios de fabricante (Samsung, Xiaomi, Huawei Perú).
 
 ## Limitaciones a tener presentes
 

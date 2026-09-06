@@ -29,7 +29,7 @@ import sys
 from pathlib import Path
 from datetime import date
 
-from adapters import vtex, falabella_nextjs
+from adapters import vtex, falabella_nextjs, entel_endeca
 import db
 
 CONFIG_PATH = Path(__file__).parent / "retailers.json"
@@ -61,9 +61,18 @@ def run_falabella_nextjs(retailer_cfg: dict, target_brands: set[str]) -> list[di
     return rows
 
 
+def run_entel_endeca(retailer_cfg: dict, target_brands: set[str]) -> list[dict]:
+    rows = []
+    for categoria, path in retailer_cfg.get("categorias", {}).items():
+        productos = entel_endeca.fetch_category(retailer_cfg["base_domain"], path)
+        rows += entel_endeca.extract_rows(productos, categoria, retailer_cfg["nombre"], target_brands)
+    return rows
+
+
 ADAPTERS = {
     "vtex": run_vtex,
     "falabella_nextjs": run_falabella_nextjs,
+    "entel_endeca": run_entel_endeca,
 }
 
 

@@ -37,7 +37,8 @@
         "Smartphones": "https://www.falabella.com.pe/falabella-pe/category/cat760706/Celulares-y-Smartphones",
         "Accesorios": "https://www.falabella.com.pe/falabella-pe/category/cat12020463/Accesorios-Celulares"
       },
-      "vendedores_honor_conocidos": ["sany-distribuidor-autorizado", "millennials"]
+      "vendedores_honor_conocidos": ["millennials"],
+      "nota": "El slug 'sany-distribuidor-autorizado' NO está confirmado (se probó a mano con el nombre visible 'Sany Distribuidor Autorizado' codificado en la URL, pero no se validó el slug real vía la página de producto como se hizo con 'millennials'). Antes de confiar en él, abrir un producto vendido por Sany y revisar el link 'Vendido por' para sacar el slug real, igual que se hizo con Millennials."
     },
     {
       "nombre": "Sodimac",
@@ -48,10 +49,38 @@
         "Tablets": "https://www.sodimac.com.pe/sodimac-pe/lista/cat270476/Tablets"
       },
       "nota": "Misma plataforma que Falabella -- validado que carga __NEXT_DATA__, falta correr y revisar campos."
+    },
+    {
+      "nombre": "Claro",
+      "plataforma": "vtex",
+      "base_domain": "https://tienda.claro.com.pe",
+      "categorias": {
+        "Smartphones": "personas/catalogo-celulares/liberados"
+      },
+      "nota": "Confirmado 06/09/2026: VTEX estándar, misma API pública que PlazaVea/Promart. 4 SKUs Honor detectados en la primera prueba, todos vendidos directo por 'Tienda Claro'."
+    },
+    {
+      "nombre": "Entel",
+      "plataforma": "entel_endeca",
+      "base_domain": "https://miportal.entel.pe",
+      "categorias": {
+        "Smartphones": "personas/catalogo/liberados",
+        "Accesorios": "personas/catalogo/accesorios"
+      },
+      "nota": "Confirmado 06/09/2026: NO es VTEX (los meta-tags de idioma/país se parecían, pero es una falsa alarma). Corre en Oracle ATG/Endeca Commerce. La página de categoría normal (HTML) no trae datos, pero la MISMA url responde JSON completo si se pide con header 'Accept: application/json' -- no hace falta ninguna API rara ni JS. Sin paginación real en las categorías probadas (todo el catálogo sale en un solo request). 8 SKUs Honor detectados en 'liberados'. Adaptador nuevo: adapters/entel_endeca.py."
+    }
+  ],
+  "no_soportados": [
+    {
+      "nombre": "Bitel",
+      "motivo": "Bloqueado por Cloudflare (tienda.bitel.com.pe devuelve HTTP 401 con body de 9 bytes 'Server: cloudflare', incluso agregando headers de navegador reales). Necesita browser real o una herramienta tipo Bright Data para pasar el challenge -- no es viable con requests simple."
+    },
+    {
+      "nombre": "Movistar",
+      "motivo": "www.movistar.com.pe/celulares es WordPress y renderiza los precios con JavaScript -- no hay JSON embebido ni API pública detectada, los nombres de producto solo aparecen en meta tags, no en el contenido real de la página. Necesita browser real (Bright Data/Playwright) para poder leer precios."
     }
   ],
   "pendientes_de_investigar": [
-    "Tottus", "Metro", "Wong", "Claro Perú", "Movistar Perú", "Entel Perú", "Bitel",
-    "Samsung Perú", "Xiaomi Perú", "Huawei Perú"
+    "Tottus", "Metro", "Wong", "Samsung Perú", "Xiaomi Perú", "Huawei Perú"
   ]
 }
