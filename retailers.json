@@ -1,0 +1,57 @@
+{
+  "target_brands": ["HONOR", "SAMSUNG", "XIAOMI", "MOTOROLA", "APPLE", "REDMI", "POCO"],
+  "retailers": [
+    {
+      "nombre": "PlazaVea",
+      "plataforma": "vtex",
+      "base_domain": "https://www.plazavea.com.pe",
+      "categorias": {
+        "Smartphones": "tecnologia/telefonia/celulares-y-smartphones",
+        "Tablets": "tecnologia/computo/tablets"
+      }
+    },
+    {
+      "nombre": "Promart",
+      "plataforma": "vtex",
+      "base_domain": "https://www.promart.pe",
+      "categorias": {
+        "Smartphones": "tecnologia/telefonia/celulares-y-smartphones",
+        "Tablets": "tecnologia/computo/tablets"
+      }
+    },
+    {
+      "nombre": "Oechsle",
+      "plataforma": "vtex",
+      "base_domain": "https://www.oechsle.pe",
+      "categorias": {
+        "Tablets": "tecnologia/computo/tablets",
+        "Accesorios": "tecnologia/telefonia/accesorios-para-celulares"
+      },
+      "nota": "Sin URL estable de Smartphones confirmada en el directorio original -- validar."
+    },
+    {
+      "nombre": "Falabella",
+      "plataforma": "falabella_nextjs",
+      "base_domain": "https://www.falabella.com.pe",
+      "categorias": {
+        "Smartphones": "https://www.falabella.com.pe/falabella-pe/category/cat760706/Celulares-y-Smartphones",
+        "Accesorios": "https://www.falabella.com.pe/falabella-pe/category/cat12020463/Accesorios-Celulares"
+      },
+      "vendedores_honor_conocidos": ["sany-distribuidor-autorizado", "millennials"]
+    },
+    {
+      "nombre": "Sodimac",
+      "plataforma": "falabella_nextjs",
+      "base_domain": "https://www.sodimac.com.pe",
+      "categorias": {
+        "Smartphones": "https://www.sodimac.com.pe/sodimac-pe/lista/cat760706/Celulares-y-Telefonos",
+        "Tablets": "https://www.sodimac.com.pe/sodimac-pe/lista/cat270476/Tablets"
+      },
+      "nota": "Misma plataforma que Falabella -- validado que carga __NEXT_DATA__, falta correr y revisar campos."
+    }
+  ],
+  "pendientes_de_investigar": [
+    "Tottus", "Metro", "Wong", "Claro Perú", "Movistar Perú", "Entel Perú", "Bitel",
+    "Samsung Perú", "Xiaomi Perú", "Huawei Perú"
+  ]
+}
