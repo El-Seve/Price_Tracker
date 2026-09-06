@@ -95,6 +95,78 @@
         "Smartphones": "tecnologia/telefonia/celulares-y-smartphones"
       },
       "nota": "Confirmado 06/09/2026: VTEX estándar (mismo grupo/plataforma que Metro). 16 SKUs Honor en la primera prueba."
+    },
+    {
+      "nombre": "Carsa",
+      "plataforma": "vtex",
+      "base_domain": "https://www.carsa.pe",
+      "categorias": {
+        "Smartphones": "tecnologia/telefonia/celulares-y-smartphones"
+      },
+      "nota": "Confirmado 06/09/2026: VTEX estándar. 14 SKUs Honor en la primera prueba."
+    },
+    {
+      "nombre": "Coolbox",
+      "plataforma": "vtex",
+      "base_domain": "https://www.coolbox.pe",
+      "categorias": {
+        "Smartphones": "tecnologia/telefonia/celulares-y-smartphones"
+      },
+      "nota": "Confirmado 06/09/2026: VTEX estándar. 46 SKUs Honor en la primera prueba (catálogo grande, 399 filas totales)."
+    },
+    {
+      "nombre": "Hiraoka",
+      "plataforma": "magento_html",
+      "categorias": {
+        "Smartphones": "https://hiraoka.com.pe/celulares-y-telefonia/celulares"
+      },
+      "nota": "Confirmado 06/09/2026: Magento, renderiza precios del lado del servidor (sin JS). Adaptador nuevo: adapters/magento_html.py, parsea el HTML de listado con paginación ?p=N. 22 SKUs Honor en la primera prueba."
+    },
+    {
+      "nombre": "La Curacao",
+      "plataforma": "magento_html",
+      "categorias": {
+        "Smartphones": "https://www.lacuracao.pe/tecnologia/celulares/celulares-y-smartphones.html"
+      },
+      "nota": "Confirmado 06/09/2026: mismo adaptador magento_html.py que Hiraoka/Tiendas EFE. 51 SKUs Honor en la primera prueba. OJO: comparte catálogo idéntico con Tiendas EFE (mismo grupo corporativo) -- los precios suelen salir iguales en ambas."
+    },
+    {
+      "nombre": "Tiendas EFE",
+      "plataforma": "magento_html",
+      "categorias": {
+        "Smartphones": "https://www.efe.com.pe/tecnologia/celulares/celulares-y-smartphones.html"
+      },
+      "nota": "Confirmado 06/09/2026: mismo adaptador magento_html.py que Hiraoka/La Curacao. 51 SKUs Honor en la primera prueba. OJO: comparte catálogo idéntico con La Curacao (mismo grupo corporativo)."
+    },
+    {
+      "nombre": "Covers Store Perú",
+      "plataforma": "shopify_json",
+      "categorias": {
+        "Accesorios": "https://www.coversstoreperu.com/collections/celulares"
+      },
+      "nota": "Confirmado 06/09/2026: Shopify -- se lee agregando /products.json a la colección, sin scraping de HTML. Adaptador nuevo: adapters/shopify_json.py. 113 SKUs Honor en la primera prueba (son cases/accesorios, no equipos)."
+    },
+    {
+      "nombre": "iShop Perú",
+      "plataforma": "shopify_json",
+      "categorias": {
+        "Equipos Apple": "https://pe.tiendasishop.com"
+      },
+      "nota": "Confirmado 06/09/2026: Shopify, mismo adaptador. Es Apple Premium Partner -- todo el catálogo es Apple (435 productos), útil solo como referencia de precio Apple, no trae Honor/otras marcas."
+    },
+    {
+      "nombre": "Mac Center Perú",
+      "plataforma": "shopify_json",
+      "categorias": {
+        "Equipos Apple": "https://mac-center.com.pe"
+      },
+      "nota": "Confirmado 06/09/2026: Shopify, mismo adaptador. Igual que iShop, Apple Premium Partner -- 544 productos, todos Apple."
+    },
+    {
+      "nombre": "Celivery Perú",
+      "plataforma": "woocommerce_store_api",
+      "base_domain": "https://celiveryperu.com",
+      "nota": "Confirmado 06/09/2026: el dominio 'celivery.com' que aparecía en el directorio original ya no existe (está parkeado/en venta) -- el real es celiveryperu.com. Es WordPress + WooCommerce: se lee con la Store API pública (wp-json/wc/store/products?search=<marca>), sin necesidad de scraping ni API key. Adaptador nuevo: adapters/woocommerce_store_api.py, busca por marca porque la Store API no siempre trae un campo 'brand' confiable. 3 SKUs Honor en la primera prueba."
     }
   ],
   "no_soportados": [
@@ -117,6 +189,46 @@
     {
       "nombre": "Huawei Perú",
       "motivo": "huawei.com/pe no expone JSON-LD ni JSON embebido detectable en la página probada. Mismo caso que Xiaomi -- pendiente de una investigación más profunda o browser real."
+    },
+    {
+      "nombre": "Ripley",
+      "motivo": "Bloqueado por Cloudflare con challenge JS activo ('Just a moment...', Cf-Mitigated: challenge) tanto en simple.ripley.com.pe como en www.ripley.com.pe. Igual que Bitel, necesita browser real."
+    },
+    {
+      "nombre": "Mercado Libre Perú",
+      "motivo": "La API pública de búsqueda (api.mercadolibre.com/sites/MPE/search) ahora devuelve 403 sin token de aplicación, y la web (listado.mercadolibre.com.pe) detecta el request como 'suspicious traffic' y devuelve una página anti-bot en vez del listado. Es un marketplace enorme además -- necesitaría lógica de búsqueda por producto, no un catálogo fijo. Requiere browser real o la API oficial con credenciales."
+    },
+    {
+      "nombre": "Rappi Perú",
+      "motivo": "El catálogo depende de seleccionar una tienda/ubicación específica dentro de la app -- no hay una URL de categoría fija y pública equivalente a un 'catálogo'. Necesitaría simular la selección de tienda vía browser real."
+    },
+    {
+      "nombre": "HONOR Perú (tienda oficial)",
+      "motivo": "www.honor.com/pe -- los precios están en variables de plantilla del lado del cliente (ej. {{colorObj.lastPrdPackagePrice}}), se rellenan con JavaScript/AJAX después de cargar la página. No hay precio en el HTML estático ni JSON-LD de producto. Necesita browser real."
+    },
+    {
+      "nombre": "Lenovo Perú",
+      "motivo": "www.lenovo.com/pe no expone JSON-LD de producto (solo breadcrumbs) ni JSON embebido detectable en la categoría de smartphones/tablets. Pendiente de revisión más profunda o browser real."
+    },
+    {
+      "nombre": "Agiletech",
+      "motivo": "No aplica -- es tienda de laptops/PC/redes, no vende celulares (confirmado buscando 'honor', 'samsung', 'xiaomi', 'motorola' en su API pública de WooCommerce: cero resultados). Queda fuera del tracker por no ser relevante, no por estar bloqueada."
+    },
+    {
+      "nombre": "Juntoz",
+      "motivo": "Sin plataforma identificada (no es VTEX, Falabella/Next.js, Magento, Shopify ni WooCommerce) y con timeouts intermitentes al acceder. Pendiente de una investigación más profunda."
+    },
+    {
+      "nombre": "Memory Kings",
+      "motivo": "Sin plataforma identificada con las firmas conocidas -- parece un carrito de compras a medida. Pendiente de revisión más profunda; además, por el rubro (cómputo/accesorios) es dudoso que tenga celulares Honor."
+    },
+    {
+      "nombre": "Pasaje Central",
+      "motivo": "Sin plataforma identificada con las firmas conocidas. Es tienda de accesorios para móviles/tablets/laptops -- relevante para la categoría Accesorios si se logra identificar la plataforma. Pendiente de revisión más profunda."
+    },
+    {
+      "nombre": "LoQuiero",
+      "motivo": "El dominio correcto es loquiero.pe (no loquiero.com, que apunta a otro sitio). Sin plataforma identificada con las firmas conocidas -- sitio pequeño de accesorios. Pendiente de revisión más profunda."
     }
   ],
   "pendientes_de_investigar": []

@@ -23,10 +23,13 @@ Revisar esto a mano, retailer por retailer, no escala. Este proyecto:
 ```
 pricetracker/
   adapters/
-    vtex.py              # PlazaVea, Promart, Oechsle, Claro, Metro, Wong (VTEX)
-    falabella_nextjs.py  # Falabella, Sodimac, Tottus (JSON embebido __NEXT_DATA__)
-    entel_endeca.py      # Entel (Oracle ATG/Endeca -- JSON pidiendo Accept: application/json)
-    schema_jsonld.py     # genérico JSON-LD (funciona en Samsung Perú, pero bloqueado por Akamai -- ver abajo)
+    vtex.py                  # PlazaVea, Promart, Oechsle, Claro, Metro, Wong, Carsa, Coolbox (VTEX)
+    falabella_nextjs.py      # Falabella, Sodimac, Tottus (JSON embebido __NEXT_DATA__)
+    entel_endeca.py          # Entel (Oracle ATG/Endeca -- JSON pidiendo Accept: application/json)
+    schema_jsonld.py         # genérico JSON-LD (funciona en Samsung Perú, pero bloqueado por Akamai -- ver abajo)
+    magento_html.py          # Hiraoka, La Curacao, Tiendas EFE (Magento, precios server-side)
+    shopify_json.py          # Covers Store, iShop, Mac Center (Shopify -- /products.json)
+    woocommerce_store_api.py # Celivery Perú (WooCommerce Store API pública)
   retailers.json          # qué retailer, qué plataforma, qué categorías/vendedores
   db.py                    # esquema SQLite + inserción + detección de cambios
   run.py                   # orquestador: lee config -> llama adaptador -> guarda
@@ -121,8 +124,46 @@ motivo documentado, para no repetir la investigación desde cero más adelante.
   automática diaria sin una capa de proxy/rotación de IP (Bright Data), así
   que queda en `no_soportados` -- el adaptador queda listo por si en el
   futuro se agrega esa capa.
-- **Xiaomi Perú** y **Huawei Perú**: sin JSON-LD ni JSON embebido detectable
-  en las páginas probadas. Necesitarían más investigación o browser real.
+- **Xiaomi Perú**, **Huawei Perú** y **Lenovo Perú**: sin JSON-LD ni JSON
+  embebido detectable en las páginas probadas. Necesitarían más investigación
+  o browser real.
+- **HONOR Perú (tienda oficial)**: los precios se rellenan por JavaScript
+  sobre una plantilla del lado del cliente (`{{colorObj.lastPrdPackagePrice}}`
+  literal en el HTML) -- no hay precio estático que leer. Necesita browser real.
+
+### Tiendas especializadas en tecnología (investigado 06/09/2026)
+
+- **Carsa** y **Coolbox**: soportados. VTEX estándar, mismo adaptador que
+  PlazaVea/Metro/Wong.
+- **Hiraoka**, **La Curacao** y **Tiendas EFE**: soportados. Las tres corren
+  Magento con el listado renderizado del lado del servidor (sin JS) --
+  adaptador nuevo `adapters/magento_html.py`, que también captura el
+  "Por &lt;vendedor&gt;" cuando el producto lo vende un tercero dentro del
+  marketplace. OJO: La Curacao y Tiendas EFE son del mismo grupo corporativo
+  y comparten el catálogo/precios casi exactos.
+- **Covers Store Perú**, **iShop Perú** y **Mac Center Perú**: soportados.
+  Las tres son Shopify -- se leen agregando `/products.json` a la colección,
+  sin tocar el HTML (`adapters/shopify_json.py`). iShop y Mac Center son
+  Apple Premium Partners: todo su catálogo es Apple, sirven como referencia
+  de precio Apple pero no traen Honor/otras marcas.
+- **Celivery Perú**: soportado, pero con una corrección de dominio -- el que
+  aparecía en el directorio original (`celivery.com`) está parkeado/en venta;
+  el real es `celiveryperu.com`. Es WordPress + WooCommerce, se lee con la
+  Store API pública (`adapters/woocommerce_store_api.py`).
+- **Ripley**: NO soportado. Cloudflare con challenge JS activo, igual que
+  Bitel -- necesita browser real.
+- **Mercado Libre Perú**: NO soportado. Su API pública de búsqueda ahora pide
+  token de aplicación (403 sin él) y la web detecta el request como tráfico
+  sospechoso. Además es un marketplace gigante -- necesitaría lógica de
+  búsqueda por producto, no un catálogo fijo.
+- **Rappi Perú**: NO soportado. El catálogo depende de elegir tienda/ubicación
+  dentro de la app, no hay una URL de categoría pública fija.
+- **Agiletech**: no aplica -- es tienda de laptops/PC/redes, no vende
+  celulares (confirmado por búsqueda vacía en su propia API).
+- **Juntoz**, **Memory Kings**, **Pasaje Central** y **LoQuiero**
+  (`loquiero.pe`, no `.com`): sin plataforma identificada con las firmas
+  conocidas (VTEX, Falabella, Magento, Shopify, WooCommerce). Pendientes de
+  una revisión más profunda -- no están descartados, solo sin resolver aún.
 
 Todo esto queda documentado en `no_soportados` dentro de `retailers.json`,
 con el motivo específico de cada uno, para no repetir la investigación desde

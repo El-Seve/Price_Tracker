@@ -29,7 +29,10 @@ import sys
 from pathlib import Path
 from datetime import date
 
-from adapters import vtex, falabella_nextjs, entel_endeca, schema_jsonld
+from adapters import (
+    vtex, falabella_nextjs, entel_endeca, schema_jsonld,
+    magento_html, shopify_json, woocommerce_store_api,
+)
 import db
 
 CONFIG_PATH = Path(__file__).parent / "retailers.json"
@@ -78,11 +81,38 @@ def run_schema_jsonld(retailer_cfg: dict, target_brands: set[str]) -> list[dict]
     return rows
 
 
+def run_magento_html(retailer_cfg: dict, target_brands: set[str]) -> list[dict]:
+    rows = []
+    for categoria, url in retailer_cfg.get("categorias", {}).items():
+        blocks = magento_html.fetch_category(url)
+        rows += magento_html.extract_rows(blocks, categoria, retailer_cfg["nombre"], target_brands)
+    return rows
+
+
+def run_shopify_json(retailer_cfg: dict, target_brands: set[str]) -> list[dict]:
+    rows = []
+    for categoria, url in retailer_cfg.get("categorias", {}).items():
+        productos = shopify_json.fetch_products(url)
+        rows += shopify_json.extract_rows(productos, categoria, retailer_cfg["nombre"], target_brands)
+    return rows
+
+
+def run_woocommerce_store_api(retailer_cfg: dict, target_brands: set[str]) -> list[dict]:
+    rows = []
+    for marca in target_brands:
+        productos = woocommerce_store_api.fetch_products_by_brand(retailer_cfg["base_domain"], marca)
+        rows += woocommerce_store_api.extract_rows(productos, "Smartphones", retailer_cfg["nombre"], marca)
+    return rows
+
+
 ADAPTERS = {
     "vtex": run_vtex,
     "falabella_nextjs": run_falabella_nextjs,
     "entel_endeca": run_entel_endeca,
     "schema_jsonld": run_schema_jsonld,
+    "magento_html": run_magento_html,
+    "shopify_json": run_shopify_json,
+    "woocommerce_store_api": run_woocommerce_store_api,
 }
 
 

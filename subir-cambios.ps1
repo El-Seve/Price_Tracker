@@ -1,4 +1,4 @@
-# subir-cambios.ps1
+﻿# subir-cambios.ps1
 # Un solo comando para subir cambios al repo sin chocar con los commits
 # automáticos del bot diario (.github/workflows/daily_scrape.yml).
 #
