@@ -29,7 +29,7 @@ import sys
 from pathlib import Path
 from datetime import date
 
-from adapters import vtex, falabella_nextjs, entel_endeca
+from adapters import vtex, falabella_nextjs, entel_endeca, schema_jsonld
 import db
 
 CONFIG_PATH = Path(__file__).parent / "retailers.json"
@@ -69,10 +69,20 @@ def run_entel_endeca(retailer_cfg: dict, target_brands: set[str]) -> list[dict]:
     return rows
 
 
+def run_schema_jsonld(retailer_cfg: dict, target_brands: set[str]) -> list[dict]:
+    rows = []
+    marca_fija = retailer_cfg.get("marca_fija", retailer_cfg["nombre"])
+    for categoria, url in retailer_cfg.get("categorias", {}).items():
+        productos = schema_jsonld.fetch_category(url)
+        rows += schema_jsonld.extract_rows(productos, categoria, retailer_cfg["nombre"], marca_fija, target_brands)
+    return rows
+
+
 ADAPTERS = {
     "vtex": run_vtex,
     "falabella_nextjs": run_falabella_nextjs,
     "entel_endeca": run_entel_endeca,
+    "schema_jsonld": run_schema_jsonld,
 }
 
 

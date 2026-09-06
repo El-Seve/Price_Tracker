@@ -68,6 +68,33 @@
         "Accesorios": "personas/catalogo/accesorios"
       },
       "nota": "Confirmado 06/09/2026: NO es VTEX (los meta-tags de idioma/país se parecían, pero es una falsa alarma). Corre en Oracle ATG/Endeca Commerce. La página de categoría normal (HTML) no trae datos, pero la MISMA url responde JSON completo si se pide con header 'Accept: application/json' -- no hace falta ninguna API rara ni JS. Sin paginación real en las categorías probadas (todo el catálogo sale en un solo request). 8 SKUs Honor detectados en 'liberados'. Adaptador nuevo: adapters/entel_endeca.py."
+    },
+    {
+      "nombre": "Tottus",
+      "plataforma": "falabella_nextjs",
+      "base_domain": "https://www.tottus.com.pe",
+      "categorias": {
+        "Smartphones": "https://www.tottus.com.pe/tottus-pe/lista/CATG47996/Smartphones"
+      },
+      "nota": "Confirmado 06/09/2026: mismo grupo/plataforma que Falabella (Next.js, __NEXT_DATA__). Reusa el adaptador falabella_nextjs sin cambios. 76 productos, ~8 SKUs Honor en la primera prueba."
+    },
+    {
+      "nombre": "Metro",
+      "plataforma": "vtex",
+      "base_domain": "https://www.metro.pe",
+      "categorias": {
+        "Smartphones": "tecnologia/telefonia/celulares-y-smartphones"
+      },
+      "nota": "Confirmado 06/09/2026: VTEX estándar (grupo Cencosud). 19 SKUs Honor en la primera prueba."
+    },
+    {
+      "nombre": "Wong",
+      "plataforma": "vtex",
+      "base_domain": "https://www.wong.pe",
+      "categorias": {
+        "Smartphones": "tecnologia/telefonia/celulares-y-smartphones"
+      },
+      "nota": "Confirmado 06/09/2026: VTEX estándar (mismo grupo/plataforma que Metro). 16 SKUs Honor en la primera prueba."
     }
   ],
   "no_soportados": [
@@ -78,9 +105,19 @@
     {
       "nombre": "Movistar",
       "motivo": "www.movistar.com.pe/celulares es WordPress y renderiza los precios con JavaScript -- no hay JSON embebido ni API pública detectada, los nombres de producto solo aparecen en meta tags, no en el contenido real de la página. Necesita browser real (Bright Data/Playwright) para poder leer precios."
+    },
+    {
+      "nombre": "Samsung Perú",
+      "motivo": "El precio SÍ está fácil de sacar (JSON-LD estándar en el HTML, sin API rara -- ver adapters/schema_jsonld.py), pero el sitio está detrás de Akamai: a la segunda o tercera request seguida devuelve 403 'Access Denied'. No es viable para una corrida automática diaria sin rotar IP/proxy (Bright Data), porque se bloquea solo. Queda el adaptador listo por si en el futuro se agrega una capa de proxy."
+    },
+    {
+      "nombre": "Xiaomi Perú",
+      "motivo": "mi.com/pe no expone JSON-LD ni ningún JSON embebido detectable en la home/categoría probada (a diferencia de Samsung Perú). Necesitaría revisar más a fondo su catálogo (probablemente requiere browser real)."
+    },
+    {
+      "nombre": "Huawei Perú",
+      "motivo": "huawei.com/pe no expone JSON-LD ni JSON embebido detectable en la página probada. Mismo caso que Xiaomi -- pendiente de una investigación más profunda o browser real."
     }
   ],
-  "pendientes_de_investigar": [
-    "Tottus", "Metro", "Wong", "Samsung Perú", "Xiaomi Perú", "Huawei Perú"
-  ]
+  "pendientes_de_investigar": []
 }

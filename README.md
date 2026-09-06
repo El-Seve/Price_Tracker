@@ -23,9 +23,10 @@ Revisar esto a mano, retailer por retailer, no escala. Este proyecto:
 ```
 pricetracker/
   adapters/
-    vtex.py              # PlazaVea, Promart, Oechsle, Claro (misma plataforma VTEX)
-    falabella_nextjs.py  # Falabella, Sodimac (JSON embebido __NEXT_DATA__)
+    vtex.py              # PlazaVea, Promart, Oechsle, Claro, Metro, Wong (VTEX)
+    falabella_nextjs.py  # Falabella, Sodimac, Tottus (JSON embebido __NEXT_DATA__)
     entel_endeca.py      # Entel (Oracle ATG/Endeca -- JSON pidiendo Accept: application/json)
+    schema_jsonld.py     # genérico JSON-LD (funciona en Samsung Perú, pero bloqueado por Akamai -- ver abajo)
   retailers.json          # qué retailer, qué plataforma, qué categorías/vendedores
   db.py                    # esquema SQLite + inserción + detección de cambios
   run.py                   # orquestador: lee config -> llama adaptador -> guarda
@@ -103,8 +104,29 @@ corrida.
 Bitel y Movistar quedan en `no_soportados` dentro de `retailers.json`, con el
 motivo documentado, para no repetir la investigación desde cero más adelante.
 
-Pendientes de investigar (ver `pendientes_de_investigar` en `retailers.json`):
-Tottus, Metro, Wong y los sitios de fabricante (Samsung, Xiaomi, Huawei Perú).
+### Tiendas propias / grupos retail (investigado 06/09/2026)
+
+- **Tottus**: soportado. Mismo grupo/plataforma que Falabella (Next.js), reusa
+  `adapters/falabella_nextjs.py` sin ningún cambio.
+- **Metro** y **Wong**: soportados. VTEX estándar (grupo Cencosud), mismo
+  adaptador que PlazaVea/Promart/Claro.
+
+### Sitios de marca (investigado 06/09/2026)
+
+- **Samsung Perú**: el precio SÍ es fácil de sacar -- la página de categoría
+  trae un bloque JSON-LD estándar (`schema.org` `ItemList`/`Product`/`Offer`)
+  con precios reales, sin falta de API ni JS (`adapters/schema_jsonld.py`).
+  El problema es que el sitio está detrás de Akamai: a la segunda o tercera
+  request seguida devuelve 403 "Access Denied". No es viable para una corrida
+  automática diaria sin una capa de proxy/rotación de IP (Bright Data), así
+  que queda en `no_soportados` -- el adaptador queda listo por si en el
+  futuro se agrega esa capa.
+- **Xiaomi Perú** y **Huawei Perú**: sin JSON-LD ni JSON embebido detectable
+  en las páginas probadas. Necesitarían más investigación o browser real.
+
+Todo esto queda documentado en `no_soportados` dentro de `retailers.json`,
+con el motivo específico de cada uno, para no repetir la investigación desde
+cero más adelante.
 
 ## Limitaciones a tener presentes
 
