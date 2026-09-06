@@ -26,6 +26,7 @@ import argparse
 import csv
 import json
 import sys
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from datetime import date
 
@@ -53,14 +54,50 @@ def run_vtex(retailer_cfg: dict, target_brands: set[str]) -> list[dict]:
 
 def run_falabella_nextjs(retailer_cfg: dict, target_brands: set[str]) -> list[dict]:
     rows = []
+    nombre = retailer_cfg["nombre"]
+    vendedores_a_expandir = {}  # sellerName -> url de muestra (para descubrir el slug real)
+
     for categoria, url in retailer_cfg.get("categorias", {}).items():
         productos = falabella_nextjs.fetch_category(url)
-        rows += falabella_nextjs.extract_rows(productos, categoria, retailer_cfg["nombre"], target_brands)
-    # Además, el catálogo completo de vendedores ya identificados como vendedores
-    # de Honor -- la categoría sola no siempre trae todo lo que un vendedor tiene.
+        rows += falabella_nextjs.extract_rows(productos, categoria, nombre, target_brands)
+        # Descubrimiento automático: cualquier vendedor (marketplace) que aparezca
+        # vendiendo alguna de las marcas objetivo se agrega a la lista a expandir.
+        # Esto reemplaza la lista manual 'vendedores_honor_conocidos' -- ya no
+        # depende de que alguien adivine/confirme un slug a mano (ver bug de
+        # Sany Distribuidor Autorizado, que quedó con un slug inventado y nunca
+        # trajo nada). La categoría sola no siempre trae TODO lo que un
+        # vendedor tiene publicado (paginación, orden por relevancia), por eso
+        # igual vale la pena bajar su catálogo completo aparte.
+        nuevos = falabella_nextjs.discover_sellers(productos, target_brands, exclude_names={nombre})
+        vendedores_a_expandir.update(nuevos)
+
+    # Vendedores manuales opcionales (fallback/override): por si algún vendedor
+    # no aparece en la muestra de esta corrida puntual, o su página de producto
+    # no revela el slug real vía discover_seller_slug.
     for slug in retailer_cfg.get("vendedores_honor_conocidos", []):
         productos = falabella_nextjs.fetch_seller(retailer_cfg["base_domain"], slug)
-        rows += falabella_nextjs.extract_rows(productos, "Smartphones (vendedor)", retailer_cfg["nombre"], target_brands)
+        rows += falabella_nextjs.extract_rows(productos, "Smartphones (vendedor)", nombre, target_brands)
+
+    # El descubrimiento automático puede encontrar 50-100+ vendedores por
+    # categoría (Falabella es un marketplace grande) -- expandirlos uno por
+    # uno tomaría demasiado (~5s cada uno = 7-8 min solo por Falabella). Como
+    # cada vendedor es un request de red independiente, paralelizamos con un
+    # puñado de workers -- no tantos como para forzar el servidor, suficientes
+    # para que la corrida diaria termine en minutos y no en media hora.
+    def _expandir_vendedor(item):
+        seller_name, sample_url = item
+        slug = falabella_nextjs.discover_seller_slug(sample_url)
+        if not slug:
+            return []
+        productos = falabella_nextjs.fetch_seller(retailer_cfg["base_domain"], slug)
+        return falabella_nextjs.extract_rows(productos, "Smartphones (vendedor)", nombre, target_brands)
+
+    if vendedores_a_expandir:
+        with ThreadPoolExecutor(max_workers=8) as pool:
+            futures = [pool.submit(_expandir_vendedor, item) for item in vendedores_a_expandir.items()]
+            for fut in as_completed(futures):
+                rows += fut.result()
+
     return rows
 
 

@@ -54,6 +54,30 @@ def fetch_seller(base_domain: str, seller_slug: str, max_pages: int = 15, delay:
     return _paginate(url, max_pages, delay)
 
 
+def discover_sellers(products: list, target_brands: set[str] | None = None,
+                      exclude_names: set[str] | None = None) -> dict:
+    """Recorre productos ya traídos (de fetch_category) y devuelve
+    {sellerName: url_de_muestra} para cada vendedor único que vende alguna
+    de las target_brands -- sin necesidad de conocerlos de antemano.
+
+    exclude_names: nombres a excluir (típicamente el propio retailer, ej.
+    'Falabella'/'Sodimac'/'Tottus' -- ese vendedor ya está cubierto por
+    fetch_category, no hace falta bajar su "catálogo de vendedor" aparte).
+    """
+    exclude_upper = {n.upper() for n in (exclude_names or [])}
+    sellers = {}
+    for p in products:
+        brand = (p.get("brand") or "").upper()
+        if target_brands and brand not in target_brands:
+            continue
+        seller_name = p.get("sellerName")
+        if not seller_name or seller_name.upper() in exclude_upper:
+            continue
+        if seller_name not in sellers:
+            sellers[seller_name] = p.get("url")
+    return sellers
+
+
 def discover_seller_slug(product_url: str) -> str | None:
     """
     Dado un URL de producto, busca el link real 'Vendido por' en el HTML y devuelve

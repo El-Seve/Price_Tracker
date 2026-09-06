@@ -37,8 +37,7 @@
         "Smartphones": "https://www.falabella.com.pe/falabella-pe/category/cat760706/Celulares-y-Smartphones",
         "Accesorios": "https://www.falabella.com.pe/falabella-pe/category/cat12020463/Accesorios-Celulares"
       },
-      "vendedores_honor_conocidos": ["millennials"],
-      "nota": "El slug 'sany-distribuidor-autorizado' NO está confirmado (se probó a mano con el nombre visible 'Sany Distribuidor Autorizado' codificado en la URL, pero no se validó el slug real vía la página de producto como se hizo con 'millennials'). Antes de confiar en él, abrir un producto vendido por Sany y revisar el link 'Vendido por' para sacar el slug real, igual que se hizo con Millennials."
+      "nota": "Actualizado 06/09/2026: ya NO hace falta mantener una lista manual de vendedores (vendedores_honor_conocidos) -- run.py ahora DESCUBRE solos todos los vendedores marketplace que venden alguna marca objetivo dentro de cada categoría, y baja el catálogo completo de cada uno en paralelo. Esto reemplaza para siempre el problema que causó el bug de Sany (un slug escrito a mano que no existía y nunca traía nada). 'vendedores_honor_conocidos' sigue soportado como lista opcional de refuerzo/override si algún vendedor puntual no aparece en la muestra de una corrida."
     },
     {
       "nombre": "Sodimac",

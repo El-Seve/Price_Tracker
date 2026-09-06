@@ -43,13 +43,29 @@ vendedor_tercero, url}`.
 
 ### Por qué "por vendedor" y no solo "por categoría"
 
-En Falabella y PlazaVea/Promart, un mismo producto lo pueden vender varios
-sellers de marketplace a precios distintos, y navegar solo por categoría no
-siempre trae TODO el catálogo de un vendedor (paginación, orden por
-relevancia). Por eso, para los vendedores que ya sabemos que tienen Honor
-(`vendedores_honor_conocidos` en `retailers.json`), además de la categoría se
-baja su catálogo completo por separado. Si aparece un vendedor nuevo relevante,
-se agrega su slug a esa lista.
+En Falabella/Sodimac/Tottus (plataforma marketplace), un mismo producto lo
+pueden vender varios sellers a precios distintos, y navegar solo por
+categoría no siempre trae TODO el catálogo de un vendedor (paginación, orden
+por relevancia).
+
+Por eso `run_falabella_nextjs` en `run.py` hace descubrimiento automático:
+mientras recorre cada categoría, identifica todos los vendedores (marketplace)
+que aparecen vendiendo alguna de las marcas objetivo, y baja el catálogo
+completo de cada uno por separado, en paralelo (hasta 8 a la vez, para que la
+corrida no tarde una eternidad -- Falabella solo puede tener 80+ vendedores
+distintos de Honor/Samsung/Xiaomi/etc. en una sola categoría).
+
+Esto reemplazó el enfoque anterior de mantener una lista manual de slugs
+conocidos (`vendedores_honor_conocidos`) -- ese enfoque causó un bug real: el
+slug de "Sany Distribuidor Autorizado" se escribió a mano mal
+(`sany-distribuidor-autorizado`, con guiones, que no existe) y nunca trajo
+nada, sin que nadie lo notara hasta que se revisó a mano. `retailers.json`
+todavía acepta `vendedores_honor_conocidos` como lista opcional de
+refuerzo/override, pero ya no es necesaria para el funcionamiento normal.
+
+El slug real de un vendedor se obtiene de una página de producto real (el
+link "Vendido por"), NO adivinando a partir del nombre -- ver
+`discover_seller_slug()` en `adapters/falabella_nextjs.py`.
 
 ## Cómo correrlo
 
