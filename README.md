@@ -115,7 +115,9 @@ publicado (`docs/index.html` + `docs/dashboard_data.json`), construido según
   proxy de "gama equivalente".
 - **Explorador**: dispersión de precio del mismo SKU Honor entre retailers y
   vendedores -- si el mismo modelo cuesta S/449 en un lado y S/899 en otro,
-  aparece acá, ordenado de mayor a menor dispersión.
+  aparece acá, ordenado de mayor a menor dispersión. Tiene filtros por tipo de
+  producto (Smartphones / Tablets / Wearables / Audio) para no mezclar, por
+  ejemplo, un celular con un smartwatch al buscar dispersión.
 - **Sany**: pestaña dedicada a todo lo que vende Sany (aparece como vendedor
   marketplace en PlazaVea/Promart y también en Falabella, no es exclusivo de
   una plataforma) comparado contra el precio más bajo del resto del mercado
@@ -133,6 +135,38 @@ publicado (`docs/index.html` + `docs/dashboard_data.json`), construido según
   alternativa si ese vendedor sube precio o se queda sin stock), y en qué
   segmento de precio el mercado es menos disciplinado (mayor dispersión
   relativa entre vendedores).
+
+### Segmentación por tipo de producto
+
+Cada oferta capturada (Honor y competencia) se clasifica automáticamente en
+**Smartphone**, **Tablet**, **Wearable** (watch/band), **Audio**
+(earbuds/audífonos) o **Accesorio** (funda, cargador, cable, mica, power
+bank, parlante -- se descarta del dashboard, no aporta a ninguna
+comparación de precio). La clasificación mira solo las primeras palabras del
+nombre del producto, para no confundir un bundle "celular + regalo" (p.ej.
+"600 Smart 5G ... + Earbuds X7L") con el regalo mismo.
+
+Por qué separarlos:
+
+- Comparar el precio de una tablet o un smartwatch contra el de un celular
+  no tiene sentido -- vienen de mercados de precio completamente distintos.
+  Por eso la comparación "Honor vs Competencia por segmento de precio" (la
+  tabla principal) queda restringida solo a Smartphones.
+- Tablets y Wearables se comparan aparte, en una tabla propia dentro de
+  "Honor vs Competencia" ("Tablets y Wearables: comparación directa"),
+  con el mínimo de Honor vs. el mínimo de la competencia sin banding por
+  precio (el rango de precios de estas categorías es angosto, no hace
+  falta segmentar). Si un día no hay ofertas de alguna categoría, la tabla
+  lo indica ("Sin datos de Tablets hoy") en vez de mostrar una fila vacía o
+  rota.
+- El resumen del día (KPI "Ofertas Honor capturadas hoy") desglosa cuántas
+  ofertas son de cada tipo, y el Explorador permite filtrar la dispersión
+  interna por tipo de producto.
+
+Agregar una línea nueva (celular, tablet, wearable o audio) es sumar una
+entrada a la lista correspondiente en `dashboard/normalize.py`
+(`FAMILIAS_HONOR`, `FAMILIAS_WEARABLE_HONOR` o `FAMILIAS_AUDIO_HONOR`) --
+no requiere tocar el resto del pipeline.
 
 ### Cómo publicarlo (una sola vez)
 

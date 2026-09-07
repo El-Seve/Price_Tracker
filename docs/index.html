@@ -291,14 +291,25 @@ footer { text-align: center; padding: var(--space-8) var(--space-4); color: var(
 
   <!-- ===== HONOR VS COMPETENCIA ===== -->
   <section id="view-competencia" class="view" role="tabpanel" aria-labelledby="tab-competencia">
-    <p class="section-title">Honor más barato vs. competidor más barato, por segmento de precio</p>
-    <div class="table-wrap">
+    <p class="section-title">Smartphones: Honor más barato vs. competidor más barato, por segmento de precio</p>
+    <div class="table-wrap" style="margin-bottom: var(--space-8)">
       <table>
         <thead><tr>
           <th>Segmento</th><th>Honor</th><th class="num">Precio</th>
           <th>Competidor</th><th class="num">Precio</th><th class="num">Brecha</th>
         </tr></thead>
         <tbody id="competencia-body"></tbody>
+      </table>
+    </div>
+
+    <p class="section-title">Tablets y Wearables: comparación directa (no por segmento)</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th>Categoría</th><th>Honor</th><th class="num">Precio</th>
+          <th>Competidor</th><th class="num">Precio</th><th class="num">Brecha</th>
+        </tr></thead>
+        <tbody id="competencia-tipo-body"></tbody>
       </table>
     </div>
   </section>
@@ -308,6 +319,11 @@ footer { text-align: center; padding: var(--space-8) var(--space-4); color: var(
     <p class="section-title">Dispersión de precio del mismo SKU Honor entre retailers/vendedores</p>
     <div class="filters">
       <input type="search" id="explorador-search" placeholder="Buscar familia (ej. X7D, Magic 8)..." aria-label="Buscar familia">
+      <button class="filtro-tipo" data-tipo="" aria-pressed="true">Todos</button>
+      <button class="filtro-tipo" data-tipo="Smartphone" aria-pressed="false">Smartphones</button>
+      <button class="filtro-tipo" data-tipo="Tablet" aria-pressed="false">Tablets</button>
+      <button class="filtro-tipo" data-tipo="Wearable" aria-pressed="false">Wearables</button>
+      <button class="filtro-tipo" data-tipo="Audio" aria-pressed="false">Audio</button>
       <button id="filtro-oportunidad" aria-pressed="false">Solo oportunidades</button>
     </div>
     <div id="explorador-list"></div>
@@ -434,8 +450,14 @@ function kpiCard(label, value, sub, tone) {
 
 function renderResumen(d) {
   const r = d.resumen;
+  const porTipo = r.ofertas_por_tipo || {};
+  const ETIQUETAS_TIPO = { Smartphone: 'Smartphones', Tablet: 'Tablets', Wearable: 'Wearables', Audio: 'Audio' };
+  const desgloseTipo = ['Smartphone', 'Tablet', 'Wearable', 'Audio']
+    .filter(t => porTipo[t])
+    .map(t => `${porTipo[t]} ${ETIQUETAS_TIPO[t]}`)
+    .join(' · ');
   document.getElementById('kpi-grid').innerHTML = [
-    kpiCard('Ofertas Honor capturadas hoy', r.total_ofertas_honor_hoy, `${r.retailers_con_honor_hoy} retailers con Honor`),
+    kpiCard('Ofertas Honor capturadas hoy', r.total_ofertas_honor_hoy, desgloseTipo || `${r.retailers_con_honor_hoy} retailers con Honor`),
     kpiCard('Familias Honor detectadas', r.familias_honor_detectadas, `${r.vendedores_honor_detectados} vendedores distintos`),
     kpiCard('Oportunidades de dispersión', r.oportunidades_dispersion, 'Mismo SKU, precio muy distinto', r.oportunidades_dispersion > 0 ? 'risk' : 'ok'),
     kpiCard('Oportunidades vs. competencia', r.oportunidades_vs_competencia, 'Brecha de precio por segmento', r.oportunidades_vs_competencia > 0 ? 'warn' : 'ok'),
@@ -487,14 +509,39 @@ function renderCompetencia(d) {
       </td>
     </tr>
   `).join('') || '<tr><td colspan="6" class="empty-state">Sin datos suficientes hoy para comparar por segmento.</td></tr>';
+
+  const filasTipo = [
+    { etiqueta: 'Tablets', datos: d.vs_competencia_tablet },
+    { etiqueta: 'Wearables', datos: d.vs_competencia_wearable },
+  ].map(({ etiqueta, datos: g }) => {
+    if (!g) {
+      return `<tr><td>${esc(etiqueta)}</td><td colspan="5" class="empty-state">Sin datos de ${esc(etiqueta)} hoy.</td></tr>`;
+    }
+    return `
+    <tr>
+      <td>${esc(etiqueta)}</td>
+      <td>${esc(g.honor_mas_barato.familia)}<br><span class="familia-meta">${esc(g.honor_mas_barato.retailer)}</span></td>
+      <td class="num">${fmtMoney(g.honor_mas_barato.precio)}</td>
+      <td>${esc(g.competidor_mas_barato.marca)}<br><span class="familia-meta">${esc(g.competidor_mas_barato.retailer)}</span></td>
+      <td class="num">${fmtMoney(g.competidor_mas_barato.precio)}</td>
+      <td class="num">
+        <span class="pill ${g.es_oportunidad ? (g.honor_mas_caro_que_competencia ? 'pill-risk' : 'pill-ok') : 'pill-neutral'}">
+          ${fmtPct(g.gap_pct)}
+        </span>
+      </td>
+    </tr>`;
+  }).join('');
+  document.getElementById('competencia-tipo-body').innerHTML = filasTipo;
 }
 
 let explFiltroOportunidad = false;
+let explFiltroTipo = '';
 function renderExplorador(d) {
   const term = document.getElementById('explorador-search').value.trim().toUpperCase();
   const list = d.dispersion_interna.filter(x =>
     (!term || x.familia.toUpperCase().includes(term)) &&
-    (!explFiltroOportunidad || x.es_oportunidad)
+    (!explFiltroOportunidad || x.es_oportunidad) &&
+    (!explFiltroTipo || x.tipo === explFiltroTipo)
   );
   const container = document.getElementById('explorador-list');
   if (!list.length) {
@@ -811,6 +858,16 @@ document.getElementById('filtro-oportunidad').addEventListener('click', (e) => {
   explFiltroOportunidad = !explFiltroOportunidad;
   e.target.setAttribute('aria-pressed', explFiltroOportunidad ? 'true' : 'false');
   if (DATA) renderExplorador(DATA);
+});
+
+document.querySelectorAll('.filtro-tipo').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    explFiltroTipo = e.currentTarget.dataset.tipo;
+    document.querySelectorAll('.filtro-tipo').forEach(b =>
+      b.setAttribute('aria-pressed', b === e.currentTarget ? 'true' : 'false')
+    );
+    if (DATA) renderExplorador(DATA);
+  });
 });
 
 fetch('dashboard_data.json?_=' + Date.now())

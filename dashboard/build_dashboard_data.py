@@ -19,7 +19,7 @@ from datetime import datetime, date
 from pathlib import Path
 
 from dashboard.normalize import (
-    modelo_a_familia, es_producto_valido, segmento_de_precio,
+    modelo_a_familia, es_producto_valido, segmento_de_precio, tipo_producto,
     es_texto_barcode, es_accesorio_por_nombre, PRECIO_MINIMO_CELULAR, _sin_acentos,
 )
 import db
@@ -101,6 +101,7 @@ def _filas_honor_hoy(conn, fecha_hoy: str) -> list[dict]:
             continue
         if not r["precio_oferta"]:
             continue
+        r["tipo"] = tipo_producto(r["modelo"])
         r["familia"] = modelo_a_familia(r["modelo"])
         out.append(r)
     return out
@@ -114,17 +115,22 @@ def _filas_competencia_hoy(conn, fecha_hoy: str) -> list[dict]:
     )
     cols = ["retailer", "marca", "modelo", "precio_oferta", "vendedor"]
     filas = [dict(zip(cols, row)) for row in cur.fetchall()]
-    # Mismo filtro de calidad que a Honor: descartar códigos de barra sueltos
-    # y precios por debajo de lo que cuesta un celular real -- si no, un
-    # accesorio mal etiquetado con marca "SAMSUNG" a S/39 hace parecer que
-    # Honor está carísimo en el segmento "Hasta S/600", cuando en realidad
-    # se está comparando un celular contra una mica de pantalla.
-    return [
-        r for r in filas
-        if not es_texto_barcode(r["modelo"])
-        and r["precio_oferta"] >= PRECIO_MINIMO_CELULAR
-        and not es_accesorio_por_nombre(_sin_acentos(r["modelo"].upper()))
-    ]
+
+    out = []
+    for r in filas:
+        # Descartar códigos de barra sueltos y accesorios descartables (case,
+        # cargador, cable, mica...) sea cual sea la marca -- un power bank
+        # Xiaomi a S/39 no debe colarse en ninguna comparación de precio.
+        if es_texto_barcode(r["modelo"]) or es_accesorio_por_nombre(_sin_acentos(r["modelo"].upper())):
+            continue
+        r["tipo"] = tipo_producto(r["modelo"])
+        # El piso de precio de celular real SOLO aplica a Smartphone/Tablet --
+        # un wearable o un audífono cuestan legítimamente menos de S/150, y
+        # aplicarles el mismo piso los descartaría a todos por error.
+        if r["tipo"] in ("Smartphone", "Tablet") and r["precio_oferta"] < PRECIO_MINIMO_CELULAR:
+            continue
+        out.append(r)
+    return out
 
 
 def _dispersion_interna(filas_honor: list[dict]) -> list[dict]:
@@ -145,6 +151,7 @@ def _dispersion_interna(filas_honor: list[dict]) -> list[dict]:
         ofertas_ordenadas = sorted(ofertas, key=lambda o: o["precio_oferta"])
         resultado.append({
             "familia": familia,
+            "tipo": ofertas[0]["tipo"],  # una familia siempre cae en un solo tipo (ver modelo_a_familia)
             "n_ofertas": len(ofertas),
             "precio_min": p_min,
             "precio_max": p_max,
@@ -170,7 +177,15 @@ def _vs_competencia(filas_honor: list[dict], filas_competencia: list[dict]) -> l
     """Por segmento de precio, el Honor más barato disponible hoy vs. el
     competidor (Samsung/Xiaomi/Motorola/Apple/Redmi/Poco) más barato del
     mismo segmento -- no hay forma confiable de matchear modelo exacto entre
-    marcas, así que el segmento de precio es el proxy de 'gama equivalente'."""
+    marcas, así que el segmento de precio es el proxy de 'gama equivalente'.
+
+    Restringido a Smartphones: comparar un Honor Pad o un Honor Watch contra
+    el celular más barato de Samsung en el mismo rango de precio no dice nada
+    útil -- son categorías distintas. Tablets y wearables se comparan aparte
+    (ver _vs_competencia_por_tipo)."""
+    filas_honor = [r for r in filas_honor if r["tipo"] == "Smartphone"]
+    filas_competencia = [r for r in filas_competencia if r["tipo"] == "Smartphone"]
+
     honor_por_segmento = defaultdict(list)
     for r in filas_honor:
         seg = segmento_de_precio(r["precio_oferta"])
@@ -209,6 +224,37 @@ def _vs_competencia(filas_honor: list[dict], filas_competencia: list[dict]) -> l
             "es_oportunidad": abs(gap_pct) >= UMBRAL_GAP_SEGMENTO_PCT,
         })
     return resultado
+
+
+def _vs_competencia_por_tipo(filas_honor: list[dict], filas_competencia: list[dict], tipo: str) -> dict | None:
+    """Comparación directa (no por segmento de precio) para Tablets y
+    Wearables: el rango de precio de esas categorías es mucho más angosto que
+    el de celulares, así que alcanza con el mínimo de Honor vs. el mínimo de
+    la competencia en esa misma categoría, sin bandas de precio."""
+    honor_ofertas = [r for r in filas_honor if r["tipo"] == tipo]
+    comp_ofertas = [r for r in filas_competencia if r["tipo"] == tipo]
+    if not honor_ofertas or not comp_ofertas:
+        return None
+
+    honor_min = min(honor_ofertas, key=lambda o: o["precio_oferta"])
+    comp_min = min(comp_ofertas, key=lambda o: o["precio_oferta"])
+    gap_pct = round((honor_min["precio_oferta"] - comp_min["precio_oferta"]) / comp_min["precio_oferta"] * 100, 1)
+    return {
+        "tipo": tipo,
+        "n_ofertas_honor": len(honor_ofertas),
+        "n_ofertas_competencia": len(comp_ofertas),
+        "honor_mas_barato": {
+            "familia": honor_min["familia"], "modelo": honor_min["modelo"],
+            "retailer": honor_min["retailer"], "precio": honor_min["precio_oferta"],
+        },
+        "competidor_mas_barato": {
+            "marca": comp_min["marca"], "modelo": comp_min["modelo"],
+            "retailer": comp_min["retailer"], "precio": comp_min["precio_oferta"],
+        },
+        "gap_pct": gap_pct,
+        "honor_mas_caro_que_competencia": gap_pct > 0,
+        "es_oportunidad": abs(gap_pct) >= UMBRAL_GAP_SEGMENTO_PCT,
+    }
 
 
 def _sany(filas_honor: list[dict]) -> dict:
@@ -450,8 +496,13 @@ def _analisis_avanzado(filas_honor: list[dict], dispersion: list[dict]) -> dict:
     familias_riesgo_alto = sum(1 for c in concentracion if c["riesgo_concentracion"] == "alto")
 
     # --- Dispersión relativa por segmento de precio ---
+    # Solo Smartphones: las bandas de precio (Hasta S/600, etc.) están
+    # calibradas para celulares -- meter un wearable o tablet en la misma
+    # banda que un celular de precio similar mezclaría cosas no comparables.
     por_segmento = defaultdict(list)
     for d in dispersion:
+        if d["tipo"] != "Smartphone":
+            continue
         por_segmento[segmento_de_precio(d["precio_min"])].append(d["spread_pct"])
     orden_segmentos = ["Hasta S/600", "S/600 - S/1,000", "S/1,000 - S/1,500",
                        "S/1,500 - S/2,500", "S/2,500 - S/4,000", "Más de S/4,000"]
@@ -631,6 +682,36 @@ def _insights(dispersion: list[dict], vs_comp: list[dict], sany: dict, cambios: 
     return insights
 
 
+def _insights_por_tipo(vs_comp_tablet: dict | None, vs_comp_wearable: dict | None) -> list[dict]:
+    """Mismo criterio Evidencia -> Interpretación -> Acción, para la
+    comparación directa de Tablets y Wearables (no por segmento de precio)."""
+    insights = []
+    for etiqueta, comp in (("Tablets", vs_comp_tablet), ("Wearables", vs_comp_wearable)):
+        if not comp or not comp["es_oportunidad"]:
+            continue
+        if comp["honor_mas_caro_que_competencia"]:
+            interp = (f"El Honor {comp['honor_mas_barato']['familia']} más barato está {comp['gap_pct']}% por "
+                      f"encima del {comp['competidor_mas_barato']['marca']} más barato en {etiqueta.lower()}.")
+            accion = f"Evaluar precio de {comp['honor_mas_barato']['familia']} frente a {comp['competidor_mas_barato']['marca']} en {etiqueta.lower()}."
+        else:
+            interp = (f"El Honor {comp['honor_mas_barato']['familia']} más barato está {abs(comp['gap_pct'])}% por "
+                      f"debajo del {comp['competidor_mas_barato']['marca']} más barato en {etiqueta.lower()} -- "
+                      f"posible espacio para subir precio.")
+            accion = f"Evaluar si {comp['honor_mas_barato']['familia']} tiene margen para subir precio en {etiqueta.lower()}."
+        insights.append({
+            "tipo": f"vs_competencia_{etiqueta.lower()}",
+            "severidad": "media",
+            "evidencia": f"{etiqueta}: Honor más barato es {comp['honor_mas_barato']['familia']}"
+                         f" (S/{comp['honor_mas_barato']['precio']:.0f} en {comp['honor_mas_barato']['retailer']});"
+                         f" {comp['competidor_mas_barato']['marca']} más barato es S/{comp['competidor_mas_barato']['precio']:.0f}"
+                         f" en {comp['competidor_mas_barato']['retailer']}.",
+            "interpretacion": interp,
+            "accion": accion,
+            "confianza": "media" if min(comp["n_ofertas_honor"], comp["n_ofertas_competencia"]) >= 3 else "baja",
+        })
+    return insights
+
+
 def build(db_path: Path | None = None, out_path: Path | None = None) -> dict:
     if db_path:
         conn = sqlite3.connect(db_path)
@@ -646,9 +727,12 @@ def build(db_path: Path | None = None, out_path: Path | None = None) -> dict:
 
     dispersion = _dispersion_interna(filas_honor)
     vs_comp = _vs_competencia(filas_honor, filas_competencia)
+    vs_comp_tablet = _vs_competencia_por_tipo(filas_honor, filas_competencia, "Tablet")
+    vs_comp_wearable = _vs_competencia_por_tipo(filas_honor, filas_competencia, "Wearable")
     sany = _sany(filas_honor)
     cambios = _cambios_precio(conn)
     insights = _insights(dispersion, vs_comp, sany, cambios)
+    insights += _insights_por_tipo(vs_comp_tablet, vs_comp_wearable)
 
     fechas_historial = _todas_las_fechas(conn)
     tendencia_familias = _tendencia_familias(conn, fechas_historial)
@@ -662,11 +746,16 @@ def build(db_path: Path | None = None, out_path: Path | None = None) -> dict:
     vendedores_detectados = {r["vendedor"] for r in filas_honor if r["vendedor"]}
     retailers_con_honor = {r["retailer"] for r in filas_honor}
 
+    ofertas_por_tipo = defaultdict(int)
+    for r in filas_honor:
+        ofertas_por_tipo[r["tipo"]] += 1
+
     data = {
         "generado": datetime.now().isoformat(timespec="seconds"),
         "fecha_captura": fecha_hoy,
         "resumen": {
             "total_ofertas_honor_hoy": len(filas_honor),
+            "ofertas_por_tipo": dict(ofertas_por_tipo),
             "familias_honor_detectadas": len(familias_detectadas),
             "vendedores_honor_detectados": len(vendedores_detectados),
             "retailers_con_honor_hoy": len(retailers_con_honor),
@@ -677,6 +766,8 @@ def build(db_path: Path | None = None, out_path: Path | None = None) -> dict:
         "cobertura": cobertura,
         "dispersion_interna": dispersion,
         "vs_competencia": vs_comp,
+        "vs_competencia_tablet": vs_comp_tablet,
+        "vs_competencia_wearable": vs_comp_wearable,
         "sany": sany,
         "cambios_precio": cambios,
         "tendencia": {

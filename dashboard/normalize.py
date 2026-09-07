@@ -38,16 +38,37 @@ FAMILIAS_HONOR = [
     "PLAY 10A", "PLAY 10",
 ]
 
+# Familias de wearables Honor conocidas -- mismo criterio que FAMILIAS_HONOR
+# (más específico primero). A diferencia de los celulares, acá solo tenemos
+# unos pocos SKUs confirmados en la captura real (Choice Watch 2i); el resto
+# son líneas activas conocidas de Honor -- si no matchean, caen en
+# "OTRO: <texto>" en vez de perderse o agruparse mal.
+FAMILIAS_WEARABLE_HONOR = [
+    "CHOICE WATCH 2I", "WATCH GS 5", "WATCH GS 3", "WATCH 5", "WATCH 4 PRO", "WATCH 4",
+    "BAND 9", "BAND 8",
+]
+
+# Familias de audio (audífonos/earbuds) Honor conocidas.
+FAMILIAS_AUDIO_HONOR = [
+    "CHOICE X7E ACTIVE", "CHOICE X7 LITE", "EARBUDS X7 LITE", "EARBUDS X7", "EARBUDS X6", "EARBUDS X5",
+]
+
 # Marcas que, si aparecen en el nombre, casi seguro indican un error de
 # etiquetado del retailer (venía como "marca": "HONOR" pero el producto real
 # es de otra marca -- típico en bundles/gift-with-purchase mal armados).
 _OTRAS_MARCAS = ["SAMSUNG", "XIAOMI", "OPPO", "APPLE", "IPHONE", "MOTOROLA", "REDMI", "POCO", "VIVO", "ZTE"]
 
-# Accesorios/no-telefonos que no deben entrar a la comparación de precio de
-# equipos (audífonos, watch, cases, etc. -- aunque la categoría ya debería
-# filtrarlos, esto es una segunda barrera si el nombre los delata).
-_ACCESORIO_KEYWORDS = ["AUDIFONO", "AURICULAR", "EARBUD", "WATCH", "SMARTWATCH", "CASE ", "FUNDA",
-                       "CARGADOR", "CABLE", "MICA", "PROTECTOR", "BATERIA", "POWER BANK", "PARLANTE"]
+# Palabras que identifican el TIPO de producto por las primeras palabras del
+# nombre (ver _primeras_palabras) -- no todo lo que suena a "accesorio" se
+# descarta: wearables (watch/band) y audio (earbuds/audífonos) se comparan
+# aparte, como pidió Seve. Solo los descartables (funda, cargador, cable,
+# mica, poder bank, etc.) quedan fuera de todo el dashboard, porque no
+# aportan nada a una comparación de precio.
+_TABLET_KEYWORDS = ["TABLET", "PAD "]
+_WEARABLE_KEYWORDS = ["WATCH", "SMARTWATCH", "BAND "]
+_AUDIO_KEYWORDS = ["AUDIFONO", "AURICULAR", "EARBUD"]
+_ACCESORIO_DESCARTABLE_KEYWORDS = ["CASE ", "FUNDA", "CARGADOR", "CABLE", "MICA", "PROTECTOR",
+                                   "BATERIA", "POWER BANK", "PARLANTE"]
 
 _GB_RE = re.compile(r"(\d{2,4})\s*GB")
 
@@ -59,26 +80,50 @@ def _sin_acentos(texto: str) -> str:
     )
 
 
+def _primeras_palabras(texto_upper_sin_acentos: str, n: int = 4) -> str:
+    return " ".join(texto_upper_sin_acentos.split()[:n])
+
+
 def es_accesorio_por_nombre(texto_upper_sin_acentos: str) -> bool:
-    """Señal genérica (no depende de marca): el nombre empieza nombrando un
-    accesorio, no un equipo. Reutilizable tanto para filas Honor como para
-    filas de competencia -- un smartwatch o power bank Xiaomi/Samsung no
-    debe colarse en la comparación de precio de celulares por segmento."""
-    primeras_palabras = " ".join(texto_upper_sin_acentos.split()[:4])
-    return any(k in primeras_palabras for k in _ACCESORIO_KEYWORDS)
+    """True si el nombre empieza nombrando un accesorio DESCARTABLE (funda,
+    cargador, cable, mica, power bank...) -- NO incluye wearables ni audio,
+    esos se comparan aparte (ver tipo_producto). Reutilizable tanto para
+    filas Honor como de competencia -- un power bank Xiaomi a S/39 no debe
+    colarse en la comparación de precio de celulares por segmento.
+
+    OJO: la señal se busca solo en las primeras palabras del nombre, no en
+    todo el texto -- un código de familia puede aparecer como substring
+    dentro del nombre de un accesorio (p.ej. "Audífonos Bluetooth Honor
+    Choice X7 Lite" contiene "X7"), y un bundle real de equipo + regalo casi
+    siempre nombra el equipo primero ("600 Smart 5G ... + Earbuds X7L")."""
+    primeras = _primeras_palabras(texto_upper_sin_acentos)
+    return any(k in primeras for k in _ACCESORIO_DESCARTABLE_KEYWORDS)
+
+
+def tipo_producto(modelo: str) -> str:
+    """Clasifica el producto en Smartphone / Tablet / Wearable / Audio /
+    Accesorio, mirando solo las primeras palabras del nombre (mismo criterio
+    que es_accesorio_por_nombre, para no confundir un bundle "celular +
+    regalo" con el regalo mismo)."""
+    if not modelo:
+        return "Smartphone"
+    primeras = _primeras_palabras(_sin_acentos(modelo.upper()))
+    if any(k in primeras for k in _TABLET_KEYWORDS):
+        return "Tablet"
+    if any(k in primeras for k in _WEARABLE_KEYWORDS):
+        return "Wearable"
+    if any(k in primeras for k in _AUDIO_KEYWORDS):
+        return "Audio"
+    if any(k in primeras for k in _ACCESORIO_DESCARTABLE_KEYWORDS):
+        return "Accesorio"
+    return "Smartphone"
 
 
 def es_producto_valido(modelo: str) -> bool:
-    """False si el nombre sugiere error de marca o que es un accesorio, no
-    un equipo -- para no meter ruido en la comparación de precios de equipos.
-
-    OJO: revisar "tiene alguna familia conocida en el texto" NO alcanza para
-    detectar accesorios, porque un código de familia puede aparecer como
-    substring dentro del propio nombre del accesorio (p.ej. "Audífonos
-    Bluetooth Honor Choice X7 Lite" contiene "X7"). En cambio, un bundle real
-    de equipo + regalo casi siempre nombra el equipo primero y el accesorio
-    después ("600 Smart 5G ... + Earbuds X7L + Liberado"). Por eso la señal
-    de accesorio se busca solo en las primeras palabras del nombre."""
+    """False si el nombre sugiere error de marca, o si es un accesorio
+    descartable (funda/cargador/cable/mica/power bank/parlante) que no aporta
+    a ninguna comparación de precio. Wearables y audio SÍ pasan -- se
+    comparan aparte, filtrados por tipo_producto()."""
     if not modelo:
         return False
     texto = _sin_acentos(modelo.upper())
@@ -91,15 +136,26 @@ def es_producto_valido(modelo: str) -> bool:
 
 def modelo_a_familia(modelo: str) -> str:
     """'Celular Honor X5d 4GB + 128GB Meteor Silver' -> 'X5D 128GB'.
+    Usa la lista de familias que corresponde al tipo de producto (celular/
+    tablet vs. wearable vs. audio) para no matchear, por ejemplo, la familia
+    de celular "X7" dentro del nombre de un audífono "Choice X7 Lite".
     Si no reconoce ninguna familia conocida, devuelve 'OTRO: <texto corto>'
     en vez de una clave falsa -- mejor visible como pendiente de mapear que
     silenciosamente mal agrupado."""
     if not modelo:
         return "DESCONOCIDO"
     texto = modelo.upper()
+    tipo = tipo_producto(modelo)
+
+    if tipo == "Wearable":
+        familias = FAMILIAS_WEARABLE_HONOR
+    elif tipo == "Audio":
+        familias = FAMILIAS_AUDIO_HONOR
+    else:
+        familias = FAMILIAS_HONOR  # Smartphone y Tablet comparten la lista (PAD ya está ahí)
 
     familia = None
-    for fam in FAMILIAS_HONOR:
+    for fam in familias:
         if fam in texto:
             familia = fam
             break
@@ -111,7 +167,7 @@ def modelo_a_familia(modelo: str) -> str:
         primeras = " ".join(texto.split()[:3])
         return f"OTRO: {primeras}"
 
-    if almacenamiento:
+    if almacenamiento and tipo in ("Smartphone", "Tablet"):
         return f"{familia} {almacenamiento}GB"
     return familia
 
