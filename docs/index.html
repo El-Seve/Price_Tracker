@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="es-PE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Honor Pricing Intelligence — Perú</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== IS Design System v1.0 — tokens ===== */
+:root {
+  --is-sky: #4FA3D1;
+  --is-olive: #7A8450;
+  --is-warmwhite: #FCFAF5;
+  --is-sand: #E9E0CF;
+  --is-graphite: #3E4448;
+  --is-mist: #DDE3E6;
+  --is-amber: #D89B3C;
+  --is-terracotta: #C85C4A;
+
+  --bg: var(--is-warmwhite);
+  --surface: #FFFFFF;
+  --surface-alt: var(--is-sand);
+  --text: var(--is-graphite);
+  --text-muted: #6B7378;
+  --border: var(--is-mist);
+  --accent: var(--is-sky);
+  --accent-2: var(--is-olive);
+  --warn: var(--is-amber);
+  --risk: var(--is-terracotta);
+  --ok: #4F9D6E;
+
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-6: 24px; --space-8: 32px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px;
+  --shadow-sm: 0 1px 2px rgba(62,68,72,0.06), 0 1px 1px rgba(62,68,72,0.04);
+  --shadow-md: 0 4px 12px rgba(62,68,72,0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #20242a;
+    --surface: #2a2f36;
+    --surface-alt: #333a42;
+    --text: #EDEFF1;
+    --text-muted: #A7AEB5;
+    --border: #40474f;
+    --accent: #6FB6DE;
+    --accent-2: #97A579;
+    --warn: #E8B369;
+    --risk: #E08272;
+    --ok: #6EC191;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #20242a;
+  --surface: #2a2f36;
+  --surface-alt: #333a42;
+  --text: #EDEFF1;
+  --text-muted: #A7AEB5;
+  --border: #40474f;
+  --accent: #6FB6DE;
+  --accent-2: #97A579;
+  --warn: #E8B369;
+  --risk: #E08272;
+  --ok: #6EC191;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { font-weight: 700; margin: 0; letter-spacing: -0.01em; }
+p { margin: 0; }
+a { color: var(--accent); }
+button { font-family: inherit; }
+
+.skip-link {
+  position: absolute; left: -9999px; top: 0; background: var(--surface);
+  color: var(--text); padding: var(--space-2) var(--space-4); z-index: 100;
+  border-radius: var(--radius-sm);
+}
+.skip-link:focus { left: var(--space-4); top: var(--space-4); }
+
+/* ===== Shell ===== */
+.app-header {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: var(--space-4) var(--space-6);
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+}
+.brand { display: flex; align-items: center; gap: var(--space-3); }
+.brand-mark {
+  width: 36px; height: 36px; border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--is-sky), var(--is-olive));
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 800; font-size: 15px; flex-shrink: 0;
+}
+.brand-text h1 { font-size: 16px; }
+.brand-text p { font-size: 12px; color: var(--text-muted); }
+.header-meta { text-align: right; font-size: 12px; color: var(--text-muted); }
+.header-meta strong { color: var(--text); }
+
+.tabs {
+  display: flex; gap: var(--space-2); padding: 0 var(--space-6);
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+}
+.tab-btn {
+  border: none; background: transparent; color: var(--text-muted);
+  padding: var(--space-3) var(--space-3); font-size: 13px; font-weight: 600;
+  cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap;
+  min-height: 44px;
+}
+.tab-btn[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+.tab-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+main { max-width: 1180px; margin: 0 auto; padding: var(--space-6); }
+.view { display: none; }
+.view.active { display: block; }
+
+.section-title { font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--text-muted); margin-bottom: var(--space-3); font-weight: 700; }
+
+/* ===== KPI cards ===== */
+.kpi-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: var(--space-4); margin-bottom: var(--space-8);
+}
+.kpi-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);
+  padding: var(--space-4); box-shadow: var(--shadow-sm);
+}
+.kpi-card .kpi-label { font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: var(--space-1); }
+.kpi-card .kpi-value { font-size: 28px; font-weight: 800; line-height: 1.1; }
+.kpi-card .kpi-sub { font-size: 12px; color: var(--text-muted); margin-top: var(--space-2); }
+.kpi-card.risk .kpi-value { color: var(--risk); }
+.kpi-card.warn .kpi-value { color: var(--warn); }
+.kpi-card.ok .kpi-value { color: var(--ok); }
+
+/* ===== Insight cards ===== */
+.insight-list { display: flex; flex-direction: column; gap: var(--space-3); margin-bottom: var(--space-8); }
+.insight-card {
+  background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--accent);
+  border-radius: var(--radius-md); padding: var(--space-4); box-shadow: var(--shadow-sm);
+}
+.insight-card.sev-alta { border-left-color: var(--risk); }
+.insight-card.sev-media { border-left-color: var(--warn); }
+.insight-head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-3); margin-bottom: var(--space-2); }
+.insight-tag {
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+  padding: 2px var(--space-2); border-radius: 999px; background: var(--surface-alt); color: var(--text-muted);
+  white-space: nowrap;
+}
+.insight-evidence { font-size: 12px; color: var(--text-muted); margin-bottom: var(--space-2); }
+.insight-interp { font-size: 14px; font-weight: 600; margin-bottom: var(--space-2); }
+.insight-action { font-size: 13px; color: var(--accent-2); font-weight: 600; }
+.insight-action::before { content: "→ "; }
+.empty-state { text-align: center; padding: var(--space-8); color: var(--text-muted); }
+
+/* ===== Tables ===== */
+.table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface); }
+table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 560px; }
+th, td { text-align: left; padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--border); }
+th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); background: var(--surface-alt); }
+tr:last-child td { border-bottom: none; }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+.pill { display: inline-block; padding: 2px var(--space-2); border-radius: 999px; font-size: 11px; font-weight: 700; }
+.pill-risk { background: rgba(200,92,74,0.14); color: var(--risk); }
+.pill-warn { background: rgba(216,155,60,0.16); color: var(--warn); }
+.pill-ok { background: rgba(79,157,110,0.14); color: var(--ok); }
+.pill-neutral { background: var(--surface-alt); color: var(--text-muted); }
+
+/* ===== Explorer / familia cards ===== */
+.familia-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);
+  margin-bottom: var(--space-3); overflow: hidden; }
+.familia-summary {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--space-3);
+  padding: var(--space-4); background: none; border: none; cursor: pointer; text-align: left; min-height: 44px;
+}
+.familia-summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.familia-name { font-weight: 700; font-size: 14px; }
+.familia-meta { font-size: 12px; color: var(--text-muted); }
+.familia-spread { font-weight: 800; font-size: 16px; }
+.familia-detail { display: none; padding: 0 var(--space-4) var(--space-4); }
+.familia-card.open .familia-detail { display: block; }
+.familia-card.open .chevron { transform: rotate(180deg); }
+.chevron { transition: transform 0.15s ease; color: var(--text-muted); }
+
+.filters { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-4); align-items: center; }
+.filters input[type=search] {
+  flex: 1; min-width: 180px; padding: var(--space-2) var(--space-3); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); background: var(--surface); color: var(--text); font-size: 13px; min-height: 44px;
+}
+.filters button {
+  padding: var(--space-2) var(--space-3); border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--surface); color: var(--text-muted); font-size: 12px; font-weight: 600; cursor: pointer; min-height: 44px;
+}
+.filters button[aria-pressed="true"] { background: var(--accent); color: white; border-color: var(--accent); }
+
+footer { text-align: center; padding: var(--space-8) var(--space-4); color: var(--text-muted); font-size: 12px; }
+
+@media (max-width: 720px) {
+  .app-header { padding: var(--space-3) var(--space-4); flex-wrap: wrap; }
+  .header-meta { display: none; }
+  main { padding: var(--space-4); }
+  .kpi-card .kpi-value { font-size: 24px; }
+  table { min-width: 480px; }
+}
+
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido</a>
+
+<header class="app-header">
+  <div class="brand">
+    <div class="brand-mark" aria-hidden="true">H</div>
+    <div class="brand-text">
+      <h1>Honor Pricing Intelligence</h1>
+      <p>Canal retail Perú — Honor × Entel</p>
+    </div>
+  </div>
+  <div class="header-meta">
+    <div>Última captura: <strong id="meta-fecha">—</strong></div>
+    <div id="meta-cobertura">—</div>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Secciones del dashboard">
+  <button class="tab-btn" role="tab" aria-selected="true" aria-controls="view-resumen" id="tab-resumen" data-view="resumen">Resumen</button>
+  <button class="tab-btn" role="tab" aria-selected="false" aria-controls="view-competencia" id="tab-competencia" data-view="competencia">Honor vs Competencia</button>
+  <button class="tab-btn" role="tab" aria-selected="false" aria-controls="view-explorador" id="tab-explorador" data-view="explorador">Explorador</button>
+  <button class="tab-btn" role="tab" aria-selected="false" aria-controls="view-sany" id="tab-sany" data-view="sany">Sany</button>
+  <button class="tab-btn" role="tab" aria-selected="false" aria-controls="view-tendencia" id="tab-tendencia" data-view="tendencia">Tendencia</button>
+</nav>
+
+<main id="main-content">
+
+  <!-- ===== RESUMEN ===== -->
+  <section id="view-resumen" class="view active" role="tabpanel" aria-labelledby="tab-resumen">
+    <div class="kpi-grid" id="kpi-grid"></div>
+    <h2 class="section-title">Qué revisar hoy</h2>
+    <div class="insight-list" id="insight-list"></div>
+    <h2 class="section-title">Cobertura de retailers</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Retailer</th><th class="num">Filas totales</th><th class="num">Filas Honor</th><th>Estado</th></tr></thead>
+        <tbody id="cobertura-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===== HONOR VS COMPETENCIA ===== -->
+  <section id="view-competencia" class="view" role="tabpanel" aria-labelledby="tab-competencia">
+    <p class="section-title">Honor más barato vs. competidor más barato, por segmento de precio</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th>Segmento</th><th>Honor</th><th class="num">Precio</th>
+          <th>Competidor</th><th class="num">Precio</th><th class="num">Brecha</th>
+        </tr></thead>
+        <tbody id="competencia-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===== EXPLORADOR ===== -->
+  <section id="view-explorador" class="view" role="tabpanel" aria-labelledby="tab-explorador">
+    <p class="section-title">Dispersión de precio del mismo SKU Honor entre retailers/vendedores</p>
+    <div class="filters">
+      <input type="search" id="explorador-search" placeholder="Buscar familia (ej. X7D, Magic 8)..." aria-label="Buscar familia">
+      <button id="filtro-oportunidad" aria-pressed="false">Solo oportunidades</button>
+    </div>
+    <div id="explorador-list"></div>
+  </section>
+
+  <!-- ===== SANY ===== -->
+  <section id="view-sany" class="view" role="tabpanel" aria-labelledby="tab-sany">
+    <div class="kpi-grid" id="sany-kpi-grid"></div>
+    <p class="section-title">Productos Honor vendidos por Sany, vs. el resto del mercado</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th>Familia</th><th>Retailer</th><th class="num">Precio Sany</th>
+          <th class="num">Mínimo mercado</th><th class="num">Diferencia</th>
+        </tr></thead>
+        <tbody id="sany-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===== TENDENCIA ===== -->
+  <section id="view-tendencia" class="view" role="tabpanel" aria-labelledby="tab-tendencia">
+    <p class="section-title">Cambios de precio Honor desde la corrida anterior</p>
+    <div id="tendencia-content"></div>
+  </section>
+
+</main>
+
+<footer>
+  IS Design System v1.0 · Datos públicos de retailers peruanos, capturados a diario vía GitHub Actions.
+</footer>
+
+<script>
+const fmtMoney = (n) => n == null ? '—' : 'S/' + Number(n).toLocaleString('es-PE', {maximumFractionDigits: 0});
+const fmtPct = (n) => n == null ? '—' : (n > 0 ? '+' : '') + n.toFixed(1) + '%';
+const esc = (s) => (s ?? '').toString().replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+let DATA = null;
+
+function setTab(view) {
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    const active = b.dataset.view === view;
+    b.setAttribute('aria-selected', active ? 'true' : 'false');
+  });
+  document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === 'view-' + view));
+}
+document.querySelectorAll('.tab-btn').forEach(b => b.addEventListener('click', () => setTab(b.dataset.view)));
+
+function kpiCard(label, value, sub, tone) {
+  return `<div class="kpi-card ${tone||''}">
+    <div class="kpi-label">${esc(label)}</div>
+    <div class="kpi-value">${esc(value)}</div>
+    ${sub ? `<div class="kpi-sub">${esc(sub)}</div>` : ''}
+  </div>`;
+}
+
+function renderResumen(d) {
+  const r = d.resumen;
+  document.getElementById('kpi-grid').innerHTML = [
+    kpiCard('Ofertas Honor capturadas hoy', r.total_ofertas_honor_hoy, `${r.retailers_con_honor_hoy} retailers con Honor`),
+    kpiCard('Familias Honor detectadas', r.familias_honor_detectadas, `${r.vendedores_honor_detectados} vendedores distintos`),
+    kpiCard('Oportunidades de dispersión', r.oportunidades_dispersion, 'Mismo SKU, precio muy distinto', r.oportunidades_dispersion > 0 ? 'risk' : 'ok'),
+    kpiCard('Oportunidades vs. competencia', r.oportunidades_vs_competencia, 'Brecha de precio por segmento', r.oportunidades_vs_competencia > 0 ? 'warn' : 'ok'),
+  ].join('');
+
+  const list = document.getElementById('insight-list');
+  if (!d.insights.length) {
+    list.innerHTML = '<div class="empty-state">Sin alertas relevantes con los datos de hoy.</div>';
+  } else {
+    list.innerHTML = d.insights.map(i => `
+      <div class="insight-card sev-${esc(i.severidad)}">
+        <div class="insight-head">
+          <span class="insight-tag">${esc(i.tipo.replace('_',' '))}</span>
+          <span class="insight-tag">confianza ${esc(i.confianza)}</span>
+        </div>
+        <div class="insight-evidence">${esc(i.evidencia)}</div>
+        <div class="insight-interp">${esc(i.interpretacion)}</div>
+        <div class="insight-action">${esc(i.accion)}</div>
+      </div>
+    `).join('');
+  }
+
+  document.getElementById('cobertura-body').innerHTML = d.cobertura.detalle.map(c => `
+    <tr>
+      <td>${esc(c.retailer)}</td>
+      <td class="num">${c.filas}</td>
+      <td class="num">${c.filas_honor}</td>
+      <td>${c.ok ? '<span class="pill pill-ok">OK</span>' : '<span class="pill pill-risk">Sin datos hoy</span>'}</td>
+    </tr>
+  `).join('');
+
+  document.getElementById('meta-fecha').textContent = d.fecha_captura;
+  document.getElementById('meta-cobertura').textContent =
+    `${d.cobertura.retailers_con_datos_hoy}/${d.cobertura.retailers_configurados} retailers con datos hoy`;
+}
+
+function renderCompetencia(d) {
+  document.getElementById('competencia-body').innerHTML = d.vs_competencia.map(g => `
+    <tr>
+      <td>${esc(g.segmento)}</td>
+      <td>${esc(g.honor_mas_barato.familia)}<br><span class="familia-meta">${esc(g.honor_mas_barato.retailer)}</span></td>
+      <td class="num">${fmtMoney(g.honor_mas_barato.precio)}</td>
+      <td>${esc(g.competidor_mas_barato.marca)}<br><span class="familia-meta">${esc(g.competidor_mas_barato.retailer)}</span></td>
+      <td class="num">${fmtMoney(g.competidor_mas_barato.precio)}</td>
+      <td class="num">
+        <span class="pill ${g.es_oportunidad ? (g.honor_mas_caro_que_competencia ? 'pill-risk' : 'pill-ok') : 'pill-neutral'}">
+          ${fmtPct(g.gap_pct)}
+        </span>
+      </td>
+    </tr>
+  `).join('') || '<tr><td colspan="6" class="empty-state">Sin datos suficientes hoy para comparar por segmento.</td></tr>';
+}
+
+let explFiltroOportunidad = false;
+function renderExplorador(d) {
+  const term = document.getElementById('explorador-search').value.trim().toUpperCase();
+  const list = d.dispersion_interna.filter(x =>
+    (!term || x.familia.toUpperCase().includes(term)) &&
+    (!explFiltroOportunidad || x.es_oportunidad)
+  );
+  const container = document.getElementById('explorador-list');
+  if (!list.length) {
+    container.innerHTML = '<div class="empty-state">Sin resultados.</div>';
+    return;
+  }
+  container.innerHTML = list.map((x, idx) => `
+    <div class="familia-card" data-idx="${idx}">
+      <button class="familia-summary" aria-expanded="false">
+        <div>
+          <div class="familia-name">${esc(x.familia)}</div>
+          <div class="familia-meta">${x.n_ofertas} ofertas · ${fmtMoney(x.precio_min)} – ${fmtMoney(x.precio_max)}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span class="familia-spread" style="color: ${x.es_oportunidad ? 'var(--risk)' : 'var(--text-muted)'}">${x.spread_pct}%</span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </button>
+      <div class="familia-detail">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Retailer</th><th>Vendedor</th><th class="num">Precio</th><th>Producto</th></tr></thead>
+            <tbody>
+              ${x.ofertas.map(o => `
+                <tr>
+                  <td>${esc(o.retailer)}</td>
+                  <td>${esc(o.vendedor)}${o.vendedor_tercero ? ' <span class="pill pill-neutral">3º</span>' : ''}</td>
+                  <td class="num">${fmtMoney(o.precio)}</td>
+                  <td>${o.url ? `<a href="${esc(o.url)}" target="_blank" rel="noopener">${esc(o.modelo)}</a>` : esc(o.modelo)}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  container.querySelectorAll('.familia-summary').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.familia-card');
+      const open = card.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+}
+
+function renderSany(d) {
+  const s = d.sany;
+  const masCaros = s.productos.filter(p => p.diferencia_pct != null && p.diferencia_pct > 0).length;
+  const masBaratos = s.productos.filter(p => p.sany_es_mas_barato).length;
+  document.getElementById('sany-kpi-grid').innerHTML = [
+    kpiCard('Productos Honor con Sany', s.total_productos),
+    kpiCard('Más caros que el resto del mercado', masCaros, 'Riesgo de perder venta frente al canal', masCaros > 0 ? 'risk' : 'ok'),
+    kpiCard('Más baratos que el resto del mercado', masBaratos, 'Ventaja competitiva de Sany', 'ok'),
+  ].join('');
+
+  document.getElementById('sany-body').innerHTML = s.productos.map(p => `
+    <tr>
+      <td>${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.familia)}</a>` : esc(p.familia)}</td>
+      <td>${esc(p.retailer)}</td>
+      <td class="num">${fmtMoney(p.precio_sany)}</td>
+      <td class="num">${fmtMoney(p.precio_min_resto_mercado)}</td>
+      <td class="num">
+        <span class="pill ${p.sany_es_mas_barato ? 'pill-ok' : (p.diferencia_pct > 5 ? 'pill-risk' : 'pill-neutral')}">
+          ${fmtPct(p.diferencia_pct)}
+        </span>
+      </td>
+    </tr>
+  `).join('') || '<tr><td colspan="5" class="empty-state">Sany no aparece en la captura de hoy.</td></tr>';
+}
+
+function renderTendencia(d) {
+  const el = document.getElementById('tendencia-content');
+  if (!d.cambios_precio.length) {
+    el.innerHTML = `<div class="empty-state">
+      Sin corrida anterior para comparar, o sin cambios de precio Honor desde ayer.<br>
+      Esta vista se vuelve más útil con el paso de los días, a medida que se acumula historial.
+    </div>`;
+    return;
+  }
+  el.innerHTML = `<div class="table-wrap"><table>
+    <thead><tr><th>Producto</th><th>Retailer</th><th class="num">Antes</th><th class="num">Ahora</th><th class="num">Variación</th></tr></thead>
+    <tbody>
+      ${d.cambios_precio.map(c => `
+        <tr>
+          <td>${esc(c.modelo)}<br><span class="familia-meta">${esc(c.vendedor)}</span></td>
+          <td>${esc(c.retailer)}</td>
+          <td class="num">${fmtMoney(c.precio_antes)}</td>
+          <td class="num">${fmtMoney(c.precio_ahora)}</td>
+          <td class="num"><span class="pill ${c.bajo ? 'pill-ok' : 'pill-warn'}">${fmtPct(c.variacion_pct)}</span></td>
+        </tr>
+      `).join('')}
+    </tbody>
+  </table></div>`;
+}
+
+function renderAll(d) {
+  DATA = d;
+  renderResumen(d);
+  renderCompetencia(d);
+  renderExplorador(d);
+  renderSany(d);
+  renderTendencia(d);
+}
+
+document.getElementById('explorador-search').addEventListener('input', () => DATA && renderExplorador(DATA));
+document.getElementById('filtro-oportunidad').addEventListener('click', (e) => {
+  explFiltroOportunidad = !explFiltroOportunidad;
+  e.target.setAttribute('aria-pressed', explFiltroOportunidad ? 'true' : 'false');
+  if (DATA) renderExplorador(DATA);
+});
+
+fetch('dashboard_data.json?_=' + Date.now())
+  .then(r => r.json())
+  .then(renderAll)
+  .catch(err => {
+    document.getElementById('main-content').innerHTML =
+      `<div class="empty-state">No se pudo cargar dashboard_data.json. ¿Ya corrió la primera captura? (${esc(err.message)})</div>`;
+  });
+</script>
+</body>
+</html>

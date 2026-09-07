@@ -22,10 +22,13 @@ jobs:
       - name: Correr captura
         run: python run.py --export-csv data/captura_$(date +%Y-%m-%d).csv
 
-      - name: Guardar cambios (base de datos + CSV del día)
+      - name: Generar datos del dashboard
+        run: python -m dashboard.build_dashboard_data
+
+      - name: Guardar cambios (base de datos + CSV del día + dashboard)
         run: |
           git config user.name "price-tracker-bot"
           git config user.email "actions@github.com"
-          git add data/
+          git add data/ docs/dashboard_data.json
           git diff --cached --quiet || git commit -m "Captura de precios $(date +%Y-%m-%d)"
           git push

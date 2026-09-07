@@ -30,6 +30,12 @@ pricetracker/
     magento_html.py          # Hiraoka, La Curacao, Tiendas EFE (Magento, precios server-side)
     shopify_json.py          # Covers Store, iShop, Mac Center (Shopify -- /products.json)
     woocommerce_store_api.py # Celivery Perú (WooCommerce Store API pública)
+  dashboard/
+    normalize.py              # nombre de producto -> familia comparable + filtros de calidad
+    build_dashboard_data.py   # lee precios.db, calcula KPIs/oportunidades, escribe docs/dashboard_data.json
+  docs/
+    index.html                # el dashboard (página estática, la sirve GitHub Pages)
+    dashboard_data.json       # generado por build_dashboard_data.py, se regenera cada corrida
   retailers.json          # qué retailer, qué plataforma, qué categorías/vendedores
   db.py                    # esquema SQLite + inserción + detección de cambios
   run.py                   # orquestador: lee config -> llama adaptador -> guarda
@@ -92,6 +98,66 @@ corrida.
    dentro de `data/` — el historial de commits ES el historial de precios.
 4. Se puede disparar manualmente desde la pestaña "Actions" del repo
    ("Run workflow") sin esperar al cron.
+
+## Dashboard de oportunidades de precio
+
+Además de guardar el histórico crudo, cada corrida genera un dashboard
+publicado (`docs/index.html` + `docs/dashboard_data.json`), construido según
+**IS Design System v1.0**. Muestra:
+
+- **Resumen**: KPIs del día (ofertas Honor capturadas, familias detectadas,
+  cuántas oportunidades hay) + las alertas más relevantes (Evidencia →
+  Interpretación → Acción) + tabla de qué retailers sí trajeron datos hoy.
+- **Honor vs Competencia**: por segmento de precio (Hasta S/600, S/600-1,000,
+  etc.), el Honor más barato disponible vs. el competidor (Samsung, Xiaomi,
+  Motorola, Apple, Redmi, Poco) más barato del mismo segmento -- no se puede
+  matchear modelo exacto entre marcas, así que el segmento de precio es el
+  proxy de "gama equivalente".
+- **Explorador**: dispersión de precio del mismo SKU Honor entre retailers y
+  vendedores -- si el mismo modelo cuesta S/449 en un lado y S/899 en otro,
+  aparece acá, ordenado de mayor a menor dispersión.
+- **Sany**: pestaña dedicada a todo lo que vende Sany (aparece como vendedor
+  marketplace en PlazaVea/Promart y también en Falabella, no es exclusivo de
+  una plataforma) comparado contra el precio más bajo del resto del mercado
+  para la misma familia.
+- **Tendencia**: qué precios de Honor cambiaron desde la corrida anterior.
+  Se vuelve más útil día a día, a medida que se acumula historial.
+
+### Cómo publicarlo (una sola vez)
+
+GitHub Pages gratis y automático requiere que el repositorio sea público.
+Como se decidió tratar los datos como sensibles por defecto, la config
+recomendada es: **repo público, pero con el link de la página sin listar**
+(no aparece en buscadores ni en ningún directorio, solo quien tenga el link
+exacto puede verla) -- nadie va a *encontrar* la página por accidente, pero
+técnicamente el repo deja de ser privado. Si eso no es aceptable, la
+alternativa es GitHub Pro/Team (pago) para mantener Pages sobre un repo
+privado, o simplemente no publicar la página y quedarse con el dashboard
+corriendo solo en local (`python -m dashboard.build_dashboard_data` y abrir
+`docs/index.html` a mano).
+
+Pasos (una sola vez):
+
+1. **Hacer público el repo**: Settings → General → bajar hasta "Danger Zone"
+   → "Change visibility" → "Make public" → escribir el nombre del repo para
+   confirmar.
+2. **Activar GitHub Pages**: Settings → Pages → en "Build and deployment",
+   Source = "Deploy from a branch" → Branch = `main`, carpeta = `/docs` →
+   Save.
+3. GitHub tarda 1-2 minutos en publicarla la primera vez. La URL queda como
+   `https://<tu-usuario>.github.io/<nombre-del-repo>/` -- ese es el link sin
+   listar para compartir con jefatura/equipo.
+4. Cada corrida diaria de `daily_scrape.yml` ya regenera
+   `docs/dashboard_data.json` y lo commitea -- la página se actualiza sola,
+   no hay que volver a tocar nada.
+
+### Correrlo/probarlo en local
+
+```bash
+python -m dashboard.build_dashboard_data   # genera/actualiza docs/dashboard_data.json
+python -m http.server 8000 --directory docs   # servirlo localmente
+# abrir http://localhost:8000 en el navegador
+```
 
 ## Cómo agregar un retailer nuevo
 
