@@ -1,0 +1,10 @@
+# Normaliza saltos de línea: evita el spam de "LF will be replaced by CRLF"
+# en cada git add en Windows. El repo guarda LF, Git lo adapta al pull/checkout.
+* text=auto eol=lf
+
+# docs/dashboard_data.json se regenera solo (a diario por el bot, o local al
+# probar el dashboard) -- nunca se edita a mano. Si un pull encuentra que el
+# bot lo cambió al mismo tiempo que tú, en vez de trabar el merge se queda con
+# TU versión y sigue. Requiere "git config merge.ours.driver true" una vez
+# por máquina -- subir-cambios.ps1 ya lo hace solo en cada corrida.
+docs/dashboard_data.json merge=ours
