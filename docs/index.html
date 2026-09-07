@@ -205,6 +205,35 @@ tr:last-child td { border-bottom: none; }
 }
 .filters button[aria-pressed="true"] { background: var(--accent); color: white; border-color: var(--accent); }
 
+/* ===== Charts / heatmap ===== */
+.chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);
+  padding: var(--space-4); margin-bottom: var(--space-6); box-shadow: var(--shadow-sm); }
+.chart-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3); margin-bottom: var(--space-3); }
+.chart-title { font-size: 14px; font-weight: 700; }
+.chart-select {
+  padding: var(--space-2) var(--space-3); border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--surface); color: var(--text); font-size: 13px; min-height: 40px; font-family: inherit;
+}
+.chart-legend { display: flex; gap: var(--space-4); font-size: 12px; color: var(--text-muted); flex-wrap: wrap; }
+.chart-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.chart-svg-wrap { overflow-x: auto; }
+.chart-svg-wrap svg { display: block; }
+.chart-tooltip-val { font-size: 11px; fill: var(--text-muted); }
+
+.heatmap-wrap { overflow-x: auto; }
+.heatmap-table { border-collapse: collapse; font-size: 11px; }
+.heatmap-table th, .heatmap-table td { padding: 4px 6px; text-align: center; border: 1px solid var(--border); white-space: nowrap; }
+.heatmap-table th.vendor-col, .heatmap-table td.vendor-col { text-align: left; position: sticky; left: 0; background: var(--surface); font-weight: 600; }
+.heatmap-cell { width: 34px; }
+
+/* Simple horizontal bar chart for segmento dispersion */
+.bar-row { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-2); }
+.bar-label { width: 150px; flex-shrink: 0; font-size: 12px; color: var(--text-muted); }
+.bar-track { flex: 1; background: var(--surface-alt); border-radius: 999px; height: 18px; overflow: hidden; }
+.bar-fill { height: 100%; background: var(--accent); border-radius: 999px 0 0 999px; }
+.bar-value { width: 60px; text-align: right; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+
 footer { text-align: center; padding: var(--space-8) var(--space-4); color: var(--text-muted); font-size: 12px; }
 
 @media (max-width: 720px) {
@@ -241,6 +270,7 @@ footer { text-align: center; padding: var(--space-8) var(--space-4); color: var(
   <button class="tab-btn" role="tab" aria-selected="false" aria-controls="view-explorador" id="tab-explorador" data-view="explorador">Explorador</button>
   <button class="tab-btn" role="tab" aria-selected="false" aria-controls="view-sany" id="tab-sany" data-view="sany">Sany</button>
   <button class="tab-btn" role="tab" aria-selected="false" aria-controls="view-tendencia" id="tab-tendencia" data-view="tendencia">Tendencia</button>
+  <button class="tab-btn" role="tab" aria-selected="false" aria-controls="view-analisis" id="tab-analisis" data-view="analisis">Análisis</button>
 </nav>
 
 <main id="main-content">
@@ -300,8 +330,76 @@ footer { text-align: center; padding: var(--space-8) var(--space-4); color: var(
 
   <!-- ===== TENDENCIA ===== -->
   <section id="view-tendencia" class="view" role="tabpanel" aria-labelledby="tab-tendencia">
-    <p class="section-title">Cambios de precio Honor desde la corrida anterior</p>
+    <div class="chart-card">
+      <div class="chart-head">
+        <span class="chart-title">Evolución de precio por familia Honor</span>
+        <select class="chart-select" id="tendencia-familia-select" aria-label="Elegir familia Honor"></select>
+      </div>
+      <div class="chart-legend">
+        <span><i class="legend-dot" style="background:var(--is-sky)"></i> Mínimo</span>
+        <span><i class="legend-dot" style="background:var(--is-graphite)"></i> Promedio</span>
+        <span><i class="legend-dot" style="background:var(--is-terracotta)"></i> Máximo</span>
+      </div>
+      <div class="chart-svg-wrap" id="chart-familia"></div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-head">
+        <span class="chart-title">Honor vs. competencia más barata, por segmento</span>
+        <select class="chart-select" id="tendencia-segmento-select" aria-label="Elegir segmento de precio"></select>
+      </div>
+      <div class="chart-legend">
+        <span><i class="legend-dot" style="background:var(--is-sky)"></i> Honor (mínimo del segmento)</span>
+        <span><i class="legend-dot" style="background:var(--is-terracotta)"></i> Competencia (mínimo del segmento)</span>
+      </div>
+      <div class="chart-svg-wrap" id="chart-segmento"></div>
+    </div>
+
+    <div class="chart-card">
+      <p class="chart-title" style="margin-bottom:var(--space-3)">Movimiento de precio por vendedor (cambios respecto al día anterior)</p>
+      <div id="heatmap-container"></div>
+    </div>
+
+    <h2 class="section-title">Cambios de precio Honor desde la corrida anterior</h2>
     <div id="tendencia-content"></div>
+  </section>
+
+  <!-- ===== ANÁLISIS ===== -->
+  <section id="view-analisis" class="view" role="tabpanel" aria-labelledby="tab-analisis">
+    <p class="section-title">Lo que no se ve mirando una tabla de precios</p>
+    <div class="kpi-grid" id="analisis-kpi-grid"></div>
+
+    <div class="insight-list" id="analisis-insight-list" style="margin-bottom: var(--space-8)"></div>
+
+    <h2 class="section-title">Ranking de vendedores por sobreprecio sistemático</h2>
+    <p style="color:var(--text-muted);font-size:12px;margin-bottom:var(--space-3)">
+      Cuánto vende cada vendedor por encima del precio mínimo de mercado de la misma familia, en promedio
+      (solo vendedores con 3+ ofertas Honor comparables, para que el número no sea ruido de 1-2 productos).
+    </p>
+    <div class="table-wrap" style="margin-bottom: var(--space-8)">
+      <table>
+        <thead><tr><th>Vendedor</th><th class="num">Ofertas</th><th class="num">Sobreprecio promedio</th><th>Clasificación</th></tr></thead>
+        <tbody id="ranking-vendedores-body"></tbody>
+      </table>
+    </div>
+
+    <h2 class="section-title">Riesgo de concentración por familia</h2>
+    <p style="color:var(--text-muted);font-size:12px;margin-bottom:var(--space-3)">
+      Familias Honor que dependen de un solo vendedor en todo el canal capturado -- si ese vendedor sube
+      precio o se queda sin stock, no hay alternativa visible.
+    </p>
+    <div class="filters">
+      <button class="filtro-riesgo" data-riesgo="alto" aria-pressed="false">Solo riesgo alto</button>
+    </div>
+    <div class="table-wrap" style="margin-bottom: var(--space-8)">
+      <table>
+        <thead><tr><th>Familia</th><th class="num">Vendedores distintos</th><th class="num">Retailers distintos</th><th>Riesgo</th></tr></thead>
+        <tbody id="concentracion-body"></tbody>
+      </table>
+    </div>
+
+    <h2 class="section-title">Dispersión de precio relativa por segmento</h2>
+    <div id="dispersion-segmento-chart"></div>
   </section>
 
 </main>
@@ -469,13 +567,142 @@ function renderSany(d) {
   `).join('') || '<tr><td colspan="5" class="empty-state">Sany no aparece en la captura de hoy.</td></tr>';
 }
 
+/* ===== SVG line chart (sin dependencias externas) ===== */
+function svgLineChart(container, fechas, series, opts) {
+  opts = opts || {};
+  const W = Math.max(560, container.clientWidth || 700);
+  const H = 220;
+  const PAD_L = 56, PAD_R = 16, PAD_T = 16, PAD_B = 30;
+  const innerW = W - PAD_L - PAD_R;
+  const innerH = H - PAD_T - PAD_B;
+
+  if (!fechas.length) {
+    container.innerHTML = '<div class="empty-state">Sin datos suficientes todavía.</div>';
+    return;
+  }
+  if (fechas.length === 1) {
+    container.innerHTML = `<div class="empty-state">Solo hay un día de captura por ahora. Esta vista se arma sola a medida que
+      pasen los días -- vuelve mañana para ver el primer tramo de la línea.</div>`;
+    return;
+  }
+
+  let allVals = [];
+  series.forEach(s => s.values.forEach(v => { if (v != null) allVals.push(v); }));
+  if (!allVals.length) {
+    container.innerHTML = '<div class="empty-state">Sin datos suficientes todavía.</div>';
+    return;
+  }
+  let vMin = Math.min(...allVals), vMax = Math.max(...allVals);
+  if (vMin === vMax) { vMin *= 0.95; vMax *= 1.05; }
+  const pad = (vMax - vMin) * 0.1;
+  vMin -= pad; vMax += pad;
+
+  const x = i => PAD_L + (innerW * i) / (fechas.length - 1);
+  const y = v => PAD_T + innerH - ((v - vMin) / (vMax - vMin)) * innerH;
+
+  const gridLines = 4;
+  let gridSvg = '';
+  for (let g = 0; g <= gridLines; g++) {
+    const val = vMin + ((vMax - vMin) * g) / gridLines;
+    const yy = y(val);
+    gridSvg += `<line x1="${PAD_L}" y1="${yy}" x2="${W-PAD_R}" y2="${yy}" stroke="var(--border)" stroke-width="1"/>`;
+    gridSvg += `<text x="${PAD_L-8}" y="${yy+4}" text-anchor="end" font-size="10" fill="var(--text-muted)">${fmtMoney(val)}</text>`;
+  }
+
+  const step = Math.max(1, Math.ceil(fechas.length / 7));
+  let axisSvg = '';
+  fechas.forEach((f, i) => {
+    if (i % step === 0 || i === fechas.length - 1) {
+      axisSvg += `<text x="${x(i)}" y="${H-8}" text-anchor="middle" font-size="10" fill="var(--text-muted)">${f.slice(5)}</text>`;
+    }
+  });
+
+  let linesSvg = '';
+  series.forEach(s => {
+    const pts = s.values.map((v, i) => v == null ? null : [x(i), y(v)]).filter(Boolean);
+    if (!pts.length) return;
+    const path = pts.map((p, i) => (i === 0 ? 'M' : 'L') + p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ');
+    linesSvg += `<path d="${path}" fill="none" stroke="${s.color}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`;
+    pts.forEach(p => {
+      linesSvg += `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="3" fill="${s.color}"/>`;
+    });
+  });
+
+  container.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" height="${H}" role="img" aria-label="${esc(opts.ariaLabel || 'Gráfico de tendencia')}">
+    ${gridSvg}${axisSvg}${linesSvg}
+  </svg>`;
+}
+
 function renderTendencia(d) {
+  const t = d.tendencia;
+  const familiaSelect = document.getElementById('tendencia-familia-select');
+  const familias = Object.keys(t.familias).sort((a, b) => t.familias[b].length - t.familias[a].length || a.localeCompare(b));
+  familiaSelect.innerHTML = familias.map(f => `<option value="${esc(f)}">${esc(f)}</option>`).join('');
+
+  function drawFamilia() {
+    const familia = familiaSelect.value;
+    const puntos = t.familias[familia] || [];
+    const fechasFam = puntos.map(p => p.fecha);
+    svgLineChart(document.getElementById('chart-familia'), fechasFam, [
+      { values: puntos.map(p => p.precio_min), color: 'var(--is-sky)' },
+      { values: puntos.map(p => p.precio_promedio), color: 'var(--is-graphite)' },
+      { values: puntos.map(p => p.precio_max), color: 'var(--is-terracotta)' },
+    ], { ariaLabel: `Evolución de precio de ${familia}` });
+  }
+  familiaSelect.addEventListener('change', drawFamilia);
+  if (familias.length) { familiaSelect.value = familias[0]; drawFamilia(); }
+  else document.getElementById('chart-familia').innerHTML = '<div class="empty-state">Sin familias Honor con historial todavía.</div>';
+
+  const segmentoSelect = document.getElementById('tendencia-segmento-select');
+  const segmentos = Object.keys(t.vs_competencia_por_segmento);
+  segmentoSelect.innerHTML = segmentos.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join('');
+
+  function drawSegmento() {
+    const seg = segmentoSelect.value;
+    const puntos = t.vs_competencia_por_segmento[seg] || [];
+    const fechasSeg = puntos.map(p => p.fecha);
+    svgLineChart(document.getElementById('chart-segmento'), fechasSeg, [
+      { values: puntos.map(p => p.honor_min), color: 'var(--is-sky)' },
+      { values: puntos.map(p => p.competencia_min), color: 'var(--is-terracotta)' },
+    ], { ariaLabel: `Honor vs competencia en ${seg}` });
+  }
+  segmentoSelect.addEventListener('change', drawSegmento);
+  if (segmentos.length) { segmentoSelect.value = segmentos[0]; drawSegmento(); }
+  else document.getElementById('chart-segmento').innerHTML = '<div class="empty-state">Sin datos suficientes todavía.</div>';
+
+  const heatmapEl = document.getElementById('heatmap-container');
+  const hm = t.heatmap_vendedores;
+  if (!hm.fechas || hm.fechas.length < 2 || !hm.vendedores.length) {
+    heatmapEl.innerHTML = `<div class="empty-state">Hace falta al menos 2 días de historial para ver movimiento de precio por vendedor.
+      Se arma sola con cada corrida diaria nueva.</div>`;
+  } else {
+    const maxCambio = Math.max(1, ...hm.vendedores.flatMap(v => v.cambios_por_fecha));
+    const colorFor = (n) => {
+      if (n === 0) return 'var(--surface-alt)';
+      const intensity = Math.min(1, n / maxCambio);
+      return `rgba(200,92,74,${0.15 + intensity * 0.65})`;
+    };
+    heatmapEl.innerHTML = `<div class="heatmap-wrap"><table class="heatmap-table">
+      <thead><tr><th class="vendor-col">Vendedor</th>${hm.fechas.map(f => `<th>${esc(f.slice(5))}</th>`).join('')}<th>Total</th></tr></thead>
+      <tbody>
+        ${hm.vendedores.map(v => `
+          <tr>
+            <td class="vendor-col">${esc(v.vendedor)}</td>
+            ${v.cambios_por_fecha.map(n => `<td class="heatmap-cell" style="background:${colorFor(n)}">${n || ''}</td>`).join('')}
+            <td><strong>${v.total_cambios}</strong></td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table></div>`;
+  }
+
+  renderTendenciaContent(d);
+}
+
+function renderTendenciaContent(d) {
   const el = document.getElementById('tendencia-content');
   if (!d.cambios_precio.length) {
-    el.innerHTML = `<div class="empty-state">
-      Sin corrida anterior para comparar, o sin cambios de precio Honor desde ayer.<br>
-      Esta vista se vuelve más útil con el paso de los días, a medida que se acumula historial.
-    </div>`;
+    el.innerHTML = `<div class="empty-state">Sin corrida anterior para comparar, o sin cambios de precio Honor desde ayer.</div>`;
     return;
   }
   el.innerHTML = `<div class="table-wrap"><table>
@@ -494,6 +721,81 @@ function renderTendencia(d) {
   </table></div>`;
 }
 
+function renderAnalisis(d) {
+  const a = d.analisis_avanzado;
+
+  const peorVendedor = a.vendedores_ranking[0];
+  const pctRiesgo = a.total_familias_evaluadas ? Math.round(a.familias_riesgo_alto / a.total_familias_evaluadas * 100) : 0;
+  document.getElementById('analisis-kpi-grid').innerHTML = [
+    kpiCard('Familias con 1 solo vendedor', `${a.familias_riesgo_alto}/${a.total_familias_evaluadas}`, `${pctRiesgo}% del catálogo Honor evaluado`, pctRiesgo >= 30 ? 'risk' : 'ok'),
+    peorVendedor ? kpiCard('Vendedor más caro (sistemático)', peorVendedor.vendedor, `+${peorVendedor.sobreprecio_promedio_pct}% vs. mínimo de mercado`, 'warn') : kpiCard('Vendedor más caro', '—'),
+    kpiCard('Vendedores evaluados', a.vendedores_ranking.length, '3+ ofertas Honor comparables'),
+  ].join('');
+
+  const insightsAvanzados = d.insights.filter(i =>
+    ['vendedor_sobreprecio', 'vendedor_agresivo', 'concentracion_riesgo', 'volatilidad_segmento'].includes(i.tipo)
+  );
+  const list = document.getElementById('analisis-insight-list');
+  list.innerHTML = insightsAvanzados.length
+    ? insightsAvanzados.map(i => `
+      <div class="insight-card sev-${esc(i.severidad)}">
+        <div class="insight-head">
+          <span class="insight-tag">${esc(i.tipo.replace('_',' '))}</span>
+          <span class="insight-tag">confianza ${esc(i.confianza)}</span>
+        </div>
+        <div class="insight-evidence">${esc(i.evidencia)}</div>
+        <div class="insight-interp">${esc(i.interpretacion)}</div>
+        <div class="insight-action">${esc(i.accion)}</div>
+      </div>
+    `).join('')
+    : '<div class="empty-state">Sin hallazgos relevantes con los datos de hoy.</div>';
+
+  document.getElementById('ranking-vendedores-body').innerHTML = a.vendedores_ranking.map(v => `
+    <tr>
+      <td>${esc(v.vendedor)}${v.vendedor_tercero ? ' <span class="pill pill-neutral">3º</span>' : ''}</td>
+      <td class="num">${v.n_ofertas}</td>
+      <td class="num">${fmtPct(v.sobreprecio_promedio_pct)}</td>
+      <td><span class="pill ${v.clasificacion.includes('caro') ? 'pill-risk' : v.clasificacion.includes('agresivo') ? 'pill-ok' : 'pill-neutral'}">${esc(v.clasificacion)}</span></td>
+    </tr>
+  `).join('') || '<tr><td colspan="4" class="empty-state">Sin suficientes datos todavía.</td></tr>';
+
+  let filtroRiesgoAlto = false;
+  function drawConcentracion() {
+    const rows = filtroRiesgoAlto ? a.concentracion.filter(c => c.riesgo_concentracion === 'alto') : a.concentracion;
+    document.getElementById('concentracion-body').innerHTML = rows.map(c => `
+      <tr>
+        <td>${esc(c.familia)}</td>
+        <td class="num">${c.n_vendedores_distintos}</td>
+        <td class="num">${c.n_retailers_distintos}</td>
+        <td><span class="pill ${c.riesgo_concentracion === 'alto' ? 'pill-risk' : c.riesgo_concentracion === 'medio' ? 'pill-warn' : 'pill-ok'}">${esc(c.riesgo_concentracion)}</span></td>
+      </tr>
+    `).join('') || '<tr><td colspan="4" class="empty-state">Sin resultados.</td></tr>';
+  }
+  document.querySelectorAll('.filtro-riesgo').forEach(btn => {
+    btn.addEventListener('click', () => {
+      filtroRiesgoAlto = !filtroRiesgoAlto;
+      btn.setAttribute('aria-pressed', filtroRiesgoAlto ? 'true' : 'false');
+      drawConcentracion();
+    });
+  });
+  drawConcentracion();
+
+  const dispEl = document.getElementById('dispersion-segmento-chart');
+  const disp = a.dispersion_por_segmento;
+  if (!disp.length) {
+    dispEl.innerHTML = '<div class="empty-state">Sin datos suficientes todavía.</div>';
+  } else {
+    const maxSpread = Math.max(...disp.map(s => s.spread_promedio_pct), 1);
+    dispEl.innerHTML = disp.map(s => `
+      <div class="bar-row">
+        <div class="bar-label">${esc(s.segmento)}</div>
+        <div class="bar-track"><div class="bar-fill" style="width:${Math.max(2, s.spread_promedio_pct / maxSpread * 100)}%"></div></div>
+        <div class="bar-value">${s.spread_promedio_pct}%</div>
+      </div>
+    `).join('');
+  }
+}
+
 function renderAll(d) {
   DATA = d;
   renderResumen(d);
@@ -501,6 +803,7 @@ function renderAll(d) {
   renderExplorador(d);
   renderSany(d);
   renderTendencia(d);
+  renderAnalisis(d);
 }
 
 document.getElementById('explorador-search').addEventListener('input', () => DATA && renderExplorador(DATA));

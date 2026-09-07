@@ -120,8 +120,19 @@ publicado (`docs/index.html` + `docs/dashboard_data.json`), construido según
   marketplace en PlazaVea/Promart y también en Falabella, no es exclusivo de
   una plataforma) comparado contra el precio más bajo del resto del mercado
   para la misma familia.
-- **Tendencia**: qué precios de Honor cambiaron desde la corrida anterior.
-  Se vuelve más útil día a día, a medida que se acumula historial.
+- **Tendencia**: evolución de precio (mínimo/promedio/máximo) de cada familia
+  Honor día a día, Honor vs. el mínimo de la competencia por segmento a lo
+  largo del tiempo, un mapa de calor de qué vendedor mueve precio más seguido,
+  y la tabla de qué cambió desde la corrida anterior. Con 1 día de captura
+  estas vistas muestran un aviso ("vuelve mañana") en vez de un gráfico vacío
+  o roto -- se arman solas, sin tocar código, a medida que se acumulan días.
+- **Análisis**: lecturas que no salen de mirar una tabla de precios --
+  ranking de qué vendedores cobran sistemáticamente por encima/por debajo del
+  mercado (no un caso aislado, un patrón sostenido en 3+ productos), qué % del
+  catálogo Honor depende de un solo vendedor (riesgo de quedarse sin
+  alternativa si ese vendedor sube precio o se queda sin stock), y en qué
+  segmento de precio el mercado es menos disciplinado (mayor dispersión
+  relativa entre vendedores).
 
 ### Cómo publicarlo (una sola vez)
 
