@@ -1,2 +1,5 @@
 __pycache__/
 *.pyc
+debug_dump.html
+debug_dump_texto.txt
+debug_dump.png
