@@ -52,7 +52,7 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 Write-Host "3/4 Trayendo cambios del repo (incluye commits del bot si los hay)..." -ForegroundColor Cyan
-git pull
+git pull --no-edit
 if ($LASTEXITCODE -ne 0) {
     Write-Host "ERROR: el pull falló con un conflicto real (no en dashboard_data.json)." -ForegroundColor Red
     Write-Host "Revisa el mensaje de arriba, resuelve el conflicto a mano, y recién ahí vuelve a correr el script." -ForegroundColor Red

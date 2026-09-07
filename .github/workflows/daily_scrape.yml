@@ -9,6 +9,12 @@ on:
 jobs:
   captura:
     runs-on: ubuntu-latest
+    env:
+      # El runner de GitHub Actions corre en UTC por defecto. Sin esto, una
+      # corrida de noche hora Perú (ej. 9pm) ya cae en el día SIGUIENTE en
+      # UTC -- tanto el nombre del CSV como la fecha guardada en precios.db
+      # (Python usa la hora del sistema) quedaban desfasados un día.
+      TZ: America/Lima
     steps:
       - uses: actions/checkout@v4
 
