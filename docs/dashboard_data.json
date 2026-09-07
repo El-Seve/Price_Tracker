@@ -1,5 +1,5 @@
 {
-  "generado": "2026-09-07T03:48:16",
+  "generado": "2026-09-07T04:41:29",
   "fecha_captura": "2026-09-07",
   "resumen": {
     "total_ofertas_honor_hoy": 92,
@@ -16,7 +16,7 @@
     "dias_de_historial": 1
   },
   "cobertura": {
-    "retailers_configurados": 24,
+    "retailers_configurados": 26,
     "retailers_con_datos_hoy": 10,
     "detalle": [
       {
@@ -110,6 +110,12 @@
         "ok": true
       },
       {
+        "retailer": "Movistar",
+        "filas": 0,
+        "filas_honor": 0,
+        "ok": false
+      },
+      {
         "retailer": "Oechsle",
         "filas": 0,
         "filas_honor": 0,
@@ -123,6 +129,12 @@
       },
       {
         "retailer": "Promart",
+        "filas": 0,
+        "filas_honor": 0,
+        "ok": false
+      },
+      {
+        "retailer": "Ripley",
         "filas": 0,
         "filas_honor": 0,
         "ok": false
@@ -413,6 +425,49 @@
           "precio": 1609.0,
           "modelo": "Honor 400 Lite 256GB Negro Nocturno + Liberado +  P(0c)",
           "url": "https://tienda.claro.com.pe/honor-400-lite-256gb-negro-nocturno-liberado-p/p"
+        }
+      ]
+    },
+    {
+      "familia": "X7E 256GB",
+      "tipo": "Smartphone",
+      "n_ofertas": 4,
+      "precio_min": 799.0,
+      "precio_max": 869.0,
+      "spread_pct": 8.8,
+      "es_oportunidad": false,
+      "ofertas": [
+        {
+          "retailer": "Wong",
+          "vendedor": "WongIO",
+          "vendedor_tercero": true,
+          "precio": 799.0,
+          "modelo": "Smartphone Honor X7E 6GB+256GB Black+Earbud X7Lite",
+          "url": "https://www.wong.pe/smartphone-honor-x7e-6gb-256gb-black-earbud-x7lite-1073418/p"
+        },
+        {
+          "retailer": "Wong",
+          "vendedor": "WongIO",
+          "vendedor_tercero": true,
+          "precio": 799.0,
+          "modelo": "Smartphone Honor X7E 6GB+256GB Sunrise Orange",
+          "url": "https://www.wong.pe/smartphone-honor-x7e-6gb-256gb-sunrise-orange-1073417/p"
+        },
+        {
+          "retailer": "Wong",
+          "vendedor": "WongIO",
+          "vendedor_tercero": true,
+          "precio": 869.0,
+          "modelo": "Smartphone Honor X7E 6GB+256GB Light Blue",
+          "url": "https://www.wong.pe/smartphone-honor-x7e-6gb-256gb-light-blue-1073421/p"
+        },
+        {
+          "retailer": "Wong",
+          "vendedor": "WongIO",
+          "vendedor_tercero": true,
+          "precio": 869.0,
+          "modelo": "Smartphone Honor X7E 6GB+256GB Midnight Black",
+          "url": "https://www.wong.pe/smartphone-honor-x7e-6gb-256gb-midnight-black-1073415/p"
         }
       ]
     },
@@ -806,49 +861,6 @@
           "precio": 769.0,
           "modelo": "Smartphone Honor X6E 4GB+256GB Sunrise Gold",
           "url": "https://www.wong.pe/smartphone-honor-x6e-4gb-256gb-sunrise-gold-1073416/p"
-        }
-      ]
-    },
-    {
-      "familia": "X7E 256GB",
-      "tipo": "Smartphone",
-      "n_ofertas": 4,
-      "precio_min": 869.0,
-      "precio_max": 869.0,
-      "spread_pct": 0.0,
-      "es_oportunidad": false,
-      "ofertas": [
-        {
-          "retailer": "Wong",
-          "vendedor": "WongIO",
-          "vendedor_tercero": true,
-          "precio": 869.0,
-          "modelo": "Smartphone Honor X7E 6GB+256GB Light Blue",
-          "url": "https://www.wong.pe/smartphone-honor-x7e-6gb-256gb-light-blue-1073421/p"
-        },
-        {
-          "retailer": "Wong",
-          "vendedor": "WongIO",
-          "vendedor_tercero": true,
-          "precio": 869.0,
-          "modelo": "Smartphone Honor X7E 6GB+256GB Black+Earbud X7Lite",
-          "url": "https://www.wong.pe/smartphone-honor-x7e-6gb-256gb-black-earbud-x7lite-1073418/p"
-        },
-        {
-          "retailer": "Wong",
-          "vendedor": "WongIO",
-          "vendedor_tercero": true,
-          "precio": 869.0,
-          "modelo": "Smartphone Honor X7E 6GB+256GB Sunrise Orange",
-          "url": "https://www.wong.pe/smartphone-honor-x7e-6gb-256gb-sunrise-orange-1073417/p"
-        },
-        {
-          "retailer": "Wong",
-          "vendedor": "WongIO",
-          "vendedor_tercero": true,
-          "precio": 869.0,
-          "modelo": "Smartphone Honor X7E 6GB+256GB Midnight Black",
-          "url": "https://www.wong.pe/smartphone-honor-x7e-6gb-256gb-midnight-black-1073415/p"
         }
       ]
     },
@@ -1443,8 +1455,8 @@
       "X7E 256GB": [
         {
           "fecha": "2026-09-07",
-          "precio_min": 869.0,
-          "precio_promedio": 869.0,
+          "precio_min": 799.0,
+          "precio_promedio": 834.0,
           "precio_max": 869.0,
           "n_ofertas": 4
         }
@@ -1706,7 +1718,7 @@
         "vendedor": "WongIO",
         "vendedor_tercero": true,
         "n_ofertas": 16,
-        "sobreprecio_promedio_pct": 1.4,
+        "sobreprecio_promedio_pct": 2.5,
         "clasificacion": "agresivo/barato"
       },
       {
@@ -1930,8 +1942,8 @@
       {
         "segmento": "S/600 - S/1,000",
         "n_familias": 6,
-        "spread_promedio_pct": 1.1,
-        "spread_max_pct": 6.7
+        "spread_promedio_pct": 2.6,
+        "spread_max_pct": 8.8
       },
       {
         "segmento": "S/1,000 - S/1,500",

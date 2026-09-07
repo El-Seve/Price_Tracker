@@ -32,6 +32,10 @@ pricetracker/
     shopify_json.py          # Covers Store, iShop, Mac Center (Shopify -- /products.json)
     woocommerce_store_api.py # Celivery Perú (WooCommerce Store API pública)
     honor_official.py        # HONOR Perú tienda oficial (endpoint de precios descubierto en su JS)
+    playwright_browser.py    # helper genérico con browser real, para sitios con Cloudflare
+    ripley.py                # Ripley vía Playwright -- soportado y activo en el cron
+    movistar.py              # Movistar vía Playwright -- pendiente, ver sección abajo
+  debug_playwright_dump.py # herramienta para diagnosticar Ripley/Movistar si el parseo falla
   dashboard/
     normalize.py              # nombre de producto -> familia comparable + filtros de calidad
     build_dashboard_data.py   # lee precios.db, calcula KPIs/oportunidades, escribe docs/dashboard_data.json
@@ -230,13 +234,15 @@ python -m http.server 8000 --directory docs   # servirlo localmente
   distintos, siempre el mismo 401 de 9 bytes) -- no es un problema de
   fingerprint resoluble con librerías gratis, solo cambiando la IP de origen
   (residencial), lo cual no es viable para una corrida automática en servidor.
-- **Movistar**: NO soportado por ahora. La tienda real vive en
-  `tienda.movistar.com.pe` (no en el dominio de marketing), detrás de
-  Cloudflare con bot-detection activo -- candidato a resolverse con Playwright
-  (gratis, ya se usa para QA del dashboard), pendiente de probar en vivo.
+- **Movistar**: PENDIENTE, ver sección "Ripley (Playwright) y el pendiente de
+  Movistar" más abajo -- la tienda real vive en `tienda.movistar.com.pe` (no
+  en el dominio de marketing), tiene adaptador nuevo, pero al renderizarla
+  con Playwright real devuelve una página de "Estamos en mantenimiento" en
+  vez del catálogo -- sin confirmar todavía si es downtime real o un
+  soft-block anti-bot.
 
-Bitel y Movistar quedan en `no_soportados` dentro de `retailers.json`, con el
-motivo documentado, para no repetir la investigación desde cero más adelante.
+Bitel queda en `no_soportados` dentro de `retailers.json`, con el motivo
+documentado, para no repetir la investigación desde cero más adelante.
 
 ### Tiendas propias / grupos retail (investigado 06/09/2026)
 
@@ -286,6 +292,56 @@ motivo documentado, para no repetir la investigación desde cero más adelante.
   tarjeta de producto -- adaptador nuevo `adapters/honor_official.py`, sin
   necesidad de browser, cookies ni token.
 
+### Ripley (Playwright) y el pendiente de Movistar (investigado/destrabado 07/09/2026)
+
+Estos dos son distintos a todos los anteriores: no alcanza con `requests` ni
+con `curl_cffi` (fingerprint TLS falso) porque el bloqueo de Cloudflare en
+ambos exige ejecutar JavaScript de verdad para pasar el challenge
+("Just a moment..." en Ripley, un Managed Challenge + una SPA vieja tipo
+Angular en Movistar). Se confirmó que el catálogo real con precios SÍ está
+accesible para un fetcher que se comporta como navegador legítimo -- eso
+descarta que sea un bloqueo de reputación de IP irresoluble (como Bitel).
+
+**Ripley: soportado y activo en el cron diario.** `adapters/ripley.py` +
+`adapters/playwright_browser.py` renderizan la categoría con Chromium real
+y leen el texto visible de la página (Ripley no expone JSON embebido, así
+que el parseo empareja nombre de producto + precios por patrón de líneas
+consecutivas en vez de por clases CSS). Validado en vivo por Seve:
+`python run.py --retailer Ripley` trae ~200 filas reales. El único ajuste
+que hizo falta fue el timing -- el challenge de Cloudflare por sí solo
+consume varios segundos, así que hay que esperar explícitamente a que
+aparezca contenido real (`wait_for_text="S/"`) antes de leer el texto; con
+un wait fijo corto la página se lee "vacía" (sin marcas ni precios) y
+captura 0 productos sin ningún error, que es justo lo que pasó la primera
+vez. `playwright` ya está en `requirements.txt` y el workflow de GitHub
+Actions instala chromium (`playwright install --with-deps chromium`) antes
+de correr la captura.
+
+**Movistar: pendiente, sin resolver todavía.** `adapters/movistar.py` usa el
+mismo enfoque, pero al renderizar `tienda.movistar.com.pe/celulares/<marca>`
+con Playwright real, la página muestra "Estamos en mantenimiento ¡Volveremos
+pronto!" en vez del catálogo -- confirmado con captura de pantalla. Puede
+ser downtime real del sitio (revisar en otro momento) o un soft-block
+anti-bot que le muestra esa pantalla a tráfico detectado como automatizado
+en vez de tirar un 403 directo -- no diferenciado todavía. Como
+`movistar_playwright` está en la lista principal de `retailers.json`, sigue
+corriendo cada día en el cron, pero como falla con un aviso `[!] falló`
+capturado (no rompe el resto de la corrida), simplemente no aporta datos
+hasta que esto se resuelva.
+
+**Si algún día Ripley deja de calzar con el patrón de extracción** (cambio
+de diseño del sitio, 0 filas de nuevo, etc.), la herramienta de diagnóstico
+sigue disponible:
+
+```bash
+python debug_playwright_dump.py "https://simple.ripley.com.pe/tecnologia/celulares/celulares-y-smartphones?s=mdco&page=1"
+python debug_playwright_dump.py "https://tienda.movistar.com.pe/celulares/honor"
+```
+
+Esto guarda `debug_dump.html`, `debug_dump_texto.txt` y `debug_dump.png`
+(captura de pantalla) junto al script -- compártelos para ajustar el patrón
+de extracción sin adivinar a ciegas.
+
 ### Tiendas especializadas en tecnología (investigado 06/09/2026)
 
 - **Carsa** y **Coolbox**: soportados. VTEX estándar, mismo adaptador que
@@ -305,8 +361,10 @@ motivo documentado, para no repetir la investigación desde cero más adelante.
   aparecía en el directorio original (`celivery.com`) está parkeado/en venta;
   el real es `celiveryperu.com`. Es WordPress + WooCommerce, se lee con la
   Store API pública (`adapters/woocommerce_store_api.py`).
-- **Ripley**: NO soportado. Cloudflare con challenge JS activo, igual que
-  Bitel -- necesita browser real.
+- **Ripley**: soportado (Playwright), ver sección "Ripley (Playwright) y el
+  pendiente de Movistar" más abajo -- Cloudflare con challenge JS activo,
+  distinto al bloqueo de Bitel (que es de reputación de IP, sin solución
+  gratis).
 - **Mercado Libre Perú**: NO soportado. Su API pública de búsqueda ahora pide
   token de aplicación (403 sin él) y la web detecta el request como tráfico
   sospechoso. Además es un marketplace gigante -- necesitaría lógica de

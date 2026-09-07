@@ -209,20 +209,30 @@
         "Smartphones": "https://www.honor.com/pe/phones/"
       },
       "nota": "Destrabado 07/09/2026: el HTML usa plantillas Handlebars sin resolver ({{colorObj.lastPrdPackagePrice}}) -- el precio se rellena por JS/AJAX. Encontrado el endpoint real dentro del JS del sitio (función ecCom.ajaxReq en base.min.js): POST a selfservice-sg.hihonor.com/.../queryPrdInfoByOfficial/1000 con los productIds sacados del atributo data-ec-product-id de cada tarjeta. Sin cookies ni token. Adaptador nuevo: adapters/honor_official.py."
+    },
+    {
+      "nombre": "Ripley",
+      "plataforma": "ripley_playwright",
+      "categorias": {
+        "Smartphones": "/tecnologia/celulares/celulares-y-smartphones?s=mdco"
+      },
+      "max_paginas": 5,
+      "nota": "VALIDADO EN VIVO 07/09/2026 (Seve, PC Windows): 'python run.py --retailer Ripley' trajo 212 filas reales. simple.ripley.com.pe tiene Cloudflare Turnstile ('Just a moment...'); lo pasa con Playwright real. El primer intento dio 0 filas sin error porque el wait fijo de 5s no alcanzaba a que la grilla de productos terminara de cargar tras el challenge -- se corrigió esperando explícitamente a que aparezca 'S/' en pantalla (wait_for_text) antes de leer. Parseo por patrón de texto (sin conocer las clases CSS reales) en vez de JSON -- Ripley no expone nada embebido. Adaptador: adapters/ripley.py + adapters/playwright_browser.py. 'playwright' ya está en requirements.txt y el workflow de GitHub Actions instala chromium antes de correr, así que esto ya corre en el cron diario."
+    },
+    {
+      "nombre": "Movistar",
+      "plataforma": "movistar_playwright",
+      "marcas_slug": {
+        "HONOR": "honor", "SAMSUNG": "samsung", "XIAOMI": "xiaomi",
+        "MOTOROLA": "motorola", "APPLE": "apple", "HUAWEI": "huawei"
+      },
+      "nota": "EXPERIMENTAL 07/09/2026 -- NO validado en vivo todavía, no correr en el cron automático hasta confirmarlo. tienda.movistar.com.pe tiene Cloudflare Managed Challenge + una SPA vieja tipo Angular (precios se rellenan client-side, placeholders '{{...}}' visibles en el HTML crudo) -- necesita esperar a que la app termine de pintar antes de leer. Categorías por sub-URL de marca (/celulares/<marca>). Adaptador nuevo con Playwright (adapters/movistar.py + adapters/playwright_browser.py). Requiere 'pip install playwright && playwright install chromium'; si no está instalado, se salta solo con un aviso. Probar primero con 'python run.py --retailer Movistar' y revisar con debug_playwright_dump.py si los resultados no calzan."
     }
   ],
   "no_soportados": [
     {
       "nombre": "Bitel",
       "motivo": "Bloqueado por Cloudflare (tienda.bitel.com.pe devuelve HTTP 401 con body de 9 bytes 'Server: cloudflare', incluso agregando headers de navegador reales). Necesita browser real o una herramienta tipo Bright Data para pasar el challenge -- no es viable con requests simple."
-    },
-    {
-      "nombre": "Movistar",
-      "motivo": "www.movistar.com.pe/celulares es solo landing de marketing (WordPress); la tienda real está en tienda.movistar.com.pe (slugs confirmados, ej. /iphone-16-128-gb-liberados). Ese dominio SÍ está detrás de Cloudflare anti-bot (403 'Attention Required' con cualquier header realista via requests) -- no es un problema de JS-rendering sino de bot-detection activo. Necesita Playwright (gratis, ya lo usamos para QA del dashboard) contra tienda.movistar.com.pe; no se pudo confirmar en vivo que el challenge se resuelva solo con Chromium headless -- pendiente de probar."
-    },
-    {
-      "nombre": "Ripley",
-      "motivo": "Bloqueado por Cloudflare con challenge JS activo ('Just a moment...', Cf-Mitigated: challenge) tanto en simple.ripley.com.pe como en www.ripley.com.pe. Igual que Bitel, necesita browser real."
     },
     {
       "nombre": "Mercado Libre Perú",

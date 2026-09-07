@@ -25,6 +25,9 @@ jobs:
       - name: Instalar dependencias
         run: pip install -r requirements.txt
 
+      - name: Instalar navegador (Playwright, para Ripley)
+        run: playwright install --with-deps chromium
+
       - name: Correr captura
         run: python run.py --export-csv data/captura_$(date +%Y-%m-%d).csv
 

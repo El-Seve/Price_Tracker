@@ -201,6 +201,52 @@ def run_honor_official(retailer_cfg: dict, target_brands: set[str]) -> list[dict
     return rows
 
 
+def run_ripley_playwright(retailer_cfg: dict, target_brands: set[str]) -> list[dict]:
+    """EXPERIMENTAL -- ver adapters/playwright_browser.py y adapters/ripley.py.
+    No validado en vivo contra el sitio real todavía. Requiere
+    'pip install playwright' + 'playwright install chromium'; si no está
+    instalado, se salta con un aviso en vez de romper la corrida."""
+    try:
+        from adapters import ripley
+    except ImportError as e:
+        print(f"[!] {retailer_cfg['nombre']}: falta 'playwright' "
+              f"(pip install playwright && playwright install chromium), saltando. ({e})", file=sys.stderr)
+        return []
+    rows = []
+    for categoria, path in retailer_cfg.get("categorias", {}).items():
+        try:
+            textos = ripley.fetch_category(path, max_pages=retailer_cfg.get("max_paginas", 5),
+                                            retailer_nombre=retailer_cfg["nombre"])
+        except Exception as e:
+            print(f"[!] {retailer_cfg['nombre']} / {categoria} falló: {e}", file=sys.stderr)
+            continue
+        rows += ripley.extract_rows(textos, categoria, retailer_cfg["nombre"], target_brands)
+    return rows
+
+
+def run_movistar_playwright(retailer_cfg: dict, target_brands: set[str]) -> list[dict]:
+    """EXPERIMENTAL -- ver adapters/playwright_browser.py y adapters/movistar.py.
+    No validado en vivo contra el sitio real todavía. Requiere
+    'pip install playwright' + 'playwright install chromium'; si no está
+    instalado, se salta con un aviso en vez de romper la corrida."""
+    try:
+        from adapters import movistar
+    except ImportError as e:
+        print(f"[!] {retailer_cfg['nombre']}: falta 'playwright' "
+              f"(pip install playwright && playwright install chromium), saltando. ({e})", file=sys.stderr)
+        return []
+    marcas_slug = retailer_cfg.get("marcas_slug", {})
+    textos_por_marca = {}
+    for marca, slug in marcas_slug.items():
+        if target_brands and marca.upper() not in target_brands:
+            continue
+        try:
+            textos_por_marca[slug] = movistar.fetch_category(slug, retailer_nombre=retailer_cfg["nombre"])
+        except Exception as e:
+            print(f"[!] {retailer_cfg['nombre']} / {slug} falló: {e}", file=sys.stderr)
+    return movistar.extract_rows(textos_por_marca, "Smartphones", retailer_cfg["nombre"], target_brands)
+
+
 ADAPTERS = {
     "vtex": run_vtex,
     "falabella_nextjs": run_falabella_nextjs,
@@ -209,6 +255,8 @@ ADAPTERS = {
     "schema_jsonld_cffi": run_schema_jsonld_cffi,
     "huawei_sitemap": run_huawei_sitemap,
     "honor_official": run_honor_official,
+    "ripley_playwright": run_ripley_playwright,
+    "movistar_playwright": run_movistar_playwright,
     "magento_html": run_magento_html,
     "shopify_json": run_shopify_json,
     "woocommerce_store_api": run_woocommerce_store_api,
