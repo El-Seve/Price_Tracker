@@ -163,6 +163,27 @@ main { max-width: 1180px; margin: 0 auto; padding: var(--space-6); }
 .insight-interp { font-size: 14px; font-weight: 600; margin-bottom: var(--space-2); }
 .insight-action { font-size: 13px; color: var(--accent-2); font-weight: 600; }
 .insight-action::before { content: "→ "; }
+.insight-evidence-link {
+  display: inline-flex; align-items: center; gap: 4px; margin-top: var(--space-2);
+  font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none;
+}
+.insight-evidence-link:hover { text-decoration: underline; }
+.insight-evidence-link::after { content: "↗"; font-size: 11px; }
+
+/* ===== Toolbar (fecha + acciones) sobre una tabla, ej. pestaña Sany ===== */
+.section-toolbar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: var(--space-3); margin-bottom: var(--space-3);
+}
+.section-toolbar .datos-al { font-size: 12px; color: var(--text-muted); }
+.section-toolbar .datos-al strong { color: var(--text); }
+.btn-export {
+  display: inline-flex; align-items: center; gap: 6px; padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--accent-2); border-radius: var(--radius-sm); background: var(--accent-2);
+  color: white; font-size: 12px; font-weight: 700; cursor: pointer; min-height: 40px;
+}
+.btn-export:hover { opacity: 0.92; }
+.btn-export:disabled { opacity: 0.5; cursor: not-allowed; }
 .empty-state { text-align: center; padding: var(--space-8); color: var(--text-muted); }
 
 /* ===== Tables ===== */
@@ -332,7 +353,13 @@ footer { text-align: center; padding: var(--space-8) var(--space-4); color: var(
   <!-- ===== SANY ===== -->
   <section id="view-sany" class="view" role="tabpanel" aria-labelledby="tab-sany">
     <div class="kpi-grid" id="sany-kpi-grid"></div>
-    <p class="section-title">Productos Honor vendidos por Sany, vs. el resto del mercado</p>
+    <div class="section-toolbar">
+      <p class="section-title" style="margin:0;">Productos Honor vendidos por Sany, vs. el resto del mercado</p>
+      <div class="datos-al">Datos al: <strong id="sany-fecha">—</strong></div>
+    </div>
+    <div class="section-toolbar">
+      <button class="btn-export" id="sany-export-btn" type="button">Exportar CSV para acción inmediata</button>
+    </div>
     <div class="table-wrap">
       <table>
         <thead><tr>
@@ -448,6 +475,24 @@ function kpiCard(label, value, sub, tone) {
   </div>`;
 }
 
+function insightCardHtml(i) {
+  const link = i.evidencia_url
+    ? `<a class="insight-evidence-link" href="${esc(i.evidencia_url)}" target="_blank" rel="noopener">${esc(i.evidencia_url_texto || 'Ver evidencia')}</a>`
+    : '';
+  return `
+    <div class="insight-card sev-${esc(i.severidad)}">
+      <div class="insight-head">
+        <span class="insight-tag">${esc(i.tipo.replace('_',' '))}</span>
+        <span class="insight-tag">confianza ${esc(i.confianza)}</span>
+      </div>
+      <div class="insight-evidence">${esc(i.evidencia)}</div>
+      <div class="insight-interp">${esc(i.interpretacion)}</div>
+      <div class="insight-action">${esc(i.accion)}</div>
+      ${link}
+    </div>
+  `;
+}
+
 function renderResumen(d) {
   const r = d.resumen;
   const porTipo = r.ofertas_por_tipo || {};
@@ -467,17 +512,7 @@ function renderResumen(d) {
   if (!d.insights.length) {
     list.innerHTML = '<div class="empty-state">Sin alertas relevantes con los datos de hoy.</div>';
   } else {
-    list.innerHTML = d.insights.map(i => `
-      <div class="insight-card sev-${esc(i.severidad)}">
-        <div class="insight-head">
-          <span class="insight-tag">${esc(i.tipo.replace('_',' '))}</span>
-          <span class="insight-tag">confianza ${esc(i.confianza)}</span>
-        </div>
-        <div class="insight-evidence">${esc(i.evidencia)}</div>
-        <div class="insight-interp">${esc(i.interpretacion)}</div>
-        <div class="insight-action">${esc(i.accion)}</div>
-      </div>
-    `).join('');
+    list.innerHTML = d.insights.map(insightCardHtml).join('');
   }
 
   document.getElementById('cobertura-body').innerHTML = d.cobertura.detalle.map(c => `
@@ -599,6 +634,8 @@ function renderSany(d) {
     kpiCard('Más baratos que el resto del mercado', masBaratos, 'Ventaja competitiva de Sany', 'ok'),
   ].join('');
 
+  document.getElementById('sany-fecha').textContent = d.fecha_captura || '—';
+
   document.getElementById('sany-body').innerHTML = s.productos.map(p => `
     <tr>
       <td>${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.familia)}</a>` : esc(p.familia)}</td>
@@ -612,6 +649,38 @@ function renderSany(d) {
       </td>
     </tr>
   `).join('') || '<tr><td colspan="5" class="empty-state">Sany no aparece en la captura de hoy.</td></tr>';
+
+  const btnExport = document.getElementById('sany-export-btn');
+  btnExport.disabled = !s.productos.length;
+  btnExport.onclick = () => exportSanyCSV(s.productos, d.fecha_captura);
+}
+
+/* Exporta la tabla de Sany a CSV, para que Seve pueda pasarla directo a
+   quien tenga que actuar (negociación de precio, alerta al canal) sin
+   tener que copiar la tabla a mano desde el dashboard. */
+function exportSanyCSV(productos, fecha) {
+  const encabezados = ['Familia', 'Modelo', 'Retailer', 'Precio Sany', 'Mínimo mercado', 'Diferencia %', 'URL'];
+  const filas = productos.map(p => [
+    p.familia, p.modelo, p.retailer,
+    p.precio_sany != null ? p.precio_sany.toFixed(2) : '',
+    p.precio_min_resto_mercado != null ? p.precio_min_resto_mercado.toFixed(2) : '',
+    p.diferencia_pct != null ? p.diferencia_pct : '',
+    p.url || '',
+  ]);
+  const csvEscape = (v) => {
+    const s = String(v ?? '');
+    return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+  };
+  const csv = [encabezados, ...filas].map(fila => fila.map(csvEscape).join(',')).join('\r\n');
+  const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `sany_honor_${fecha || 'hoy'}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
 
 /* ===== SVG line chart (sin dependencias externas) ===== */
@@ -784,17 +853,7 @@ function renderAnalisis(d) {
   );
   const list = document.getElementById('analisis-insight-list');
   list.innerHTML = insightsAvanzados.length
-    ? insightsAvanzados.map(i => `
-      <div class="insight-card sev-${esc(i.severidad)}">
-        <div class="insight-head">
-          <span class="insight-tag">${esc(i.tipo.replace('_',' '))}</span>
-          <span class="insight-tag">confianza ${esc(i.confianza)}</span>
-        </div>
-        <div class="insight-evidence">${esc(i.evidencia)}</div>
-        <div class="insight-interp">${esc(i.interpretacion)}</div>
-        <div class="insight-action">${esc(i.accion)}</div>
-      </div>
-    `).join('')
+    ? insightsAvanzados.map(insightCardHtml).join('')
     : '<div class="empty-state">Sin hallazgos relevantes con los datos de hoy.</div>';
 
   document.getElementById('ranking-vendedores-body').innerHTML = a.vendedores_ranking.map(v => `

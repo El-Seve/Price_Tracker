@@ -435,11 +435,16 @@ def _analisis_avanzado(filas_honor: list[dict], dispersion: list[dict]) -> dict:
     """Lecturas que no saltan a la vista mirando una tabla: quién cobra de
     más de forma sistemática, dónde el catálogo Honor depende de un solo
     vendedor (riesgo de cobertura), y en qué franja de precio el mercado es
-    más inestable en términos relativos."""
+    más inestable en términos relativos.
+
+    Cada hallazgo agregado guarda además un "ejemplo" con la fila concreta
+    (familia/modelo/retailer/precio/url) que mejor lo ilustra, para que el
+    insight en pantalla pueda enlazar a la publicación real que sustenta el
+    número, en vez de pedirle a Seve que confíe en el cálculo a ciegas."""
     precio_min_por_familia = {d["familia"]: d["precio_min"] for d in dispersion}
 
     # --- Ranking de vendedores por sobreprecio sistemático ---
-    acumulado = defaultdict(lambda: {"sobreprecios": [], "n_ofertas": 0, "display": None, "vendedor_tercero": False})
+    acumulado = defaultdict(lambda: {"ofertas": [], "n_ofertas": 0, "display": None, "vendedor_tercero": False})
     for r in filas_honor:
         if r["familia"].startswith("OTRO:") or not r["vendedor"]:
             continue
@@ -451,13 +456,21 @@ def _analisis_avanzado(filas_honor: list[dict], dispersion: list[dict]) -> dict:
         entry["display"] = entry["display"] or r["vendedor"]
         entry["n_ofertas"] += 1
         entry["vendedor_tercero"] = entry["vendedor_tercero"] or bool(r["vendedor_tercero"])
-        entry["sobreprecios"].append((r["precio_oferta"] - precio_min) / precio_min * 100)
+        sobreprecio_pct = (r["precio_oferta"] - precio_min) / precio_min * 100
+        entry["ofertas"].append({
+            "sobreprecio_pct": sobreprecio_pct,
+            "familia": r["familia"], "modelo": r["modelo"],
+            "retailer": r["retailer"], "precio": r["precio_oferta"], "url": r.get("url") or "",
+        })
 
     vendedores_ranking = []
     for vkey, entry in acumulado.items():
         if entry["n_ofertas"] < MIN_OFERTAS_PARA_RANKING:
             continue
-        promedio = round(sum(entry["sobreprecios"]) / len(entry["sobreprecios"]), 1)
+        sobreprecios = [o["sobreprecio_pct"] for o in entry["ofertas"]]
+        promedio = round(sum(sobreprecios) / len(sobreprecios), 1)
+        peor_oferta = max(entry["ofertas"], key=lambda o: o["sobreprecio_pct"])
+        mejor_oferta = min(entry["ofertas"], key=lambda o: o["sobreprecio_pct"])
         vendedores_ranking.append({
             "vendedor": entry["display"],
             "vendedor_tercero": entry["vendedor_tercero"],
@@ -468,6 +481,8 @@ def _analisis_avanzado(filas_honor: list[dict], dispersion: list[dict]) -> dict:
                 "agresivo/barato" if promedio <= 3 else
                 "alineado al mercado"
             ),
+            "ejemplo_mas_caro": peor_oferta,
+            "ejemplo_mas_barato": mejor_oferta,
         })
     vendedores_ranking.sort(key=lambda v: -v["sobreprecio_promedio_pct"])
 
@@ -475,12 +490,18 @@ def _analisis_avanzado(filas_honor: list[dict], dispersion: list[dict]) -> dict:
     concentracion = []
     por_familia_vendedores = defaultdict(set)
     por_familia_retailers = defaultdict(set)
+    por_familia_ejemplo = {}
     for r in filas_honor:
         if r["familia"].startswith("OTRO:"):
             continue
         if r["vendedor"]:
             por_familia_vendedores[r["familia"]].add(_vendedor_key(r["vendedor"]))
         por_familia_retailers[r["familia"]].add(r["retailer"])
+        # Cualquier fila real de esa familia sirve de ejemplo enlazable --
+        # solo hace falta una publicación concreta para poder verificar.
+        por_familia_ejemplo.setdefault(r["familia"], {
+            "modelo": r["modelo"], "retailer": r["retailer"], "url": r.get("url") or "",
+        })
 
     for familia in por_familia_retailers:
         n_vend = len(por_familia_vendedores.get(familia, set()))
@@ -491,6 +512,7 @@ def _analisis_avanzado(filas_honor: list[dict], dispersion: list[dict]) -> dict:
             "n_vendedores_distintos": n_vend,
             "n_retailers_distintos": n_ret,
             "riesgo_concentracion": riesgo,
+            "ejemplo": por_familia_ejemplo.get(familia, {}),
         })
     concentracion.sort(key=lambda c: (c["n_vendedores_distintos"], -c["n_retailers_distintos"]))
     familias_riesgo_alto = sum(1 for c in concentracion if c["riesgo_concentracion"] == "alto")
@@ -500,10 +522,21 @@ def _analisis_avanzado(filas_honor: list[dict], dispersion: list[dict]) -> dict:
     # calibradas para celulares -- meter un wearable o tablet en la misma
     # banda que un celular de precio similar mezclaría cosas no comparables.
     por_segmento = defaultdict(list)
+    familia_mas_volatil_por_segmento = {}
     for d in dispersion:
         if d["tipo"] != "Smartphone":
             continue
-        por_segmento[segmento_de_precio(d["precio_min"])].append(d["spread_pct"])
+        seg = segmento_de_precio(d["precio_min"])
+        por_segmento[seg].append(d["spread_pct"])
+        actual = familia_mas_volatil_por_segmento.get(seg)
+        if actual is None or d["spread_pct"] > actual["spread_pct"]:
+            # ofertas viene ordenada de más barata a más cara (ver
+            # _dispersion_interna) -- la más cara es la publicación que
+            # explica el spread, la que vale la pena enlazar.
+            familia_mas_volatil_por_segmento[seg] = {
+                "familia": d["familia"], "spread_pct": d["spread_pct"],
+                "ejemplo": d["ofertas"][-1] if d["ofertas"] else {},
+            }
     orden_segmentos = ["Hasta S/600", "S/600 - S/1,000", "S/1,000 - S/1,500",
                        "S/1,500 - S/2,500", "S/2,500 - S/4,000", "Más de S/4,000"]
     dispersion_por_segmento = []
@@ -516,6 +549,7 @@ def _analisis_avanzado(filas_honor: list[dict], dispersion: list[dict]) -> dict:
             "n_familias": len(spreads),
             "spread_promedio_pct": round(sum(spreads) / len(spreads), 1),
             "spread_max_pct": round(max(spreads), 1),
+            "familia_mas_volatil": familia_mas_volatil_por_segmento.get(seg, {}),
         })
 
     return {
@@ -537,6 +571,7 @@ def _insights_avanzados(analisis: dict) -> list[dict]:
     if ranking:
         peor = ranking[0]
         if peor["sobreprecio_promedio_pct"] >= 10:
+            ej = peor["ejemplo_mas_caro"]
             insights.append({
                 "tipo": "vendedor_sobreprecio",
                 "severidad": "alta" if peor["sobreprecio_promedio_pct"] >= 20 else "media",
@@ -547,11 +582,15 @@ def _insights_avanzados(analisis: dict) -> list[dict]:
                 "accion": f"Evaluar si {peor['vendedor']} necesita ajuste de precio o si compite en otro "
                           f"factor (servicio, stock, ubicación) que justifique el sobreprecio.",
                 "confianza": "alta",
+                "evidencia_url": ej.get("url") or "",
+                "evidencia_url_texto": f"Ver ejemplo: {ej['familia']} a S/{ej['precio']:.0f} en {ej['retailer']} "
+                                       f"(+{ej['sobreprecio_pct']:.0f}% vs. mínimo)" if ej.get("url") else "",
             })
 
         agresivos = [v for v in ranking if v["clasificacion"] == "agresivo/barato"]
         if agresivos:
             mejor = min(agresivos, key=lambda v: v["sobreprecio_promedio_pct"])
+            ej = mejor["ejemplo_mas_barato"]
             insights.append({
                 "tipo": "vendedor_agresivo",
                 "severidad": "media",
@@ -562,11 +601,21 @@ def _insights_avanzados(analisis: dict) -> list[dict]:
                 "accion": f"Monitorear a {mejor['vendedor']} de cerca: cualquier ajuste ahí arrastra la "
                           f"percepción de precio de todo el canal.",
                 "confianza": "media",
+                "evidencia_url": ej.get("url") or "",
+                "evidencia_url_texto": f"Ver ejemplo: {ej['familia']} a S/{ej['precio']:.0f} en {ej['retailer']} "
+                                       f"({ej['sobreprecio_pct']:+.0f}% vs. mínimo)" if ej.get("url") else "",
             })
 
     if analisis["total_familias_evaluadas"]:
         pct_riesgo = round(analisis["familias_riesgo_alto"] / analisis["total_familias_evaluadas"] * 100, 0)
         if pct_riesgo >= 30:
+            familias_riesgo = [c for c in analisis["concentracion"] if c["riesgo_concentracion"] == "alto"]
+            # Preferir un ejemplo que sí tenga URL capturada -- no todos los
+            # adaptadores capturan el link (los de Playwright por texto, por
+            # ejemplo), y de nada sirve enlazar a una publicación sin URL.
+            ej_familia = next((c for c in familias_riesgo if c["ejemplo"].get("url")), None) \
+                or (familias_riesgo[0] if familias_riesgo else None)
+            ej = ej_familia["ejemplo"] if ej_familia else {}
             insights.append({
                 "tipo": "concentracion_riesgo",
                 "severidad": "alta" if pct_riesgo >= 50 else "media",
@@ -577,12 +626,17 @@ def _insights_avanzados(analisis: dict) -> list[dict]:
                 "accion": "Priorizar que esas familias también estén disponibles con al menos un vendedor más "
                           "(propio del retailer o marketplace).",
                 "confianza": "alta",
+                "evidencia_url": ej.get("url", "") if ej else "",
+                "evidencia_url_texto": f"Ver ejemplo: {ej_familia['familia']} en {ej.get('retailer', '')} "
+                                       f"(único vendedor visto)" if ej_familia and ej.get("url") else "",
             })
 
     disp_seg = analisis["dispersion_por_segmento"]
     if disp_seg:
         mas_volatil = max(disp_seg, key=lambda s: s["spread_promedio_pct"])
         if mas_volatil["spread_promedio_pct"] >= 15:
+            fam = mas_volatil.get("familia_mas_volatil") or {}
+            ej = fam.get("ejemplo") or {}
             insights.append({
                 "tipo": "volatilidad_segmento",
                 "severidad": "media",
@@ -593,6 +647,9 @@ def _insights_avanzados(analisis: dict) -> list[dict]:
                                    "más margen de maniobra, pero también más riesgo de que un vendedor rompa precio.",
                 "accion": f"Si hay política de precio mínimo (PVP), reforzarla primero en {mas_volatil['segmento']}.",
                 "confianza": "media",
+                "evidencia_url": ej.get("url") or "",
+                "evidencia_url_texto": f"Ver ejemplo: {fam.get('familia', '')} a S/{ej.get('precio', 0):.0f} "
+                                       f"en {ej.get('retailer', '')} ({fam.get('spread_pct', 0):.0f}% de dispersión)" if ej.get("url") else "",
             })
 
     return insights
