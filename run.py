@@ -26,13 +26,14 @@ import argparse
 import csv
 import json
 import sys
+import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from datetime import date
 
 from adapters import (
     vtex, falabella_nextjs, entel_endeca, schema_jsonld,
-    magento_html, shopify_json, woocommerce_store_api,
+    magento_html, shopify_json, woocommerce_store_api, honor_official,
 )
 import db
 
@@ -142,11 +143,72 @@ def run_woocommerce_store_api(retailer_cfg: dict, target_brands: set[str]) -> li
     return rows
 
 
+def run_schema_jsonld_cffi(retailer_cfg: dict, target_brands: set[str]) -> list[dict]:
+    """Variante de run_schema_jsonld para sitios que bloquean por huella de
+    conexión (Samsung Perú / Akamai) -- reutiliza UNA sola sesión curl_cffi
+    para todas las categorías de este retailer en la corrida, en vez de abrir
+    una conexión nueva por request."""
+    rows = []
+    marca_fija = retailer_cfg.get("marca_fija", retailer_cfg["nombre"])
+    try:
+        from curl_cffi import requests as cffi_requests
+    except ImportError:
+        print(f"[!] {retailer_cfg['nombre']}: falta 'curl_cffi' (pip install curl_cffi) "
+              f"para evitar el bloqueo de Akamai, saltando.", file=sys.stderr)
+        return rows
+    session = cffi_requests.Session(impersonate="edge101")
+    for categoria, url in retailer_cfg.get("categorias", {}).items():
+        try:
+            productos = schema_jsonld.fetch_category_cffi(url, session=session)
+        except Exception as e:
+            print(f"[!] {retailer_cfg['nombre']} / {categoria} falló: {e}", file=sys.stderr)
+            continue
+        rows += schema_jsonld.extract_rows(productos, categoria, retailer_cfg["nombre"], marca_fija, target_brands)
+        time.sleep(retailer_cfg.get("delay_entre_categorias", 3))
+    return rows
+
+
+def run_huawei_sitemap(retailer_cfg: dict, target_brands: set[str]) -> list[dict]:
+    """Caso Huawei: descubre las páginas de producto vía sitemap.xml y arma
+    filas desde su JSON-LD tipo productGroup (formato distinto al ItemList
+    estándar de schema_jsonld)."""
+    marca_fija = retailer_cfg.get("marca_fija", retailer_cfg["nombre"])
+    if target_brands and marca_fija.upper() not in target_brands:
+        return []
+    try:
+        productos = schema_jsonld.fetch_product_groups_from_sitemap(
+            retailer_cfg["sitemap_url"], retailer_cfg["sitemap_url_pattern"]
+        )
+    except Exception as e:
+        print(f"[!] {retailer_cfg['nombre']} falló: {e}", file=sys.stderr)
+        return []
+    return schema_jsonld.extract_rows_product_group(
+        productos, "Smartphones", retailer_cfg["nombre"], marca_fija, target_brands
+    )
+
+
+def run_honor_official(retailer_cfg: dict, target_brands: set[str]) -> list[dict]:
+    if target_brands and "HONOR" not in target_brands:
+        return []
+    rows = []
+    for categoria, url in retailer_cfg.get("categorias", {}).items():
+        try:
+            productos = honor_official.fetch_category(url)
+        except Exception as e:
+            print(f"[!] {retailer_cfg['nombre']} / {categoria} falló: {e}", file=sys.stderr)
+            continue
+        rows += honor_official.extract_rows(productos, categoria, retailer_cfg["nombre"])
+    return rows
+
+
 ADAPTERS = {
     "vtex": run_vtex,
     "falabella_nextjs": run_falabella_nextjs,
     "entel_endeca": run_entel_endeca,
     "schema_jsonld": run_schema_jsonld,
+    "schema_jsonld_cffi": run_schema_jsonld_cffi,
+    "huawei_sitemap": run_huawei_sitemap,
+    "honor_official": run_honor_official,
     "magento_html": run_magento_html,
     "shopify_json": run_shopify_json,
     "woocommerce_store_api": run_woocommerce_store_api,

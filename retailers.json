@@ -1,5 +1,5 @@
 {
-  "target_brands": ["HONOR", "SAMSUNG", "XIAOMI", "MOTOROLA", "APPLE", "REDMI", "POCO"],
+  "target_brands": ["HONOR", "SAMSUNG", "XIAOMI", "MOTOROLA", "APPLE", "REDMI", "POCO", "HUAWEI"],
   "retailers": [
     {
       "nombre": "PlazaVea",
@@ -166,6 +166,49 @@
       "plataforma": "woocommerce_store_api",
       "base_domain": "https://celiveryperu.com",
       "nota": "Confirmado 06/09/2026: el dominio 'celivery.com' que aparecía en el directorio original ya no existe (está parkeado/en venta) -- el real es celiveryperu.com. Es WordPress + WooCommerce: se lee con la Store API pública (wp-json/wc/store/products?search=<marca>), sin necesidad de scraping ni API key. Adaptador nuevo: adapters/woocommerce_store_api.py, busca por marca porque la Store API no siempre trae un campo 'brand' confiable. 3 SKUs Honor en la primera prueba."
+    },
+    {
+      "nombre": "Samsung Perú",
+      "plataforma": "schema_jsonld_cffi",
+      "marca_fija": "SAMSUNG",
+      "categorias": {
+        "Smartphones": "https://www.samsung.com/pe/smartphones/all-smartphones/"
+      },
+      "nota": "Destrabado 07/09/2026: el precio SÍ estaba en JSON-LD (ItemList) en /smartphones/all-smartphones/, confirmado en vivo. El bloqueo de Akamai (403 a la 2da/3ra request) resultó ser por abrir una conexión nueva por cada request, no por volumen -- con curl_cffi (impersonate='edge101') y UNA sola sesión reutilizada dio 13/13 respuestas OK en la prueba. Adaptador: schema_jsonld.fetch_category_cffi / run.run_schema_jsonld_cffi. Requiere 'pip install curl_cffi' (ya en requirements.txt); si no está instalado, este retailer se salta con un aviso en vez de romper la corrida."
+    },
+    {
+      "nombre": "Xiaomi Perú",
+      "plataforma": "schema_jsonld",
+      "marca_fija": "XIAOMI",
+      "categorias": {
+        "Smartphones": "https://www.mi.com/pe/v2/product-list/phone"
+      },
+      "nota": "Destrabado 07/09/2026: la home/categoría antigua no tenía JSON, pero /v2/product-list/phone sí trae un ItemList JSON-LD completo (20 productos), confirmado en vivo, sin bloqueo ni headers especiales. OJO: esa página mezcla Xiaomi + Redmi + Poco bajo el mismo catálogo -- extract_rows() detecta la sub-marca real por la primera palabra del nombre en vez de forzar 'XIAOMI' a todo (evita etiquetar mal un Redmi/Poco)."
+    },
+    {
+      "nombre": "Huawei Perú",
+      "plataforma": "huawei_sitemap",
+      "marca_fija": "HUAWEI",
+      "sitemap_url": "https://consumer.huawei.com/pe/sitemap.xml",
+      "sitemap_url_pattern": "<loc>(https://consumer\\.huawei\\.com/pe/offer/smartphones/[a-z0-9-]+-buy/?)</loc>",
+      "nota": "Destrabado 07/09/2026: la categoría general de celulares trae un ItemList vacío, pero cada página de producto ('.../offer/smartphones/<modelo>-buy/') tiene un JSON-LD tipo 'productGroup' (formato distinto al ItemList estándar) con las variantes y precios por SKU, incluyendo el precio tachado (StrikethroughPrice) cuando hay descuento. El sitemap.xml público lista las 7 páginas de producto vigentes sin necesidad de adivinar URLs. Se agregó HUAWEI a target_brands -- antes no estaba en la lista de marcas comparadas."
+    },
+    {
+      "nombre": "Motorola Perú",
+      "plataforma": "vtex",
+      "base_domain": "https://www.motorola.com.pe",
+      "categorias": {
+        "Smartphones": "smartphones"
+      },
+      "nota": "Destrabado 07/09/2026: Lenovo no vende celulares con su propia marca en Perú (esa web solo tiene 'smart devices' genéricos) -- la marca de teléfonos del grupo es Motorola, con tienda propia en motorola.com.pe corriendo sobre VTEX estándar (confirmado meta generator vtex.render-server). Reusa el adaptador vtex.py existente sin ningún cambio, solo un dominio nuevo."
+    },
+    {
+      "nombre": "HONOR Perú (tienda oficial)",
+      "plataforma": "honor_official",
+      "categorias": {
+        "Smartphones": "https://www.honor.com/pe/phones/"
+      },
+      "nota": "Destrabado 07/09/2026: el HTML usa plantillas Handlebars sin resolver ({{colorObj.lastPrdPackagePrice}}) -- el precio se rellena por JS/AJAX. Encontrado el endpoint real dentro del JS del sitio (función ecCom.ajaxReq en base.min.js): POST a selfservice-sg.hihonor.com/.../queryPrdInfoByOfficial/1000 con los productIds sacados del atributo data-ec-product-id de cada tarjeta. Sin cookies ni token. Adaptador nuevo: adapters/honor_official.py."
     }
   ],
   "no_soportados": [
@@ -175,19 +218,7 @@
     },
     {
       "nombre": "Movistar",
-      "motivo": "www.movistar.com.pe/celulares es WordPress y renderiza los precios con JavaScript -- no hay JSON embebido ni API pública detectada, los nombres de producto solo aparecen en meta tags, no en el contenido real de la página. Necesita browser real (Bright Data/Playwright) para poder leer precios."
-    },
-    {
-      "nombre": "Samsung Perú",
-      "motivo": "El precio SÍ está fácil de sacar (JSON-LD estándar en el HTML, sin API rara -- ver adapters/schema_jsonld.py), pero el sitio está detrás de Akamai: a la segunda o tercera request seguida devuelve 403 'Access Denied'. No es viable para una corrida automática diaria sin rotar IP/proxy (Bright Data), porque se bloquea solo. Queda el adaptador listo por si en el futuro se agrega una capa de proxy."
-    },
-    {
-      "nombre": "Xiaomi Perú",
-      "motivo": "mi.com/pe no expone JSON-LD ni ningún JSON embebido detectable en la home/categoría probada (a diferencia de Samsung Perú). Necesitaría revisar más a fondo su catálogo (probablemente requiere browser real)."
-    },
-    {
-      "nombre": "Huawei Perú",
-      "motivo": "huawei.com/pe no expone JSON-LD ni JSON embebido detectable en la página probada. Mismo caso que Xiaomi -- pendiente de una investigación más profunda o browser real."
+      "motivo": "www.movistar.com.pe/celulares es solo landing de marketing (WordPress); la tienda real está en tienda.movistar.com.pe (slugs confirmados, ej. /iphone-16-128-gb-liberados). Ese dominio SÍ está detrás de Cloudflare anti-bot (403 'Attention Required' con cualquier header realista via requests) -- no es un problema de JS-rendering sino de bot-detection activo. Necesita Playwright (gratis, ya lo usamos para QA del dashboard) contra tienda.movistar.com.pe; no se pudo confirmar en vivo que el challenge se resuelva solo con Chromium headless -- pendiente de probar."
     },
     {
       "nombre": "Ripley",
@@ -202,12 +233,8 @@
       "motivo": "El catálogo depende de seleccionar una tienda/ubicación específica dentro de la app -- no hay una URL de categoría fija y pública equivalente a un 'catálogo'. Necesitaría simular la selección de tienda vía browser real."
     },
     {
-      "nombre": "HONOR Perú (tienda oficial)",
-      "motivo": "www.honor.com/pe -- los precios están en variables de plantilla del lado del cliente (ej. {{colorObj.lastPrdPackagePrice}}), se rellenan con JavaScript/AJAX después de cargar la página. No hay precio en el HTML estático ni JSON-LD de producto. Necesita browser real."
-    },
-    {
       "nombre": "Lenovo Perú",
-      "motivo": "www.lenovo.com/pe no expone JSON-LD de producto (solo breadcrumbs) ni JSON embebido detectable en la categoría de smartphones/tablets. Pendiente de revisión más profunda o browser real."
+      "motivo": "www.lenovo.com/pe no vende celulares con marca propia en Perú (esa web solo tiene 'smart devices' genéricos, sin smartphones). La marca de teléfonos del grupo, Motorola, SÍ está cubierta -- ver 'Motorola Perú' en la lista de retailers activos."
     },
     {
       "nombre": "Agiletech",

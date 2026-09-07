@@ -1,7 +1,8 @@
 # Tracker de precios — Honor vs. competencia (Retail Perú)
 
 Captura diaria y gratuita de precios de smartphones (y accesorios) en retailers
-peruanos, comparando Honor contra Samsung, Xiaomi, Motorola, Apple y Redmi.
+peruanos, comparando Honor contra Samsung, Xiaomi, Motorola, Apple, Redmi,
+Poco y Huawei.
 Nace del piloto hecho a mano con PlazaVea y Falabella — esto es la versión
 que corre sola, todos los días, sin depender de una conversación de chat.
 
@@ -26,10 +27,11 @@ pricetracker/
     vtex.py                  # PlazaVea, Promart, Oechsle, Claro, Metro, Wong, Carsa, Coolbox (VTEX)
     falabella_nextjs.py      # Falabella, Sodimac, Tottus (JSON embebido __NEXT_DATA__)
     entel_endeca.py          # Entel (Oracle ATG/Endeca -- JSON pidiendo Accept: application/json)
-    schema_jsonld.py         # genérico JSON-LD (funciona en Samsung Perú, pero bloqueado por Akamai -- ver abajo)
+    schema_jsonld.py         # genérico JSON-LD: Samsung Perú (con curl_cffi), Xiaomi Perú, Huawei Perú
     magento_html.py          # Hiraoka, La Curacao, Tiendas EFE (Magento, precios server-side)
     shopify_json.py          # Covers Store, iShop, Mac Center (Shopify -- /products.json)
     woocommerce_store_api.py # Celivery Perú (WooCommerce Store API pública)
+    honor_official.py        # HONOR Perú tienda oficial (endpoint de precios descubierto en su JS)
   dashboard/
     normalize.py              # nombre de producto -> familia comparable + filtros de calidad
     build_dashboard_data.py   # lee precios.db, calcula KPIs/oportunidades, escribe docs/dashboard_data.json
@@ -223,13 +225,15 @@ python -m http.server 8000 --directory docs   # servirlo localmente
   categoría normal no trae los datos en el HTML, pero la misma URL responde
   el catálogo completo en JSON si se pide con header `Accept:
   application/json`. Adaptador propio: `adapters/entel_endeca.py`.
-- **Bitel**: NO soportado por ahora. `tienda.bitel.com.pe` está detrás de
-  Cloudflare y devuelve HTTP 401 a cualquier request simple, headers de
-  navegador incluidos. Necesita browser real o una herramienta tipo Bright
-  Data para pasar el challenge.
-- **Movistar**: NO soportado por ahora. Es un sitio WordPress que carga los
-  precios vía JavaScript -- no hay JSON embebido ni API pública detectada.
-  Necesita browser real (Bright Data/Playwright).
+- **Bitel**: NO soportado. `tienda.bitel.com.pe` bloquea por reputación de IP
+  a nivel de borde de Cloudflare (probado con varios fingerprints TLS
+  distintos, siempre el mismo 401 de 9 bytes) -- no es un problema de
+  fingerprint resoluble con librerías gratis, solo cambiando la IP de origen
+  (residencial), lo cual no es viable para una corrida automática en servidor.
+- **Movistar**: NO soportado por ahora. La tienda real vive en
+  `tienda.movistar.com.pe` (no en el dominio de marketing), detrás de
+  Cloudflare con bot-detection activo -- candidato a resolverse con Playwright
+  (gratis, ya se usa para QA del dashboard), pendiente de probar en vivo.
 
 Bitel y Movistar quedan en `no_soportados` dentro de `retailers.json`, con el
 motivo documentado, para no repetir la investigación desde cero más adelante.
@@ -241,22 +245,46 @@ motivo documentado, para no repetir la investigación desde cero más adelante.
 - **Metro** y **Wong**: soportados. VTEX estándar (grupo Cencosud), mismo
   adaptador que PlazaVea/Promart/Claro.
 
-### Sitios de marca (investigado 06/09/2026)
+### Sitios de marca (investigado 06/09/2026, destrabados 07/09/2026)
 
-- **Samsung Perú**: el precio SÍ es fácil de sacar -- la página de categoría
-  trae un bloque JSON-LD estándar (`schema.org` `ItemList`/`Product`/`Offer`)
-  con precios reales, sin falta de API ni JS (`adapters/schema_jsonld.py`).
-  El problema es que el sitio está detrás de Akamai: a la segunda o tercera
-  request seguida devuelve 403 "Access Denied". No es viable para una corrida
-  automática diaria sin una capa de proxy/rotación de IP (Bright Data), así
-  que queda en `no_soportados` -- el adaptador queda listo por si en el
-  futuro se agrega esa capa.
-- **Xiaomi Perú**, **Huawei Perú** y **Lenovo Perú**: sin JSON-LD ni JSON
-  embebido detectable en las páginas probadas. Necesitarían más investigación
-  o browser real.
-- **HONOR Perú (tienda oficial)**: los precios se rellenan por JavaScript
-  sobre una plantilla del lado del cliente (`{{colorObj.lastPrdPackagePrice}}`
-  literal en el HTML) -- no hay precio estático que leer. Necesita browser real.
+- **Samsung Perú**: soportado. La categoría trae un bloque JSON-LD estándar
+  (`schema.org` `ItemList`/`Product`/`Offer`) en
+  `samsung.com/pe/smartphones/all-smartphones/`. El bloqueo de Akamai (403 a
+  la 2da/3ra request) resultó ser por abrir una conexión nueva por cada
+  request, no por volumen -- se resuelve con `curl_cffi` (`impersonate=
+  "edge101"`) reutilizando UNA sola sesión para todas las categorías de la
+  corrida, con reintento automático (hasta 3 intentos con backoff 0s/2s/5s,
+  porque el primer request de una sesión nueva a veces sale 403 y el
+  siguiente ya funciona). No es 100% infalible -- Akamai puede seguir
+  bloqueando algún día puntual -- pero si falla, ese retailer simplemente
+  queda sin datos ese día sin romper el resto de la corrida. Requiere
+  `pip install curl_cffi` (ya en `requirements.txt`); si no está instalado,
+  se salta con un aviso en vez de fallar.
+- **Xiaomi Perú**: soportado. La URL real del catálogo es
+  `mi.com/pe/v2/product-list/phone` (no la home/categoría genérica, que no
+  tiene nada) -- trae el mismo formato ItemList que Samsung, sin bloqueo.
+  Esa página mezcla Xiaomi + Redmi + Poco bajo un solo listado, así que el
+  adaptador detecta la sub-marca real por la primera palabra del nombre del
+  producto en vez de etiquetar todo como "XIAOMI".
+- **Huawei Perú**: soportado, con un formato distinto al de Samsung/Xiaomi.
+  La categoría general viene vacía, pero cada página de producto individual
+  trae un JSON-LD tipo `productGroup` (variantes anidadas, precio tachado
+  incluido cuando hay descuento). El `sitemap.xml` público lista todas esas
+  páginas de producto sin necesidad de adivinar URLs. Se agregó **HUAWEI**
+  a `target_brands` -- antes no estaba entre las marcas comparadas.
+- **Lenovo Perú**: descartado (no un bloqueo, sino que no aplica). Lenovo no
+  vende celulares con marca propia en Perú, esa web solo tiene "smart
+  devices" genéricos. La marca de teléfonos del grupo es **Motorola**, que
+  sí se agregó: `motorola.com.pe` corre sobre VTEX estándar, así que reusa
+  `adapters/vtex.py` sin ningún cambio de código, solo un dominio nuevo.
+- **HONOR Perú (tienda oficial)**: soportado. Los precios se rellenan por
+  JavaScript sobre una plantilla del lado del cliente
+  (`{{colorObj.lastPrdPackagePrice}}` literal en el HTML), pero el propio JS
+  del sitio (`base.min.js`) llama a un endpoint de precios
+  (`selfservice-sg.hihonor.com/.../queryPrdInfoByOfficial`) mandando los
+  `productIds` que aparecen como atributo `data-ec-product-id` en cada
+  tarjeta de producto -- adaptador nuevo `adapters/honor_official.py`, sin
+  necesidad de browser, cookies ni token.
 
 ### Tiendas especializadas en tecnología (investigado 06/09/2026)
 

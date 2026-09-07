@@ -1,50 +1,62 @@
 {
-  "generado": "2026-09-07T02:23:57",
+  "generado": "2026-09-07T03:48:16",
   "fecha_captura": "2026-09-07",
   "resumen": {
-    "total_ofertas_honor_hoy": 53,
+    "total_ofertas_honor_hoy": 92,
     "ofertas_por_tipo": {
-      "Smartphone": 48,
-      "Wearable": 3,
-      "Audio": 2
+      "Smartphone": 85,
+      "Audio": 3,
+      "Wearable": 4
     },
-    "familias_honor_detectadas": 17,
-    "vendedores_honor_detectados": 5,
-    "retailers_con_honor_hoy": 3,
-    "oportunidades_dispersion": 1,
+    "familias_honor_detectadas": 32,
+    "vendedores_honor_detectados": 8,
+    "retailers_con_honor_hoy": 6,
+    "oportunidades_dispersion": 6,
     "oportunidades_vs_competencia": 3,
     "dias_de_historial": 1
   },
   "cobertura": {
-    "retailers_configurados": 19,
-    "retailers_con_datos_hoy": 3,
+    "retailers_configurados": 24,
+    "retailers_con_datos_hoy": 10,
     "detalle": [
       {
+        "retailer": "Claro",
+        "filas": 92,
+        "filas_honor": 24,
+        "ok": true
+      },
+      {
         "retailer": "Metro",
-        "filas": 45,
+        "filas": 44,
         "filas_honor": 23,
         "ok": true
       },
       {
         "retailer": "Wong",
-        "filas": 27,
+        "filas": 26,
         "filas_honor": 16,
         "ok": true
       },
       {
         "retailer": "Carsa",
-        "filas": 92,
+        "filas": 95,
         "filas_honor": 14,
         "ok": true
       },
       {
-        "retailer": "Celivery Perú",
-        "filas": 0,
-        "filas_honor": 0,
-        "ok": false
+        "retailer": "Entel",
+        "filas": 42,
+        "filas_honor": 8,
+        "ok": true
       },
       {
-        "retailer": "Claro",
+        "retailer": "HONOR Perú (tienda oficial)",
+        "filas": 7,
+        "filas_honor": 7,
+        "ok": true
+      },
+      {
+        "retailer": "Celivery Perú",
         "filas": 0,
         "filas_honor": 0,
         "ok": false
@@ -62,12 +74,6 @@
         "ok": false
       },
       {
-        "retailer": "Entel",
-        "filas": 0,
-        "filas_honor": 0,
-        "ok": false
-      },
-      {
         "retailer": "Falabella",
         "filas": 0,
         "filas_honor": 0,
@@ -80,6 +86,12 @@
         "ok": false
       },
       {
+        "retailer": "Huawei Perú",
+        "filas": 37,
+        "filas_honor": 0,
+        "ok": true
+      },
+      {
         "retailer": "La Curacao",
         "filas": 0,
         "filas_honor": 0,
@@ -90,6 +102,12 @@
         "filas": 0,
         "filas_honor": 0,
         "ok": false
+      },
+      {
+        "retailer": "Motorola Perú",
+        "filas": 23,
+        "filas_honor": 0,
+        "ok": true
       },
       {
         "retailer": "Oechsle",
@@ -110,6 +128,12 @@
         "ok": false
       },
       {
+        "retailer": "Samsung Perú",
+        "filas": 13,
+        "filas_honor": 0,
+        "ok": true
+      },
+      {
         "retailer": "Sodimac",
         "filas": 0,
         "filas_honor": 0,
@@ -128,6 +152,12 @@
         "ok": false
       },
       {
+        "retailer": "Xiaomi Perú",
+        "filas": 18,
+        "filas_honor": 0,
+        "ok": true
+      },
+      {
         "retailer": "iShop Perú",
         "filas": 0,
         "filas_honor": 0,
@@ -137,22 +167,92 @@
   },
   "dispersion_interna": [
     {
+      "familia": "600",
+      "tipo": "Smartphone",
+      "n_ofertas": 5,
+      "precio_min": 2299.0,
+      "precio_max": 3139.0,
+      "spread_pct": 36.5,
+      "es_oportunidad": true,
+      "ofertas": [
+        {
+          "retailer": "HONOR Perú (tienda oficial)",
+          "vendedor": "HONOR Perú (tienda oficial)",
+          "vendedor_tercero": false,
+          "precio": 2299.0,
+          "modelo": "HONOR 600",
+          "url": ""
+        },
+        {
+          "retailer": "Claro",
+          "vendedor": "Tienda Claro",
+          "vendedor_tercero": true,
+          "precio": 3139.0,
+          "modelo": "600 5G Negro + Liberado +  P(0c)",
+          "url": "https://tienda.claro.com.pe/honor-600-512gb-5g-negro-liberado-p/p"
+        },
+        {
+          "retailer": "Claro",
+          "vendedor": "Tienda Claro",
+          "vendedor_tercero": true,
+          "precio": 3139.0,
+          "modelo": "600 5G Dorado Platino + Liberado +  P(0c)",
+          "url": "https://tienda.claro.com.pe/honor-600-512gb-5g-dorado-platino-liberado-p/p"
+        },
+        {
+          "retailer": "Claro",
+          "vendedor": "Tienda Claro",
+          "vendedor_tercero": true,
+          "precio": 3139.0,
+          "modelo": "600 5G Naranja + Liberado +  P(0c)",
+          "url": "https://tienda.claro.com.pe/honor-600-512gb-5g-naranja-liberado-p/p"
+        },
+        {
+          "retailer": "Claro",
+          "vendedor": "Tienda Claro",
+          "vendedor_tercero": true,
+          "precio": 3139.0,
+          "modelo": "600 5G Dorado Platino + Watch 2I + Liberado +  P(0c)",
+          "url": "https://tienda.claro.com.pe/honor-600-512gb-5g-dorado-platino-watch-2i-liberado-p/p"
+        }
+      ]
+    },
+    {
+      "familia": "X5D",
+      "tipo": "Smartphone",
+      "n_ofertas": 2,
+      "precio_min": 479.0,
+      "precio_max": 619.0,
+      "spread_pct": 29.2,
+      "es_oportunidad": true,
+      "ofertas": [
+        {
+          "retailer": "Claro",
+          "vendedor": "Tienda Claro",
+          "vendedor_tercero": true,
+          "precio": 479.0,
+          "modelo": "X5D Negro Medianoche + Weird Earb + Liberado +  P(0c)",
+          "url": "https://tienda.claro.com.pe/honor-x5d-128gb-negro-medianoche-liberado-p/p"
+        },
+        {
+          "retailer": "Claro",
+          "vendedor": "Tienda Claro",
+          "vendedor_tercero": true,
+          "precio": 619.0,
+          "modelo": "X5D Negro Medianoche + Weird Earb + Liberado +  P(0c)",
+          "url": "https://tienda.claro.com.pe/honor-x5d-256gb-negro-medianoche-weird-earb-liberado-p/p"
+        }
+      ]
+    },
+    {
       "familia": "X5C PLUS 256GB",
       "tipo": "Smartphone",
       "n_ofertas": 3,
       "precio_min": 459.0,
-      "precio_max": 580.0,
-      "spread_pct": 26.4,
+      "precio_max": 569.0,
+      "spread_pct": 24.0,
       "es_oportunidad": true,
       "ofertas": [
-        {
-          "retailer": "Wong",
-          "vendedor": "WongIO",
-          "vendedor_tercero": true,
-          "precio": 459.0,
-          "modelo": "Smartphone Honor X5C Plus 4Gb+256Gb Meteor Silver",
-          "url": "https://www.wong.pe/smartphone-honor-x5c-plus-4gb-256gb-meteor-silver-1064192/p"
-        },
         {
           "retailer": "Metro",
           "vendedor": "wongiononfood",
@@ -162,12 +262,224 @@
           "url": "https://www.metro.pe/smartphone-honor-x5c-plus-4gb-256gb-meteor-silver-1064192/p"
         },
         {
+          "retailer": "Wong",
+          "vendedor": "WongIO",
+          "vendedor_tercero": true,
+          "precio": 459.0,
+          "modelo": "Smartphone Honor X5C Plus 4Gb+256Gb Meteor Silver",
+          "url": "https://www.wong.pe/smartphone-honor-x5c-plus-4gb-256gb-meteor-silver-1064192/p"
+        },
+        {
           "retailer": "Carsa",
           "vendedor": "Perú smart",
           "vendedor_tercero": true,
-          "precio": 580.0,
+          "precio": 569.0,
           "modelo": "Honor X5C Plus 256GB 4GB Cyan",
           "url": "https://www.carsa.pe/honor-x5c-plus-256gb-4gb-cyan-5321/p"
+        }
+      ]
+    },
+    {
+      "familia": "600E 512GB",
+      "tipo": "Smartphone",
+      "n_ofertas": 7,
+      "precio_min": 1750.0,
+      "precio_max": 2149.0,
+      "spread_pct": 22.8,
+      "es_oportunidad": true,
+      "ofertas": [
+        {
+          "retailer": "Entel",
+          "vendedor": "Entel",
+          "vendedor_tercero": false,
+          "precio": 1750.0,
+          "modelo": "600e 512GB 5G + Audífono Over Ear",
+          "url": "https://miportal.entel.pe/personas/producto/equipos/prod1100046"
+        },
+        {
+          "retailer": "Entel",
+          "vendedor": "Entel",
+          "vendedor_tercero": false,
+          "precio": 1750.0,
+          "modelo": "600e 512GB 5G + Choice Watch 2I",
+          "url": "https://miportal.entel.pe/personas/producto/equipos/prod1080044"
+        },
+        {
+          "retailer": "Metro",
+          "vendedor": "CENCOSUD RETAIL PERU S.A.",
+          "vendedor_tercero": true,
+          "precio": 1899.0,
+          "modelo": "Smartphone Honor 600E 8GB+512GB 8GB+512GB Gold",
+          "url": "https://www.metro.pe/smartphone-honor-600e-8gb-512gb-8gb-512gb-gold-1067014/p"
+        },
+        {
+          "retailer": "Metro",
+          "vendedor": "wongiononfood",
+          "vendedor_tercero": true,
+          "precio": 1899.0,
+          "modelo": "Smartphone Honor 600E 8GB+512GB 8GB+512GB Green",
+          "url": "https://www.metro.pe/smartphone-honor-600e-8gb-512gb-8gb-512gb-green-1066961/p"
+        },
+        {
+          "retailer": "Metro",
+          "vendedor": "CENCOSUD RETAIL PERU S.A.",
+          "vendedor_tercero": true,
+          "precio": 1899.0,
+          "modelo": "Smartphone Honor 600E 8GB+512GB 8GB+512GB Grey",
+          "url": "https://www.metro.pe/smartphone-honor-600e-8gb-512gb-8gb-512gb-grey-1066958/p"
+        },
+        {
+          "retailer": "Wong",
+          "vendedor": "WongIO",
+          "vendedor_tercero": true,
+          "precio": 1899.0,
+          "modelo": "Smartphone Honor 600E 8GB+512GB 8GB+512GB Green",
+          "url": "https://www.wong.pe/smartphone-honor-600e-8gb-512gb-8gb-512gb-green-1066961/p"
+        },
+        {
+          "retailer": "Claro",
+          "vendedor": "Tienda Claro",
+          "vendedor_tercero": true,
+          "precio": 2149.0,
+          "modelo": "600E 512GB 5G Dorado Desierto + Liberado +  P(0c)",
+          "url": "https://tienda.claro.com.pe/honor-600e-512gb-5g-dorado-desierto-liberado-p/p"
+        }
+      ]
+    },
+    {
+      "familia": "600 PRO",
+      "tipo": "Smartphone",
+      "n_ofertas": 3,
+      "precio_min": 3399.0,
+      "precio_max": 4139.0,
+      "spread_pct": 21.8,
+      "es_oportunidad": true,
+      "ofertas": [
+        {
+          "retailer": "HONOR Perú (tienda oficial)",
+          "vendedor": "HONOR Perú (tienda oficial)",
+          "vendedor_tercero": false,
+          "precio": 3399.0,
+          "modelo": "HONOR 600 Pro",
+          "url": ""
+        },
+        {
+          "retailer": "Claro",
+          "vendedor": "Tienda Claro",
+          "vendedor_tercero": true,
+          "precio": 4139.0,
+          "modelo": "600 Pro 5G Negro + Liberado +  P(0c)",
+          "url": "https://tienda.claro.com.pe/honor-600-pro-5g-negro-liberado-p/p"
+        },
+        {
+          "retailer": "Claro",
+          "vendedor": "Tienda Claro",
+          "vendedor_tercero": true,
+          "precio": 4139.0,
+          "modelo": "600 Pro 5G Dorado Platino + Liberado +  P(0c)",
+          "url": "https://tienda.claro.com.pe/honor-600-pro-5g-dorado-platino-liberado-p/p"
+        }
+      ]
+    },
+    {
+      "familia": "400 LITE 256GB",
+      "tipo": "Smartphone",
+      "n_ofertas": 3,
+      "precio_min": 1399.0,
+      "precio_max": 1609.0,
+      "spread_pct": 15.0,
+      "es_oportunidad": true,
+      "ofertas": [
+        {
+          "retailer": "Metro",
+          "vendedor": "CENCOSUD RETAIL PERU S.A.",
+          "vendedor_tercero": true,
+          "precio": 1399.0,
+          "modelo": "Smartphone Honor 400 Lite 12Gb+256Gb Marrs Green",
+          "url": "https://www.metro.pe/smartphone-honor-400-lite-12gb-256gb-marrs-green-1040508/p"
+        },
+        {
+          "retailer": "Wong",
+          "vendedor": "WongIO",
+          "vendedor_tercero": true,
+          "precio": 1399.0,
+          "modelo": "Smartphone Honor 400 Lite 12Gb+256Gb Velvet Black",
+          "url": "https://www.wong.pe/smartphone-honor-400-lite-12gb-256gb-velvet-black-1040507/p"
+        },
+        {
+          "retailer": "Claro",
+          "vendedor": "Tienda Claro",
+          "vendedor_tercero": true,
+          "precio": 1609.0,
+          "modelo": "Honor 400 Lite 256GB Negro Nocturno + Liberado +  P(0c)",
+          "url": "https://tienda.claro.com.pe/honor-400-lite-256gb-negro-nocturno-liberado-p/p"
+        }
+      ]
+    },
+    {
+      "familia": "X8D 256GB",
+      "tipo": "Smartphone",
+      "n_ofertas": 7,
+      "precio_min": 899.0,
+      "precio_max": 959.0,
+      "spread_pct": 6.7,
+      "es_oportunidad": false,
+      "ofertas": [
+        {
+          "retailer": "Entel",
+          "vendedor": "Entel",
+          "vendedor_tercero": false,
+          "precio": 899.0,
+          "modelo": "X8D 256GB 4G",
+          "url": "https://miportal.entel.pe/personas/producto/equipos/prod1080042"
+        },
+        {
+          "retailer": "Metro",
+          "vendedor": "wongiononfood",
+          "vendedor_tercero": true,
+          "precio": 959.0,
+          "modelo": "Smartphone Honor X8D 8GB+256GB Light Blue",
+          "url": "https://www.metro.pe/smartphone-honor-x8d-8gb-256gb-light-blue-1062082/p"
+        },
+        {
+          "retailer": "Metro",
+          "vendedor": "CENCOSUD RETAIL PERU S.A.",
+          "vendedor_tercero": true,
+          "precio": 959.0,
+          "modelo": "Smartphone Honor X8D 8GB+256GB Light Blue",
+          "url": "https://www.metro.pe/smartphone-honor-x8d-8gb-256gb-light-blue-1062082/p"
+        },
+        {
+          "retailer": "Metro",
+          "vendedor": "CENCOSUD RETAIL PERU S.A.",
+          "vendedor_tercero": true,
+          "precio": 959.0,
+          "modelo": "Smartphone Honor X8D 8GB+256GB Velvet Grey",
+          "url": "https://www.metro.pe/smartphone-honor-x8d-8gb-256gb-velvet-grey-1062081/p"
+        },
+        {
+          "retailer": "Metro",
+          "vendedor": "CENCOSUD RETAIL PERU S.A.",
+          "vendedor_tercero": true,
+          "precio": 959.0,
+          "modelo": "Smartphone Honor X8D 8GB+256GB Velvet Black",
+          "url": "https://www.metro.pe/smartphone-honor-x8d-8gb-256gb-velvet-black-1062080/p"
+        },
+        {
+          "retailer": "Wong",
+          "vendedor": "WongIO",
+          "vendedor_tercero": true,
+          "precio": 959.0,
+          "modelo": "Smartphone Honor X8D 8GB+256GB Light Blue",
+          "url": "https://www.wong.pe/smartphone-honor-x8d-8gb-256gb-light-blue-1062082/p"
+        },
+        {
+          "retailer": "Wong",
+          "vendedor": "WongIO",
+          "vendedor_tercero": true,
+          "precio": 959.0,
+          "modelo": "Smartphone Honor X8D 8GB+256GB Velvet Black",
+          "url": "https://www.wong.pe/smartphone-honor-x8d-8gb-256gb-velvet-black-1062080/p"
         }
       ]
     },
@@ -244,12 +556,28 @@
     {
       "familia": "600 512GB",
       "tipo": "Smartphone",
-      "n_ofertas": 7,
+      "n_ofertas": 8,
       "precio_min": 2299.0,
       "precio_max": 2399.0,
       "spread_pct": 4.3,
       "es_oportunidad": false,
       "ofertas": [
+        {
+          "retailer": "Metro",
+          "vendedor": "wongiononfood",
+          "vendedor_tercero": true,
+          "precio": 2299.0,
+          "modelo": "Smartphone Honor 600 8GB+512GB Black",
+          "url": "https://www.metro.pe/smartphone-honor-600-8gb-512gb-black-1067123/p"
+        },
+        {
+          "retailer": "Metro",
+          "vendedor": "wongiononfood",
+          "vendedor_tercero": true,
+          "precio": 2299.0,
+          "modelo": "Smartphone Honor 600 8GB+512GB Golden White",
+          "url": "https://www.metro.pe/smartphone-honor-600-8gb-512gb-golden-white-1067122/p"
+        },
         {
           "retailer": "Wong",
           "vendedor": "WongIO",
@@ -267,20 +595,12 @@
           "url": "https://www.wong.pe/smartphone-honor-600-8gb-512gb-golden-white-1067122/p"
         },
         {
-          "retailer": "Metro",
-          "vendedor": "wongiononfood",
-          "vendedor_tercero": true,
-          "precio": 2299.0,
-          "modelo": "Smartphone Honor 600 8GB+512GB Black",
-          "url": "https://www.metro.pe/smartphone-honor-600-8gb-512gb-black-1067123/p"
-        },
-        {
-          "retailer": "Metro",
-          "vendedor": "wongiononfood",
-          "vendedor_tercero": true,
-          "precio": 2299.0,
-          "modelo": "Smartphone Honor 600 8GB+512GB Golden White",
-          "url": "https://www.metro.pe/smartphone-honor-600-8gb-512gb-golden-white-1067122/p"
+          "retailer": "Entel",
+          "vendedor": "Entel",
+          "vendedor_tercero": false,
+          "precio": 2310.0,
+          "modelo": "600 512GB 5G",
+          "url": "https://miportal.entel.pe/personas/producto/equipos/prod1090041"
         },
         {
           "retailer": "Metro",
@@ -305,6 +625,160 @@
           "precio": 2399.0,
           "modelo": "Smartphone Honor 600 8GB+512GB Orange",
           "url": "https://www.metro.pe/smartphone-honor-600-8gb-512gb-orange-1067121/p"
+        }
+      ]
+    },
+    {
+      "familia": "X5D 128GB",
+      "tipo": "Smartphone",
+      "n_ofertas": 2,
+      "precio_min": 449.0,
+      "precio_max": 449.0,
+      "spread_pct": 0.0,
+      "es_oportunidad": false,
+      "ofertas": [
+        {
+          "retailer": "Metro",
+          "vendedor": "CENCOSUD RETAIL PERU S.A.",
+          "vendedor_tercero": true,
+          "precio": 449.0,
+          "modelo": "Smartphone Honor X5D 4GB+128GB Midnight Black",
+          "url": "https://www.metro.pe/smartphone-honor-x5d-4gb-128gb-midnight-black-1069422/p"
+        },
+        {
+          "retailer": "Wong",
+          "vendedor": "WongIO",
+          "vendedor_tercero": true,
+          "precio": 449.0,
+          "modelo": "Smartphone Honor X5D 4GB+128GB Meteor Silver",
+          "url": "https://www.wong.pe/smartphone-honor-x5d-4gb-128gb-meteor-silver-1069421/p"
+        }
+      ]
+    },
+    {
+      "familia": "CHOICE X7 LITE",
+      "tipo": "Audio",
+      "n_ofertas": 1,
+      "precio_min": 89.0,
+      "precio_max": 89.0,
+      "spread_pct": 0.0,
+      "es_oportunidad": false,
+      "ofertas": [
+        {
+          "retailer": "Metro",
+          "vendedor": "CENCOSUD RETAIL PERU S.A.",
+          "vendedor_tercero": true,
+          "precio": 89.0,
+          "modelo": "Audífonos Bluetooth Honor Choice X7 Lite",
+          "url": "https://www.metro.pe/aud-fonos-bluetooth-honor-choice-x7-lite-1068392/p"
+        }
+      ]
+    },
+    {
+      "familia": "CHOICE X7E ACTIVE",
+      "tipo": "Audio",
+      "n_ofertas": 1,
+      "precio_min": 59.0,
+      "precio_max": 59.0,
+      "spread_pct": 0.0,
+      "es_oportunidad": false,
+      "ofertas": [
+        {
+          "retailer": "Metro",
+          "vendedor": "CENCOSUD RETAIL PERU S.A.",
+          "vendedor_tercero": true,
+          "precio": 59.0,
+          "modelo": "Audífonos Bluetooth Honor Choice X7E Active",
+          "url": "https://www.metro.pe/aud-fonos-bluetooth-honor-choice-x7e-active-1068391/p"
+        }
+      ]
+    },
+    {
+      "familia": "CHOICE WATCH 2I",
+      "tipo": "Wearable",
+      "n_ofertas": 3,
+      "precio_min": 139.0,
+      "precio_max": 139.0,
+      "spread_pct": 0.0,
+      "es_oportunidad": false,
+      "ofertas": [
+        {
+          "retailer": "Metro",
+          "vendedor": "wongiononfood",
+          "vendedor_tercero": true,
+          "precio": 139.0,
+          "modelo": "Smartwatche Honor Choice Watch 2I",
+          "url": "https://www.metro.pe/smartwatche-honor-choice-watch-2i-1068390/p"
+        },
+        {
+          "retailer": "Metro",
+          "vendedor": "CENCOSUD RETAIL PERU S.A.",
+          "vendedor_tercero": true,
+          "precio": 139.0,
+          "modelo": "Smartwatche Honor Choice Watch 2I",
+          "url": "https://www.metro.pe/smartwatche-honor-choice-watch-2i-1068390/p"
+        },
+        {
+          "retailer": "Wong",
+          "vendedor": "WongIO",
+          "vendedor_tercero": true,
+          "precio": 139.0,
+          "modelo": "Smartwatche Honor Choice Watch 2I",
+          "url": "https://www.wong.pe/smartwatche-honor-choice-watch-2i-1068390/p"
+        }
+      ]
+    },
+    {
+      "familia": "MAGIC8 LITE 512GB",
+      "tipo": "Smartphone",
+      "n_ofertas": 1,
+      "precio_min": 1699.0,
+      "precio_max": 1699.0,
+      "spread_pct": 0.0,
+      "es_oportunidad": false,
+      "ofertas": [
+        {
+          "retailer": "Metro",
+          "vendedor": "CENCOSUD RETAIL PERU S.A.",
+          "vendedor_tercero": true,
+          "precio": 1699.0,
+          "modelo": "HONOR Magic8 Lite 8GB+512GB Sunrise Gold",
+          "url": "https://www.metro.pe/smartphone-honor-magic8-lite-8gb-512gb-sunrise-gold-1058739/p"
+        }
+      ]
+    },
+    {
+      "familia": "X5C 128GB",
+      "tipo": "Smartphone",
+      "n_ofertas": 3,
+      "precio_min": 459.0,
+      "precio_max": 459.0,
+      "spread_pct": 0.0,
+      "es_oportunidad": false,
+      "ofertas": [
+        {
+          "retailer": "Metro",
+          "vendedor": "CENCOSUD RETAIL PERU S.A.",
+          "vendedor_tercero": true,
+          "precio": 459.0,
+          "modelo": "Smartphone Honor X5C 4GB+128GB Midnight Black",
+          "url": "https://www.metro.pe/smartphone-honor-x5c-4gb-128gb-midnight-black-1049370/p"
+        },
+        {
+          "retailer": "Metro",
+          "vendedor": "CENCOSUD RETAIL PERU S.A.",
+          "vendedor_tercero": true,
+          "precio": 459.0,
+          "modelo": "Smartphone Honor X5C 4GB+128GB Meteor Silver",
+          "url": "https://www.metro.pe/smartphone-honor-x5c-4gb-128gb-meteor-silver-1049369/p"
+        },
+        {
+          "retailer": "Metro",
+          "vendedor": "CENCOSUD RETAIL PERU S.A.",
+          "vendedor_tercero": true,
+          "precio": 459.0,
+          "modelo": "Smartphone Honor X5C 4GB+128GB Ocean Cyan",
+          "url": "https://www.metro.pe/smartphone-honor-x5c-4gb-128gb-ocean-cyan-1049368/p"
         }
       ]
     },
@@ -398,197 +872,6 @@
       ]
     },
     {
-      "familia": "X5D 128GB",
-      "tipo": "Smartphone",
-      "n_ofertas": 2,
-      "precio_min": 449.0,
-      "precio_max": 449.0,
-      "spread_pct": 0.0,
-      "es_oportunidad": false,
-      "ofertas": [
-        {
-          "retailer": "Wong",
-          "vendedor": "WongIO",
-          "vendedor_tercero": true,
-          "precio": 449.0,
-          "modelo": "Smartphone Honor X5D 4GB+128GB Meteor Silver",
-          "url": "https://www.wong.pe/smartphone-honor-x5d-4gb-128gb-meteor-silver-1069421/p"
-        },
-        {
-          "retailer": "Metro",
-          "vendedor": "CENCOSUD RETAIL PERU S.A.",
-          "vendedor_tercero": true,
-          "precio": 449.0,
-          "modelo": "Smartphone Honor X5D 4GB+128GB Midnight Black",
-          "url": "https://www.metro.pe/smartphone-honor-x5d-4gb-128gb-midnight-black-1069422/p"
-        }
-      ]
-    },
-    {
-      "familia": "CHOICE WATCH 2I",
-      "tipo": "Wearable",
-      "n_ofertas": 3,
-      "precio_min": 139.0,
-      "precio_max": 139.0,
-      "spread_pct": 0.0,
-      "es_oportunidad": false,
-      "ofertas": [
-        {
-          "retailer": "Wong",
-          "vendedor": "WongIO",
-          "vendedor_tercero": true,
-          "precio": 139.0,
-          "modelo": "Smartwatche Honor Choice Watch 2I",
-          "url": "https://www.wong.pe/smartwatche-honor-choice-watch-2i-1068390/p"
-        },
-        {
-          "retailer": "Metro",
-          "vendedor": "wongiononfood",
-          "vendedor_tercero": true,
-          "precio": 139.0,
-          "modelo": "Smartwatche Honor Choice Watch 2I",
-          "url": "https://www.metro.pe/smartwatche-honor-choice-watch-2i-1068390/p"
-        },
-        {
-          "retailer": "Metro",
-          "vendedor": "CENCOSUD RETAIL PERU S.A.",
-          "vendedor_tercero": true,
-          "precio": 139.0,
-          "modelo": "Smartwatche Honor Choice Watch 2I",
-          "url": "https://www.metro.pe/smartwatche-honor-choice-watch-2i-1068390/p"
-        }
-      ]
-    },
-    {
-      "familia": "600E 512GB",
-      "tipo": "Smartphone",
-      "n_ofertas": 4,
-      "precio_min": 1899.0,
-      "precio_max": 1899.0,
-      "spread_pct": 0.0,
-      "es_oportunidad": false,
-      "ofertas": [
-        {
-          "retailer": "Wong",
-          "vendedor": "WongIO",
-          "vendedor_tercero": true,
-          "precio": 1899.0,
-          "modelo": "Smartphone Honor 600E 8GB+512GB 8GB+512GB Green",
-          "url": "https://www.wong.pe/smartphone-honor-600e-8gb-512gb-8gb-512gb-green-1066961/p"
-        },
-        {
-          "retailer": "Metro",
-          "vendedor": "CENCOSUD RETAIL PERU S.A.",
-          "vendedor_tercero": true,
-          "precio": 1899.0,
-          "modelo": "Smartphone Honor 600E 8GB+512GB 8GB+512GB Gold",
-          "url": "https://www.metro.pe/smartphone-honor-600e-8gb-512gb-8gb-512gb-gold-1067014/p"
-        },
-        {
-          "retailer": "Metro",
-          "vendedor": "wongiononfood",
-          "vendedor_tercero": true,
-          "precio": 1899.0,
-          "modelo": "Smartphone Honor 600E 8GB+512GB 8GB+512GB Green",
-          "url": "https://www.metro.pe/smartphone-honor-600e-8gb-512gb-8gb-512gb-green-1066961/p"
-        },
-        {
-          "retailer": "Metro",
-          "vendedor": "CENCOSUD RETAIL PERU S.A.",
-          "vendedor_tercero": true,
-          "precio": 1899.0,
-          "modelo": "Smartphone Honor 600E 8GB+512GB 8GB+512GB Grey",
-          "url": "https://www.metro.pe/smartphone-honor-600e-8gb-512gb-8gb-512gb-grey-1066958/p"
-        }
-      ]
-    },
-    {
-      "familia": "X8D 256GB",
-      "tipo": "Smartphone",
-      "n_ofertas": 6,
-      "precio_min": 959.0,
-      "precio_max": 959.0,
-      "spread_pct": 0.0,
-      "es_oportunidad": false,
-      "ofertas": [
-        {
-          "retailer": "Wong",
-          "vendedor": "WongIO",
-          "vendedor_tercero": true,
-          "precio": 959.0,
-          "modelo": "Smartphone Honor X8D 8GB+256GB Light Blue",
-          "url": "https://www.wong.pe/smartphone-honor-x8d-8gb-256gb-light-blue-1062082/p"
-        },
-        {
-          "retailer": "Wong",
-          "vendedor": "WongIO",
-          "vendedor_tercero": true,
-          "precio": 959.0,
-          "modelo": "Smartphone Honor X8D 8GB+256GB Velvet Black",
-          "url": "https://www.wong.pe/smartphone-honor-x8d-8gb-256gb-velvet-black-1062080/p"
-        },
-        {
-          "retailer": "Metro",
-          "vendedor": "wongiononfood",
-          "vendedor_tercero": true,
-          "precio": 959.0,
-          "modelo": "Smartphone Honor X8D 8GB+256GB Light Blue",
-          "url": "https://www.metro.pe/smartphone-honor-x8d-8gb-256gb-light-blue-1062082/p"
-        },
-        {
-          "retailer": "Metro",
-          "vendedor": "CENCOSUD RETAIL PERU S.A.",
-          "vendedor_tercero": true,
-          "precio": 959.0,
-          "modelo": "Smartphone Honor X8D 8GB+256GB Light Blue",
-          "url": "https://www.metro.pe/smartphone-honor-x8d-8gb-256gb-light-blue-1062082/p"
-        },
-        {
-          "retailer": "Metro",
-          "vendedor": "CENCOSUD RETAIL PERU S.A.",
-          "vendedor_tercero": true,
-          "precio": 959.0,
-          "modelo": "Smartphone Honor X8D 8GB+256GB Velvet Grey",
-          "url": "https://www.metro.pe/smartphone-honor-x8d-8gb-256gb-velvet-grey-1062081/p"
-        },
-        {
-          "retailer": "Metro",
-          "vendedor": "CENCOSUD RETAIL PERU S.A.",
-          "vendedor_tercero": true,
-          "precio": 959.0,
-          "modelo": "Smartphone Honor X8D 8GB+256GB Velvet Black",
-          "url": "https://www.metro.pe/smartphone-honor-x8d-8gb-256gb-velvet-black-1062080/p"
-        }
-      ]
-    },
-    {
-      "familia": "400 LITE 256GB",
-      "tipo": "Smartphone",
-      "n_ofertas": 2,
-      "precio_min": 1399.0,
-      "precio_max": 1399.0,
-      "spread_pct": 0.0,
-      "es_oportunidad": false,
-      "ofertas": [
-        {
-          "retailer": "Wong",
-          "vendedor": "WongIO",
-          "vendedor_tercero": true,
-          "precio": 1399.0,
-          "modelo": "Smartphone Honor 400 Lite 12Gb+256Gb Velvet Black",
-          "url": "https://www.wong.pe/smartphone-honor-400-lite-12gb-256gb-velvet-black-1040507/p"
-        },
-        {
-          "retailer": "Metro",
-          "vendedor": "CENCOSUD RETAIL PERU S.A.",
-          "vendedor_tercero": true,
-          "precio": 1399.0,
-          "modelo": "Smartphone Honor 400 Lite 12Gb+256Gb Marrs Green",
-          "url": "https://www.metro.pe/smartphone-honor-400-lite-12gb-256gb-marrs-green-1040508/p"
-        }
-      ]
-    },
-    {
       "familia": "MAGIC 7 LITE 512GB",
       "tipo": "Smartphone",
       "n_ofertas": 1,
@@ -608,94 +891,302 @@
       ]
     },
     {
-      "familia": "CHOICE X7 LITE",
-      "tipo": "Audio",
-      "n_ofertas": 1,
-      "precio_min": 89.0,
-      "precio_max": 89.0,
+      "familia": "600 SMART 256GB",
+      "tipo": "Smartphone",
+      "n_ofertas": 2,
+      "precio_min": 1430.0,
+      "precio_max": 1430.0,
       "spread_pct": 0.0,
       "es_oportunidad": false,
       "ofertas": [
         {
-          "retailer": "Metro",
-          "vendedor": "CENCOSUD RETAIL PERU S.A.",
-          "vendedor_tercero": true,
-          "precio": 89.0,
-          "modelo": "Audífonos Bluetooth Honor Choice X7 Lite",
-          "url": "https://www.metro.pe/aud-fonos-bluetooth-honor-choice-x7-lite-1068392/p"
-        }
-      ]
-    },
-    {
-      "familia": "CHOICE X7E ACTIVE",
-      "tipo": "Audio",
-      "n_ofertas": 1,
-      "precio_min": 59.0,
-      "precio_max": 59.0,
-      "spread_pct": 0.0,
-      "es_oportunidad": false,
-      "ofertas": [
+          "retailer": "Entel",
+          "vendedor": "Entel",
+          "vendedor_tercero": false,
+          "precio": 1430.0,
+          "modelo": "600 Smart 256GB 5G",
+          "url": "https://miportal.entel.pe/personas/producto/equipos/prod1110049"
+        },
         {
-          "retailer": "Metro",
-          "vendedor": "CENCOSUD RETAIL PERU S.A.",
-          "vendedor_tercero": true,
-          "precio": 59.0,
-          "modelo": "Audífonos Bluetooth Honor Choice X7E Active",
-          "url": "https://www.metro.pe/aud-fonos-bluetooth-honor-choice-x7e-active-1068391/p"
+          "retailer": "Entel",
+          "vendedor": "Entel",
+          "vendedor_tercero": false,
+          "precio": 1430.0,
+          "modelo": "600 Smart 256GB 5G + Earbuds X7 Lite",
+          "url": "https://miportal.entel.pe/personas/producto/equipos/prod1110050"
         }
       ]
     },
     {
-      "familia": "MAGIC8 LITE 512GB",
+      "familia": "MAGIC 8 LITE 512GB",
       "tipo": "Smartphone",
       "n_ofertas": 1,
-      "precio_min": 1699.0,
-      "precio_max": 1699.0,
+      "precio_min": 1550.0,
+      "precio_max": 1550.0,
       "spread_pct": 0.0,
       "es_oportunidad": false,
       "ofertas": [
         {
-          "retailer": "Metro",
-          "vendedor": "CENCOSUD RETAIL PERU S.A.",
-          "vendedor_tercero": true,
-          "precio": 1699.0,
-          "modelo": "HONOR Magic8 Lite 8GB+512GB Sunrise Gold",
-          "url": "https://www.metro.pe/smartphone-honor-magic8-lite-8gb-512gb-sunrise-gold-1058739/p"
+          "retailer": "Entel",
+          "vendedor": "Entel",
+          "vendedor_tercero": false,
+          "precio": 1550.0,
+          "modelo": "Magic 8 Lite 512GB 5G",
+          "url": "https://miportal.entel.pe/personas/producto/equipos/prod1040038"
         }
       ]
     },
     {
-      "familia": "X5C 128GB",
+      "familia": "X6D 256GB",
+      "tipo": "Smartphone",
+      "n_ofertas": 1,
+      "precio_min": 620.0,
+      "precio_max": 620.0,
+      "spread_pct": 0.0,
+      "es_oportunidad": false,
+      "ofertas": [
+        {
+          "retailer": "Entel",
+          "vendedor": "Entel",
+          "vendedor_tercero": false,
+          "precio": 620.0,
+          "modelo": "X6d 256GB 5G + Choice Mili Litag",
+          "url": "https://miportal.entel.pe/personas/producto/equipos/prod1070044"
+        }
+      ]
+    },
+    {
+      "familia": "X7E PLUS",
       "tipo": "Smartphone",
       "n_ofertas": 3,
-      "precio_min": 459.0,
-      "precio_max": 459.0,
+      "precio_min": 1189.0,
+      "precio_max": 1189.0,
       "spread_pct": 0.0,
       "es_oportunidad": false,
       "ofertas": [
         {
-          "retailer": "Metro",
-          "vendedor": "CENCOSUD RETAIL PERU S.A.",
+          "retailer": "Claro",
+          "vendedor": "Tienda Claro",
           "vendedor_tercero": true,
-          "precio": 459.0,
-          "modelo": "Smartphone Honor X5C 4GB+128GB Midnight Black",
-          "url": "https://www.metro.pe/smartphone-honor-x5c-4gb-128gb-midnight-black-1049370/p"
+          "precio": 1189.0,
+          "modelo": "X7E Plus 5G Dorado Desierto + Earbuds X7L + Liberado +  P(0c)",
+          "url": "https://tienda.claro.com.pe/honor-x7e-plus-5g-dorado-desierto-earbuds-x7l-liberado-p/p"
         },
         {
-          "retailer": "Metro",
-          "vendedor": "CENCOSUD RETAIL PERU S.A.",
+          "retailer": "Claro",
+          "vendedor": "Tienda Claro",
           "vendedor_tercero": true,
-          "precio": 459.0,
-          "modelo": "Smartphone Honor X5C 4GB+128GB Meteor Silver",
-          "url": "https://www.metro.pe/smartphone-honor-x5c-4gb-128gb-meteor-silver-1049369/p"
+          "precio": 1189.0,
+          "modelo": "X7E Plus 5G Dorado Desierto + Liberado +  P(0c)",
+          "url": "https://tienda.claro.com.pe/honor-x7e-plus-5g-dorado-desierto-liberado-p/p"
         },
         {
-          "retailer": "Metro",
-          "vendedor": "CENCOSUD RETAIL PERU S.A.",
+          "retailer": "Claro",
+          "vendedor": "Tienda Claro",
           "vendedor_tercero": true,
-          "precio": 459.0,
-          "modelo": "Smartphone Honor X5C 4GB+128GB Ocean Cyan",
-          "url": "https://www.metro.pe/smartphone-honor-x5c-4gb-128gb-ocean-cyan-1049368/p"
+          "precio": 1189.0,
+          "modelo": "X7E Plus 5G Plata Meteoro + Liberado +  P(0c)",
+          "url": "https://tienda.claro.com.pe/honor-x7e-plus-5g-plata-meteoro-liberado-p/p"
+        }
+      ]
+    },
+    {
+      "familia": "X6D",
+      "tipo": "Smartphone",
+      "n_ofertas": 2,
+      "precio_min": 879.0,
+      "precio_max": 879.0,
+      "spread_pct": 0.0,
+      "es_oportunidad": false,
+      "ofertas": [
+        {
+          "retailer": "Claro",
+          "vendedor": "Tienda Claro",
+          "vendedor_tercero": true,
+          "precio": 879.0,
+          "modelo": "X6D 5G Cian Oceano + Liberado +  P(0c)",
+          "url": "https://tienda.claro.com.pe/honor-x6d-5g-cian-oceano-liberado-p/p"
+        },
+        {
+          "retailer": "Claro",
+          "vendedor": "Tienda Claro",
+          "vendedor_tercero": true,
+          "precio": 879.0,
+          "modelo": "X6D 5G Negro Medianoche + Liberado +  P(0c)",
+          "url": "https://tienda.claro.com.pe/honor-x6d-5g-negro-medianoche-liberado-p/p"
+        }
+      ]
+    },
+    {
+      "familia": "600 SMART",
+      "tipo": "Smartphone",
+      "n_ofertas": 3,
+      "precio_min": 1759.0,
+      "precio_max": 1759.0,
+      "spread_pct": 0.0,
+      "es_oportunidad": false,
+      "ofertas": [
+        {
+          "retailer": "Claro",
+          "vendedor": "Tienda Claro",
+          "vendedor_tercero": true,
+          "precio": 1759.0,
+          "modelo": "600 Smart 5G Plata Meteoro + Earbuds X7L + Liberado +  P(0c)",
+          "url": "https://tienda.claro.com.pe/honor-600-smart-5g-plata-meteoro-earbuds-x7l-liberado-p/p"
+        },
+        {
+          "retailer": "Claro",
+          "vendedor": "Tienda Claro",
+          "vendedor_tercero": true,
+          "precio": 1759.0,
+          "modelo": "600 Smart 5G Plata Meteroro + Liberado +  P(0c)",
+          "url": "https://tienda.claro.com.pe/honor-600-smart-5g-plata-meteroro-liberado-p/p"
+        },
+        {
+          "retailer": "Claro",
+          "vendedor": "Tienda Claro",
+          "vendedor_tercero": true,
+          "precio": 1759.0,
+          "modelo": "600 Smart 5G Morado Niebla + Earbuds X7L + Liberado +  P(0c)",
+          "url": "https://tienda.claro.com.pe/honor-600-smart-5g-morado-niebla-earbuds-x7l-liberado-p/p"
+        }
+      ]
+    },
+    {
+      "familia": "600 PRO 512GB",
+      "tipo": "Smartphone",
+      "n_ofertas": 1,
+      "precio_min": 4139.0,
+      "precio_max": 4139.0,
+      "spread_pct": 0.0,
+      "es_oportunidad": false,
+      "ofertas": [
+        {
+          "retailer": "Claro",
+          "vendedor": "Tienda Claro",
+          "vendedor_tercero": true,
+          "precio": 4139.0,
+          "modelo": "600 Pro 512GB 5G Negro + Watch 2I + Liberado +  P(0c)",
+          "url": "https://tienda.claro.com.pe/honor-600-pro-512gb-5g-negro-watch-2i-liberado-p/p"
+        }
+      ]
+    },
+    {
+      "familia": "MAGIC 8 LITE",
+      "tipo": "Smartphone",
+      "n_ofertas": 4,
+      "precio_min": 1889.0,
+      "precio_max": 1889.0,
+      "spread_pct": 0.0,
+      "es_oportunidad": false,
+      "ofertas": [
+        {
+          "retailer": "Claro",
+          "vendedor": "Tienda Claro",
+          "vendedor_tercero": true,
+          "precio": 1889.0,
+          "modelo": "Magic 8 Lite 5G Verde Foresta + Liberado +  P(0c)",
+          "url": "https://tienda.claro.com.pe/honor-magic-8-lite-5g-512gb-verde-foresta-liberado-p/p"
+        },
+        {
+          "retailer": "Claro",
+          "vendedor": "Tienda Claro",
+          "vendedor_tercero": true,
+          "precio": 1889.0,
+          "modelo": "Magic 8 Lite 5G Verde Amanecer + Headphones Pro + Liberado +  P(0c)",
+          "url": "https://tienda.claro.com.pe/honor-magic-8-lite-512gb-5g-verde-amanecer-headphones-pro-liberado-p/p"
+        },
+        {
+          "retailer": "Claro",
+          "vendedor": "Tienda Claro",
+          "vendedor_tercero": true,
+          "precio": 1889.0,
+          "modelo": "Magic 8 Lite 5G Dorado Amanecer + Headphones Pro + Liberado +  P(0c)",
+          "url": "https://tienda.claro.com.pe/honor-magic-8-lite-512gb-5g-dorado-amanecer-headphones-pro-liberado-p/p"
+        },
+        {
+          "retailer": "Claro",
+          "vendedor": "Tienda Claro",
+          "vendedor_tercero": true,
+          "precio": 1889.0,
+          "modelo": "Magic 8 Lite 5G Negro + Liberado +  P(0c)",
+          "url": "https://tienda.claro.com.pe/honor-magic-8-lite-512gb-5g-negro-liberado-p/p"
+        }
+      ]
+    },
+    {
+      "familia": "MAGIC 8 PRO",
+      "tipo": "Smartphone",
+      "n_ofertas": 1,
+      "precio_min": 6139.0,
+      "precio_max": 6139.0,
+      "spread_pct": 0.0,
+      "es_oportunidad": false,
+      "ofertas": [
+        {
+          "retailer": "Claro",
+          "vendedor": "Tienda Claro",
+          "vendedor_tercero": true,
+          "precio": 6139.0,
+          "modelo": "Honor Magic 8 Pro 5G Negro + Earbuds + Liberado +  P(0c)",
+          "url": "https://tienda.claro.com.pe/honor-magic-8-pro-512gb-5g-negro-earbuds-liberado-p/p"
+        }
+      ]
+    },
+    {
+      "familia": "X8D",
+      "tipo": "Smartphone",
+      "n_ofertas": 1,
+      "precio_min": 959.0,
+      "precio_max": 959.0,
+      "spread_pct": 0.0,
+      "es_oportunidad": false,
+      "ofertas": [
+        {
+          "retailer": "HONOR Perú (tienda oficial)",
+          "vendedor": "HONOR Perú (tienda oficial)",
+          "vendedor_tercero": false,
+          "precio": 959.0,
+          "modelo": "HONOR X8d",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "familia": "600E",
+      "tipo": "Smartphone",
+      "n_ofertas": 1,
+      "precio_min": 1899.0,
+      "precio_max": 1899.0,
+      "spread_pct": 0.0,
+      "es_oportunidad": false,
+      "ofertas": [
+        {
+          "retailer": "HONOR Perú (tienda oficial)",
+          "vendedor": "HONOR Perú (tienda oficial)",
+          "vendedor_tercero": false,
+          "precio": 1899.0,
+          "modelo": "HONOR 600e",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "familia": "MAGIC8 LITE",
+      "tipo": "Smartphone",
+      "n_ofertas": 1,
+      "precio_min": 1599.0,
+      "precio_max": 1599.0,
+      "spread_pct": 0.0,
+      "es_oportunidad": false,
+      "ofertas": [
+        {
+          "retailer": "HONOR Perú (tienda oficial)",
+          "vendedor": "HONOR Perú (tienda oficial)",
+          "vendedor_tercero": false,
+          "precio": 1599.0,
+          "modelo": "HONOR Magic8 Lite",
+          "url": ""
         }
       ]
     }
@@ -710,40 +1201,40 @@
         "precio": 440.0
       },
       "competidor_mas_barato": {
-        "marca": "XIAOMI",
-        "modelo": "Celular Xiaomi POCO C71 128GB 4GB RAM cámara 32MP negro",
-        "retailer": "Carsa",
-        "precio": 429.0
+        "marca": "MOTOROLA",
+        "modelo": "Azul",
+        "retailer": "Motorola Perú",
+        "precio": 399.0
       },
-      "gap_pct": 2.6,
-      "honor_mas_caro_que_competencia": true,
-      "es_oportunidad": false
-    },
-    {
-      "segmento": "S/600 - S/1,000",
-      "honor_mas_barato": {
-        "familia": "OTRO: 6936520881239",
-        "modelo": "6936520881239",
-        "retailer": "Carsa",
-        "precio": 749.0
-      },
-      "competidor_mas_barato": {
-        "marca": "XIAOMI",
-        "modelo": "Celular Xiaomi REDMI 15C 256GB 8GB RAM cámara 50MP verde menta",
-        "retailer": "Carsa",
-        "precio": 676.0
-      },
-      "gap_pct": 10.8,
+      "gap_pct": 10.3,
       "honor_mas_caro_que_competencia": true,
       "es_oportunidad": true
     },
     {
+      "segmento": "S/600 - S/1,000",
+      "honor_mas_barato": {
+        "familia": "X5D",
+        "modelo": "X5D Negro Medianoche + Weird Earb + Liberado +  P(0c)",
+        "retailer": "Claro",
+        "precio": 619.0
+      },
+      "competidor_mas_barato": {
+        "marca": "MOTOROLA",
+        "modelo": "Moto G17 256GB 4G",
+        "retailer": "Entel",
+        "precio": 620.0
+      },
+      "gap_pct": -0.2,
+      "honor_mas_caro_que_competencia": false,
+      "es_oportunidad": false
+    },
+    {
       "segmento": "S/1,000 - S/1,500",
       "honor_mas_barato": {
-        "familia": "400 LITE 256GB",
-        "modelo": "Smartphone Honor 400 Lite 12Gb+256Gb Velvet Black",
-        "retailer": "Wong",
-        "precio": 1399.0
+        "familia": "X7E PLUS",
+        "modelo": "X7E Plus 5G Dorado Desierto + Earbuds X7L + Liberado +  P(0c)",
+        "retailer": "Claro",
+        "precio": 1189.0
       },
       "competidor_mas_barato": {
         "marca": "MOTOROLA",
@@ -751,7 +1242,7 @@
         "retailer": "Metro",
         "precio": 1049.0
       },
-      "gap_pct": 33.4,
+      "gap_pct": 13.3,
       "honor_mas_caro_que_competencia": true,
       "es_oportunidad": true
     },
@@ -764,43 +1255,61 @@
         "precio": 1504.0
       },
       "competidor_mas_barato": {
-        "marca": "MOTOROLA",
-        "modelo": "Smartphone Motorola Edge 70 Fusion 256GB 8GB RAM Azul",
-        "retailer": "Metro",
-        "precio": 1599.0
+        "marca": "REDMI",
+        "modelo": "REDMI Note 15 Pro 5G",
+        "retailer": "Xiaomi Perú",
+        "precio": 1549.0
       },
-      "gap_pct": -5.9,
+      "gap_pct": -2.9,
       "honor_mas_caro_que_competencia": false,
       "es_oportunidad": false
     },
     {
       "segmento": "S/2,500 - S/4,000",
       "honor_mas_barato": {
-        "familia": "OTRO: 6942785100480",
-        "modelo": "6942785100480",
-        "retailer": "Carsa",
-        "precio": 3169.0
+        "familia": "600",
+        "modelo": "600 5G Negro + Liberado +  P(0c)",
+        "retailer": "Claro",
+        "precio": 3139.0
       },
       "competidor_mas_barato": {
         "marca": "XIAOMI",
-        "modelo": "Smartphone Xiaomi 17T Black Bundle",
-        "retailer": "Metro",
-        "precio": 2799.0
+        "modelo": "17T 512GB 5G + Watch 5 Active",
+        "retailer": "Entel",
+        "precio": 2590.0
       },
-      "gap_pct": 13.2,
+      "gap_pct": 21.2,
       "honor_mas_caro_que_competencia": true,
       "es_oportunidad": true
+    },
+    {
+      "segmento": "Más de S/4,000",
+      "honor_mas_barato": {
+        "familia": "600 PRO",
+        "modelo": "600 Pro 5G Negro + Liberado +  P(0c)",
+        "retailer": "Claro",
+        "precio": 4139.0
+      },
+      "competidor_mas_barato": {
+        "marca": "MOTOROLA",
+        "modelo": "Moto Signature 1TB 5G + Moto Buds Bass",
+        "retailer": "Entel",
+        "precio": 4000.0
+      },
+      "gap_pct": 3.5,
+      "honor_mas_caro_que_competencia": true,
+      "es_oportunidad": false
     }
   ],
   "vs_competencia_tablet": null,
   "vs_competencia_wearable": {
     "tipo": "Wearable",
-    "n_ofertas_honor": 3,
-    "n_ofertas_competencia": 5,
+    "n_ofertas_honor": 4,
+    "n_ofertas_competencia": 8,
     "honor_mas_barato": {
       "familia": "CHOICE WATCH 2I",
       "modelo": "Smartwatche Honor Choice Watch 2I",
-      "retailer": "Wong",
+      "retailer": "Metro",
       "precio": 139.0
     },
     "competidor_mas_barato": {
@@ -823,6 +1332,105 @@
       "2026-09-07"
     ],
     "familias": {
+      "X5D 128GB": [
+        {
+          "fecha": "2026-09-07",
+          "precio_min": 449.0,
+          "precio_promedio": 449.0,
+          "precio_max": 449.0,
+          "n_ofertas": 2
+        }
+      ],
+      "CHOICE X7 LITE": [
+        {
+          "fecha": "2026-09-07",
+          "precio_min": 89.0,
+          "precio_promedio": 89.0,
+          "precio_max": 89.0,
+          "n_ofertas": 1
+        }
+      ],
+      "CHOICE X7E ACTIVE": [
+        {
+          "fecha": "2026-09-07",
+          "precio_min": 59.0,
+          "precio_promedio": 59.0,
+          "precio_max": 59.0,
+          "n_ofertas": 1
+        }
+      ],
+      "CHOICE WATCH 2I": [
+        {
+          "fecha": "2026-09-07",
+          "precio_min": 139.0,
+          "precio_promedio": 139.0,
+          "precio_max": 139.0,
+          "n_ofertas": 3
+        }
+      ],
+      "600 512GB": [
+        {
+          "fecha": "2026-09-07",
+          "precio_min": 2299.0,
+          "precio_promedio": 2338.0,
+          "precio_max": 2399.0,
+          "n_ofertas": 8
+        }
+      ],
+      "600E 512GB": [
+        {
+          "fecha": "2026-09-07",
+          "precio_min": 1750.0,
+          "precio_promedio": 1892.0,
+          "precio_max": 2149.0,
+          "n_ofertas": 7
+        }
+      ],
+      "X5C PLUS 256GB": [
+        {
+          "fecha": "2026-09-07",
+          "precio_min": 459.0,
+          "precio_promedio": 496.0,
+          "precio_max": 569.0,
+          "n_ofertas": 3
+        }
+      ],
+      "X8D 256GB": [
+        {
+          "fecha": "2026-09-07",
+          "precio_min": 899.0,
+          "precio_promedio": 950.0,
+          "precio_max": 959.0,
+          "n_ofertas": 7
+        }
+      ],
+      "MAGIC8 LITE 512GB": [
+        {
+          "fecha": "2026-09-07",
+          "precio_min": 1699.0,
+          "precio_promedio": 1699.0,
+          "precio_max": 1699.0,
+          "n_ofertas": 1
+        }
+      ],
+      "X5C 128GB": [
+        {
+          "fecha": "2026-09-07",
+          "precio_min": 459.0,
+          "precio_promedio": 459.0,
+          "precio_max": 459.0,
+          "n_ofertas": 3
+        }
+      ],
+      "400 LITE 256GB": [
+        {
+          "fecha": "2026-09-07",
+          "precio_min": 1399.0,
+          "precio_promedio": 1469.0,
+          "precio_max": 1609.0,
+          "n_ofertas": 3
+        }
+      ],
       "X6E 256GB": [
         {
           "fecha": "2026-09-07",
@@ -848,69 +1456,6 @@
           "precio_promedio": 1699.0,
           "precio_max": 1699.0,
           "n_ofertas": 1
-        }
-      ],
-      "X5D 128GB": [
-        {
-          "fecha": "2026-09-07",
-          "precio_min": 449.0,
-          "precio_promedio": 449.0,
-          "precio_max": 449.0,
-          "n_ofertas": 2
-        }
-      ],
-      "CHOICE WATCH 2I": [
-        {
-          "fecha": "2026-09-07",
-          "precio_min": 139.0,
-          "precio_promedio": 139.0,
-          "precio_max": 139.0,
-          "n_ofertas": 3
-        }
-      ],
-      "600 512GB": [
-        {
-          "fecha": "2026-09-07",
-          "precio_min": 2299.0,
-          "precio_promedio": 2342.0,
-          "precio_max": 2399.0,
-          "n_ofertas": 7
-        }
-      ],
-      "600E 512GB": [
-        {
-          "fecha": "2026-09-07",
-          "precio_min": 1899.0,
-          "precio_promedio": 1899.0,
-          "precio_max": 1899.0,
-          "n_ofertas": 4
-        }
-      ],
-      "X5C PLUS 256GB": [
-        {
-          "fecha": "2026-09-07",
-          "precio_min": 459.0,
-          "precio_promedio": 499.0,
-          "precio_max": 580.0,
-          "n_ofertas": 3
-        }
-      ],
-      "X8D 256GB": [
-        {
-          "fecha": "2026-09-07",
-          "precio_min": 959.0,
-          "precio_promedio": 959.0,
-          "precio_max": 959.0,
-          "n_ofertas": 6
-        }
-      ],
-      "400 LITE 256GB": [
-        {
-          "fecha": "2026-09-07",
-          "precio_min": 1399.0,
-          "precio_promedio": 1399.0,
-          "precio_max": 1399.0,
-          "n_ofertas": 2
         }
       ],
       "PLAY 10 128GB": [
@@ -940,40 +1485,139 @@
           "n_ofertas": 4
         }
       ],
-      "CHOICE X7 LITE": [
+      "600 SMART 256GB": [
         {
           "fecha": "2026-09-07",
-          "precio_min": 89.0,
-          "precio_promedio": 89.0,
-          "precio_max": 89.0,
+          "precio_min": 1430.0,
+          "precio_promedio": 1430.0,
+          "precio_max": 1430.0,
+          "n_ofertas": 2
+        }
+      ],
+      "MAGIC 8 LITE 512GB": [
+        {
+          "fecha": "2026-09-07",
+          "precio_min": 1550.0,
+          "precio_promedio": 1550.0,
+          "precio_max": 1550.0,
           "n_ofertas": 1
         }
       ],
-      "CHOICE X7E ACTIVE": [
+      "X6D 256GB": [
         {
           "fecha": "2026-09-07",
-          "precio_min": 59.0,
-          "precio_promedio": 59.0,
-          "precio_max": 59.0,
+          "precio_min": 620.0,
+          "precio_promedio": 620.0,
+          "precio_max": 620.0,
           "n_ofertas": 1
         }
       ],
-      "MAGIC8 LITE 512GB": [
+      "600 PRO": [
         {
           "fecha": "2026-09-07",
-          "precio_min": 1699.0,
-          "precio_promedio": 1699.0,
-          "precio_max": 1699.0,
-          "n_ofertas": 1
-        }
-      ],
-      "X5C 128GB": [
-        {
-          "fecha": "2026-09-07",
-          "precio_min": 459.0,
-          "precio_promedio": 459.0,
-          "precio_max": 459.0,
+          "precio_min": 3399.0,
+          "precio_promedio": 3892.0,
+          "precio_max": 4139.0,
           "n_ofertas": 3
+        }
+      ],
+      "X7E PLUS": [
+        {
+          "fecha": "2026-09-07",
+          "precio_min": 1189.0,
+          "precio_promedio": 1189.0,
+          "precio_max": 1189.0,
+          "n_ofertas": 3
+        }
+      ],
+      "X6D": [
+        {
+          "fecha": "2026-09-07",
+          "precio_min": 879.0,
+          "precio_promedio": 879.0,
+          "precio_max": 879.0,
+          "n_ofertas": 2
+        }
+      ],
+      "600 SMART": [
+        {
+          "fecha": "2026-09-07",
+          "precio_min": 1759.0,
+          "precio_promedio": 1759.0,
+          "precio_max": 1759.0,
+          "n_ofertas": 3
+        }
+      ],
+      "X5D": [
+        {
+          "fecha": "2026-09-07",
+          "precio_min": 479.0,
+          "precio_promedio": 549.0,
+          "precio_max": 619.0,
+          "n_ofertas": 2
+        }
+      ],
+      "600 PRO 512GB": [
+        {
+          "fecha": "2026-09-07",
+          "precio_min": 4139.0,
+          "precio_promedio": 4139.0,
+          "precio_max": 4139.0,
+          "n_ofertas": 1
+        }
+      ],
+      "600": [
+        {
+          "fecha": "2026-09-07",
+          "precio_min": 2299.0,
+          "precio_promedio": 2971.0,
+          "precio_max": 3139.0,
+          "n_ofertas": 5
+        }
+      ],
+      "MAGIC 8 LITE": [
+        {
+          "fecha": "2026-09-07",
+          "precio_min": 1889.0,
+          "precio_promedio": 1889.0,
+          "precio_max": 1889.0,
+          "n_ofertas": 4
+        }
+      ],
+      "MAGIC 8 PRO": [
+        {
+          "fecha": "2026-09-07",
+          "precio_min": 6139.0,
+          "precio_promedio": 6139.0,
+          "precio_max": 6139.0,
+          "n_ofertas": 1
+        }
+      ],
+      "X8D": [
+        {
+          "fecha": "2026-09-07",
+          "precio_min": 959.0,
+          "precio_promedio": 959.0,
+          "precio_max": 959.0,
+          "n_ofertas": 1
+        }
+      ],
+      "600E": [
+        {
+          "fecha": "2026-09-07",
+          "precio_min": 1899.0,
+          "precio_promedio": 1899.0,
+          "precio_max": 1899.0,
+          "n_ofertas": 1
+        }
+      ],
+      "MAGIC8 LITE": [
+        {
+          "fecha": "2026-09-07",
+          "precio_min": 1599.0,
+          "precio_promedio": 1599.0,
+          "precio_max": 1599.0,
+          "n_ofertas": 1
         }
       ]
     },
@@ -988,14 +1632,14 @@
       "S/600 - S/1,000": [
         {
           "fecha": "2026-09-07",
-          "honor_min": 749.0,
-          "competencia_min": 676.0
+          "honor_min": 619.0,
+          "competencia_min": 603.0
         }
       ],
       "S/1,000 - S/1,500": [
         {
           "fecha": "2026-09-07",
-          "honor_min": 1399.0,
+          "honor_min": 1189.0,
           "competencia_min": 1049.0
         }
       ],
@@ -1003,14 +1647,21 @@
         {
           "fecha": "2026-09-07",
           "honor_min": 1504.0,
-          "competencia_min": 1599.0
+          "competencia_min": 1549.0
         }
       ],
       "S/2,500 - S/4,000": [
         {
           "fecha": "2026-09-07",
-          "honor_min": 3169.0,
-          "competencia_min": 2799.0
+          "honor_min": 3139.0,
+          "competencia_min": 2590.0
+        }
+      ],
+      "Más de S/4,000": [
+        {
+          "fecha": "2026-09-07",
+          "honor_min": 4139.0,
+          "competencia_min": 4000.0
         }
       ]
     },
@@ -1024,35 +1675,80 @@
   "analisis_avanzado": {
     "vendedores_ranking": [
       {
+        "vendedor": "Tienda Claro",
+        "vendedor_tercero": true,
+        "n_ofertas": 24,
+        "sobreprecio_promedio_pct": 10.7,
+        "clasificacion": "alineado al mercado"
+      },
+      {
         "vendedor": "Perú smart",
         "vendedor_tercero": true,
         "n_ofertas": 8,
-        "sobreprecio_promedio_pct": 5.6,
+        "sobreprecio_promedio_pct": 5.3,
         "clasificacion": "alineado al mercado"
       },
       {
         "vendedor": "CENCOSUD RETAIL PERU S.A.",
         "vendedor_tercero": true,
         "n_ofertas": 17,
-        "sobreprecio_promedio_pct": 0.8,
-        "clasificacion": "agresivo/barato"
-      },
-      {
-        "vendedor": "WongIO",
-        "vendedor_tercero": true,
-        "n_ofertas": 16,
-        "sobreprecio_promedio_pct": 0.0,
+        "sobreprecio_promedio_pct": 2.9,
         "clasificacion": "agresivo/barato"
       },
       {
         "vendedor": "wongiononfood",
         "vendedor_tercero": true,
         "n_ofertas": 6,
+        "sobreprecio_promedio_pct": 2.5,
+        "clasificacion": "agresivo/barato"
+      },
+      {
+        "vendedor": "WongIO",
+        "vendedor_tercero": true,
+        "n_ofertas": 16,
+        "sobreprecio_promedio_pct": 1.4,
+        "clasificacion": "agresivo/barato"
+      },
+      {
+        "vendedor": "Entel",
+        "vendedor_tercero": false,
+        "n_ofertas": 8,
+        "sobreprecio_promedio_pct": 0.1,
+        "clasificacion": "agresivo/barato"
+      },
+      {
+        "vendedor": "HONOR Perú (tienda oficial)",
+        "vendedor_tercero": false,
+        "n_ofertas": 5,
         "sobreprecio_promedio_pct": 0.0,
         "clasificacion": "agresivo/barato"
       }
     ],
     "concentracion": [
+      {
+        "familia": "CHOICE X7 LITE",
+        "n_vendedores_distintos": 1,
+        "n_retailers_distintos": 1,
+        "riesgo_concentracion": "alto"
+      },
+      {
+        "familia": "CHOICE X7E ACTIVE",
+        "n_vendedores_distintos": 1,
+        "n_retailers_distintos": 1,
+        "riesgo_concentracion": "alto"
+      },
+      {
+        "familia": "MAGIC8 LITE 512GB",
+        "n_vendedores_distintos": 1,
+        "n_retailers_distintos": 1,
+        "riesgo_concentracion": "alto"
+      },
+      {
+        "familia": "X5C 128GB",
+        "n_vendedores_distintos": 1,
+        "n_retailers_distintos": 1,
+        "riesgo_concentracion": "alto"
+      },
       {
         "familia": "X6E 256GB",
         "n_vendedores_distintos": 1,
@@ -1090,25 +1786,79 @@
         "riesgo_concentracion": "alto"
       },
       {
-        "familia": "CHOICE X7 LITE",
+        "familia": "600 SMART 256GB",
         "n_vendedores_distintos": 1,
         "n_retailers_distintos": 1,
         "riesgo_concentracion": "alto"
       },
       {
-        "familia": "CHOICE X7E ACTIVE",
+        "familia": "MAGIC 8 LITE 512GB",
         "n_vendedores_distintos": 1,
         "n_retailers_distintos": 1,
         "riesgo_concentracion": "alto"
       },
       {
-        "familia": "MAGIC8 LITE 512GB",
+        "familia": "X6D 256GB",
         "n_vendedores_distintos": 1,
         "n_retailers_distintos": 1,
         "riesgo_concentracion": "alto"
       },
       {
-        "familia": "X5C 128GB",
+        "familia": "X7E PLUS",
+        "n_vendedores_distintos": 1,
+        "n_retailers_distintos": 1,
+        "riesgo_concentracion": "alto"
+      },
+      {
+        "familia": "X6D",
+        "n_vendedores_distintos": 1,
+        "n_retailers_distintos": 1,
+        "riesgo_concentracion": "alto"
+      },
+      {
+        "familia": "600 SMART",
+        "n_vendedores_distintos": 1,
+        "n_retailers_distintos": 1,
+        "riesgo_concentracion": "alto"
+      },
+      {
+        "familia": "X5D",
+        "n_vendedores_distintos": 1,
+        "n_retailers_distintos": 1,
+        "riesgo_concentracion": "alto"
+      },
+      {
+        "familia": "600 PRO 512GB",
+        "n_vendedores_distintos": 1,
+        "n_retailers_distintos": 1,
+        "riesgo_concentracion": "alto"
+      },
+      {
+        "familia": "MAGIC 8 LITE",
+        "n_vendedores_distintos": 1,
+        "n_retailers_distintos": 1,
+        "riesgo_concentracion": "alto"
+      },
+      {
+        "familia": "MAGIC 8 PRO",
+        "n_vendedores_distintos": 1,
+        "n_retailers_distintos": 1,
+        "riesgo_concentracion": "alto"
+      },
+      {
+        "familia": "X8D",
+        "n_vendedores_distintos": 1,
+        "n_retailers_distintos": 1,
+        "riesgo_concentracion": "alto"
+      },
+      {
+        "familia": "600E",
+        "n_vendedores_distintos": 1,
+        "n_retailers_distintos": 1,
+        "riesgo_concentracion": "alto"
+      },
+      {
+        "familia": "MAGIC8 LITE",
         "n_vendedores_distintos": 1,
         "n_retailers_distintos": 1,
         "riesgo_concentracion": "alto"
@@ -1120,13 +1870,25 @@
         "riesgo_concentracion": "medio"
       },
       {
-        "familia": "400 LITE 256GB",
+        "familia": "600 PRO",
+        "n_vendedores_distintos": 2,
+        "n_retailers_distintos": 2,
+        "riesgo_concentracion": "medio"
+      },
+      {
+        "familia": "600",
         "n_vendedores_distintos": 2,
         "n_retailers_distintos": 2,
         "riesgo_concentracion": "medio"
       },
       {
         "familia": "X5C PLUS 256GB",
+        "n_vendedores_distintos": 3,
+        "n_retailers_distintos": 3,
+        "riesgo_concentracion": "bajo"
+      },
+      {
+        "familia": "400 LITE 256GB",
         "n_vendedores_distintos": 3,
         "n_retailers_distintos": 3,
         "riesgo_concentracion": "bajo"
@@ -1139,49 +1901,61 @@
       },
       {
         "familia": "600 512GB",
-        "n_vendedores_distintos": 3,
-        "n_retailers_distintos": 2,
-        "riesgo_concentracion": "bajo"
-      },
-      {
-        "familia": "600E 512GB",
-        "n_vendedores_distintos": 3,
-        "n_retailers_distintos": 2,
+        "n_vendedores_distintos": 4,
+        "n_retailers_distintos": 3,
         "riesgo_concentracion": "bajo"
       },
       {
         "familia": "X8D 256GB",
-        "n_vendedores_distintos": 3,
-        "n_retailers_distintos": 2,
+        "n_vendedores_distintos": 4,
+        "n_retailers_distintos": 3,
+        "riesgo_concentracion": "bajo"
+      },
+      {
+        "familia": "600E 512GB",
+        "n_vendedores_distintos": 5,
+        "n_retailers_distintos": 4,
         "riesgo_concentracion": "bajo"
       }
     ],
-    "familias_riesgo_alto": 10,
-    "total_familias_evaluadas": 17,
+    "familias_riesgo_alto": 23,
+    "total_familias_evaluadas": 32,
     "dispersion_por_segmento": [
       {
         "segmento": "Hasta S/600",
-        "n_familias": 4,
-        "spread_promedio_pct": 7.8,
-        "spread_max_pct": 26.4
+        "n_familias": 5,
+        "spread_promedio_pct": 11.6,
+        "spread_max_pct": 29.2
       },
       {
         "segmento": "S/600 - S/1,000",
-        "n_familias": 3,
-        "spread_promedio_pct": 0.0,
-        "spread_max_pct": 0.0
+        "n_familias": 6,
+        "spread_promedio_pct": 1.1,
+        "spread_max_pct": 6.7
       },
       {
         "segmento": "S/1,000 - S/1,500",
-        "n_familias": 1,
-        "spread_promedio_pct": 0.0,
-        "spread_max_pct": 0.0
+        "n_familias": 3,
+        "spread_promedio_pct": 5.0,
+        "spread_max_pct": 15.0
       },
       {
         "segmento": "S/1,500 - S/2,500",
-        "n_familias": 6,
-        "spread_promedio_pct": 1.6,
-        "spread_max_pct": 5.5
+        "n_familias": 12,
+        "spread_promedio_pct": 5.8,
+        "spread_max_pct": 36.5
+      },
+      {
+        "segmento": "S/2,500 - S/4,000",
+        "n_familias": 1,
+        "spread_promedio_pct": 21.8,
+        "spread_max_pct": 21.8
+      },
+      {
+        "segmento": "Más de S/4,000",
+        "n_familias": 2,
+        "spread_promedio_pct": 0.0,
+        "spread_max_pct": 0.0
       }
     ]
   },
@@ -1189,58 +1963,106 @@
     {
       "tipo": "dispersion_interna",
       "severidad": "alta",
-      "evidencia": "X5C PLUS 256GB: precio de S/459 en Wong (WongIO) hasta S/580 en Carsa (Perú smart) -- 3 ofertas activas.",
-      "interpretacion": "Dispersión de 26.4% para el mismo SKU. El precio en Carsa está 26.4% por encima del más barato del mercado.",
+      "evidencia": "600: precio de S/2299 en HONOR Perú (tienda oficial) (HONOR Perú (tienda oficial)) hasta S/3139 en Claro (Tienda Claro) -- 5 ofertas activas.",
+      "interpretacion": "Dispersión de 36.5% para el mismo SKU. El precio en Claro está 36.5% por encima del más barato del mercado.",
+      "accion": "Revisar la estrategia de precio de 600 en Claro (Tienda Claro) frente al resto del canal.",
+      "confianza": "alta"
+    },
+    {
+      "tipo": "dispersion_interna",
+      "severidad": "alta",
+      "evidencia": "X5D: precio de S/479 en Claro (Tienda Claro) hasta S/619 en Claro (Tienda Claro) -- 2 ofertas activas.",
+      "interpretacion": "Dispersión de 29.2% para el mismo SKU. El precio en Claro está 29.2% por encima del más barato del mercado.",
+      "accion": "Revisar la estrategia de precio de X5D en Claro (Tienda Claro) frente al resto del canal.",
+      "confianza": "alta"
+    },
+    {
+      "tipo": "dispersion_interna",
+      "severidad": "alta",
+      "evidencia": "X5C PLUS 256GB: precio de S/459 en Metro (wongiononfood) hasta S/569 en Carsa (Perú smart) -- 3 ofertas activas.",
+      "interpretacion": "Dispersión de 24.0% para el mismo SKU. El precio en Carsa está 24.0% por encima del más barato del mercado.",
       "accion": "Revisar la estrategia de precio de X5C PLUS 256GB en Carsa (Perú smart) frente al resto del canal.",
+      "confianza": "alta"
+    },
+    {
+      "tipo": "dispersion_interna",
+      "severidad": "alta",
+      "evidencia": "600E 512GB: precio de S/1750 en Entel (Entel) hasta S/2149 en Claro (Tienda Claro) -- 7 ofertas activas.",
+      "interpretacion": "Dispersión de 22.8% para el mismo SKU. El precio en Claro está 22.8% por encima del más barato del mercado.",
+      "accion": "Revisar la estrategia de precio de 600E 512GB en Claro (Tienda Claro) frente al resto del canal.",
+      "confianza": "alta"
+    },
+    {
+      "tipo": "dispersion_interna",
+      "severidad": "alta",
+      "evidencia": "600 PRO: precio de S/3399 en HONOR Perú (tienda oficial) (HONOR Perú (tienda oficial)) hasta S/4139 en Claro (Tienda Claro) -- 3 ofertas activas.",
+      "interpretacion": "Dispersión de 21.8% para el mismo SKU. El precio en Claro está 21.8% por encima del más barato del mercado.",
+      "accion": "Revisar la estrategia de precio de 600 PRO en Claro (Tienda Claro) frente al resto del canal.",
       "confianza": "alta"
     },
     {
       "tipo": "vs_competencia",
       "severidad": "media",
-      "evidencia": "Segmento S/1,000 - S/1,500: Honor más barato es 400 LITE 256GB (S/1399 en Wong); MOTOROLA más barato es S/1049 en Metro.",
-      "interpretacion": "Honor está 33.4% más caro que MOTOROLA en el segmento S/1,000 - S/1,500.",
-      "accion": "Evaluar ajuste de precio o refuerzo de argumento de valor de 400 LITE 256GB en S/1,000 - S/1,500.",
+      "evidencia": "Segmento S/2,500 - S/4,000: Honor más barato es 600 (S/3139 en Claro); XIAOMI más barato es S/2590 en Entel.",
+      "interpretacion": "Honor está 21.2% más caro que XIAOMI en el segmento S/2,500 - S/4,000.",
+      "accion": "Evaluar ajuste de precio o refuerzo de argumento de valor de 600 en S/2,500 - S/4,000.",
       "confianza": "media"
     },
     {
       "tipo": "vs_competencia",
       "severidad": "media",
-      "evidencia": "Segmento S/2,500 - S/4,000: Honor más barato es OTRO: 6942785100480 (S/3169 en Carsa); XIAOMI más barato es S/2799 en Metro.",
-      "interpretacion": "Honor está 13.2% más caro que XIAOMI en el segmento S/2,500 - S/4,000.",
-      "accion": "Evaluar ajuste de precio o refuerzo de argumento de valor de OTRO: 6942785100480 en S/2,500 - S/4,000.",
+      "evidencia": "Segmento S/1,000 - S/1,500: Honor más barato es X7E PLUS (S/1189 en Claro); MOTOROLA más barato es S/1049 en Metro.",
+      "interpretacion": "Honor está 13.3% más caro que MOTOROLA en el segmento S/1,000 - S/1,500.",
+      "accion": "Evaluar ajuste de precio o refuerzo de argumento de valor de X7E PLUS en S/1,000 - S/1,500.",
       "confianza": "media"
     },
     {
       "tipo": "vs_competencia",
       "severidad": "media",
-      "evidencia": "Segmento S/600 - S/1,000: Honor más barato es OTRO: 6936520881239 (S/749 en Carsa); XIAOMI más barato es S/676 en Carsa.",
-      "interpretacion": "Honor está 10.8% más caro que XIAOMI en el segmento S/600 - S/1,000.",
-      "accion": "Evaluar ajuste de precio o refuerzo de argumento de valor de OTRO: 6936520881239 en S/600 - S/1,000.",
+      "evidencia": "Segmento Hasta S/600: Honor más barato es PLAY 10 128GB (S/440 en Carsa); MOTOROLA más barato es S/399 en Motorola Perú.",
+      "interpretacion": "Honor está 10.3% más caro que MOTOROLA en el segmento Hasta S/600.",
+      "accion": "Evaluar ajuste de precio o refuerzo de argumento de valor de PLAY 10 128GB en Hasta S/600.",
       "confianza": "media"
     },
     {
       "tipo": "vs_competencia_wearables",
       "severidad": "media",
-      "evidencia": "Wearables: Honor más barato es CHOICE WATCH 2I (S/139 en Wong); XIAOMI más barato es S/229 en Carsa.",
+      "evidencia": "Wearables: Honor más barato es CHOICE WATCH 2I (S/139 en Metro); XIAOMI más barato es S/229 en Carsa.",
       "interpretacion": "El Honor CHOICE WATCH 2I más barato está 39.3% por debajo del XIAOMI más barato en wearables -- posible espacio para subir precio.",
       "accion": "Evaluar si CHOICE WATCH 2I tiene margen para subir precio en wearables.",
       "confianza": "media"
     },
     {
+      "tipo": "vendedor_sobreprecio",
+      "severidad": "media",
+      "evidencia": "Tienda Claro vende 24 SKUs Honor a un precio 10.7% por encima del mínimo de mercado, en promedio.",
+      "interpretacion": "Tienda Claro es sistemáticamente el más caro del canal en los productos Honor que vende, no un caso aislado.",
+      "accion": "Evaluar si Tienda Claro necesita ajuste de precio o si compite en otro factor (servicio, stock, ubicación) que justifique el sobreprecio.",
+      "confianza": "alta"
+    },
+    {
       "tipo": "vendedor_agresivo",
       "severidad": "media",
-      "evidencia": "WongIO vende 16 SKUs Honor a un promedio de solo 0.0% sobre el mínimo de mercado.",
-      "interpretacion": "WongIO es el vendedor de referencia de precio bajo para Honor -- probablemente ancla la percepción de precio del canal.",
-      "accion": "Monitorear a WongIO de cerca: cualquier ajuste ahí arrastra la percepción de precio de todo el canal.",
+      "evidencia": "HONOR Perú (tienda oficial) vende 5 SKUs Honor a un promedio de solo 0.0% sobre el mínimo de mercado.",
+      "interpretacion": "HONOR Perú (tienda oficial) es el vendedor de referencia de precio bajo para Honor -- probablemente ancla la percepción de precio del canal.",
+      "accion": "Monitorear a HONOR Perú (tienda oficial) de cerca: cualquier ajuste ahí arrastra la percepción de precio de todo el canal.",
       "confianza": "media"
     },
     {
       "tipo": "concentracion_riesgo",
       "severidad": "alta",
-      "evidencia": "10 de 17 familias Honor (59%) dependen de un solo vendedor en todo el canal capturado.",
+      "evidencia": "23 de 32 familias Honor (72%) dependen de un solo vendedor en todo el canal capturado.",
       "interpretacion": "Si ese vendedor sube precio, se queda sin stock o deja de listar el producto, no hay alternativa visible en el resto del canal.",
       "accion": "Priorizar que esas familias también estén disponibles con al menos un vendedor más (propio del retailer o marketplace).",
       "confianza": "alta"
+    },
+    {
+      "tipo": "volatilidad_segmento",
+      "severidad": "media",
+      "evidencia": "El segmento S/2,500 - S/4,000 tiene una dispersión promedio de 21.8% entre vendedores, la más alta de todos los segmentos (1 familias Honor evaluadas).",
+      "interpretacion": "El precio de Honor en esa franja es el menos disciplinado del catálogo -- más margen de maniobra, pero también más riesgo de que un vendedor rompa precio.",
+      "accion": "Si hay política de precio mínimo (PVP), reforzarla primero en S/2,500 - S/4,000.",
+      "confianza": "media"
     }
   ]
 }

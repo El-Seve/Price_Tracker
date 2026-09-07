@@ -56,7 +56,7 @@ FAMILIAS_AUDIO_HONOR = [
 # Marcas que, si aparecen en el nombre, casi seguro indican un error de
 # etiquetado del retailer (venía como "marca": "HONOR" pero el producto real
 # es de otra marca -- típico en bundles/gift-with-purchase mal armados).
-_OTRAS_MARCAS = ["SAMSUNG", "XIAOMI", "OPPO", "APPLE", "IPHONE", "MOTOROLA", "REDMI", "POCO", "VIVO", "ZTE"]
+_OTRAS_MARCAS = ["SAMSUNG", "XIAOMI", "OPPO", "APPLE", "IPHONE", "MOTOROLA", "REDMI", "POCO", "VIVO", "ZTE", "HUAWEI"]
 
 # Palabras que identifican el TIPO de producto por las primeras palabras del
 # nombre (ver _primeras_palabras) -- no todo lo que suena a "accesorio" se
