@@ -1,12 +1,12 @@
 {
-  "generado": "2026-09-08T11:13:03",
+  "generado": "2026-09-08T12:56:44",
   "fecha_captura": "2026-09-08",
   "resumen": {
-    "total_ofertas_honor_hoy": 1125,
+    "total_ofertas_honor_hoy": 1134,
     "ofertas_por_tipo": {
-      "Smartphone": 1061,
+      "Smartphone": 1069,
       "Tablet": 38,
-      "Audio": 12,
+      "Audio": 13,
       "Wearable": 14
     },
     "familias_honor_detectadas": 71,
@@ -22,13 +22,13 @@
     "detalle": [
       {
         "retailer": "PlazaVea",
-        "filas": 2258,
+        "filas": 2290,
         "filas_honor": 399,
         "ok": true
       },
       {
         "retailer": "Promart",
-        "filas": 2035,
+        "filas": 2048,
         "filas_honor": 362,
         "ok": true
       },
@@ -40,8 +40,8 @@
       },
       {
         "retailer": "Falabella",
-        "filas": 1120,
-        "filas_honor": 80,
+        "filas": 1235,
+        "filas_honor": 87,
         "ok": true
       },
       {
@@ -58,7 +58,7 @@
       },
       {
         "retailer": "Coolbox",
-        "filas": 413,
+        "filas": 415,
         "filas_honor": 45,
         "ok": true
       },
@@ -100,13 +100,19 @@
       },
       {
         "retailer": "Oechsle",
-        "filas": 328,
+        "filas": 341,
         "filas_honor": 11,
         "ok": true
       },
       {
+        "retailer": "Sodimac",
+        "filas": 112,
+        "filas_honor": 9,
+        "ok": true
+      },
+      {
         "retailer": "Entel",
-        "filas": 42,
+        "filas": 43,
         "filas_honor": 8,
         "ok": true
       },
@@ -114,12 +120,6 @@
         "retailer": "HONOR Perú (tienda oficial)",
         "filas": 7,
         "filas_honor": 7,
-        "ok": true
-      },
-      {
-        "retailer": "Sodimac",
-        "filas": 93,
-        "filas_honor": 6,
         "ok": true
       },
       {
@@ -2542,7 +2542,7 @@
     {
       "familia": "X5D 128GB",
       "tipo": "Smartphone",
-      "n_ofertas": 67,
+      "n_ofertas": 69,
       "precio_min": 399.0,
       "precio_max": 720.0,
       "spread_pct": 80.5,
@@ -2829,6 +2829,14 @@
           "url": "https://www.plazavea.com.pe/honor-x5d-128gb-4ram-silver-102202087/p"
         },
         {
+          "retailer": "Falabella",
+          "vendedor": "Coolbox",
+          "vendedor_tercero": true,
+          "precio": 469.0,
+          "modelo": "Celular X5D 128GB, 4GB RAM, cámara trasera 50MP y frontal 5MP, 6.74\", plata",
+          "url": "https://www.falabella.com.pe/falabella-pe/product/157156720/celular-honor-x5d-128gb-4gb-ram-camara-trasera-50mp-y-frontal-5mp-6-74-plata"
+        },
+        {
           "retailer": "PlazaVea",
           "vendedor": "D´TEEC-TECNOLOGÍA ELECTRO",
           "vendedor_tercero": true,
@@ -3019,6 +3027,14 @@
           "precio": 629.0,
           "modelo": "Celular Honor X5D 128GB, 4GB RAM, cámara trasera 50MP y frontal 5MP, 6.74\", azul",
           "url": "https://www.coolbox.pe/celular-honor-x5d-128gb-4gb-ram-5109cgpc/p"
+        },
+        {
+          "retailer": "Falabella",
+          "vendedor": "Coolbox",
+          "vendedor_tercero": true,
+          "precio": 629.0,
+          "modelo": "Celular X5D 128GB, 4GB RAM, cámara trasera 50MP y frontal 5MP, 6.74\", azul",
+          "url": "https://www.falabella.com.pe/falabella-pe/product/157156722/celular-honor-x5d-128gb-4gb-ram-camara-trasera-50mp-y-frontal-5mp-6-74-azul"
         },
         {
           "retailer": "La Curacao",
@@ -3599,7 +3615,7 @@
     {
       "familia": "400 LITE 256GB",
       "tipo": "Smartphone",
-      "n_ofertas": 5,
+      "n_ofertas": 6,
       "precio_min": 1269.0,
       "precio_max": 2100.0,
       "spread_pct": 65.5,
@@ -3644,6 +3660,14 @@
           "precio": 2100.0,
           "modelo": "400 LITE 12RAM 256GB",
           "url": "https://www.falabella.com.pe/falabella-pe/product/151669446/honor-400-lite-12ram-256gb"
+        },
+        {
+          "retailer": "Sodimac",
+          "vendedor": "Rrj Electronics Sac",
+          "vendedor_tercero": true,
+          "precio": 2100.0,
+          "modelo": "HONOR 400 LITE 12RAM 256GB",
+          "url": "https://www.sodimac.com.pe/sodimac-pe/articulo/151669446/honor-400-lite-12ram-256gb?exp=so_com"
         }
       ]
     },
@@ -3717,7 +3741,7 @@
     {
       "familia": "MAGIC 8 LITE 512GB",
       "tipo": "Smartphone",
-      "n_ofertas": 81,
+      "n_ofertas": 83,
       "precio_min": 1449.0,
       "precio_max": 2299.0,
       "spread_pct": 58.7,
@@ -3962,6 +3986,14 @@
           "precio": 1619.0,
           "modelo": "Celular Honor MAGIC 8 LITE 5G 8GB 512GB Negro",
           "url": "https://www.promart.pe/celular-honor-magic-8-lite-5g-8gb-512gb-negro-1001571183/p"
+        },
+        {
+          "retailer": "Falabella",
+          "vendedor": "Coolbox",
+          "vendedor_tercero": true,
+          "precio": 1649.0,
+          "modelo": "Celular Magic 8 Lite 5G 512GB 8GB RAM negro medianoche",
+          "url": "https://www.falabella.com.pe/falabella-pe/product/157402117/celular-honor-magic-8-lite-5g-512gb-8gb-ram-negro-medianoche"
         },
         {
           "retailer": "PlazaVea",
@@ -4370,6 +4402,14 @@
           "precio": 2299.0,
           "modelo": "Magic 8 Lite 512GB 8GB RAM – Smartphone 5G con Pantalla AMOLED 120Hz y Cámara 108MP",
           "url": "https://www.falabella.com.pe/falabella-pe/product/152123016/honor-magic-8-lite-512gb-8gb-ram-smartphone-5g-con-pantalla-amoled-120hz-y-camara-108mp"
+        },
+        {
+          "retailer": "Falabella",
+          "vendedor": "Que Tal Compra Del Peru",
+          "vendedor_tercero": true,
+          "precio": 2299.0,
+          "modelo": "Smartphone Magic 8 Lite 512GB 8GB RAM – 5G con Pantalla AMOLED 120Hz y Cámara 108MP",
+          "url": "https://www.falabella.com.pe/falabella-pe/product/152122913/honor-magic-8-lite-512gb-8gb-ram-smartphone-5g-con-pantalla-amoled-120hz-y-camara-108mp"
         }
       ]
     },
@@ -5412,7 +5452,7 @@
     {
       "familia": "X8D 256GB",
       "tipo": "Smartphone",
-      "n_ofertas": 78,
+      "n_ofertas": 79,
       "precio_min": 889.0,
       "precio_max": 1299.0,
       "spread_pct": 46.1,
@@ -6041,6 +6081,14 @@
           "precio": 1299.0,
           "modelo": "CELULAR X8D 8RAM 256GB AZUL",
           "url": "https://www.falabella.com.pe/falabella-pe/product/153512351/celular-honor-x8d-8ram-256gb-azul"
+        },
+        {
+          "retailer": "Sodimac",
+          "vendedor": "Rrj Electronics Sac",
+          "vendedor_tercero": true,
+          "precio": 1299.0,
+          "modelo": "CELULAR HONOR X8D 8RAM 256GB NEGRO",
+          "url": "https://www.sodimac.com.pe/sodimac-pe/articulo/153509665/celular-honor-x8d-8ram-256gb-negro?exp=so_com"
         }
       ]
     },
@@ -6381,7 +6429,7 @@
     {
       "familia": "X6E 256GB",
       "tipo": "Smartphone",
-      "n_ofertas": 25,
+      "n_ofertas": 26,
       "precio_min": 639.0,
       "precio_max": 899.0,
       "spread_pct": 40.7,
@@ -6394,6 +6442,14 @@
           "precio": 639.0,
           "modelo": "Celular X6e 4+256GB",
           "url": "https://www.falabella.com.pe/falabella-pe/product/155497397/celular-honor-x6e-4256gb"
+        },
+        {
+          "retailer": "Sodimac",
+          "vendedor": "Intx Store",
+          "vendedor_tercero": true,
+          "precio": 639.0,
+          "modelo": "Celular Honor X6e 4+256GB",
+          "url": "https://www.sodimac.com.pe/sodimac-pe/articulo/155497397/celular-honor-x6e-4256gb?exp=so_com"
         },
         {
           "retailer": "PlazaVea",
@@ -7100,7 +7156,7 @@
     {
       "familia": "600E 512GB",
       "tipo": "Smartphone",
-      "n_ofertas": 56,
+      "n_ofertas": 57,
       "precio_min": 1689.0,
       "precio_max": 2199.0,
       "spread_pct": 30.2,
@@ -7369,6 +7425,14 @@
           "precio": 1799.0,
           "modelo": "Celular Honor 600e 512GB 8GB Gold",
           "url": "https://www.efe.com.pe/600e-8gb-512gb-desert-gold-5109cgdq.html"
+        },
+        {
+          "retailer": "Falabella",
+          "vendedor": "Coolbox",
+          "vendedor_tercero": true,
+          "precio": 1849.0,
+          "modelo": "Celular 600E 512GB 8GB RAM gris + Choice 2i",
+          "url": "https://www.falabella.com.pe/falabella-pe/product/156871009/celular-honor-600e-512gb-8gb-ram-gris-honor-choice-2i"
         },
         {
           "retailer": "PlazaVea",
@@ -9938,7 +10002,7 @@
   "vs_competencia_tablet": {
     "tipo": "Tablet",
     "n_ofertas_honor": 38,
-    "n_ofertas_competencia": 1123,
+    "n_ofertas_competencia": 1165,
     "honor_mas_barato": {
       "familia": "PAD X7 128GB",
       "modelo": "Tabler Honor Pad X7 128gb Wi-fi",
@@ -9946,19 +10010,19 @@
       "precio": 449.0
     },
     "competidor_mas_barato": {
-      "marca": "SAMSUNG",
-      "modelo": "Tablet Samsung Galaxy Tab A11 8.7\" 64GB, 4GB RAM, cámara principal 8MP y frontal 5MP, 5100 mAh, MediaTek Helio G99, gris",
-      "retailer": "Coolbox",
-      "precio": 429.0
+      "marca": "XIAOMI",
+      "modelo": "REDMI Pad 2 Pro Keyboard",
+      "retailer": "Falabella",
+      "precio": 189.0
     },
-    "gap_pct": 4.7,
+    "gap_pct": 137.6,
     "honor_mas_caro_que_competencia": true,
-    "es_oportunidad": false
+    "es_oportunidad": true
   },
   "vs_competencia_wearable": {
     "tipo": "Wearable",
     "n_ofertas_honor": 14,
-    "n_ofertas_competencia": 162,
+    "n_ofertas_competencia": 171,
     "honor_mas_barato": {
       "familia": "CHOICE WATCH 2I",
       "modelo": "Smartwatch Honor Choice Watch 2i pantalla 1.85''/ AMOLED, resistente al agua 1 ATM IP68, batería 14 días, negro",
@@ -12743,9 +12807,9 @@
         {
           "fecha": "2026-09-08",
           "precio_min": 1449.0,
-          "precio_promedio": 1716.0,
+          "precio_promedio": 1723.0,
           "precio_max": 2299.0,
-          "n_ofertas": 81
+          "n_ofertas": 83
         }
       ],
       "X5D 128GB": [
@@ -12766,9 +12830,9 @@
         {
           "fecha": "2026-09-08",
           "precio_min": 399.0,
-          "precio_promedio": 510.0,
+          "precio_promedio": 511.0,
           "precio_max": 720.0,
-          "n_ofertas": 67
+          "n_ofertas": 69
         }
       ],
       "MAGIC 8 LITE 256GB": [
@@ -12973,9 +13037,9 @@
         {
           "fecha": "2026-09-08",
           "precio_min": 889.0,
-          "precio_promedio": 1017.0,
+          "precio_promedio": 1020.0,
           "precio_max": 1299.0,
-          "n_ofertas": 78
+          "n_ofertas": 79
         }
       ],
       "PLAY 10 64GB": [
@@ -13042,9 +13106,9 @@
         {
           "fecha": "2026-09-08",
           "precio_min": 639.0,
-          "precio_promedio": 776.0,
+          "precio_promedio": 771.0,
           "precio_max": 899.0,
-          "n_ofertas": 25
+          "n_ofertas": 26
         }
       ],
       "600 SMART 256GB": [
@@ -13203,9 +13267,9 @@
         {
           "fecha": "2026-09-08",
           "precio_min": 1689.0,
-          "precio_promedio": 1882.0,
+          "precio_promedio": 1881.0,
           "precio_max": 2199.0,
-          "n_ofertas": 56
+          "n_ofertas": 57
         }
       ],
       "MAGIC 8 PRO 512GB": [
@@ -13548,9 +13612,9 @@
         {
           "fecha": "2026-09-08",
           "precio_min": 1269.0,
-          "precio_promedio": 1529.0,
+          "precio_promedio": 1624.0,
           "precio_max": 2100.0,
-          "n_ofertas": 5
+          "n_ofertas": 6
         }
       ],
       "X7 128GB": [
@@ -14305,7 +14369,7 @@
         {
           "fecha": "2026-09-08",
           "honor_min": 49.0,
-          "competencia_min": 39.9
+          "competencia_min": 37.9
         }
       ],
       "S/600 - S/1,000": [
@@ -14657,29 +14721,6 @@
   "analisis_avanzado": {
     "vendedores_ranking": [
       {
-        "vendedor": "Rrj Electronics Sac",
-        "vendedor_tercero": true,
-        "n_ofertas": 6,
-        "sobreprecio_promedio_pct": 75.0,
-        "clasificacion": "premium/caro",
-        "ejemplo_mas_caro": {
-          "sobreprecio_pct": 128.93982808022923,
-          "familia": "PLAY 10 64GB",
-          "modelo": "CELULAR PLAY 10 3RAM 64GB",
-          "retailer": "Falabella",
-          "precio": 799.0,
-          "url": "https://www.falabella.com.pe/falabella-pe/product/151601387/celular-honor-play-10-3ram-64gb"
-        },
-        "ejemplo_mas_barato": {
-          "sobreprecio_pct": 46.11923509561305,
-          "familia": "X8D 256GB",
-          "modelo": "CELULAR X8D 8RAM 256GB NEGRO",
-          "retailer": "Falabella",
-          "precio": 1299.0,
-          "url": "https://www.falabella.com.pe/falabella-pe/product/153509665/celular-honor-x8d-8ram-256gb-negro"
-        }
-      },
-      {
         "vendedor": "La Curacao",
         "vendedor_tercero": false,
         "n_ofertas": 38,
@@ -14746,6 +14787,29 @@
           "retailer": "PlazaVea",
           "precio": 599.0,
           "url": "https://www.plazavea.com.pe/honor-x5c-4ram-y-64gb-negro-101729498/p"
+        }
+      },
+      {
+        "vendedor": "Rrj Electronics Sac",
+        "vendedor_tercero": true,
+        "n_ofertas": 8,
+        "sobreprecio_promedio_pct": 70.2,
+        "clasificacion": "premium/caro",
+        "ejemplo_mas_caro": {
+          "sobreprecio_pct": 128.93982808022923,
+          "familia": "PLAY 10 64GB",
+          "modelo": "CELULAR PLAY 10 3RAM 64GB",
+          "retailer": "Falabella",
+          "precio": 799.0,
+          "url": "https://www.falabella.com.pe/falabella-pe/product/151601387/celular-honor-play-10-3ram-64gb"
+        },
+        "ejemplo_mas_barato": {
+          "sobreprecio_pct": 46.11923509561305,
+          "familia": "X8D 256GB",
+          "modelo": "CELULAR X8D 8RAM 256GB NEGRO",
+          "retailer": "Falabella",
+          "precio": 1299.0,
+          "url": "https://www.falabella.com.pe/falabella-pe/product/153509665/celular-honor-x8d-8ram-256gb-negro"
         }
       },
       {
@@ -14820,8 +14884,8 @@
       {
         "vendedor": "Que Tal Compra Del Peru",
         "vendedor_tercero": true,
-        "n_ofertas": 9,
-        "sobreprecio_promedio_pct": 39.1,
+        "n_ofertas": 10,
+        "sobreprecio_promedio_pct": 41.1,
         "clasificacion": "premium/caro",
         "ejemplo_mas_caro": {
           "sobreprecio_pct": 62.93706293706294,
@@ -15183,6 +15247,29 @@
           "retailer": "Coolbox",
           "precio": 116.0,
           "url": "https://www.coolbox.pe/smartwatch-honor-choice-watch-2i-amd-5504acgp/p"
+        }
+      },
+      {
+        "vendedor": "Coolbox",
+        "vendedor_tercero": true,
+        "n_ofertas": 6,
+        "sobreprecio_promedio_pct": 19.3,
+        "clasificacion": "premium/caro",
+        "ejemplo_mas_caro": {
+          "sobreprecio_pct": 57.64411027568922,
+          "familia": "X5D 128GB",
+          "modelo": "Celular X5D 128GB, 4GB RAM, cámara trasera 50MP y frontal 5MP, 6.74\", azul",
+          "retailer": "Falabella",
+          "precio": 629.0,
+          "url": "https://www.falabella.com.pe/falabella-pe/product/157156722/celular-honor-x5d-128gb-4gb-ram-camara-trasera-50mp-y-frontal-5mp-6-74-azul"
+        },
+        "ejemplo_mas_barato": {
+          "sobreprecio_pct": 5.893909626719057,
+          "familia": "CHOICE X7E ACTIVE",
+          "modelo": "Audífonos bluetooth Choice x7E Active IP54 40h blanco",
+          "retailer": "Falabella",
+          "precio": 53.9,
+          "url": "https://www.falabella.com.pe/falabella-pe/product/155292682/audifonos-bluetooth-honor-choice-x7e-active-ip54-40h-blanco"
         }
       },
       {
@@ -15924,8 +16011,8 @@
       {
         "vendedor": "Intx Store",
         "vendedor_tercero": true,
-        "n_ofertas": 13,
-        "sobreprecio_promedio_pct": 5.7,
+        "n_ofertas": 14,
+        "sobreprecio_promedio_pct": 5.3,
         "clasificacion": "alineado al mercado",
         "ejemplo_mas_caro": {
           "sobreprecio_pct": 30.36576949620428,
@@ -16616,6 +16703,17 @@
         }
       },
       {
+        "familia": "400 LITE 256GB",
+        "n_vendedores_distintos": 4,
+        "n_retailers_distintos": 6,
+        "riesgo_concentracion": "bajo",
+        "ejemplo": {
+          "modelo": "CELULAR HONOR 400 LITE 12RAM 256GB NEGRO",
+          "retailer": "PlazaVea",
+          "url": "https://www.plazavea.com.pe/celular-honor-400-lite-12ram-256gb-negro-102075399/p"
+        }
+      },
+      {
         "familia": "MAGIC 7 LITE 512GB",
         "n_vendedores_distintos": 4,
         "n_retailers_distintos": 6,
@@ -16624,17 +16722,6 @@
           "modelo": "Honor Magic 7 Lite 512GB 8GB Jade Cyan",
           "retailer": "PlazaVea",
           "url": "https://www.plazavea.com.pe/honor-magic-7-lite-512gb-8gb-jade-cyan-101987895/p"
-        }
-      },
-      {
-        "familia": "400 LITE 256GB",
-        "n_vendedores_distintos": 4,
-        "n_retailers_distintos": 5,
-        "riesgo_concentracion": "bajo",
-        "ejemplo": {
-          "modelo": "CELULAR HONOR 400 LITE 12RAM 256GB NEGRO",
-          "retailer": "PlazaVea",
-          "url": "https://www.plazavea.com.pe/celular-honor-400-lite-12ram-256gb-negro-102075399/p"
         }
       },
       {
@@ -16783,7 +16870,7 @@
       {
         "familia": "X6E 256GB",
         "n_vendedores_distintos": 10,
-        "n_retailers_distintos": 9,
+        "n_retailers_distintos": 10,
         "riesgo_concentracion": "bajo",
         "ejemplo": {
           "modelo": "Celular HONOR X6e 4GB Ram 256GB Rom - Dorado",
@@ -16859,7 +16946,7 @@
       },
       {
         "familia": "600E 512GB",
-        "n_vendedores_distintos": 18,
+        "n_vendedores_distintos": 19,
         "n_retailers_distintos": 12,
         "riesgo_concentracion": "bajo",
         "ejemplo": {
@@ -16870,7 +16957,7 @@
       },
       {
         "familia": "X5D 128GB",
-        "n_vendedores_distintos": 23,
+        "n_vendedores_distintos": 24,
         "n_retailers_distintos": 10,
         "riesgo_concentracion": "bajo",
         "ejemplo": {
@@ -16902,25 +16989,25 @@
         }
       },
       {
-        "familia": "MAGIC 8 LITE 512GB",
+        "familia": "X8D 256GB",
         "n_vendedores_distintos": 25,
+        "n_retailers_distintos": 10,
+        "riesgo_concentracion": "bajo",
+        "ejemplo": {
+          "modelo": "HONOR X8d 8GB RAM - 256GB - GRIS",
+          "retailer": "PlazaVea",
+          "url": "https://www.plazavea.com.pe/honor-x8d-8gb-ram---256gb---gris-102266562/p"
+        }
+      },
+      {
+        "familia": "MAGIC 8 LITE 512GB",
+        "n_vendedores_distintos": 26,
         "n_retailers_distintos": 10,
         "riesgo_concentracion": "bajo",
         "ejemplo": {
           "modelo": "Smartphone HONOR Magic 8 Lite 6.78\" 8GB 512GB 108MP+5MP Dorado",
           "retailer": "PlazaVea",
           "url": "https://www.plazavea.com.pe/smartphone-honor-magic-8-lite-6-78--8gb-512gb-108mp5mp-dorado-20570180/p"
-        }
-      },
-      {
-        "familia": "X8D 256GB",
-        "n_vendedores_distintos": 25,
-        "n_retailers_distintos": 9,
-        "riesgo_concentracion": "bajo",
-        "ejemplo": {
-          "modelo": "HONOR X8d 8GB RAM - 256GB - GRIS",
-          "retailer": "PlazaVea",
-          "url": "https://www.plazavea.com.pe/honor-x8d-8gb-ram---256gb---gris-102266562/p"
         }
       },
       {
@@ -16983,12 +17070,12 @@
           "familia": "400 LITE 256GB",
           "spread_pct": 65.5,
           "ejemplo": {
-            "retailer": "Falabella",
+            "retailer": "Sodimac",
             "vendedor": "Rrj Electronics Sac",
             "vendedor_tercero": true,
             "precio": 2100.0,
-            "modelo": "400 LITE 12RAM 256GB",
-            "url": "https://www.falabella.com.pe/falabella-pe/product/151669446/honor-400-lite-12ram-256gb"
+            "modelo": "HONOR 400 LITE 12RAM 256GB",
+            "url": "https://www.sodimac.com.pe/sodimac-pe/articulo/151669446/honor-400-lite-12ram-256gb?exp=so_com"
           }
         }
       },
@@ -17130,14 +17217,22 @@
       "confianza": "alta"
     },
     {
+      "tipo": "vs_competencia_tablets",
+      "severidad": "media",
+      "evidencia": "Tablets: Honor más barato es PAD X7 128GB (S/449 en PlazaVea); XIAOMI más barato es S/189 en Falabella.",
+      "interpretacion": "El Honor PAD X7 128GB más barato está 137.6% por encima del XIAOMI más barato en tablets.",
+      "accion": "Evaluar precio de PAD X7 128GB frente a XIAOMI en tablets.",
+      "confianza": "media"
+    },
+    {
       "tipo": "vendedor_sobreprecio",
       "severidad": "alta",
-      "evidencia": "Rrj Electronics Sac vende 6 SKUs Honor a un precio 75.0% por encima del mínimo de mercado, en promedio.",
-      "interpretacion": "Rrj Electronics Sac es sistemáticamente el más caro del canal en los productos Honor que vende, no un caso aislado.",
-      "accion": "Evaluar si Rrj Electronics Sac necesita ajuste de precio o si compite en otro factor (servicio, stock, ubicación) que justifique el sobreprecio.",
+      "evidencia": "La Curacao vende 38 SKUs Honor a un precio 72.6% por encima del mínimo de mercado, en promedio.",
+      "interpretacion": "La Curacao es sistemáticamente el más caro del canal en los productos Honor que vende, no un caso aislado.",
+      "accion": "Evaluar si La Curacao necesita ajuste de precio o si compite en otro factor (servicio, stock, ubicación) que justifique el sobreprecio.",
       "confianza": "alta",
-      "evidencia_url": "https://www.falabella.com.pe/falabella-pe/product/151601387/celular-honor-play-10-3ram-64gb",
-      "evidencia_url_texto": "Ver ejemplo: PLAY 10 64GB a S/799 en Falabella (+129% vs. mínimo)"
+      "evidencia_url": "https://www.lacuracao.pe/honor-600e-256gb-8-verde-earbuds-honor-600e-256-8ve.html",
+      "evidencia_url_texto": "Ver ejemplo: 600E 256GB a S/9999 en La Curacao (+546% vs. mínimo)"
     },
     {
       "tipo": "vendedor_agresivo",
