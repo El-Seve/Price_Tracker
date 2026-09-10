@@ -357,10 +357,16 @@ footer { text-align: center; padding: var(--space-8) var(--space-4); color: var(
       <p class="section-title" style="margin:0;">Productos Honor vendidos por Sany, vs. el resto del mercado</p>
       <div class="datos-al">Datos al: <strong id="sany-fecha">—</strong></div>
     </div>
+    <div class="filters" id="sany-filtros-tipo">
+      <button class="filtro-sany-tipo" data-tipo="" aria-pressed="true">Todos</button>
+      <button class="filtro-sany-tipo" data-tipo="Smartphone" aria-pressed="false">Smartphones</button>
+      <button class="filtro-sany-tipo" data-tipo="Tablet" aria-pressed="false">Tablets</button>
+      <button class="filtro-sany-tipo" data-tipo="Accesorio" aria-pressed="false">Accesorios</button>
+    </div>
     <div class="section-toolbar">
       <button class="btn-export" id="sany-export-btn" type="button">Exportar CSV para acción inmediata</button>
     </div>
-    <div class="table-wrap">
+    <div class="table-wrap" style="margin-bottom: var(--space-8)">
       <table>
         <thead><tr>
           <th>Familia</th><th>Retailer</th><th class="num">Precio Sany</th>
@@ -368,6 +374,29 @@ footer { text-align: center; padding: var(--space-8) var(--space-4); color: var(
         </tr></thead>
         <tbody id="sany-body"></tbody>
       </table>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-head">
+        <span class="chart-title">Tendencia de precio Sany por familia</span>
+        <select class="chart-select" id="sany-familia-select" aria-label="Elegir familia Honor vendida por Sany"></select>
+      </div>
+      <div class="filters" style="margin-bottom: var(--space-3)">
+        <label style="font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:6px;">
+          Desde
+          <input type="date" id="sany-fecha-desde" class="chart-select" style="min-height:36px;" aria-label="Fecha de inicio del rango">
+        </label>
+        <label style="font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:6px;">
+          Hasta
+          <input type="date" id="sany-fecha-hasta" class="chart-select" style="min-height:36px;" aria-label="Fecha de fin del rango">
+        </label>
+      </div>
+      <div class="chart-legend">
+        <span><i class="legend-dot" style="background:var(--is-sky)"></i> Mínimo</span>
+        <span><i class="legend-dot" style="background:var(--is-graphite)"></i> Promedio</span>
+        <span><i class="legend-dot" style="background:var(--is-terracotta)"></i> Máximo</span>
+      </div>
+      <div class="chart-svg-wrap" id="sany-chart-tendencia"></div>
     </div>
   </section>
 
@@ -624,8 +653,17 @@ function renderExplorador(d) {
   });
 }
 
+/* Wearable/Audio/Accesorio se agrupan como "Accesorio" para el filtro de
+   Sany -- no vale la pena separar audífonos de smartwatches ahí, solo
+   distinguirlos de celulares/tablets (mismo criterio que el backend). */
+function sanyBucketTipo(tipo) {
+  return (tipo === 'Smartphone' || tipo === 'Tablet') ? tipo : 'Accesorio';
+}
+
+let sanyFiltroTipo = '';
 function renderSany(d) {
   const s = d.sany;
+  const productosFiltrados = s.productos.filter(p => !sanyFiltroTipo || sanyBucketTipo(p.tipo) === sanyFiltroTipo);
   const masCaros = s.productos.filter(p => p.diferencia_pct != null && p.diferencia_pct > 0).length;
   const masBaratos = s.productos.filter(p => p.sany_es_mas_barato).length;
   document.getElementById('sany-kpi-grid').innerHTML = [
@@ -636,11 +674,16 @@ function renderSany(d) {
 
   document.getElementById('sany-fecha').textContent = d.fecha_captura || '—';
 
-  document.getElementById('sany-body').innerHTML = s.productos.map(p => `
+  document.getElementById('sany-body').innerHTML = productosFiltrados.map(p => `
     <tr>
       <td>${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.familia)}</a>` : esc(p.familia)}</td>
       <td>${esc(p.retailer)}</td>
-      <td class="num">${fmtMoney(p.precio_sany)}</td>
+      <td class="num">
+        ${fmtMoney(p.precio_sany)}<br>
+        ${p.en_promocion
+          ? `<span class="pill pill-warn">En promoción</span> <span style="text-decoration:line-through;color:var(--text-muted);font-size:11px;">${fmtMoney(p.precio_regular_sany)}</span>`
+          : `<span class="pill pill-neutral">Precio regular</span>`}
+      </td>
       <td class="num">${fmtMoney(p.precio_min_resto_mercado)}</td>
       <td class="num">
         <span class="pill ${p.sany_es_mas_barato ? 'pill-ok' : (p.diferencia_pct > 5 ? 'pill-risk' : 'pill-neutral')}">
@@ -648,21 +691,84 @@ function renderSany(d) {
         </span>
       </td>
     </tr>
-  `).join('') || '<tr><td colspan="5" class="empty-state">Sany no aparece en la captura de hoy.</td></tr>';
+  `).join('') || `<tr><td colspan="5" class="empty-state">${s.total_productos ? 'Sin productos Sany para este filtro.' : 'Sany no aparece en la captura de hoy.'}</td></tr>`;
 
   const btnExport = document.getElementById('sany-export-btn');
-  btnExport.disabled = !s.productos.length;
-  btnExport.onclick = () => exportSanyCSV(s.productos, d.fecha_captura);
+  btnExport.disabled = !productosFiltrados.length;
+  btnExport.onclick = () => exportSanyCSV(productosFiltrados, d.fecha_captura);
+
+  renderSanyTendencia(s);
+}
+
+document.querySelectorAll('.filtro-sany-tipo').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    sanyFiltroTipo = e.currentTarget.dataset.tipo;
+    document.querySelectorAll('.filtro-sany-tipo').forEach(b =>
+      b.setAttribute('aria-pressed', b === e.currentTarget ? 'true' : 'false')
+    );
+    if (DATA) renderSany(DATA);
+  });
+});
+
+/* Tendencia de precio de Sany por familia, con selector de familia y rango
+   de fechas (desde/hasta) -- reutiliza el mismo motor de gráfico de línea
+   que la pestaña Tendencia, pero filtrado a las fechas elegidas. */
+function renderSanyTendencia(s) {
+  const historial = s.historial || {};
+  const familias = Object.keys(historial).sort((a, b) => historial[b].length - historial[a].length || a.localeCompare(b));
+  const familiaSelect = document.getElementById('sany-familia-select');
+  const desdeInput = document.getElementById('sany-fecha-desde');
+  const hastaInput = document.getElementById('sany-fecha-hasta');
+
+  if (!familias.length) {
+    familiaSelect.innerHTML = '';
+    document.getElementById('sany-chart-tendencia').innerHTML =
+      '<div class="empty-state">Sin historial de precio Sany todavía -- se arma solo con cada corrida diaria nueva.</div>';
+    return;
+  }
+
+  const familiaPrevia = familiaSelect.value;
+  familiaSelect.innerHTML = familias.map(f => `<option value="${esc(f)}">${esc(f)}</option>`).join('');
+  familiaSelect.value = familias.includes(familiaPrevia) ? familiaPrevia : familias[0];
+
+  // Rango disponible de fechas (todas las familias juntas), para poner
+  // límites razonables en los calendarios sin que Seve tenga que adivinar
+  // qué fechas hay datos.
+  const todasFechas = [...new Set(Object.values(historial).flat().map(p => p.fecha))].sort();
+  const minFecha = todasFechas[0], maxFecha = todasFechas[todasFechas.length - 1];
+  [desdeInput, hastaInput].forEach(inp => { inp.min = minFecha; inp.max = maxFecha; });
+  if (!desdeInput.value) desdeInput.value = minFecha;
+  if (!hastaInput.value) hastaInput.value = maxFecha;
+
+  function draw() {
+    const familia = familiaSelect.value;
+    const desde = desdeInput.value || minFecha;
+    const hasta = hastaInput.value || maxFecha;
+    const puntos = (historial[familia] || []).filter(p => p.fecha >= desde && p.fecha <= hasta);
+    const fechasFam = puntos.map(p => p.fecha);
+    svgLineChart(document.getElementById('sany-chart-tendencia'), fechasFam, [
+      { values: puntos.map(p => p.precio_min), color: 'var(--is-sky)' },
+      { values: puntos.map(p => p.precio_promedio), color: 'var(--is-graphite)' },
+      { values: puntos.map(p => p.precio_max), color: 'var(--is-terracotta)' },
+    ], { ariaLabel: `Evolución de precio de Sany en ${familia}, del ${desde} al ${hasta}` });
+  }
+
+  familiaSelect.onchange = draw;
+  desdeInput.onchange = draw;
+  hastaInput.onchange = draw;
+  draw();
 }
 
 /* Exporta la tabla de Sany a CSV, para que Seve pueda pasarla directo a
    quien tenga que actuar (negociación de precio, alerta al canal) sin
    tener que copiar la tabla a mano desde el dashboard. */
 function exportSanyCSV(productos, fecha) {
-  const encabezados = ['Familia', 'Modelo', 'Retailer', 'Precio Sany', 'Mínimo mercado', 'Diferencia %', 'URL'];
+  const encabezados = ['Familia', 'Modelo', 'Retailer', 'Tipo', 'Precio Sany', 'Tipo de precio', 'Precio regular Sany', 'Mínimo mercado', 'Diferencia %', 'URL'];
   const filas = productos.map(p => [
-    p.familia, p.modelo, p.retailer,
+    p.familia, p.modelo, p.retailer, p.tipo,
     p.precio_sany != null ? p.precio_sany.toFixed(2) : '',
+    p.en_promocion ? 'Promoción' : 'Regular',
+    p.precio_regular_sany != null ? p.precio_regular_sany.toFixed(2) : '',
     p.precio_min_resto_mercado != null ? p.precio_min_resto_mercado.toFixed(2) : '',
     p.diferencia_pct != null ? p.diferencia_pct : '',
     p.url || '',

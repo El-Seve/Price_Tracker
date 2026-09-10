@@ -257,6 +257,13 @@ def _vs_competencia_por_tipo(filas_honor: list[dict], filas_competencia: list[di
     }
 
 
+def _bucket_tipo(tipo: str) -> str:
+    """Agrupa Wearable/Audio/Accesorio en un solo balde 'Accesorio' -- para
+    filtros simples (ej. pestaña Sany) donde no vale la pena separar
+    audífonos de smartwatches, solo distinguirlos de celulares/tablets."""
+    return tipo if tipo in ("Smartphone", "Tablet") else "Accesorio"
+
+
 def _sany(filas_honor: list[dict]) -> dict:
     """Pestaña dedicada: todo lo que vende Sany (aparece como vendedor
     marketplace en más de un retailer/plataforma, no solo Falabella) y cómo
@@ -278,11 +285,21 @@ def _sany(filas_honor: list[dict]) -> dict:
         diferencia_pct = None
         if precio_min_resto:
             diferencia_pct = round((r["precio_oferta"] - precio_min_resto) / precio_min_resto * 100, 1)
+        # "En promoción" = el propio precio regular de Sany es mayor a lo que
+        # está cobrando hoy (precio tachado en la ficha del producto) -- no
+        # tiene que ver con el resto del mercado, es sobre su propio precio
+        # de lista. Si no capturamos precio_regular (o es igual al de
+        # oferta), asumimos que es su precio normal, no una promo puntual.
+        precio_regular = r.get("precio_regular")
+        en_promocion = bool(precio_regular) and precio_regular > r["precio_oferta"] * 1.001
         productos.append({
             "familia": r["familia"],
             "modelo": r["modelo"],
             "retailer": r["retailer"],
+            "tipo": r["tipo"],
             "precio_sany": r["precio_oferta"],
+            "precio_regular_sany": precio_regular if en_promocion else None,
+            "en_promocion": en_promocion,
             "precio_min_resto_mercado": precio_min_resto,
             "diferencia_pct": diferencia_pct,
             "sany_es_mas_barato": diferencia_pct is not None and diferencia_pct < 0,
@@ -290,6 +307,46 @@ def _sany(filas_honor: list[dict]) -> dict:
         })
     productos.sort(key=lambda p: (p["diferencia_pct"] if p["diferencia_pct"] is not None else 0))
     return {"total_productos": len(productos), "productos": productos}
+
+
+def _sany_historial(conn, fechas: list[str]) -> dict:
+    """Serie de tiempo del precio de Sany por familia Honor, para el
+    gráfico de tendencia de la pestaña Sany (con selector de rango de
+    fechas en el frontend) -- mismo criterio que _tendencia_familias pero
+    filtrado solo a filas donde el vendedor es Sany."""
+    cur = conn.execute(
+        "SELECT fecha, modelo, precio_oferta FROM capturas "
+        "WHERE marca = 'HONOR' AND vendedor LIKE '%SANY%' AND fecha IN ({})".format(
+            ",".join("?" for _ in fechas)
+        ),
+        fechas,
+    )
+    por_familia_fecha = defaultdict(lambda: defaultdict(list))
+    for fecha, modelo, precio in cur.fetchall():
+        if not precio or not es_producto_valido(modelo):
+            continue
+        familia = modelo_a_familia(modelo)
+        if familia.startswith("OTRO:"):
+            continue
+        por_familia_fecha[familia][fecha].append(precio)
+
+    series = {}
+    for familia, por_fecha in por_familia_fecha.items():
+        puntos = []
+        for fecha in fechas:
+            precios = por_fecha.get(fecha)
+            if not precios:
+                continue
+            puntos.append({
+                "fecha": fecha,
+                "precio_min": min(precios),
+                "precio_promedio": round(sum(precios) / len(precios), 0),
+                "precio_max": max(precios),
+                "n_ofertas": len(precios),
+            })
+        if puntos:
+            series[familia] = puntos
+    return series
 
 
 MAX_DIAS_HISTORIAL = 60  # no tiene sentido graficar un histórico infinito
@@ -795,6 +852,7 @@ def build(db_path: Path | None = None, out_path: Path | None = None) -> dict:
     tendencia_familias = _tendencia_familias(conn, fechas_historial)
     tendencia_vs_competencia = _tendencia_vs_competencia(conn, fechas_historial)
     heatmap_vendedores = _heatmap_vendedores(conn, fechas_historial)
+    sany["historial"] = _sany_historial(conn, fechas_historial)
 
     analisis_avanzado = _analisis_avanzado(filas_honor, dispersion)
     insights += _insights_avanzados(analisis_avanzado)
