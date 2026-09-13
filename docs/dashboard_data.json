@@ -1,20 +1,20 @@
 {
-  "generado": "2026-09-12T11:57:54",
-  "fecha_captura": "2026-09-12",
+  "generado": "2026-09-13T12:26:32",
+  "fecha_captura": "2026-09-13",
   "resumen": {
-    "total_ofertas_honor_hoy": 1131,
+    "total_ofertas_honor_hoy": 1129,
     "ofertas_por_tipo": {
-      "Smartphone": 1071,
-      "Tablet": 34,
-      "Wearable": 16,
-      "Audio": 10
+      "Smartphone": 1065,
+      "Tablet": 42,
+      "Wearable": 15,
+      "Audio": 7
     },
-    "familias_honor_detectadas": 71,
-    "vendedores_honor_detectados": 77,
+    "familias_honor_detectadas": 69,
+    "vendedores_honor_detectados": 76,
     "retailers_con_honor_hoy": 17,
     "oportunidades_dispersion": 37,
     "oportunidades_vs_competencia": 1,
-    "dias_de_historial": 6
+    "dias_de_historial": 7
   },
   "cobertura": {
     "retailers_configurados": 26,
@@ -22,13 +22,13 @@
     "detalle": [
       {
         "retailer": "PlazaVea",
-        "filas": 2058,
-        "filas_honor": 403,
+        "filas": 2256,
+        "filas_honor": 408,
         "ok": true
       },
       {
         "retailer": "Promart",
-        "filas": 2079,
+        "filas": 2064,
         "filas_honor": 364,
         "ok": true
       },
@@ -40,8 +40,8 @@
       },
       {
         "retailer": "Falabella",
-        "filas": 1130,
-        "filas_honor": 71,
+        "filas": 1121,
+        "filas_honor": 67,
         "ok": true
       },
       {
@@ -64,8 +64,8 @@
       },
       {
         "retailer": "Metro",
-        "filas": 56,
-        "filas_honor": 25,
+        "filas": 55,
+        "filas_honor": 24,
         "ok": true
       },
       {
@@ -76,7 +76,7 @@
       },
       {
         "retailer": "Hiraoka",
-        "filas": 108,
+        "filas": 111,
         "filas_honor": 22,
         "ok": true
       },
@@ -94,13 +94,13 @@
       },
       {
         "retailer": "Carsa",
-        "filas": 92,
+        "filas": 93,
         "filas_honor": 11,
         "ok": true
       },
       {
         "retailer": "Oechsle",
-        "filas": 335,
+        "filas": 329,
         "filas_honor": 11,
         "ok": true
       },
@@ -111,15 +111,15 @@
         "ok": true
       },
       {
-        "retailer": "Entel",
-        "filas": 39,
-        "filas_honor": 8,
+        "retailer": "Sodimac",
+        "filas": 112,
+        "filas_honor": 9,
         "ok": true
       },
       {
-        "retailer": "Sodimac",
-        "filas": 114,
-        "filas_honor": 8,
+        "retailer": "Entel",
+        "filas": 39,
+        "filas_honor": 7,
         "ok": true
       },
       {
@@ -136,7 +136,7 @@
       },
       {
         "retailer": "Mac Center Perú",
-        "filas": 478,
+        "filas": 942,
         "filas_honor": 0,
         "ok": true
       },
@@ -369,20 +369,12 @@
     {
       "familia": "X5C PLUS 256GB",
       "tipo": "Smartphone",
-      "n_ofertas": 108,
+      "n_ofertas": 106,
       "precio_min": 429.0,
       "precio_max": 899.0,
       "spread_pct": 109.6,
       "es_oportunidad": true,
       "ofertas": [
-        {
-          "retailer": "PlazaVea",
-          "vendedor": "Plaza Vea",
-          "vendedor_tercero": true,
-          "precio": 429.0,
-          "modelo": "Smartphone HONOR X5C Plus 6.75\" 4GB 256GB 50M+Auxiliary Camera Midnight Black",
-          "url": "https://www.plazavea.com.pe/smartphone-honor-x5c-plus-6-75--4gb-256gb-50mauxiliary-camera-midnight-black-20571416/p"
-        },
         {
           "retailer": "PlazaVea",
           "vendedor": "Plaza Vea",
@@ -398,14 +390,6 @@
           "precio": 429.0,
           "modelo": "Smartphone HONOR X5C Plus 6.75\" 4GB 256GB 50M+Auxiliary Camera Meteor Silver",
           "url": "https://www.promart.pe/smartphone-honor-x5c-plus-6-75--4gb-256gb-50m-auxiliary-camera-meteor-silver-1001398326/p"
-        },
-        {
-          "retailer": "Promart",
-          "vendedor": "Plaza Vea",
-          "vendedor_tercero": true,
-          "precio": 429.0,
-          "modelo": "Smartphone HONOR X5C Plus 6.75\" 4GB 256GB 50M+Auxiliary Camera Midnight Black",
-          "url": "https://www.promart.pe/smartphone-honor-x5c-plus-6-75--4gb-256gb-50m-auxiliary-camera-midnight-black-1001397131/p"
         },
         {
           "retailer": "PlazaVea",
@@ -1347,6 +1331,14 @@
           "url": "https://www.plazavea.com.pe/honor-x7d-4g-8gb-256gb-silver-101884180/p"
         },
         {
+          "retailer": "Promart",
+          "vendedor": "Plaza Vea",
+          "vendedor_tercero": true,
+          "precio": 749.0,
+          "modelo": "Smartphone HONOR X7D 8 Gb Ram 256 Gb Color Meteor Silver",
+          "url": "https://www.promart.pe/smartphone-honor-x7d-8-gb-ram-256-gb-color-meteor-silver-1001376015/p"
+        },
+        {
           "retailer": "PlazaVea",
           "vendedor": "SMART TECH RB",
           "vendedor_tercero": true,
@@ -1577,14 +1569,6 @@
           "precio": 799.0,
           "modelo": "Celular Honor X7d 6GB RAM 256GB - Azul Cian",
           "url": "https://www.promart.pe/celular-honor-x7d-6gb-ram-256gb-azul-cian-1001411919/p"
-        },
-        {
-          "retailer": "Metro",
-          "vendedor": "CENCOSUD RETAIL PERU S.A.",
-          "vendedor_tercero": true,
-          "precio": 799.0,
-          "modelo": "Smartphone Honor X7D 8GB+256GB Meteor Silver",
-          "url": "https://www.metro.pe/smartphone-honor-x7d-8gb-256gb-meteor-silver-1058744/p"
         },
         {
           "retailer": "Hiraoka",
@@ -2082,7 +2066,7 @@
     {
       "familia": "PLAY 10 128GB",
       "tipo": "Smartphone",
-      "n_ofertas": 5,
+      "n_ofertas": 6,
       "precio_min": 449.0,
       "precio_max": 799.0,
       "spread_pct": 78.0,
@@ -2119,6 +2103,14 @@
           "precio": 799.0,
           "modelo": "CELULAR PLAY 10 4RAM 128GB.",
           "url": "https://www.falabella.com.pe/falabella-pe/product/153499796/celular-honor-play-10-3ram-128gb"
+        },
+        {
+          "retailer": "Falabella",
+          "vendedor": "Rrj Electronics Sac",
+          "vendedor_tercero": true,
+          "precio": 799.0,
+          "modelo": "CELULAR PLAY 10 4RAM 128GB MORADO",
+          "url": "https://www.falabella.com.pe/falabella-pe/product/153500029/celular-honor-play-10-3ram-128gb-morado"
         },
         {
           "retailer": "Falabella",
@@ -2237,14 +2229,6 @@
         },
         {
           "retailer": "PlazaVea",
-          "vendedor": "Plaza Vea",
-          "vendedor_tercero": true,
-          "precio": 449.0,
-          "modelo": "Smartphone HONOR X5D 6.74\" 4GB 128GB 50MP Negro",
-          "url": "https://www.plazavea.com.pe/smartphone-honor-x5d-6-74--4gb-128gb-50mp-negro-20634112/p"
-        },
-        {
-          "retailer": "PlazaVea",
           "vendedor": "oechsle",
           "vendedor_tercero": true,
           "precio": 449.0,
@@ -2282,6 +2266,14 @@
           "precio": 449.0,
           "modelo": "Smartphone HONOR X5D 6.74\" 4GB 128GB 50MP Silver",
           "url": "https://www.plazavea.com.pe/smartphone-honor-x5d-6-74--4gb-128gb-50mp-silver-20634111/p"
+        },
+        {
+          "retailer": "PlazaVea",
+          "vendedor": "Plaza Vea",
+          "vendedor_tercero": true,
+          "precio": 449.0,
+          "modelo": "Smartphone HONOR X5D 6.74\" 4GB 128GB 50MP Negro",
+          "url": "https://www.plazavea.com.pe/smartphone-honor-x5d-6-74--4gb-128gb-50mp-negro-20634112/p"
         },
         {
           "retailer": "Promart",
@@ -4060,7 +4052,7 @@
     {
       "familia": "CHOICE WATCH 2I",
       "tipo": "Wearable",
-      "n_ofertas": 7,
+      "n_ofertas": 6,
       "precio_min": 116.0,
       "precio_max": 189.0,
       "spread_pct": 62.9,
@@ -4073,14 +4065,6 @@
           "precio": 116.0,
           "modelo": "Smartwatch Honor Choice Watch 2i pantalla 1.85''/ AMOLED, resistente al agua 1 ATM IP68, batería 14 días, negro",
           "url": "https://www.coolbox.pe/smartwatch-honor-choice-watch-2i-amd-5504acgp/p"
-        },
-        {
-          "retailer": "Falabella",
-          "vendedor": "Coolbox",
-          "vendedor_tercero": true,
-          "precio": 129.0,
-          "modelo": "Smartwatch Choice Watch 2i pantalla 1.85''/ AMOLED, resistente al agua 1 ATM IP68, batería 14",
-          "url": "https://www.falabella.com.pe/falabella-pe/product/155206206/smartwatch-honor-choice-watch-2i-pantalla-1-85-amoled-resistente-al-agua-1-atm-ip68-14-dias-negro"
         },
         {
           "retailer": "Metro",
@@ -4314,7 +4298,7 @@
     {
       "familia": "MAGIC 8 LITE 256GB",
       "tipo": "Smartphone",
-      "n_ofertas": 87,
+      "n_ofertas": 86,
       "precio_min": 1359.0,
       "precio_max": 2019.0,
       "spread_pct": 48.6,
@@ -4945,14 +4929,6 @@
           "url": "https://www.efe.com.pe/honor-magic-8-lite-256gb-8gb-rojo-rojo-p85195551.html"
         },
         {
-          "retailer": "Falabella",
-          "vendedor": "Lider Phone",
-          "vendedor_tercero": true,
-          "precio": 1809.0,
-          "modelo": "MAGIC 8 LITE 5G 8RAM 256GB NEGRO - REGISTRADO",
-          "url": "https://www.falabella.com.pe/falabella-pe/product/152414293/honor-magic-8-lite-5g-negro-8ram-256gb-registrado"
-        },
-        {
           "retailer": "La Curacao",
           "vendedor": "CELULARES PERU SMART SAC",
           "vendedor_tercero": true,
@@ -5021,7 +4997,7 @@
     {
       "familia": "X8D 256GB",
       "tipo": "Smartphone",
-      "n_ofertas": 73,
+      "n_ofertas": 70,
       "precio_min": 879.0,
       "precio_max": 1299.0,
       "spread_pct": 47.8,
@@ -5034,22 +5010,6 @@
           "precio": 879.0,
           "modelo": "X8d 8GB+256GB - Light Blue",
           "url": "https://www.falabella.com.pe/falabella-pe/product/152056274/honor-x8d-8gb256gb-light-blue"
-        },
-        {
-          "retailer": "PlazaVea",
-          "vendedor": "RAYKOV",
-          "vendedor_tercero": true,
-          "precio": 899.0,
-          "modelo": "Celular HONOR X8D 256GB ROM 8GB RAM - NEGRO 108 mpx",
-          "url": "https://www.plazavea.com.pe/celular-honor-x8d-256gb-rom-8gb-ram-negro-108-mpx-102198481/p"
-        },
-        {
-          "retailer": "Promart",
-          "vendedor": "RAYKOV",
-          "vendedor_tercero": true,
-          "precio": 899.0,
-          "modelo": "Celular HONOR X8D 256GB ROM 8GB RAM - NEGRO 108 mpx",
-          "url": "https://www.promart.pe/celular-honor-x8d-256gb-rom-8gb-ram-negro-108-mpx-1001540109/p"
         },
         {
           "retailer": "Entel",
@@ -5592,14 +5552,6 @@
           "vendedor": "Rrj Electronics Sac",
           "vendedor_tercero": true,
           "precio": 1299.0,
-          "modelo": "CELULAR X8D 8RAM 256GB NEGRO",
-          "url": "https://www.falabella.com.pe/falabella-pe/product/153509665/celular-honor-x8d-8ram-256gb-negro"
-        },
-        {
-          "retailer": "Falabella",
-          "vendedor": "Rrj Electronics Sac",
-          "vendedor_tercero": true,
-          "precio": 1299.0,
           "modelo": "CELULAR X8D 8RAM 256GB AZUL.",
           "url": "https://www.falabella.com.pe/falabella-pe/product/153512351/celular-honor-x8d-8ram-256gb-azul"
         },
@@ -6041,7 +5993,7 @@
     {
       "familia": "PAD X7 128GB",
       "tipo": "Tablet",
-      "n_ofertas": 14,
+      "n_ofertas": 19,
       "precio_min": 349.0,
       "precio_max": 499.0,
       "spread_pct": 43.0,
@@ -6062,6 +6014,14 @@
           "precio": 349.0,
           "modelo": "HONOR Pad X7 WiFi 4+128GB Space Gray",
           "url": "https://www.sodimac.com.pe/sodimac-pe/articulo/148366045/HONOR-Pad-X7-WiFi-4+128GB-Space-Gray?exp=so_com"
+        },
+        {
+          "retailer": "PlazaVea",
+          "vendedor": "STARK COMPUTER",
+          "vendedor_tercero": true,
+          "precio": 449.0,
+          "modelo": "Tabler Honor Pad X7 128gb Wi-fi",
+          "url": "https://www.plazavea.com.pe/tabler-honor-pad-x7-128gb-wi-fi-102068796/p"
         },
         {
           "retailer": "Promart",
@@ -6086,6 +6046,22 @@
           "precio": 459.0,
           "modelo": "Tablet HONOR PAD X7 8.7 WiFi 4GB 128GB Android 15 Case Gris",
           "url": "https://www.oechsle.pe/tablet-honor-pad-x7-8-7-wifi-4gb-128gb-android-15-case-gris--1001763697/p"
+        },
+        {
+          "retailer": "PlazaVea",
+          "vendedor": "oechsle",
+          "vendedor_tercero": true,
+          "precio": 469.0,
+          "modelo": "Tablet Honor PAD X7 128GB",
+          "url": "https://www.plazavea.com.pe/tablet-honor-pad-x7-128gb-102074259/p"
+        },
+        {
+          "retailer": "PlazaVea",
+          "vendedor": "Plaza Vea",
+          "vendedor_tercero": true,
+          "precio": 469.0,
+          "modelo": "Tablet HONOR Pad X7 8.7''4GB 128GB Space Gray",
+          "url": "https://www.plazavea.com.pe/tablet-honor-pad-x7-8-74gb-128gb-space-gray-20565819/p"
         },
         {
           "retailer": "Promart",
@@ -6136,12 +6112,28 @@
           "url": "https://www.coolbox.pe/tablet-honor-pad-x7-wifi--4-128gb---jms-w09----gris-espacial-100443838/p"
         },
         {
+          "retailer": "PlazaVea",
+          "vendedor": "VEGA SAC",
+          "vendedor_tercero": true,
+          "precio": 479.0,
+          "modelo": "Tablet HONOR PAD X7 8.7 WiFi 4GB 128GB Android 15 Case Gris",
+          "url": "https://www.plazavea.com.pe/tablet-honor-pad-x7-8-7-wifi-4gb-128gb-android-15-case-gris-102059270/p"
+        },
+        {
           "retailer": "Promart",
           "vendedor": "VEGA SAC",
           "vendedor_tercero": true,
           "precio": 479.0,
           "modelo": "Tablet HONOR PAD X7 8.7 WiFi 4GB 128GB Android 15 Case Gris",
           "url": "https://www.promart.pe/tablet-honor-pad-x7-8-7-wifi-4gb-128gb-android-15-case-gris-1001461046/p"
+        },
+        {
+          "retailer": "PlazaVea",
+          "vendedor": "SanyPeru",
+          "vendedor_tercero": true,
+          "precio": 489.0,
+          "modelo": "Tablet Honor Pad X7 4GB 128GB WIFI",
+          "url": "https://www.plazavea.com.pe/tablet-honor-pad-x7-4gb-128gb-wifi-101959695/p"
         },
         {
           "retailer": "Oechsle",
@@ -6447,7 +6439,7 @@
     {
       "familia": "PAD X9A 128GB",
       "tipo": "Tablet",
-      "n_ofertas": 11,
+      "n_ofertas": 12,
       "precio_min": 849.0,
       "precio_max": 1179.0,
       "spread_pct": 38.9,
@@ -6484,6 +6476,14 @@
           "precio": 849.0,
           "modelo": "Tablet HONOR PAD X9A 11.5 2.5K WiFi 8GB 128GB Android 15 Flip cover Gris",
           "url": "https://www.oechsle.pe/tablet-honor-pad-x9a-11-5-2-5k-wifi-8gb-128gb-android-15-flip-cover-gris--1001763473/p"
+        },
+        {
+          "retailer": "PlazaVea",
+          "vendedor": "VEGA SAC",
+          "vendedor_tercero": true,
+          "precio": 899.0,
+          "modelo": "Tablet HONOR PAD X9A 11.5 2.5K WiFi 8GB 128GB Android 15 Flip cover Gris",
+          "url": "https://www.plazavea.com.pe/tablet-honor-pad-x9a-11-5-2-5k-wifi-8gb-128gb-android-15-flip-cover-gris-102059203/p"
         },
         {
           "retailer": "Promart",
@@ -6546,7 +6546,7 @@
     {
       "familia": "600E 512GB",
       "tipo": "Smartphone",
-      "n_ofertas": 59,
+      "n_ofertas": 58,
       "precio_min": 1589.0,
       "precio_max": 2199.0,
       "spread_pct": 38.4,
@@ -6623,14 +6623,6 @@
           "precio": 1749.0,
           "modelo": "Smartphone HONOR 600E 6.6\" 8GB 512GB 108MP+5MP Green",
           "url": "https://www.promart.pe/smartphone-honor-600e-6-6--8gb-512gb-108mp-5mp-green-1001525132/p"
-        },
-        {
-          "retailer": "Entel",
-          "vendedor": "Entel",
-          "vendedor_tercero": false,
-          "precio": 1750.0,
-          "modelo": "600e 512GB 5G + Audífono Over Ear",
-          "url": "https://miportal.entel.pe/personas/producto/equipos/prod1100046"
         },
         {
           "retailer": "Entel",
@@ -7524,9 +7516,148 @@
       ]
     },
     {
+      "familia": "X5D 256GB",
+      "tipo": "Smartphone",
+      "n_ofertas": 16,
+      "precio_min": 569.0,
+      "precio_max": 699.0,
+      "spread_pct": 22.8,
+      "es_oportunidad": true,
+      "ofertas": [
+        {
+          "retailer": "PlazaVea",
+          "vendedor": "HolaPlaza",
+          "vendedor_tercero": true,
+          "precio": 569.0,
+          "modelo": "Celular Honor X5D 256GB 4GB Negro",
+          "url": "https://www.plazavea.com.pe/celular-honor-x5d-256gb-4gb-negro-102336562/p"
+        },
+        {
+          "retailer": "Promart",
+          "vendedor": "HolaPlaza",
+          "vendedor_tercero": true,
+          "precio": 569.0,
+          "modelo": "Celular Honor X5D 256GB 4GB Negro",
+          "url": "https://www.promart.pe/celular-honor-x5d-256gb-4gb-negro-1001606780/p"
+        },
+        {
+          "retailer": "PlazaVea",
+          "vendedor": "MI CEL PERU",
+          "vendedor_tercero": true,
+          "precio": 589.0,
+          "modelo": "Celular Honor X5D 4GB+256GB MIDNIGHT BLACK",
+          "url": "https://www.plazavea.com.pe/celular-honor-x5d-4gb-256gb-midnight-black-102269527/p"
+        },
+        {
+          "retailer": "PlazaVea",
+          "vendedor": "MI CEL PERU",
+          "vendedor_tercero": true,
+          "precio": 589.0,
+          "modelo": "Celular Honor X5D 4GB+256GB TIDAL BLUE",
+          "url": "https://www.plazavea.com.pe/celular-honor-x5d-4gb-256gb-tidal-blue-102269014/p"
+        },
+        {
+          "retailer": "PlazaVea",
+          "vendedor": "MI CEL PERU",
+          "vendedor_tercero": true,
+          "precio": 589.0,
+          "modelo": "Celular Honor X5D 4GB+256GB  METEOR SILVER",
+          "url": "https://www.plazavea.com.pe/celular-honor-x5d-4gb-256gb--meteor-silver-102268871/p"
+        },
+        {
+          "retailer": "Promart",
+          "vendedor": "MI CEL PERU",
+          "vendedor_tercero": true,
+          "precio": 589.0,
+          "modelo": "Celular Honor X5D 4GB+256GB TIDAL BLUE",
+          "url": "https://www.promart.pe/celular-honor-x5d-4gb-256gb-tidal-blue-1001576641/p"
+        },
+        {
+          "retailer": "Promart",
+          "vendedor": "MI CEL PERU",
+          "vendedor_tercero": true,
+          "precio": 589.0,
+          "modelo": "Celular Honor X5D 4GB+256GB METEOR SILVER",
+          "url": "https://www.promart.pe/celular-honor-x5d-4gb-256gb-meteor-silver-1001576623/p"
+        },
+        {
+          "retailer": "Promart",
+          "vendedor": "MI CEL PERU",
+          "vendedor_tercero": true,
+          "precio": 589.0,
+          "modelo": "Celular Honor X5D 4GB+256GB MIDNIGHT BLACK",
+          "url": "https://www.promart.pe/celular-honor-x5d-4gb-256gb-midnight-black-1001576574/p"
+        },
+        {
+          "retailer": "PlazaVea",
+          "vendedor": "Plaza Vea",
+          "vendedor_tercero": true,
+          "precio": 599.0,
+          "modelo": "Smartphone HONOR X5D 6.74\" 4GB 256GB 50MP Tidal Blue",
+          "url": "https://www.plazavea.com.pe/smartphone-honor-x5d-674-4gb-256gb-50mp-tidal-blue-20659565/p"
+        },
+        {
+          "retailer": "PlazaVea",
+          "vendedor": "Plaza Vea",
+          "vendedor_tercero": true,
+          "precio": 599.0,
+          "modelo": "Smartphone HONOR X5D 6.74\" 4GB 256GB 50MP Midnight Black",
+          "url": "https://www.plazavea.com.pe/smartphone-honor-x5d-674-4gb-256gb-50mp-midnight-black-20659568/p"
+        },
+        {
+          "retailer": "PlazaVea",
+          "vendedor": "Plaza Vea",
+          "vendedor_tercero": true,
+          "precio": 599.0,
+          "modelo": "Smartphone HONOR X5D 6.74\" 4GB 256GB 50MP Meteor Silver",
+          "url": "https://www.plazavea.com.pe/smartphone-honor-x5d-674-4gb-256gb-50mp-meteor-silver-20659570/p"
+        },
+        {
+          "retailer": "La Curacao",
+          "vendedor": "La Curacao",
+          "vendedor_tercero": false,
+          "precio": 599.0,
+          "modelo": "Celular Honor X5d 256GB 4GB 6.74&quot; Midnigth Black",
+          "url": "https://www.lacuracao.pe/x5d-4gb-256gb-midnight-black-5109clar.html"
+        },
+        {
+          "retailer": "Tiendas EFE",
+          "vendedor": "Tiendas EFE",
+          "vendedor_tercero": false,
+          "precio": 599.0,
+          "modelo": "Celular Honor X5d 256GB 4GB 6.74&quot; Midnigth Black",
+          "url": "https://www.efe.com.pe/x5d-4gb-256gb-midnight-black-5109clar.html"
+        },
+        {
+          "retailer": "PlazaVea",
+          "vendedor": "SanyPeru",
+          "vendedor_tercero": true,
+          "precio": 699.0,
+          "modelo": "Celular HONOR X5d 4GB Ram 256GB Rom - Negro",
+          "url": "https://www.plazavea.com.pe/celular-honor-x5d-4gb-ram-256gb-rom---negro-102251717/p"
+        },
+        {
+          "retailer": "PlazaVea",
+          "vendedor": "SanyPeru",
+          "vendedor_tercero": true,
+          "precio": 699.0,
+          "modelo": "Celular HONOR X5d 4GB Ram 256GB Rom - Silver",
+          "url": "https://www.plazavea.com.pe/celular-honor-x5d-4gb-ram-256gb-rom---silver-102251688/p"
+        },
+        {
+          "retailer": "PlazaVea",
+          "vendedor": "SanyPeru",
+          "vendedor_tercero": true,
+          "precio": 699.0,
+          "modelo": "Celular HONOR X5d 4GB Ram 256GB Rom - Azul",
+          "url": "https://www.plazavea.com.pe/celular-honor-x5d-4gb-ram-256gb-rom---azul-102251679/p"
+        }
+      ]
+    },
+    {
       "familia": "600 512GB",
       "tipo": "Smartphone",
-      "n_ofertas": 47,
+      "n_ofertas": 46,
       "precio_min": 2129.0,
       "precio_max": 2599.0,
       "spread_pct": 22.1,
@@ -7686,14 +7817,6 @@
         },
         {
           "retailer": "Promart",
-          "vendedor": "SanyPeru",
-          "vendedor_tercero": true,
-          "precio": 2399.0,
-          "modelo": "Celular HONOR 600 8GB 512GB VKJ-NX9 Negro",
-          "url": "https://www.promart.pe/celular-honor-600-8gb-512gb-vkj-nx9-negro-1001513164/p"
-        },
-        {
-          "retailer": "Promart",
           "vendedor": "Oechsle",
           "vendedor_tercero": true,
           "precio": 2399.0,
@@ -7821,14 +7944,6 @@
           "url": "https://www.efe.com.pe/honor-600-8gb-512gb-orange-5109chbu.html"
         },
         {
-          "retailer": "Falabella",
-          "vendedor": "Coolbox",
-          "vendedor_tercero": true,
-          "precio": 2469.0,
-          "modelo": "Celular 600 512GB 8GB RAM negro",
-          "url": "https://www.falabella.com.pe/falabella-pe/product/157437350/celular-honor-600-512gb-8gb-ram-negro"
-        },
-        {
           "retailer": "Coolbox",
           "vendedor": "Rash Peru S.R.L",
           "vendedor_tercero": true,
@@ -7883,6 +7998,14 @@
           "precio": 2599.0,
           "modelo": "Celular HONOR 600 8GB 512GB VKJ-NX9 Golden",
           "url": "https://www.promart.pe/celular-honor-600-8gb-512gb-vkj-nx9-golden-1001513167/p"
+        },
+        {
+          "retailer": "Promart",
+          "vendedor": "SanyPeru",
+          "vendedor_tercero": true,
+          "precio": 2599.0,
+          "modelo": "Celular HONOR 600 8GB 512GB VKJ-NX9 Negro",
+          "url": "https://www.promart.pe/celular-honor-600-8gb-512gb-vkj-nx9-negro-1001513164/p"
         },
         {
           "retailer": "Falabella",
@@ -8449,129 +8572,6 @@
       ]
     },
     {
-      "familia": "X5D 256GB",
-      "tipo": "Smartphone",
-      "n_ofertas": 14,
-      "precio_min": 589.0,
-      "precio_max": 699.0,
-      "spread_pct": 18.7,
-      "es_oportunidad": true,
-      "ofertas": [
-        {
-          "retailer": "PlazaVea",
-          "vendedor": "MI CEL PERU",
-          "vendedor_tercero": true,
-          "precio": 589.0,
-          "modelo": "Celular Honor X5D 4GB+256GB MIDNIGHT BLACK",
-          "url": "https://www.plazavea.com.pe/celular-honor-x5d-4gb-256gb-midnight-black-102269527/p"
-        },
-        {
-          "retailer": "PlazaVea",
-          "vendedor": "MI CEL PERU",
-          "vendedor_tercero": true,
-          "precio": 589.0,
-          "modelo": "Celular Honor X5D 4GB+256GB TIDAL BLUE",
-          "url": "https://www.plazavea.com.pe/celular-honor-x5d-4gb-256gb-tidal-blue-102269014/p"
-        },
-        {
-          "retailer": "PlazaVea",
-          "vendedor": "MI CEL PERU",
-          "vendedor_tercero": true,
-          "precio": 589.0,
-          "modelo": "Celular Honor X5D 4GB+256GB  METEOR SILVER",
-          "url": "https://www.plazavea.com.pe/celular-honor-x5d-4gb-256gb--meteor-silver-102268871/p"
-        },
-        {
-          "retailer": "Promart",
-          "vendedor": "MI CEL PERU",
-          "vendedor_tercero": true,
-          "precio": 589.0,
-          "modelo": "Celular Honor X5D 4GB+256GB TIDAL BLUE",
-          "url": "https://www.promart.pe/celular-honor-x5d-4gb-256gb-tidal-blue-1001576641/p"
-        },
-        {
-          "retailer": "Promart",
-          "vendedor": "MI CEL PERU",
-          "vendedor_tercero": true,
-          "precio": 589.0,
-          "modelo": "Celular Honor X5D 4GB+256GB METEOR SILVER",
-          "url": "https://www.promart.pe/celular-honor-x5d-4gb-256gb-meteor-silver-1001576623/p"
-        },
-        {
-          "retailer": "Promart",
-          "vendedor": "MI CEL PERU",
-          "vendedor_tercero": true,
-          "precio": 589.0,
-          "modelo": "Celular Honor X5D 4GB+256GB MIDNIGHT BLACK",
-          "url": "https://www.promart.pe/celular-honor-x5d-4gb-256gb-midnight-black-1001576574/p"
-        },
-        {
-          "retailer": "PlazaVea",
-          "vendedor": "Plaza Vea",
-          "vendedor_tercero": true,
-          "precio": 599.0,
-          "modelo": "Smartphone HONOR X5D 6.74\" 4GB 256GB 50MP Tidal Blue",
-          "url": "https://www.plazavea.com.pe/smartphone-honor-x5d-674-4gb-256gb-50mp-tidal-blue-20659565/p"
-        },
-        {
-          "retailer": "PlazaVea",
-          "vendedor": "Plaza Vea",
-          "vendedor_tercero": true,
-          "precio": 599.0,
-          "modelo": "Smartphone HONOR X5D 6.74\" 4GB 256GB 50MP Midnight Black",
-          "url": "https://www.plazavea.com.pe/smartphone-honor-x5d-674-4gb-256gb-50mp-midnight-black-20659568/p"
-        },
-        {
-          "retailer": "PlazaVea",
-          "vendedor": "Plaza Vea",
-          "vendedor_tercero": true,
-          "precio": 599.0,
-          "modelo": "Smartphone HONOR X5D 6.74\" 4GB 256GB 50MP Meteor Silver",
-          "url": "https://www.plazavea.com.pe/smartphone-honor-x5d-674-4gb-256gb-50mp-meteor-silver-20659570/p"
-        },
-        {
-          "retailer": "La Curacao",
-          "vendedor": "La Curacao",
-          "vendedor_tercero": false,
-          "precio": 599.0,
-          "modelo": "Celular Honor X5d 256GB 4GB 6.74&quot; Midnigth Black",
-          "url": "https://www.lacuracao.pe/x5d-4gb-256gb-midnight-black-5109clar.html"
-        },
-        {
-          "retailer": "Tiendas EFE",
-          "vendedor": "Tiendas EFE",
-          "vendedor_tercero": false,
-          "precio": 599.0,
-          "modelo": "Celular Honor X5d 256GB 4GB 6.74&quot; Midnigth Black",
-          "url": "https://www.efe.com.pe/x5d-4gb-256gb-midnight-black-5109clar.html"
-        },
-        {
-          "retailer": "PlazaVea",
-          "vendedor": "SanyPeru",
-          "vendedor_tercero": true,
-          "precio": 699.0,
-          "modelo": "Celular HONOR X5d 4GB Ram 256GB Rom - Negro",
-          "url": "https://www.plazavea.com.pe/celular-honor-x5d-4gb-ram-256gb-rom---negro-102251717/p"
-        },
-        {
-          "retailer": "PlazaVea",
-          "vendedor": "SanyPeru",
-          "vendedor_tercero": true,
-          "precio": 699.0,
-          "modelo": "Celular HONOR X5d 4GB Ram 256GB Rom - Silver",
-          "url": "https://www.plazavea.com.pe/celular-honor-x5d-4gb-ram-256gb-rom---silver-102251688/p"
-        },
-        {
-          "retailer": "PlazaVea",
-          "vendedor": "SanyPeru",
-          "vendedor_tercero": true,
-          "precio": 699.0,
-          "modelo": "Celular HONOR X5d 4GB Ram 256GB Rom - Azul",
-          "url": "https://www.plazavea.com.pe/celular-honor-x5d-4gb-ram-256gb-rom---azul-102251679/p"
-        }
-      ]
-    },
-    {
       "familia": "X9D 512GB",
       "tipo": "Smartphone",
       "n_ofertas": 7,
@@ -8641,7 +8641,7 @@
     {
       "familia": "CHOICE X7E ACTIVE",
       "tipo": "Audio",
-      "n_ofertas": 3,
+      "n_ofertas": 2,
       "precio_min": 50.9,
       "precio_max": 59.0,
       "spread_pct": 15.9,
@@ -8654,14 +8654,6 @@
           "precio": 50.9,
           "modelo": "Audífonos bluetooth True Wireless Honor Choice x7E Active, resistente al agua IP54, duración hasta 38 horas con estuche, blanco",
           "url": "https://www.coolbox.pe/audifonos-honor-choice-x7e-active-blanco-5504addb/p"
-        },
-        {
-          "retailer": "Falabella",
-          "vendedor": "Coolbox",
-          "vendedor_tercero": true,
-          "precio": 53.9,
-          "modelo": "Audífonos bluetooth Choice x7E Active IP54 40h blanco",
-          "url": "https://www.falabella.com.pe/falabella-pe/product/155292682/audifonos-bluetooth-honor-choice-x7e-active-ip54-40h-blanco"
         },
         {
           "retailer": "Metro",
@@ -8786,7 +8778,7 @@
     {
       "familia": "MAGIC 8 PRO 512GB",
       "tipo": "Smartphone",
-      "n_ofertas": 11,
+      "n_ofertas": 12,
       "precio_min": 4469.0,
       "precio_max": 5098.0,
       "spread_pct": 14.1,
@@ -8799,6 +8791,14 @@
           "precio": 4469.0,
           "modelo": "Honor Magic 8 Pro 12RAM 512GB Negro",
           "url": "https://www.plazavea.com.pe/honor-magic-8-pro-12ram-512gb-negro-102336497/p"
+        },
+        {
+          "retailer": "Promart",
+          "vendedor": "F MOBILE TECH",
+          "vendedor_tercero": true,
+          "precio": 4469.0,
+          "modelo": "Honor Magic 8 Pro 12RAM 512GB Negro",
+          "url": "https://www.promart.pe/honor-magic-8-pro-12ram-512gb-negro-1001606693/p"
         },
         {
           "retailer": "PlazaVea",
@@ -9033,7 +9033,7 @@
     {
       "familia": "PAD X8B 128GB",
       "tipo": "Tablet",
-      "n_ofertas": 5,
+      "n_ofertas": 6,
       "precio_min": 719.0,
       "precio_max": 749.0,
       "spread_pct": 4.2,
@@ -9046,6 +9046,14 @@
           "precio": 719.0,
           "modelo": "Tablet HONOR Pad X8b WiFi 4GB RAM - 128GB Gray",
           "url": "https://www.oechsle.pe/tablet-honor-pad-x8b-wifi-4gb-ram---128gb-gray-1001944010/p"
+        },
+        {
+          "retailer": "PlazaVea",
+          "vendedor": "oechsle",
+          "vendedor_tercero": true,
+          "precio": 729.0,
+          "modelo": "Tablet Honor Pad X8B 4Gb + 128Gb Grey",
+          "url": "https://www.plazavea.com.pe/tablet-honor-pad-x8b-4gb---128gb-grey-102074258/p"
         },
         {
           "retailer": "Promart",
@@ -9113,33 +9121,6 @@
           "precio": 1029.0,
           "modelo": "CELULAR HONOR X8C 8RAM 256GB",
           "url": "https://www.promart.pe/celular-honor-x8c-8ram-256gb-1001380820/p"
-        }
-      ]
-    },
-    {
-      "familia": "X5C 256GB",
-      "tipo": "Smartphone",
-      "n_ofertas": 2,
-      "precio_min": 429.0,
-      "precio_max": 429.0,
-      "spread_pct": 0.0,
-      "es_oportunidad": false,
-      "ofertas": [
-        {
-          "retailer": "PlazaVea",
-          "vendedor": "Plaza Vea",
-          "vendedor_tercero": true,
-          "precio": 429.0,
-          "modelo": "Smartphone HONOR X5C C Plus 6.75\" 4GB 256GB 50M+Auxiliary Camera Ocean Cyan",
-          "url": "https://www.plazavea.com.pe/smartphone-honor-x5c-c-plus-6-75--4gb-256gb-50mauxiliary-camera-ocean-cyan-20571419/p"
-        },
-        {
-          "retailer": "Promart",
-          "vendedor": "Plaza Vea",
-          "vendedor_tercero": true,
-          "precio": 429.0,
-          "modelo": "Smartphone HONOR X5C C Plus 6.75\" 4GB 256GB 50M+Auxiliary Camera Ocean Cyan",
-          "url": "https://www.promart.pe/smartphone-honor-x5c-c-plus-6-75--4gb-256gb-50m-auxiliary-camera-ocean-cyan-1001398325/p"
         }
       ]
     },
@@ -9243,20 +9224,12 @@
     {
       "familia": "X5D 64GB",
       "tipo": "Smartphone",
-      "n_ofertas": 3,
+      "n_ofertas": 2,
       "precio_min": 399.0,
       "precio_max": 399.0,
       "spread_pct": 0.0,
       "es_oportunidad": false,
       "ofertas": [
-        {
-          "retailer": "PlazaVea",
-          "vendedor": "PHONE SPOT PERU",
-          "vendedor_tercero": true,
-          "precio": 399.0,
-          "modelo": "HONOR X5D 4GB - 64GB TILDA BLUE",
-          "url": "https://www.plazavea.com.pe/honor-x5d-4gb-64gb-tilda-blue-102155865/p"
-        },
         {
           "retailer": "PlazaVea",
           "vendedor": "PHONE SPOT PERU",
@@ -9330,6 +9303,41 @@
       ]
     },
     {
+      "familia": "PAD 10 256GB",
+      "tipo": "Tablet",
+      "n_ofertas": 3,
+      "precio_min": 1699.0,
+      "precio_max": 1699.0,
+      "spread_pct": 0.0,
+      "es_oportunidad": false,
+      "ofertas": [
+        {
+          "retailer": "PlazaVea",
+          "vendedor": "oechsle",
+          "vendedor_tercero": true,
+          "precio": 1699.0,
+          "modelo": "Tablet Honor PAD 10 256GB",
+          "url": "https://www.plazavea.com.pe/tablet-honor-pad-10-256gb-101908807/p"
+        },
+        {
+          "retailer": "Promart",
+          "vendedor": "Oechsle",
+          "vendedor_tercero": true,
+          "precio": 1699.0,
+          "modelo": "Tablet Honor PAD 10 256GB",
+          "url": "https://www.promart.pe/tablet-honor-pad-10-256gb-1001366517/p"
+        },
+        {
+          "retailer": "Oechsle",
+          "vendedor": "oechsle",
+          "vendedor_tercero": true,
+          "precio": 1699.0,
+          "modelo": "Tablet Honor PAD 10 256GB",
+          "url": "https://www.oechsle.pe/tablet-honor-pad-10-256gb-3034689/p"
+        }
+      ]
+    },
+    {
       "familia": "X6S 128GB",
       "tipo": "Smartphone",
       "n_ofertas": 1,
@@ -9368,36 +9376,9 @@
       ]
     },
     {
-      "familia": "PAD 10 256GB",
-      "tipo": "Tablet",
-      "n_ofertas": 2,
-      "precio_min": 1699.0,
-      "precio_max": 1699.0,
-      "spread_pct": 0.0,
-      "es_oportunidad": false,
-      "ofertas": [
-        {
-          "retailer": "Promart",
-          "vendedor": "Oechsle",
-          "vendedor_tercero": true,
-          "precio": 1699.0,
-          "modelo": "Tablet Honor PAD 10 256GB",
-          "url": "https://www.promart.pe/tablet-honor-pad-10-256gb-1001366517/p"
-        },
-        {
-          "retailer": "Oechsle",
-          "vendedor": "oechsle",
-          "vendedor_tercero": true,
-          "precio": 1699.0,
-          "modelo": "Tablet Honor PAD 10 256GB",
-          "url": "https://www.oechsle.pe/tablet-honor-pad-10-256gb-3034689/p"
-        }
-      ]
-    },
-    {
       "familia": "MAGIC8 LITE 256GB",
       "tipo": "Smartphone",
-      "n_ofertas": 1,
+      "n_ofertas": 2,
       "precio_min": 1329.0,
       "precio_max": 1329.0,
       "spread_pct": 0.0,
@@ -9410,6 +9391,14 @@
           "precio": 1329.0,
           "modelo": "MAGIC8 LITE 8GB+256GB REDDISH BROWN.",
           "url": "https://www.falabella.com.pe/falabella-pe/product/154551215/honor-magic8-lite-8gb256gb-reddish-brown"
+        },
+        {
+          "retailer": "Sodimac",
+          "vendedor": "Millennials",
+          "vendedor_tercero": true,
+          "precio": 1329.0,
+          "modelo": "HONOR MAGIC8 LITE 8GB+256GB REDDISH BROWN.",
+          "url": "https://www.sodimac.com.pe/sodimac-pe/articulo/154551215/honor-magic8-lite-8gb256gb-reddish-brown?exp=so_com"
         }
       ]
     },
@@ -9464,25 +9453,6 @@
           "precio": 679.0,
           "modelo": "X6e 4GB+128GB - Midnight Black",
           "url": "https://www.falabella.com.pe/falabella-pe/product/156432591/honor-x6e-4gb128gb-midnight-black"
-        }
-      ]
-    },
-    {
-      "familia": "EARBUDS X7 LITE",
-      "tipo": "Audio",
-      "n_ofertas": 1,
-      "precio_min": 199.0,
-      "precio_max": 199.0,
-      "spread_pct": 0.0,
-      "es_oportunidad": false,
-      "ofertas": [
-        {
-          "retailer": "Falabella",
-          "vendedor": "Newphone",
-          "vendedor_tercero": true,
-          "precio": 199.0,
-          "modelo": "CHOICE Earbuds X7 Lite Audífonos Inalámbricos Bluetooth con Micrófono",
-          "url": "https://www.falabella.com.pe/falabella-pe/product/152958825/honor-choice-earbuds-x7-lite-audifonos-inalambricos-bluetooth-con-microfono"
         }
       ]
     },
@@ -9945,8 +9915,8 @@
   ],
   "vs_competencia_tablet": {
     "tipo": "Tablet",
-    "n_ofertas_honor": 34,
-    "n_ofertas_competencia": 895,
+    "n_ofertas_honor": 42,
+    "n_ofertas_competencia": 1122,
     "honor_mas_barato": {
       "familia": "PAD X7 128GB",
       "modelo": "Pad X7 WiFi 4+128GB Space Gray",
@@ -9965,8 +9935,8 @@
   },
   "vs_competencia_wearable": {
     "tipo": "Wearable",
-    "n_ofertas_honor": 16,
-    "n_ofertas_competencia": 141,
+    "n_ofertas_honor": 15,
+    "n_ofertas_competencia": 159,
     "honor_mas_barato": {
       "familia": "OTRO: SMARTWATCH 2I AMOLED",
       "modelo": "Smartwatch 2i AMOLED - Black",
@@ -9984,7 +9954,7 @@
     "es_oportunidad": true
   },
   "sany": {
-    "total_productos": 73,
+    "total_productos": 74,
     "productos": [
       {
         "familia": "PAD X7 128GB",
@@ -10150,8 +10120,8 @@
         "precio_sany": 879.0,
         "precio_regular_sany": 1149.0,
         "en_promocion": true,
-        "precio_min_resto_mercado": 899.0,
-        "diferencia_pct": -2.2,
+        "precio_min_resto_mercado": 900.0,
+        "diferencia_pct": -2.3,
         "sany_es_mas_barato": true,
         "url": "https://www.falabella.com.pe/falabella-pe/product/152056274/honor-x8d-8gb256gb-light-blue"
       },
@@ -10313,19 +10283,6 @@
       },
       {
         "familia": "600 512GB",
-        "modelo": "Celular HONOR 600 8GB 512GB VKJ-NX9 Negro",
-        "retailer": "Promart",
-        "tipo": "Smartphone",
-        "precio_sany": 2399.0,
-        "precio_regular_sany": 2599.0,
-        "en_promocion": true,
-        "precio_min_resto_mercado": 2270.0,
-        "diferencia_pct": 5.7,
-        "sany_es_mas_barato": false,
-        "url": "https://www.promart.pe/celular-honor-600-8gb-512gb-vkj-nx9-negro-1001513164/p"
-      },
-      {
-        "familia": "600 512GB",
         "modelo": "Celular Honor 600 512GB, 8GB RAM, cámara trasera 200MP y frontal 50MP, AMOLED 6.57\", dorado",
         "retailer": "Coolbox",
         "tipo": "Smartphone",
@@ -10349,6 +10306,19 @@
         "diferencia_pct": 5.7,
         "sany_es_mas_barato": false,
         "url": "https://www.coolbox.pe/celular-honor-600--8gb-512gb---vkj-nx9----negro-100443637/p"
+      },
+      {
+        "familia": "PAD X7 128GB",
+        "modelo": "Tablet Honor Pad X7 4GB 128GB WIFI",
+        "retailer": "PlazaVea",
+        "tipo": "Tablet",
+        "precio_sany": 489.0,
+        "precio_regular_sany": 499.0,
+        "en_promocion": true,
+        "precio_min_resto_mercado": 449.0,
+        "diferencia_pct": 8.9,
+        "sany_es_mas_barato": false,
+        "url": "https://www.plazavea.com.pe/tablet-honor-pad-x7-4gb-128gb-wifi-101959695/p"
       },
       {
         "familia": "PAD X7 128GB",
@@ -10442,6 +10412,19 @@
         "url": "https://www.promart.pe/celular-honor-600-8gb-512gb-vkj-nx9-golden-1001513167/p"
       },
       {
+        "familia": "600 512GB",
+        "modelo": "Celular HONOR 600 8GB 512GB VKJ-NX9 Negro",
+        "retailer": "Promart",
+        "tipo": "Smartphone",
+        "precio_sany": 2599.0,
+        "precio_regular_sany": null,
+        "en_promocion": false,
+        "precio_min_resto_mercado": 2270.0,
+        "diferencia_pct": 14.5,
+        "sany_es_mas_barato": false,
+        "url": "https://www.promart.pe/celular-honor-600-8gb-512gb-vkj-nx9-negro-1001513164/p"
+      },
+      {
         "familia": "600 SMART 256GB",
         "modelo": "Celular HONOR 600 Smart 5G 6GB Ram 256GB Rom - Morado",
         "retailer": "PlazaVea",
@@ -10479,45 +10462,6 @@
         "diferencia_pct": 16.7,
         "sany_es_mas_barato": false,
         "url": "https://www.coolbox.pe/celular-honor-600-pro-512gb-200mp-5109chgu-s/p"
-      },
-      {
-        "familia": "X5D 256GB",
-        "modelo": "Celular HONOR X5d 4GB Ram 256GB Rom - Negro",
-        "retailer": "PlazaVea",
-        "tipo": "Smartphone",
-        "precio_sany": 699.0,
-        "precio_regular_sany": 799.0,
-        "en_promocion": true,
-        "precio_min_resto_mercado": 589.0,
-        "diferencia_pct": 18.7,
-        "sany_es_mas_barato": false,
-        "url": "https://www.plazavea.com.pe/celular-honor-x5d-4gb-ram-256gb-rom---negro-102251717/p"
-      },
-      {
-        "familia": "X5D 256GB",
-        "modelo": "Celular HONOR X5d 4GB Ram 256GB Rom - Silver",
-        "retailer": "PlazaVea",
-        "tipo": "Smartphone",
-        "precio_sany": 699.0,
-        "precio_regular_sany": 799.0,
-        "en_promocion": true,
-        "precio_min_resto_mercado": 589.0,
-        "diferencia_pct": 18.7,
-        "sany_es_mas_barato": false,
-        "url": "https://www.plazavea.com.pe/celular-honor-x5d-4gb-ram-256gb-rom---silver-102251688/p"
-      },
-      {
-        "familia": "X5D 256GB",
-        "modelo": "Celular HONOR X5d 4GB Ram 256GB Rom - Azul",
-        "retailer": "PlazaVea",
-        "tipo": "Smartphone",
-        "precio_sany": 699.0,
-        "precio_regular_sany": 799.0,
-        "en_promocion": true,
-        "precio_min_resto_mercado": 589.0,
-        "diferencia_pct": 18.7,
-        "sany_es_mas_barato": false,
-        "url": "https://www.plazavea.com.pe/celular-honor-x5d-4gb-ram-256gb-rom---azul-102251679/p"
       },
       {
         "familia": "MAGIC 8 LITE 512GB",
@@ -10622,6 +10566,45 @@
         "diferencia_pct": 22.0,
         "sany_es_mas_barato": false,
         "url": "https://www.sodimac.com.pe/sodimac-pe/articulo/139967880/honor-x7c-8gb256gb-forest-green?exp=so_com"
+      },
+      {
+        "familia": "X5D 256GB",
+        "modelo": "Celular HONOR X5d 4GB Ram 256GB Rom - Negro",
+        "retailer": "PlazaVea",
+        "tipo": "Smartphone",
+        "precio_sany": 699.0,
+        "precio_regular_sany": 799.0,
+        "en_promocion": true,
+        "precio_min_resto_mercado": 569.0,
+        "diferencia_pct": 22.8,
+        "sany_es_mas_barato": false,
+        "url": "https://www.plazavea.com.pe/celular-honor-x5d-4gb-ram-256gb-rom---negro-102251717/p"
+      },
+      {
+        "familia": "X5D 256GB",
+        "modelo": "Celular HONOR X5d 4GB Ram 256GB Rom - Silver",
+        "retailer": "PlazaVea",
+        "tipo": "Smartphone",
+        "precio_sany": 699.0,
+        "precio_regular_sany": 799.0,
+        "en_promocion": true,
+        "precio_min_resto_mercado": 569.0,
+        "diferencia_pct": 22.8,
+        "sany_es_mas_barato": false,
+        "url": "https://www.plazavea.com.pe/celular-honor-x5d-4gb-ram-256gb-rom---silver-102251688/p"
+      },
+      {
+        "familia": "X5D 256GB",
+        "modelo": "Celular HONOR X5d 4GB Ram 256GB Rom - Azul",
+        "retailer": "PlazaVea",
+        "tipo": "Smartphone",
+        "precio_sany": 699.0,
+        "precio_regular_sany": 799.0,
+        "en_promocion": true,
+        "precio_min_resto_mercado": 569.0,
+        "diferencia_pct": 22.8,
+        "sany_es_mas_barato": false,
+        "url": "https://www.plazavea.com.pe/celular-honor-x5d-4gb-ram-256gb-rom---azul-102251679/p"
       },
       {
         "familia": "600E 512GB",
@@ -10979,6 +10962,13 @@
           "precio_promedio": 699.0,
           "precio_max": 699.0,
           "n_ofertas": 3
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 699.0,
+          "precio_promedio": 699.0,
+          "precio_max": 699.0,
+          "n_ofertas": 3
         }
       ],
       "X7E 256GB": [
@@ -11019,6 +11009,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 769.0,
+          "precio_promedio": 934.0,
+          "precio_max": 1099.0,
+          "n_ofertas": 6
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 769.0,
           "precio_promedio": 934.0,
           "precio_max": 1099.0,
@@ -11067,6 +11064,13 @@
           "precio_promedio": 899.0,
           "precio_max": 899.0,
           "n_ofertas": 4
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 899.0,
+          "precio_promedio": 899.0,
+          "precio_max": 899.0,
+          "n_ofertas": 4
         }
       ],
       "600 SMART 256GB": [
@@ -11107,6 +11111,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 1549.0,
+          "precio_promedio": 1549.0,
+          "precio_max": 1549.0,
+          "n_ofertas": 2
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 1549.0,
           "precio_promedio": 1549.0,
           "precio_max": 1549.0,
@@ -11155,6 +11166,13 @@
           "precio_promedio": 598.0,
           "precio_max": 629.0,
           "n_ofertas": 7
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 409.0,
+          "precio_promedio": 598.0,
+          "precio_max": 629.0,
+          "n_ofertas": 7
         }
       ],
       "600 512GB": [
@@ -11199,6 +11217,13 @@
           "precio_promedio": 2428.0,
           "precio_max": 2599.0,
           "n_ofertas": 10
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 2129.0,
+          "precio_promedio": 2448.0,
+          "precio_max": 2599.0,
+          "n_ofertas": 10
         }
       ],
       "600E 512GB": [
@@ -11239,6 +11264,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 1589.0,
+          "precio_promedio": 1973.0,
+          "precio_max": 2199.0,
+          "n_ofertas": 9
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 1589.0,
           "precio_promedio": 1973.0,
           "precio_max": 2199.0,
@@ -11287,6 +11319,13 @@
           "precio_promedio": 3650.0,
           "precio_max": 3999.0,
           "n_ofertas": 7
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 3149.0,
+          "precio_promedio": 3650.0,
+          "precio_max": 3999.0,
+          "n_ofertas": 7
         }
       ],
       "MAGIC 8 LITE 512GB": [
@@ -11327,6 +11366,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 1399.0,
+          "precio_promedio": 1691.0,
+          "precio_max": 2099.0,
+          "n_ofertas": 13
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 1399.0,
           "precio_promedio": 1691.0,
           "precio_max": 2099.0,
@@ -11375,6 +11421,13 @@
           "precio_promedio": 431.0,
           "precio_max": 499.0,
           "n_ofertas": 5
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 349.0,
+          "precio_promedio": 441.0,
+          "precio_max": 499.0,
+          "n_ofertas": 6
         }
       ],
       "X7C 256GB": [
@@ -11419,6 +11472,13 @@
           "precio_promedio": 999.0,
           "precio_max": 999.0,
           "n_ofertas": 2
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 999.0,
+          "precio_promedio": 999.0,
+          "precio_max": 999.0,
+          "n_ofertas": 2
         }
       ],
       "X8D 256GB": [
@@ -11452,6 +11512,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 879.0,
+          "precio_promedio": 879.0,
+          "precio_max": 879.0,
+          "n_ofertas": 1
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 879.0,
           "precio_promedio": 879.0,
           "precio_max": 879.0,
@@ -11500,6 +11567,13 @@
           "precio_promedio": 679.0,
           "precio_max": 679.0,
           "n_ofertas": 2
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 679.0,
+          "precio_promedio": 679.0,
+          "precio_max": 679.0,
+          "n_ofertas": 2
         }
       ]
     }
@@ -11507,21 +11581,12 @@
   "cambios_precio": [
     {
       "retailer": "Promart",
-      "modelo": "Celular Honor 600e 256GB 8GB RAM cámara 108MP velvet grey mas Earbuds X7 Lite",
-      "vendedor": "CARSA",
-      "precio_antes": 1639.0,
-      "precio_ahora": 1569.0,
-      "bajo": true,
-      "variacion_pct": -4.3
-    },
-    {
-      "retailer": "Promart",
       "modelo": "Celular HONOR 600 8GB 512GB VKJ-NX9 Negro",
       "vendedor": "SanyPeru",
-      "precio_antes": 2599.0,
-      "precio_ahora": 2399.0,
-      "bajo": true,
-      "variacion_pct": -7.7
+      "precio_antes": 2399.0,
+      "precio_ahora": 2599.0,
+      "bajo": false,
+      "variacion_pct": 8.3
     },
     {
       "retailer": "Claro",
@@ -11540,114 +11605,6 @@
       "precio_ahora": 619.0,
       "bajo": false,
       "variacion_pct": 29.2
-    },
-    {
-      "retailer": "La Curacao",
-      "modelo": "Celular Honor 600E 5G 256GB Verde + Aud fonos Earbuds",
-      "vendedor": "La Curacao",
-      "precio_antes": 9999.0,
-      "precio_ahora": 1849.0,
-      "bajo": true,
-      "variacion_pct": -81.5
-    },
-    {
-      "retailer": "La Curacao",
-      "modelo": "Celular Honor 600E 5G 256GB 8 Gris + Aud fonos Earbuds",
-      "vendedor": "La Curacao",
-      "precio_antes": 9999.0,
-      "precio_ahora": 1849.0,
-      "bajo": true,
-      "variacion_pct": -81.5
-    },
-    {
-      "retailer": "La Curacao",
-      "modelo": "Celular Honor 600E 5G 256GB 8 Dorado + Aud fonos Earbuds",
-      "vendedor": "La Curacao",
-      "precio_antes": 9999.0,
-      "precio_ahora": 1849.0,
-      "bajo": true,
-      "variacion_pct": -81.5
-    },
-    {
-      "retailer": "La Curacao",
-      "modelo": "Combo Honor Magic 8 Lite 256GB 8GB Rojo + Cocina Surge COCINETA/GAS",
-      "vendedor": "CELULARES PERU SMART SAC",
-      "precio_antes": 1725.0,
-      "precio_ahora": 1898.0,
-      "bajo": false,
-      "variacion_pct": 10.0
-    },
-    {
-      "retailer": "La Curacao",
-      "modelo": "Honor 600e + choiche earbuds X7 lite 256GB 8GB Sprout Green",
-      "vendedor": "CELULARES PERU SMART SAC",
-      "precio_antes": 1874.0,
-      "precio_ahora": 2061.0,
-      "bajo": false,
-      "variacion_pct": 10.0
-    },
-    {
-      "retailer": "La Curacao",
-      "modelo": "Honor 600e + choiche earbuds X7 lite 256GB 8GB Grey",
-      "vendedor": "CELULARES PERU SMART SAC",
-      "precio_antes": 1830.0,
-      "precio_ahora": 2013.0,
-      "bajo": false,
-      "variacion_pct": 10.0
-    },
-    {
-      "retailer": "Tiendas EFE",
-      "modelo": "Celular Honor 600E 5G 256GB Verde + Aud fonos Earbuds",
-      "vendedor": "Tiendas EFE",
-      "precio_antes": 9999.0,
-      "precio_ahora": 1849.0,
-      "bajo": true,
-      "variacion_pct": -81.5
-    },
-    {
-      "retailer": "Tiendas EFE",
-      "modelo": "Celular Honor 600E 5G 256GB 8 Gris + Aud fonos Earbuds",
-      "vendedor": "Tiendas EFE",
-      "precio_antes": 9999.0,
-      "precio_ahora": 1849.0,
-      "bajo": true,
-      "variacion_pct": -81.5
-    },
-    {
-      "retailer": "Tiendas EFE",
-      "modelo": "Celular Honor 600E 5G 256GB 8 Dorado + Aud fonos Earbuds",
-      "vendedor": "Tiendas EFE",
-      "precio_antes": 9999.0,
-      "precio_ahora": 1849.0,
-      "bajo": true,
-      "variacion_pct": -81.5
-    },
-    {
-      "retailer": "Tiendas EFE",
-      "modelo": "Combo Honor Magic 8 Lite 256GB 8GB Rojo + Cocina Surge COCINETA/GAS",
-      "vendedor": "CELULARES PERU SMART SAC",
-      "precio_antes": 1725.0,
-      "precio_ahora": 1898.0,
-      "bajo": false,
-      "variacion_pct": 10.0
-    },
-    {
-      "retailer": "Tiendas EFE",
-      "modelo": "Honor 600e + choiche earbuds X7 lite 256GB 8GB Sprout Green",
-      "vendedor": "CELULARES PERU SMART SAC",
-      "precio_antes": 1874.0,
-      "precio_ahora": 2061.0,
-      "bajo": false,
-      "variacion_pct": 10.0
-    },
-    {
-      "retailer": "Tiendas EFE",
-      "modelo": "Honor 600e + choiche earbuds X7 lite 256GB 8GB Grey",
-      "vendedor": "CELULARES PERU SMART SAC",
-      "precio_antes": 1830.0,
-      "precio_ahora": 2013.0,
-      "bajo": false,
-      "variacion_pct": 10.0
     }
   ],
   "tendencia": {
@@ -11657,7 +11614,8 @@
       "2026-09-08",
       "2026-09-10",
       "2026-09-11",
-      "2026-09-12"
+      "2026-09-12",
+      "2026-09-13"
     ],
     "familias": {
       "X7D 256GB": [
@@ -11700,6 +11658,13 @@
           "fecha": "2026-09-12",
           "precio_min": 709.0,
           "precio_promedio": 858.0,
+          "precio_max": 1299.0,
+          "n_ofertas": 90
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 709.0,
+          "precio_promedio": 857.0,
           "precio_max": 1299.0,
           "n_ofertas": 90
         }
@@ -11746,6 +11711,13 @@
           "precio_promedio": 582.0,
           "precio_max": 899.0,
           "n_ofertas": 108
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 429.0,
+          "precio_promedio": 584.0,
+          "precio_max": 899.0,
+          "n_ofertas": 106
         }
       ],
       "X5C 256GB": [
@@ -11834,6 +11806,13 @@
           "precio_promedio": 1715.0,
           "precio_max": 2299.0,
           "n_ofertas": 84
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 1399.0,
+          "precio_promedio": 1715.0,
+          "precio_max": 2299.0,
+          "n_ofertas": 84
         }
       ],
       "X5D 128GB": [
@@ -11874,6 +11853,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 409.0,
+          "precio_promedio": 517.0,
+          "precio_max": 720.0,
+          "n_ofertas": 82
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 409.0,
           "precio_promedio": 517.0,
           "precio_max": 720.0,
@@ -11922,6 +11908,13 @@
           "precio_promedio": 1570.0,
           "precio_max": 2019.0,
           "n_ofertas": 87
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 1359.0,
+          "precio_promedio": 1567.0,
+          "precio_max": 2019.0,
+          "n_ofertas": 86
         }
       ],
       "400 512GB": [
@@ -11962,6 +11955,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 1729.0,
+          "precio_promedio": 1935.0,
+          "precio_max": 2099.0,
+          "n_ofertas": 12
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 1729.0,
           "precio_promedio": 1935.0,
           "precio_max": 2099.0,
@@ -12010,6 +12010,13 @@
           "precio_promedio": 1382.0,
           "precio_max": 1709.0,
           "n_ofertas": 10
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 1189.0,
+          "precio_promedio": 1382.0,
+          "precio_max": 1709.0,
+          "n_ofertas": 10
         }
       ],
       "600E 256GB": [
@@ -12050,6 +12057,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 1549.0,
+          "precio_promedio": 1799.0,
+          "precio_max": 2219.0,
+          "n_ofertas": 35
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 1549.0,
           "precio_promedio": 1799.0,
           "precio_max": 2219.0,
@@ -12098,6 +12112,13 @@
           "precio_promedio": 887.0,
           "precio_max": 1099.0,
           "n_ofertas": 34
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 769.0,
+          "precio_promedio": 887.0,
+          "precio_max": 1099.0,
+          "n_ofertas": 34
         }
       ],
       "600 PRO 512GB": [
@@ -12138,6 +12159,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 2999.0,
+          "precio_promedio": 3493.0,
+          "precio_max": 4139.0,
+          "n_ofertas": 29
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 2999.0,
           "precio_promedio": 3493.0,
           "precio_max": 4139.0,
@@ -12186,6 +12214,13 @@
           "precio_promedio": 677.0,
           "precio_max": 729.0,
           "n_ofertas": 11
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 610.0,
+          "precio_promedio": 677.0,
+          "precio_max": 729.0,
+          "n_ofertas": 11
         }
       ],
       "X5D 256GB": [
@@ -12230,6 +12265,13 @@
           "precio_promedio": 616.0,
           "precio_max": 699.0,
           "n_ofertas": 14
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 569.0,
+          "precio_promedio": 610.0,
+          "precio_max": 699.0,
+          "n_ofertas": 16
         }
       ],
       "X8D 256GB": [
@@ -12274,6 +12316,13 @@
           "precio_promedio": 1022.0,
           "precio_max": 1299.0,
           "n_ofertas": 73
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 879.0,
+          "precio_promedio": 1022.0,
+          "precio_max": 1299.0,
+          "n_ofertas": 70
         }
       ],
       "PLAY 10 64GB": [
@@ -12314,6 +12363,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 349.0,
+          "precio_promedio": 450.0,
+          "precio_max": 799.0,
+          "n_ofertas": 22
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 349.0,
           "precio_promedio": 450.0,
           "precio_max": 799.0,
@@ -12362,6 +12418,13 @@
           "precio_promedio": 613.0,
           "precio_max": 799.0,
           "n_ofertas": 5
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 449.0,
+          "precio_promedio": 644.0,
+          "precio_max": 799.0,
+          "n_ofertas": 6
         }
       ],
       "X6E 256GB": [
@@ -12402,6 +12465,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 675.0,
+          "precio_promedio": 777.0,
+          "precio_max": 899.0,
+          "n_ofertas": 27
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 675.0,
           "precio_promedio": 777.0,
           "precio_max": 899.0,
@@ -12450,6 +12520,13 @@
           "precio_promedio": 1414.0,
           "precio_max": 1549.0,
           "n_ofertas": 8
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 1349.0,
+          "precio_promedio": 1414.0,
+          "precio_max": 1549.0,
+          "n_ofertas": 8
         }
       ],
       "X7D": [
@@ -12490,6 +12567,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 799.0,
+          "precio_promedio": 852.0,
+          "precio_max": 879.0,
+          "n_ofertas": 3
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 799.0,
           "precio_promedio": 852.0,
           "precio_max": 879.0,
@@ -12538,6 +12622,13 @@
           "precio_promedio": 1059.0,
           "precio_max": 1109.0,
           "n_ofertas": 3
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 959.0,
+          "precio_promedio": 1059.0,
+          "precio_max": 1109.0,
+          "n_ofertas": 3
         }
       ],
       "600E": [
@@ -12578,6 +12669,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 1774.0,
+          "precio_promedio": 1816.0,
+          "precio_max": 1899.0,
+          "n_ofertas": 3
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 1774.0,
           "precio_promedio": 1816.0,
           "precio_max": 1899.0,
@@ -12626,6 +12724,13 @@
           "precio_promedio": 1629.0,
           "precio_max": 1629.0,
           "n_ofertas": 2
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 1629.0,
+          "precio_promedio": 1629.0,
+          "precio_max": 1629.0,
+          "n_ofertas": 2
         }
       ],
       "X6C": [
@@ -12666,6 +12771,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 734.0,
+          "precio_promedio": 734.0,
+          "precio_max": 734.0,
+          "n_ofertas": 2
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 734.0,
           "precio_promedio": 734.0,
           "precio_max": 734.0,
@@ -12714,6 +12826,13 @@
           "precio_promedio": 1883.0,
           "precio_max": 2199.0,
           "n_ofertas": 59
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 1589.0,
+          "precio_promedio": 1885.0,
+          "precio_max": 2199.0,
+          "n_ofertas": 58
         }
       ],
       "MAGIC 8 PRO 512GB": [
@@ -12758,6 +12877,13 @@
           "precio_promedio": 4787.0,
           "precio_max": 5098.0,
           "n_ofertas": 11
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 4469.0,
+          "precio_promedio": 4760.0,
+          "precio_max": 5098.0,
+          "n_ofertas": 12
         }
       ],
       "MAGIC 7 PRO 512GB": [
@@ -12798,6 +12924,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 3558.0,
+          "precio_promedio": 3664.0,
+          "precio_max": 3771.0,
+          "n_ofertas": 4
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 3558.0,
           "precio_promedio": 3664.0,
           "precio_max": 3771.0,
@@ -12846,6 +12979,13 @@
           "precio_promedio": 1499.0,
           "precio_max": 1499.0,
           "n_ofertas": 4
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 1499.0,
+          "precio_promedio": 1499.0,
+          "precio_max": 1499.0,
+          "n_ofertas": 4
         }
       ],
       "X9D 512GB": [
@@ -12886,6 +13026,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 1525.0,
+          "precio_promedio": 1652.0,
+          "precio_max": 1799.0,
+          "n_ofertas": 7
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 1525.0,
           "precio_promedio": 1652.0,
           "precio_max": 1799.0,
@@ -12934,6 +13081,13 @@
           "precio_promedio": 1026.0,
           "precio_max": 1029.0,
           "n_ofertas": 3
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 1019.0,
+          "precio_promedio": 1026.0,
+          "precio_max": 1029.0,
+          "n_ofertas": 3
         }
       ],
       "X6C 256GB": [
@@ -12974,6 +13128,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 599.0,
+          "precio_promedio": 919.0,
+          "precio_max": 999.0,
+          "n_ofertas": 5
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 599.0,
           "precio_promedio": 919.0,
           "precio_max": 999.0,
@@ -13022,6 +13183,13 @@
           "precio_promedio": 1329.0,
           "precio_max": 1329.0,
           "n_ofertas": 1
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 1329.0,
+          "precio_promedio": 1329.0,
+          "precio_max": 1329.0,
+          "n_ofertas": 2
         }
       ],
       "X5C 128GB": [
@@ -13062,6 +13230,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 399.0,
+          "precio_promedio": 521.0,
+          "precio_max": 699.0,
+          "n_ofertas": 57
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 399.0,
           "precio_promedio": 521.0,
           "precio_max": 699.0,
@@ -13110,6 +13285,13 @@
           "precio_promedio": 399.0,
           "precio_max": 399.0,
           "n_ofertas": 3
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 399.0,
+          "precio_promedio": 399.0,
+          "precio_max": 399.0,
+          "n_ofertas": 2
         }
       ],
       "600 512GB": [
@@ -13154,6 +13336,13 @@
           "precio_promedio": 2408.0,
           "precio_max": 2599.0,
           "n_ofertas": 47
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 2129.0,
+          "precio_promedio": 2411.0,
+          "precio_max": 2599.0,
+          "n_ofertas": 46
         }
       ],
       "600 256GB": [
@@ -13194,6 +13383,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 1449.0,
+          "precio_promedio": 2249.0,
+          "precio_max": 2639.0,
+          "n_ofertas": 12
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 1449.0,
           "precio_promedio": 2249.0,
           "precio_max": 2639.0,
@@ -13242,6 +13438,13 @@
           "precio_promedio": 1357.0,
           "precio_max": 1459.0,
           "n_ofertas": 17
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 1199.0,
+          "precio_promedio": 1357.0,
+          "precio_max": 1459.0,
+          "n_ofertas": 17
         }
       ],
       "400 PRO 512GB": [
@@ -13282,6 +13485,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 2749.0,
+          "precio_promedio": 2938.0,
+          "precio_max": 3299.0,
+          "n_ofertas": 12
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 2749.0,
           "precio_promedio": 2938.0,
           "precio_max": 3299.0,
@@ -13330,6 +13540,13 @@
           "precio_promedio": 498.0,
           "precio_max": 699.0,
           "n_ofertas": 22
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 449.0,
+          "precio_promedio": 498.0,
+          "precio_max": 699.0,
+          "n_ofertas": 22
         }
       ],
       "400 LITE 256GB": [
@@ -13370,6 +13587,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 1269.0,
+          "precio_promedio": 1312.0,
+          "precio_max": 1399.0,
+          "n_ofertas": 3
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 1269.0,
           "precio_promedio": 1312.0,
           "precio_max": 1399.0,
@@ -13418,6 +13642,13 @@
           "precio_promedio": 721.0,
           "precio_max": 721.0,
           "n_ofertas": 2
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 721.0,
+          "precio_promedio": 721.0,
+          "precio_max": 721.0,
+          "n_ofertas": 2
         }
       ],
       "PLAY 10A 128GB": [
@@ -13458,6 +13689,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 409.0,
+          "precio_promedio": 504.0,
+          "precio_max": 599.0,
+          "n_ofertas": 4
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 409.0,
           "precio_promedio": 504.0,
           "precio_max": 599.0,
@@ -13506,6 +13744,13 @@
           "precio_promedio": 2049.0,
           "precio_max": 2049.0,
           "n_ofertas": 2
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 2049.0,
+          "precio_promedio": 2049.0,
+          "precio_max": 2049.0,
+          "n_ofertas": 2
         }
       ],
       "200 PRO 512GB": [
@@ -13550,6 +13795,13 @@
           "precio_promedio": 2199.0,
           "precio_max": 2199.0,
           "n_ofertas": 2
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 2199.0,
+          "precio_promedio": 2199.0,
+          "precio_max": 2199.0,
+          "n_ofertas": 2
         }
       ],
       "X7C 256GB": [
@@ -13590,6 +13842,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 819.0,
+          "precio_promedio": 909.0,
+          "precio_max": 999.0,
+          "n_ofertas": 4
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 819.0,
           "precio_promedio": 909.0,
           "precio_max": 999.0,
@@ -13668,6 +13927,13 @@
           "precio_promedio": 1032.0,
           "precio_max": 1179.0,
           "n_ofertas": 11
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 849.0,
+          "precio_promedio": 1021.0,
+          "precio_max": 1179.0,
+          "n_ofertas": 12
         }
       ],
       "PAD X8B 128GB": [
@@ -13712,6 +13978,13 @@
           "precio_promedio": 735.0,
           "precio_max": 749.0,
           "n_ofertas": 5
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 719.0,
+          "precio_promedio": 734.0,
+          "precio_max": 749.0,
+          "n_ofertas": 6
         }
       ],
       "PAD X7 128GB": [
@@ -13756,6 +14029,13 @@
           "precio_promedio": 453.0,
           "precio_max": 499.0,
           "n_ofertas": 14
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 349.0,
+          "precio_promedio": 457.0,
+          "precio_max": 499.0,
+          "n_ofertas": 19
         }
       ],
       "PAD 10 256GB": [
@@ -13800,6 +14080,13 @@
           "precio_promedio": 1699.0,
           "precio_max": 1699.0,
           "n_ofertas": 2
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 1699.0,
+          "precio_promedio": 1699.0,
+          "precio_max": 1699.0,
+          "n_ofertas": 3
         }
       ],
       "X6S 128GB": [
@@ -13840,6 +14127,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 1500.0,
+          "precio_promedio": 1500.0,
+          "precio_max": 1500.0,
+          "n_ofertas": 1
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 1500.0,
           "precio_promedio": 1500.0,
           "precio_max": 1500.0,
@@ -13888,6 +14182,13 @@
           "precio_promedio": 1200.0,
           "precio_max": 1200.0,
           "n_ofertas": 1
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 1200.0,
+          "precio_promedio": 1200.0,
+          "precio_max": 1200.0,
+          "n_ofertas": 1
         }
       ],
       "MAGIC 7 LITE 256GB": [
@@ -13928,6 +14229,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 1599.0,
+          "precio_promedio": 1599.0,
+          "precio_max": 1599.0,
+          "n_ofertas": 2
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 1599.0,
           "precio_promedio": 1599.0,
           "precio_max": 1599.0,
@@ -14057,6 +14365,13 @@
           "precio_promedio": 3892.0,
           "precio_max": 4139.0,
           "n_ofertas": 3
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 3399.0,
+          "precio_promedio": 3892.0,
+          "precio_max": 4139.0,
+          "n_ofertas": 3
         }
       ],
       "X7E PLUS": [
@@ -14097,6 +14412,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 1189.0,
+          "precio_promedio": 1189.0,
+          "precio_max": 1189.0,
+          "n_ofertas": 2
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 1189.0,
           "precio_promedio": 1189.0,
           "precio_max": 1189.0,
@@ -14145,6 +14467,13 @@
           "precio_promedio": 879.0,
           "precio_max": 879.0,
           "n_ofertas": 2
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 879.0,
+          "precio_promedio": 879.0,
+          "precio_max": 879.0,
+          "n_ofertas": 2
         }
       ],
       "600 SMART": [
@@ -14185,6 +14514,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 1759.0,
+          "precio_promedio": 1759.0,
+          "precio_max": 1759.0,
+          "n_ofertas": 3
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 1759.0,
           "precio_promedio": 1759.0,
           "precio_max": 1759.0,
@@ -14233,6 +14569,13 @@
           "precio_promedio": 549.0,
           "precio_max": 619.0,
           "n_ofertas": 2
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 479.0,
+          "precio_promedio": 549.0,
+          "precio_max": 619.0,
+          "n_ofertas": 2
         }
       ],
       "600": [
@@ -14273,6 +14616,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 1849.0,
+          "precio_promedio": 2784.0,
+          "precio_max": 3139.0,
+          "n_ofertas": 6
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 1849.0,
           "precio_promedio": 2784.0,
           "precio_max": 3139.0,
@@ -14321,6 +14671,13 @@
           "precio_promedio": 1809.0,
           "precio_max": 1809.0,
           "n_ofertas": 4
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 1809.0,
+          "precio_promedio": 1809.0,
+          "precio_max": 1809.0,
+          "n_ofertas": 4
         }
       ],
       "MAGIC 8 PRO": [
@@ -14361,6 +14718,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 6139.0,
+          "precio_promedio": 6139.0,
+          "precio_max": 6139.0,
+          "n_ofertas": 1
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 6139.0,
           "precio_promedio": 6139.0,
           "precio_max": 6139.0,
@@ -14409,6 +14773,13 @@
           "precio_promedio": 89.0,
           "precio_max": 89.0,
           "n_ofertas": 1
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 89.0,
+          "precio_promedio": 89.0,
+          "precio_max": 89.0,
+          "n_ofertas": 1
         }
       ],
       "CHOICE X7E ACTIVE": [
@@ -14453,6 +14824,13 @@
           "precio_promedio": 55.0,
           "precio_max": 59.0,
           "n_ofertas": 3
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 50.9,
+          "precio_promedio": 55.0,
+          "precio_max": 59.0,
+          "n_ofertas": 2
         }
       ],
       "CHOICE WATCH 2I": [
@@ -14497,6 +14875,13 @@
           "precio_promedio": 141.0,
           "precio_max": 189.0,
           "n_ofertas": 7
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 116.0,
+          "precio_promedio": 144.0,
+          "precio_max": 189.0,
+          "n_ofertas": 6
         }
       ],
       "MAGIC8 LITE 512GB": [
@@ -14537,6 +14922,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 1599.0,
+          "precio_promedio": 1599.0,
+          "precio_max": 1599.0,
+          "n_ofertas": 2
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 1599.0,
           "precio_promedio": 1599.0,
           "precio_max": 1599.0,
@@ -14585,6 +14977,13 @@
           "precio_promedio": 1599.0,
           "precio_max": 1599.0,
           "n_ofertas": 1
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 1599.0,
+          "precio_promedio": 1599.0,
+          "precio_max": 1599.0,
+          "n_ofertas": 1
         }
       ],
       "WATCH 5": [
@@ -14625,6 +15024,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 159.0,
+          "precio_promedio": 159.0,
+          "precio_max": 159.0,
+          "n_ofertas": 1
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 159.0,
           "precio_promedio": 159.0,
           "precio_max": 159.0,
@@ -14673,6 +15079,13 @@
           "precio_promedio": 679.0,
           "precio_max": 679.0,
           "n_ofertas": 2
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 679.0,
+          "precio_promedio": 679.0,
+          "precio_max": 679.0,
+          "n_ofertas": 2
         }
       ],
       "400 256GB": [
@@ -14713,6 +15126,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 2209.0,
+          "precio_promedio": 2209.0,
+          "precio_max": 2209.0,
+          "n_ofertas": 2
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 2209.0,
           "precio_promedio": 2209.0,
           "precio_max": 2209.0,
@@ -14761,6 +15181,13 @@
           "precio_promedio": 1599.0,
           "precio_max": 1599.0,
           "n_ofertas": 1
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 1599.0,
+          "precio_promedio": 1599.0,
+          "precio_max": 1599.0,
+          "n_ofertas": 1
         }
       ],
       "X6E": [
@@ -14784,6 +15211,13 @@
           "precio_promedio": 769.0,
           "precio_max": 769.0,
           "n_ofertas": 1
+        },
+        {
+          "fecha": "2026-09-13",
+          "precio_min": 769.0,
+          "precio_promedio": 769.0,
+          "precio_max": 769.0,
+          "n_ofertas": 1
         }
       ],
       "X7E": [
@@ -14803,6 +15237,13 @@
         },
         {
           "fecha": "2026-09-12",
+          "precio_min": 869.0,
+          "precio_promedio": 869.0,
+          "precio_max": 869.0,
+          "n_ofertas": 1
+        },
+        {
+          "fecha": "2026-09-13",
           "precio_min": 869.0,
           "precio_promedio": 869.0,
           "precio_max": 869.0,
@@ -14841,6 +15282,11 @@
           "fecha": "2026-09-12",
           "honor_min": 50.9,
           "competencia_min": 37.9
+        },
+        {
+          "fecha": "2026-09-13",
+          "honor_min": 50.9,
+          "competencia_min": 37.9
         }
       ],
       "S/600 - S/1,000": [
@@ -14871,6 +15317,11 @@
         },
         {
           "fecha": "2026-09-12",
+          "honor_min": 605.0,
+          "competencia_min": 603.0
+        },
+        {
+          "fecha": "2026-09-13",
           "honor_min": 605.0,
           "competencia_min": 603.0
         }
@@ -14905,6 +15356,11 @@
           "fecha": "2026-09-12",
           "honor_min": 1000.0,
           "competencia_min": 1009.0
+        },
+        {
+          "fecha": "2026-09-13",
+          "honor_min": 1000.0,
+          "competencia_min": 1009.0
         }
       ],
       "S/1,500 - S/2,500": [
@@ -14935,6 +15391,11 @@
         },
         {
           "fecha": "2026-09-12",
+          "honor_min": 1500.0,
+          "competencia_min": 1500.0
+        },
+        {
+          "fecha": "2026-09-13",
           "honor_min": 1500.0,
           "competencia_min": 1500.0
         }
@@ -14969,6 +15430,11 @@
           "fecha": "2026-09-12",
           "honor_min": 2519.0,
           "competencia_min": 2509.0
+        },
+        {
+          "fecha": "2026-09-13",
+          "honor_min": 2519.0,
+          "competencia_min": 2509.0
         }
       ],
       "Más de S/4,000": [
@@ -15001,6 +15467,11 @@
           "fecha": "2026-09-12",
           "honor_min": 4139.0,
           "competencia_min": 4000.0
+        },
+        {
+          "fecha": "2026-09-13",
+          "honor_min": 4139.0,
+          "competencia_min": 4000.0
         }
       ]
     },
@@ -15011,7 +15482,8 @@
         "2026-09-08",
         "2026-09-10",
         "2026-09-11",
-        "2026-09-12"
+        "2026-09-12",
+        "2026-09-13"
       ],
       "vendedores": [
         {
@@ -15023,6 +15495,7 @@
             44,
             20,
             23,
+            0,
             0
           ],
           "total_cambios": 145
@@ -15036,6 +15509,7 @@
             0,
             22,
             2,
+            0,
             0
           ],
           "total_cambios": 32
@@ -15049,9 +15523,10 @@
             12,
             0,
             0,
+            1,
             1
           ],
-          "total_cambios": 25
+          "total_cambios": 26
         },
         {
           "vendedor": "Tienda Claro",
@@ -15062,6 +15537,7 @@
             11,
             0,
             9,
+            0,
             0
           ],
           "total_cambios": 20
@@ -15075,6 +15551,7 @@
             5,
             0,
             10,
+            0,
             0
           ],
           "total_cambios": 15
@@ -15088,17 +15565,19 @@
             0,
             2,
             0,
+            0,
             0
           ],
           "total_cambios": 14
         },
         {
           "vendedor": "F MOBILE TECH",
-          "n_ofertas": 32,
+          "n_ofertas": 33,
           "cambios_por_fecha": [
             0,
             3,
             3,
+            0,
             0,
             0,
             0
@@ -15114,6 +15593,7 @@
             3,
             0,
             0,
+            0,
             0
           ],
           "total_cambios": 6
@@ -15125,6 +15605,7 @@
             0,
             0,
             6,
+            0,
             0,
             0,
             0
@@ -15140,6 +15621,7 @@
             2,
             0,
             0,
+            0,
             0
           ],
           "total_cambios": 4
@@ -15153,7 +15635,8 @@
             0,
             0,
             0,
-            3
+            3,
+            0
           ],
           "total_cambios": 3
         },
@@ -15166,7 +15649,8 @@
             0,
             0,
             0,
-            3
+            3,
+            0
           ],
           "total_cambios": 3
         },
@@ -15179,6 +15663,7 @@
             0,
             2,
             0,
+            0,
             0
           ],
           "total_cambios": 2
@@ -15190,6 +15675,7 @@
             0,
             1,
             1,
+            0,
             0,
             0,
             0
@@ -15205,6 +15691,7 @@
             0,
             0,
             2,
+            0,
             0
           ],
           "total_cambios": 2
@@ -15218,6 +15705,7 @@
             1,
             0,
             0,
+            0,
             0
           ],
           "total_cambios": 2
@@ -15226,6 +15714,7 @@
           "vendedor": "Covers Store Perú",
           "n_ofertas": 177,
           "cambios_por_fecha": [
+            0,
             0,
             0,
             0,
@@ -15244,6 +15733,7 @@
             0,
             0,
             0,
+            0,
             0
           ],
           "total_cambios": 0
@@ -15252,6 +15742,7 @@
           "vendedor": "RRJ ELECTRONICS",
           "n_ofertas": 34,
           "cambios_por_fecha": [
+            0,
             0,
             0,
             0,
@@ -15270,6 +15761,7 @@
             0,
             0,
             0,
+            0,
             0
           ],
           "total_cambios": 0
@@ -15278,6 +15770,7 @@
           "vendedor": "Telcelperu",
           "n_ofertas": 28,
           "cambios_por_fecha": [
+            0,
             0,
             0,
             0,
@@ -15296,6 +15789,7 @@
             0,
             0,
             0,
+            0,
             0
           ],
           "total_cambios": 0
@@ -15304,6 +15798,7 @@
           "vendedor": "Intx Store",
           "n_ofertas": 27,
           "cambios_por_fecha": [
+            0,
             0,
             0,
             0,
@@ -15322,6 +15817,7 @@
             0,
             0,
             0,
+            0,
             0
           ],
           "total_cambios": 0
@@ -15330,6 +15826,7 @@
           "vendedor": "MI CEL PERU",
           "n_ofertas": 23,
           "cambios_por_fecha": [
+            0,
             0,
             0,
             0,
@@ -15348,7 +15845,7 @@
         "vendedor": "Rrj Electronics Sac",
         "vendedor_tercero": true,
         "n_ofertas": 6,
-        "sobreprecio_promedio_pct": 71.4,
+        "sobreprecio_promedio_pct": 76.4,
         "clasificacion": "premium/caro",
         "ejemplo_mas_caro": {
           "sobreprecio_pct": 128.93982808022923,
@@ -15361,10 +15858,10 @@
         "ejemplo_mas_barato": {
           "sobreprecio_pct": 47.781569965870304,
           "familia": "X8D 256GB",
-          "modelo": "CELULAR X8D 8RAM 256GB NEGRO",
+          "modelo": "CELULAR X8D 8RAM 256GB AZUL.",
           "retailer": "Falabella",
           "precio": 1299.0,
-          "url": "https://www.falabella.com.pe/falabella-pe/product/153509665/celular-honor-x8d-8ram-256gb-negro"
+          "url": "https://www.falabella.com.pe/falabella-pe/product/153512351/celular-honor-x8d-8ram-256gb-azul"
         }
       },
       {
@@ -15462,8 +15959,8 @@
       {
         "vendedor": "SanyPeru",
         "vendedor_tercero": true,
-        "n_ofertas": 40,
-        "sobreprecio_promedio_pct": 35.2,
+        "n_ofertas": 41,
+        "sobreprecio_promedio_pct": 35.8,
         "clasificacion": "premium/caro",
         "ejemplo_mas_caro": {
           "sobreprecio_pct": 53.789731051344745,
@@ -15474,19 +15971,19 @@
           "url": "https://www.plazavea.com.pe/celular-honor-x5d-4gb-128gb-naa-lx3-silver-102153376/p"
         },
         "ejemplo_mas_barato": {
-          "sobreprecio_pct": 12.682010333489902,
-          "familia": "600 512GB",
-          "modelo": "Celular HONOR 600 8GB 512GB VKJ-NX9 Negro",
-          "retailer": "Promart",
-          "precio": 2399.0,
-          "url": "https://www.promart.pe/celular-honor-600-8gb-512gb-vkj-nx9-negro-1001513164/p"
+          "sobreprecio_pct": 14.825796886582655,
+          "familia": "600 SMART 256GB",
+          "modelo": "Celular HONOR 600 Smart 5G 6GB Ram 256GB Rom - Morado",
+          "retailer": "PlazaVea",
+          "precio": 1549.0,
+          "url": "https://www.plazavea.com.pe/celular-honor-600-smart-5g-6gb-ram-256gb-rom---morado-102248055/p"
         }
       },
       {
         "vendedor": "La Curacao",
         "vendedor_tercero": false,
         "n_ofertas": 38,
-        "sobreprecio_promedio_pct": 32.9,
+        "sobreprecio_promedio_pct": 33.0,
         "clasificacion": "premium/caro",
         "ejemplo_mas_caro": {
           "sobreprecio_pct": 82.1256038647343,
@@ -15509,7 +16006,7 @@
         "vendedor": "Tiendas EFE",
         "vendedor_tercero": false,
         "n_ofertas": 39,
-        "sobreprecio_promedio_pct": 32.4,
+        "sobreprecio_promedio_pct": 32.5,
         "clasificacion": "premium/caro",
         "ejemplo_mas_caro": {
           "sobreprecio_pct": 82.1256038647343,
@@ -15572,6 +16069,52 @@
           "retailer": "PlazaVea",
           "precio": 449.0,
           "url": "https://www.plazavea.com.pe/honor-x5c-64gb-4gb-ram-negro-102072917/p"
+        }
+      },
+      {
+        "vendedor": "RAYKOV",
+        "vendedor_tercero": true,
+        "n_ofertas": 4,
+        "sobreprecio_promedio_pct": 30.4,
+        "clasificacion": "premium/caro",
+        "ejemplo_mas_caro": {
+          "sobreprecio_pct": 55.00705218617772,
+          "familia": "X7D 256GB",
+          "modelo": "Celular Honor X7d 8GB RAM 256GB ROM - Silver",
+          "retailer": "PlazaVea",
+          "precio": 1099.0,
+          "url": "https://www.plazavea.com.pe/celular-honor-x7d-8gb-ram-256gb-rom---silver-102329589/p"
+        },
+        "ejemplo_mas_barato": {
+          "sobreprecio_pct": 4.662004662004662,
+          "familia": "X5C PLUS 256GB",
+          "modelo": "Celular Honor X5C Plus 4GB RAM 256GB rom - Negro 50 mgpx",
+          "retailer": "PlazaVea",
+          "precio": 449.0,
+          "url": "https://www.plazavea.com.pe/celular-honor-x5c-plus-4gb-ram-256gb-rom-negro-50-mgpx-102149753/p"
+        }
+      },
+      {
+        "vendedor": "STARK COMPUTER",
+        "vendedor_tercero": true,
+        "n_ofertas": 3,
+        "sobreprecio_promedio_pct": 28.7,
+        "clasificacion": "premium/caro",
+        "ejemplo_mas_caro": {
+          "sobreprecio_pct": 28.653295128939828,
+          "familia": "PAD X7 128GB",
+          "modelo": "Tabler Honor Pad X7 128gb Wi-fi",
+          "retailer": "PlazaVea",
+          "precio": 449.0,
+          "url": "https://www.plazavea.com.pe/tabler-honor-pad-x7-128gb-wi-fi-102068796/p"
+        },
+        "ejemplo_mas_barato": {
+          "sobreprecio_pct": 28.653295128939828,
+          "familia": "PAD X7 128GB",
+          "modelo": "Tabler Honor Pad X7 128gb Wi-fi",
+          "retailer": "PlazaVea",
+          "precio": 449.0,
+          "url": "https://www.plazavea.com.pe/tabler-honor-pad-x7-128gb-wi-fi-102068796/p"
         }
       },
       {
@@ -15805,29 +16348,6 @@
         }
       },
       {
-        "vendedor": "RAYKOV",
-        "vendedor_tercero": true,
-        "n_ofertas": 6,
-        "sobreprecio_promedio_pct": 21.0,
-        "clasificacion": "premium/caro",
-        "ejemplo_mas_caro": {
-          "sobreprecio_pct": 55.00705218617772,
-          "familia": "X7D 256GB",
-          "modelo": "Celular Honor X7d 8GB RAM 256GB ROM - Silver",
-          "retailer": "PlazaVea",
-          "precio": 1099.0,
-          "url": "https://www.plazavea.com.pe/celular-honor-x7d-8gb-ram-256gb-rom---silver-102329589/p"
-        },
-        "ejemplo_mas_barato": {
-          "sobreprecio_pct": 2.2753128555176336,
-          "familia": "X8D 256GB",
-          "modelo": "Celular HONOR X8D 256GB ROM 8GB RAM - NEGRO 108 mpx",
-          "retailer": "PlazaVea",
-          "precio": 899.0,
-          "url": "https://www.plazavea.com.pe/celular-honor-x8d-256gb-rom-8gb-ram-negro-108-mpx-102198481/p"
-        }
-      },
-      {
         "vendedor": "Rash Peru S.R.L",
         "vendedor_tercero": true,
         "n_ofertas": 10,
@@ -15922,16 +16442,16 @@
       {
         "vendedor": "VEGA SAC",
         "vendedor_tercero": true,
-        "n_ofertas": 4,
-        "sobreprecio_promedio_pct": 18.7,
+        "n_ofertas": 6,
+        "sobreprecio_promedio_pct": 19.6,
         "clasificacion": "premium/caro",
         "ejemplo_mas_caro": {
           "sobreprecio_pct": 37.249283667621775,
           "familia": "PAD X7 128GB",
           "modelo": "Tablet HONOR PAD X7 8.7 WiFi 4GB 128GB Android 15 Case Gris",
-          "retailer": "Promart",
+          "retailer": "PlazaVea",
           "precio": 479.0,
-          "url": "https://www.promart.pe/tablet-honor-pad-x7-8-7-wifi-4gb-128gb-android-15-case-gris-1001461046/p"
+          "url": "https://www.plazavea.com.pe/tablet-honor-pad-x7-8-7-wifi-4gb-128gb-android-15-case-gris-102059270/p"
         },
         "ejemplo_mas_barato": {
           "sobreprecio_pct": 0.0,
@@ -15989,6 +16509,29 @@
         }
       },
       {
+        "vendedor": "PHONE SPOT PERU",
+        "vendedor_tercero": true,
+        "n_ofertas": 9,
+        "sobreprecio_promedio_pct": 18.0,
+        "clasificacion": "premium/caro",
+        "ejemplo_mas_caro": {
+          "sobreprecio_pct": 40.90267983074753,
+          "familia": "X7D 256GB",
+          "modelo": "HONOR X7D 4G 6GB-256GB VELVET BLACK - ENTREGA INMEDIATA",
+          "retailer": "PlazaVea",
+          "precio": 999.0,
+          "url": "https://www.plazavea.com.pe/honor-x7d-4g-6gb-256gb-velvet-black-entrega-inmediata-102083804/p"
+        },
+        "ejemplo_mas_barato": {
+          "sobreprecio_pct": 0.0,
+          "familia": "X5D 64GB",
+          "modelo": "HONOR X5D 4GB - 64GB METEOR SILVER",
+          "retailer": "PlazaVea",
+          "precio": 399.0,
+          "url": "https://www.plazavea.com.pe/honor-x5d-4gb-64gb-meteor-silver-102155841/p"
+        }
+      },
+      {
         "vendedor": "ITG PERU",
         "vendedor_tercero": true,
         "n_ofertas": 16,
@@ -16009,6 +16552,29 @@
           "retailer": "PlazaVea",
           "precio": 509.0,
           "url": "https://www.plazavea.com.pe/celular-honor-play-10-4g-4gb-128gb-negro-102251032/p"
+        }
+      },
+      {
+        "vendedor": "MI CEL PERU",
+        "vendedor_tercero": true,
+        "n_ofertas": 22,
+        "sobreprecio_promedio_pct": 17.3,
+        "clasificacion": "premium/caro",
+        "ejemplo_mas_caro": {
+          "sobreprecio_pct": 83.21579689703809,
+          "familia": "X7D 256GB",
+          "modelo": "Celular Smartphone HONOR X7d (8GB+256GB) - Black",
+          "retailer": "La Curacao",
+          "precio": 1299.0,
+          "url": "https://www.lacuracao.pe/celular-smartphone-honor-x7d-8gb256gb-black-36035968x7d-8gb-256-black0408202607291712365.html"
+        },
+        "ejemplo_mas_barato": {
+          "sobreprecio_pct": 0.0,
+          "familia": "200 256GB",
+          "modelo": "Celular Honor 200 5g Dual Sim Phone 12 Gb Ram 256 Gb Rom Black Negro",
+          "retailer": "Promart",
+          "precio": 1189.0,
+          "url": "https://www.promart.pe/celular-honor-200-5g-dual-sim-phone-12-gb-ram-256-gb-rom-black-negro-1001513228/p"
         }
       },
       {
@@ -16058,29 +16624,6 @@
         }
       },
       {
-        "vendedor": "MI CEL PERU",
-        "vendedor_tercero": true,
-        "n_ofertas": 22,
-        "sobreprecio_promedio_pct": 16.3,
-        "clasificacion": "premium/caro",
-        "ejemplo_mas_caro": {
-          "sobreprecio_pct": 83.21579689703809,
-          "familia": "X7D 256GB",
-          "modelo": "Celular Smartphone HONOR X7d (8GB+256GB) - Black",
-          "retailer": "La Curacao",
-          "precio": 1299.0,
-          "url": "https://www.lacuracao.pe/celular-smartphone-honor-x7d-8gb256gb-black-36035968x7d-8gb-256-black0408202607291712365.html"
-        },
-        "ejemplo_mas_barato": {
-          "sobreprecio_pct": 0.0,
-          "familia": "X5D 256GB",
-          "modelo": "Celular Honor X5D 4GB+256GB MIDNIGHT BLACK",
-          "retailer": "PlazaVea",
-          "precio": 589.0,
-          "url": "https://www.plazavea.com.pe/celular-honor-x5d-4gb-256gb-midnight-black-102269527/p"
-        }
-      },
-      {
         "vendedor": "ELECTRODOMESTICOS GALEXA",
         "vendedor_tercero": true,
         "n_ofertas": 10,
@@ -16101,29 +16644,6 @@
           "retailer": "PlazaVea",
           "precio": 1499.0,
           "url": "https://www.plazavea.com.pe/celular-honor-magic7-lite-512gb-8gb-108-mp-titanium-purple-102214285/p"
-        }
-      },
-      {
-        "vendedor": "PHONE SPOT PERU",
-        "vendedor_tercero": true,
-        "n_ofertas": 10,
-        "sobreprecio_promedio_pct": 16.2,
-        "clasificacion": "premium/caro",
-        "ejemplo_mas_caro": {
-          "sobreprecio_pct": 40.90267983074753,
-          "familia": "X7D 256GB",
-          "modelo": "HONOR X7D 4G 6GB-256GB VELVET BLACK - ENTREGA INMEDIATA",
-          "retailer": "PlazaVea",
-          "precio": 999.0,
-          "url": "https://www.plazavea.com.pe/honor-x7d-4g-6gb-256gb-velvet-black-entrega-inmediata-102083804/p"
-        },
-        "ejemplo_mas_barato": {
-          "sobreprecio_pct": 0.0,
-          "familia": "X5D 64GB",
-          "modelo": "HONOR X5D 4GB - 64GB TILDA BLUE",
-          "retailer": "PlazaVea",
-          "precio": 399.0,
-          "url": "https://www.plazavea.com.pe/honor-x5d-4gb-64gb-tilda-blue-102155865/p"
         }
       },
       {
@@ -16244,8 +16764,8 @@
       {
         "vendedor": "F MOBILE TECH",
         "vendedor_tercero": true,
-        "n_ofertas": 26,
-        "sobreprecio_promedio_pct": 13.2,
+        "n_ofertas": 27,
+        "sobreprecio_promedio_pct": 12.7,
         "clasificacion": "alineado al mercado",
         "ejemplo_mas_caro": {
           "sobreprecio_pct": 36.67136812411847,
@@ -16313,24 +16833,24 @@
       {
         "vendedor": "oechsle",
         "vendedor_tercero": true,
-        "n_ofertas": 35,
+        "n_ofertas": 38,
         "sobreprecio_promedio_pct": 11.8,
         "clasificacion": "alineado al mercado",
         "ejemplo_mas_caro": {
           "sobreprecio_pct": 34.38395415472779,
           "familia": "PAD X7 128GB",
           "modelo": "Tablet Honor PAD X7 128GB",
-          "retailer": "Promart",
+          "retailer": "PlazaVea",
           "precio": 469.0,
-          "url": "https://www.promart.pe/tablet-honor-pad-x7-128gb-1001400279/p"
+          "url": "https://www.plazavea.com.pe/tablet-honor-pad-x7-128gb-102074259/p"
         },
         "ejemplo_mas_barato": {
           "sobreprecio_pct": 0.0,
           "familia": "PAD 10 256GB",
           "modelo": "Tablet Honor PAD 10 256GB",
-          "retailer": "Promart",
+          "retailer": "PlazaVea",
           "precio": 1699.0,
-          "url": "https://www.promart.pe/tablet-honor-pad-10-256gb-1001366517/p"
+          "url": "https://www.plazavea.com.pe/tablet-honor-pad-10-256gb-101908807/p"
         }
       },
       {
@@ -16403,29 +16923,6 @@
         }
       },
       {
-        "vendedor": "Coolbox",
-        "vendedor_tercero": true,
-        "n_ofertas": 3,
-        "sobreprecio_promedio_pct": 11.0,
-        "clasificacion": "alineado al mercado",
-        "ejemplo_mas_caro": {
-          "sobreprecio_pct": 15.969938938468765,
-          "familia": "600 512GB",
-          "modelo": "Celular 600 512GB 8GB RAM negro",
-          "retailer": "Falabella",
-          "precio": 2469.0,
-          "url": "https://www.falabella.com.pe/falabella-pe/product/157437350/celular-honor-600-512gb-8gb-ram-negro"
-        },
-        "ejemplo_mas_barato": {
-          "sobreprecio_pct": 5.893909626719057,
-          "familia": "CHOICE X7E ACTIVE",
-          "modelo": "Audífonos bluetooth Choice x7E Active IP54 40h blanco",
-          "retailer": "Falabella",
-          "precio": 53.9,
-          "url": "https://www.falabella.com.pe/falabella-pe/product/155292682/audifonos-bluetooth-honor-choice-x7e-active-ip54-40h-blanco"
-        }
-      },
-      {
         "vendedor": "PRIME MOBILE EIRL",
         "vendedor_tercero": true,
         "n_ofertas": 30,
@@ -16472,26 +16969,26 @@
         }
       },
       {
-        "vendedor": "HolaPlaza",
+        "vendedor": "Plaza Vea",
         "vendedor_tercero": true,
-        "n_ofertas": 9,
-        "sobreprecio_promedio_pct": 9.8,
+        "n_ofertas": 60,
+        "sobreprecio_promedio_pct": 10.1,
         "clasificacion": "alineado al mercado",
         "ejemplo_mas_caro": {
-          "sobreprecio_pct": 31.7016317016317,
-          "familia": "X5C PLUS 256GB",
-          "modelo": "Celular HONOR X5c Plus 256GB Cian",
+          "sobreprecio_pct": 34.38395415472779,
+          "familia": "PAD X7 128GB",
+          "modelo": "Tablet HONOR Pad X7 8.7''4GB 128GB Space Gray",
           "retailer": "PlazaVea",
-          "precio": 565.0,
-          "url": "https://www.plazavea.com.pe/celular-honor-x5c-plus-256gb-cian-102195108/p"
+          "precio": 469.0,
+          "url": "https://www.plazavea.com.pe/tablet-honor-pad-x7-8-74gb-128gb-space-gray-20565819/p"
         },
         "ejemplo_mas_barato": {
           "sobreprecio_pct": 0.0,
-          "familia": "X6S 128GB",
-          "modelo": "Celular HONOR X6s 4GB RAM 128GB Plata",
-          "retailer": "Promart",
-          "precio": 1500.0,
-          "url": "https://www.promart.pe/celular-honor-x6s-4gb-ram-12gb-plata-10096345/p"
+          "familia": "X5C PLUS 256GB",
+          "modelo": "Smartphone HONOR X5C Plus 6.75\" 4GB 256GB 50M+Auxiliary Camera Meteor Silver",
+          "retailer": "PlazaVea",
+          "precio": 429.0,
+          "url": "https://www.plazavea.com.pe/smartphone-honor-x5c-plus-6-75--4gb-256gb-50mauxiliary-camera-meteor-silver-20571420/p"
         }
       },
       {
@@ -16518,33 +17015,10 @@
         }
       },
       {
-        "vendedor": "Plaza Vea",
-        "vendedor_tercero": true,
-        "n_ofertas": 62,
-        "sobreprecio_promedio_pct": 9.0,
-        "clasificacion": "alineado al mercado",
-        "ejemplo_mas_caro": {
-          "sobreprecio_pct": 34.38395415472779,
-          "familia": "PAD X7 128GB",
-          "modelo": "Tablet HONOR Pad X7 8.7''4GB 128GB Space Gray",
-          "retailer": "Promart",
-          "precio": 469.0,
-          "url": "https://www.promart.pe/tablet-honor-pad-x7-8-7--4gb-128gb-space-gray-1001271600/p"
-        },
-        "ejemplo_mas_barato": {
-          "sobreprecio_pct": 0.0,
-          "familia": "X5C PLUS 256GB",
-          "modelo": "Smartphone HONOR X5C Plus 6.75\" 4GB 256GB 50M+Auxiliary Camera Midnight Black",
-          "retailer": "PlazaVea",
-          "precio": 429.0,
-          "url": "https://www.plazavea.com.pe/smartphone-honor-x5c-plus-6-75--4gb-256gb-50mauxiliary-camera-midnight-black-20571416/p"
-        }
-      },
-      {
         "vendedor": "CENCOSUD RETAIL PERU S.A.",
         "vendedor_tercero": true,
-        "n_ofertas": 18,
-        "sobreprecio_promedio_pct": 8.4,
+        "n_ofertas": 17,
+        "sobreprecio_promedio_pct": 8.1,
         "clasificacion": "alineado al mercado",
         "ejemplo_mas_caro": {
           "sobreprecio_pct": 19.82758620689655,
@@ -16561,6 +17035,29 @@
           "retailer": "Metro",
           "precio": 89.0,
           "url": "https://www.metro.pe/aud-fonos-bluetooth-honor-choice-x7-lite-1068392/p"
+        }
+      },
+      {
+        "vendedor": "HolaPlaza",
+        "vendedor_tercero": true,
+        "n_ofertas": 11,
+        "sobreprecio_promedio_pct": 8.0,
+        "clasificacion": "alineado al mercado",
+        "ejemplo_mas_caro": {
+          "sobreprecio_pct": 31.7016317016317,
+          "familia": "X5C PLUS 256GB",
+          "modelo": "Celular HONOR X5c Plus 256GB Cian",
+          "retailer": "PlazaVea",
+          "precio": 565.0,
+          "url": "https://www.plazavea.com.pe/celular-honor-x5c-plus-256gb-cian-102195108/p"
+        },
+        "ejemplo_mas_barato": {
+          "sobreprecio_pct": 0.0,
+          "familia": "X5D 256GB",
+          "modelo": "Celular Honor X5D 256GB 4GB Negro",
+          "retailer": "PlazaVea",
+          "precio": 569.0,
+          "url": "https://www.plazavea.com.pe/celular-honor-x5d-256gb-4gb-negro-102336562/p"
         }
       },
       {
@@ -16656,29 +17153,6 @@
         }
       },
       {
-        "vendedor": "Entel",
-        "vendedor_tercero": false,
-        "n_ofertas": 8,
-        "sobreprecio_promedio_pct": 4.8,
-        "clasificacion": "alineado al mercado",
-        "ejemplo_mas_caro": {
-          "sobreprecio_pct": 10.13215859030837,
-          "familia": "600E 512GB",
-          "modelo": "600e 512GB 5G + Audífono Over Ear",
-          "retailer": "Entel",
-          "precio": 1750.0,
-          "url": "https://miportal.entel.pe/personas/producto/equipos/prod1100046"
-        },
-        "ejemplo_mas_barato": {
-          "sobreprecio_pct": 0.0,
-          "familia": "X6D 256GB",
-          "modelo": "X6d 256GB 5G + Choice Mili Litag",
-          "retailer": "Entel",
-          "precio": 610.0,
-          "url": "https://miportal.entel.pe/personas/producto/equipos/prod1070044"
-        }
-      },
-      {
         "vendedor": "HONOR Perú (tienda oficial)",
         "vendedor_tercero": false,
         "n_ofertas": 7,
@@ -16699,6 +17173,29 @@
           "retailer": "HONOR Perú (tienda oficial)",
           "precio": 769.0,
           "url": ""
+        }
+      },
+      {
+        "vendedor": "Entel",
+        "vendedor_tercero": false,
+        "n_ofertas": 7,
+        "sobreprecio_promedio_pct": 4.0,
+        "clasificacion": "alineado al mercado",
+        "ejemplo_mas_caro": {
+          "sobreprecio_pct": 10.13215859030837,
+          "familia": "600E 512GB",
+          "modelo": "600e 512GB 5G + Choice Watch 2I",
+          "retailer": "Entel",
+          "precio": 1750.0,
+          "url": "https://miportal.entel.pe/personas/producto/equipos/prod1080044"
+        },
+        "ejemplo_mas_barato": {
+          "sobreprecio_pct": 0.0,
+          "familia": "X6D 256GB",
+          "modelo": "X6d 256GB 5G + Choice Mili Litag",
+          "retailer": "Entel",
+          "precio": 610.0,
+          "url": "https://miportal.entel.pe/personas/producto/equipos/prod1070044"
         }
       },
       {
@@ -16819,14 +17316,14 @@
     ],
     "concentracion": [
       {
-        "familia": "X5C 256GB",
+        "familia": "PAD 10 256GB",
         "n_vendedores_distintos": 1,
-        "n_retailers_distintos": 2,
+        "n_retailers_distintos": 3,
         "riesgo_concentracion": "alto",
         "ejemplo": {
-          "modelo": "Smartphone HONOR X5C C Plus 6.75\" 4GB 256GB 50M+Auxiliary Camera Ocean Cyan",
+          "modelo": "Tablet Honor PAD 10 256GB",
           "retailer": "PlazaVea",
-          "url": "https://www.plazavea.com.pe/smartphone-honor-x5c-c-plus-6-75--4gb-256gb-50mauxiliary-camera-ocean-cyan-20571419/p"
+          "url": "https://www.plazavea.com.pe/tablet-honor-pad-10-256gb-101908807/p"
         }
       },
       {
@@ -16874,14 +17371,14 @@
         }
       },
       {
-        "familia": "PAD 10 256GB",
+        "familia": "MAGIC8 LITE 256GB",
         "n_vendedores_distintos": 1,
         "n_retailers_distintos": 2,
         "riesgo_concentracion": "alto",
         "ejemplo": {
-          "modelo": "Tablet Honor PAD 10 256GB",
-          "retailer": "Promart",
-          "url": "https://www.promart.pe/tablet-honor-pad-10-256gb-1001366517/p"
+          "modelo": "MAGIC8 LITE 8GB+256GB REDDISH BROWN.",
+          "retailer": "Falabella",
+          "url": "https://www.falabella.com.pe/falabella-pe/product/154551215/honor-magic8-lite-8gb256gb-reddish-brown"
         }
       },
       {
@@ -16912,9 +17409,9 @@
         "n_retailers_distintos": 1,
         "riesgo_concentracion": "alto",
         "ejemplo": {
-          "modelo": "HONOR X5D 4GB - 64GB TILDA BLUE",
+          "modelo": "HONOR X5D 4GB - 64GB METEOR SILVER",
           "retailer": "PlazaVea",
-          "url": "https://www.plazavea.com.pe/honor-x5d-4gb-64gb-tilda-blue-102155865/p"
+          "url": "https://www.plazavea.com.pe/honor-x5d-4gb-64gb-meteor-silver-102155841/p"
         }
       },
       {
@@ -16940,17 +17437,6 @@
         }
       },
       {
-        "familia": "MAGIC8 LITE 256GB",
-        "n_vendedores_distintos": 1,
-        "n_retailers_distintos": 1,
-        "riesgo_concentracion": "alto",
-        "ejemplo": {
-          "modelo": "MAGIC8 LITE 8GB+256GB REDDISH BROWN.",
-          "retailer": "Falabella",
-          "url": "https://www.falabella.com.pe/falabella-pe/product/154551215/honor-magic8-lite-8gb256gb-reddish-brown"
-        }
-      },
-      {
         "familia": "X6E 128GB",
         "n_vendedores_distintos": 1,
         "n_retailers_distintos": 1,
@@ -16959,17 +17445,6 @@
           "modelo": "X6e 4GB+128GB - gold",
           "retailer": "Falabella",
           "url": "https://www.falabella.com.pe/falabella-pe/product/156432630/honor-x6e-4gb128gb-gold"
-        }
-      },
-      {
-        "familia": "EARBUDS X7 LITE",
-        "n_vendedores_distintos": 1,
-        "n_retailers_distintos": 1,
-        "riesgo_concentracion": "alto",
-        "ejemplo": {
-          "modelo": "CHOICE Earbuds X7 Lite Audífonos Inalámbricos Bluetooth con Micrófono",
-          "retailer": "Falabella",
-          "url": "https://www.falabella.com.pe/falabella-pe/product/152958825/honor-choice-earbuds-x7-lite-audifonos-inalambricos-bluetooth-con-microfono"
         }
       },
       {
@@ -17248,6 +17723,17 @@
         }
       },
       {
+        "familia": "CHOICE X7E ACTIVE",
+        "n_vendedores_distintos": 2,
+        "n_retailers_distintos": 2,
+        "riesgo_concentracion": "medio",
+        "ejemplo": {
+          "modelo": "Audífonos Bluetooth Honor Choice X7E Active",
+          "retailer": "Metro",
+          "url": "https://www.metro.pe/aud-fonos-bluetooth-honor-choice-x7e-active-1068391/p"
+        }
+      },
+      {
         "familia": "400 256GB",
         "n_vendedores_distintos": 2,
         "n_retailers_distintos": 2,
@@ -17281,17 +17767,6 @@
         }
       },
       {
-        "familia": "CHOICE X7E ACTIVE",
-        "n_vendedores_distintos": 3,
-        "n_retailers_distintos": 3,
-        "riesgo_concentracion": "bajo",
-        "ejemplo": {
-          "modelo": "Audífonos bluetooth Choice x7E Active IP54 40h blanco",
-          "retailer": "Falabella",
-          "url": "https://www.falabella.com.pe/falabella-pe/product/155292682/audifonos-bluetooth-honor-choice-x7e-active-ip54-40h-blanco"
-        }
-      },
-      {
         "familia": "600",
         "n_vendedores_distintos": 3,
         "n_retailers_distintos": 3,
@@ -17311,6 +17786,17 @@
           "modelo": "Celular Honor X6d 5G 4 GB 256GB Cyan",
           "retailer": "PlazaVea",
           "url": "https://www.plazavea.com.pe/celular-honor-x6d-5g-4-gb-256gb-cyan-102301793/p"
+        }
+      },
+      {
+        "familia": "CHOICE WATCH 2I",
+        "n_vendedores_distintos": 4,
+        "n_retailers_distintos": 3,
+        "riesgo_concentracion": "bajo",
+        "ejemplo": {
+          "modelo": "Smartwatche Honor Choice Watch 2I",
+          "retailer": "Metro",
+          "url": "https://www.metro.pe/smartwatche-honor-choice-watch-2i-1068390/p"
         }
       },
       {
@@ -17358,28 +17844,6 @@
         }
       },
       {
-        "familia": "X5D 256GB",
-        "n_vendedores_distintos": 5,
-        "n_retailers_distintos": 4,
-        "riesgo_concentracion": "bajo",
-        "ejemplo": {
-          "modelo": "Smartphone HONOR X5D 6.74\" 4GB 256GB 50MP Tidal Blue",
-          "retailer": "PlazaVea",
-          "url": "https://www.plazavea.com.pe/smartphone-honor-x5d-674-4gb-256gb-50mp-tidal-blue-20659565/p"
-        }
-      },
-      {
-        "familia": "CHOICE WATCH 2I",
-        "n_vendedores_distintos": 5,
-        "n_retailers_distintos": 4,
-        "riesgo_concentracion": "bajo",
-        "ejemplo": {
-          "modelo": "Smartwatch Choice Watch 2i pantalla 1.85''/ AMOLED, resistente al agua 1 ATM IP68, batería 14",
-          "retailer": "Falabella",
-          "url": "https://www.falabella.com.pe/falabella-pe/product/155206206/smartwatch-honor-choice-watch-2i-pantalla-1-85-amoled-resistente-al-agua-1-atm-ip68-14-dias-negro"
-        }
-      },
-      {
         "familia": "400 512GB",
         "n_vendedores_distintos": 5,
         "n_retailers_distintos": 2,
@@ -17413,14 +17877,25 @@
         }
       },
       {
-        "familia": "PAD X7 128GB",
-        "n_vendedores_distintos": 8,
-        "n_retailers_distintos": 5,
+        "familia": "X5D 256GB",
+        "n_vendedores_distintos": 6,
+        "n_retailers_distintos": 4,
         "riesgo_concentracion": "bajo",
         "ejemplo": {
-          "modelo": "Tabler Honor Pad X7 128gb Wi-fi",
-          "retailer": "Promart",
-          "url": "https://www.promart.pe/tabler-honor-pad-x7-128gb-wi-fi-1001466547/p"
+          "modelo": "Celular Honor X5D 256GB 4GB Negro",
+          "retailer": "PlazaVea",
+          "url": "https://www.plazavea.com.pe/celular-honor-x5d-256gb-4gb-negro-102336562/p"
+        }
+      },
+      {
+        "familia": "PAD X7 128GB",
+        "n_vendedores_distintos": 8,
+        "n_retailers_distintos": 6,
+        "riesgo_concentracion": "bajo",
+        "ejemplo": {
+          "modelo": "Tablet Honor PAD X7 128GB",
+          "retailer": "PlazaVea",
+          "url": "https://www.plazavea.com.pe/tablet-honor-pad-x7-128gb-102074259/p"
         }
       },
       {
@@ -17501,6 +17976,17 @@
         }
       },
       {
+        "familia": "600 512GB",
+        "n_vendedores_distintos": 16,
+        "n_retailers_distintos": 10,
+        "riesgo_concentracion": "bajo",
+        "ejemplo": {
+          "modelo": "Celular HONOR 600 8GB 512GB VKJ-NX9 Naranja",
+          "retailer": "PlazaVea",
+          "url": "https://www.plazavea.com.pe/celular-honor-600-8gb-512gb-vkj-nx9-naranja-102151955/p"
+        }
+      },
+      {
         "familia": "X5C 128GB",
         "n_vendedores_distintos": 16,
         "n_retailers_distintos": 5,
@@ -17509,17 +17995,6 @@
           "modelo": "Honor X5C 128Gb 4Ram Plata Meteoro Registrado Plateado 128 GB",
           "retailer": "PlazaVea",
           "url": "https://www.plazavea.com.pe/honor-x5c-128gb-4ram-plata-meteoro-registrado-102156671/p"
-        }
-      },
-      {
-        "familia": "600 512GB",
-        "n_vendedores_distintos": 17,
-        "n_retailers_distintos": 10,
-        "riesgo_concentracion": "bajo",
-        "ejemplo": {
-          "modelo": "Celular HONOR 600 8GB 512GB VKJ-NX9 Naranja",
-          "retailer": "PlazaVea",
-          "url": "https://www.plazavea.com.pe/celular-honor-600-8gb-512gb-vkj-nx9-naranja-102151955/p"
         }
       },
       {
@@ -17535,7 +18010,7 @@
       },
       {
         "familia": "X8D 256GB",
-        "n_vendedores_distintos": 23,
+        "n_vendedores_distintos": 22,
         "n_retailers_distintos": 10,
         "riesgo_concentracion": "bajo",
         "ejemplo": {
@@ -17545,25 +18020,25 @@
         }
       },
       {
-        "familia": "X5D 128GB",
-        "n_vendedores_distintos": 24,
-        "n_retailers_distintos": 9,
-        "riesgo_concentracion": "bajo",
-        "ejemplo": {
-          "modelo": "Smartphone HONOR X5D 6.74\" 4GB 128GB 50MP Negro",
-          "retailer": "PlazaVea",
-          "url": "https://www.plazavea.com.pe/smartphone-honor-x5d-6-74--4gb-128gb-50mp-negro-20634112/p"
-        }
-      },
-      {
         "familia": "MAGIC 8 LITE 256GB",
-        "n_vendedores_distintos": 24,
-        "n_retailers_distintos": 7,
+        "n_vendedores_distintos": 23,
+        "n_retailers_distintos": 6,
         "riesgo_concentracion": "bajo",
         "ejemplo": {
           "modelo": "Honor Magic 8 Lite 5G Nfc, 8GB Ram - 256GB, COLOR VERDE Verde",
           "retailer": "PlazaVea",
           "url": "https://www.plazavea.com.pe/honor-magic-8-lite-5g-nfc-8gb-ram---256gb-color-verde-102312934/p"
+        }
+      },
+      {
+        "familia": "X5D 128GB",
+        "n_vendedores_distintos": 24,
+        "n_retailers_distintos": 9,
+        "riesgo_concentracion": "bajo",
+        "ejemplo": {
+          "modelo": "Honor X5d 128gb 4gb Azul Marea",
+          "retailer": "PlazaVea",
+          "url": "https://www.plazavea.com.pe/honor-x5d-128gb-4gb-azul-marea-102332142/p"
         }
       },
       {
@@ -17579,8 +18054,8 @@
       },
       {
         "familia": "X7D 256GB",
-        "n_vendedores_distintos": 26,
-        "n_retailers_distintos": 7,
+        "n_vendedores_distintos": 25,
+        "n_retailers_distintos": 6,
         "riesgo_concentracion": "bajo",
         "ejemplo": {
           "modelo": "Smartphone HONOR X7D 8 Gb Ram 256 Gb Color Meteor Silver",
@@ -17594,19 +18069,19 @@
         "n_retailers_distintos": 10,
         "riesgo_concentracion": "bajo",
         "ejemplo": {
-          "modelo": "Smartphone HONOR X5C Plus 6.75\" 4GB 256GB 50M+Auxiliary Camera Midnight Black",
+          "modelo": "Smartphone HONOR X5C Plus 6.75\" 4GB 256GB 50M+Auxiliary Camera Meteor Silver",
           "retailer": "PlazaVea",
-          "url": "https://www.plazavea.com.pe/smartphone-honor-x5c-plus-6-75--4gb-256gb-50mauxiliary-camera-midnight-black-20571416/p"
+          "url": "https://www.plazavea.com.pe/smartphone-honor-x5c-plus-6-75--4gb-256gb-50mauxiliary-camera-meteor-silver-20571420/p"
         }
       }
     ],
-    "familias_riesgo_alto": 27,
-    "total_familias_evaluadas": 71,
+    "familias_riesgo_alto": 25,
+    "total_familias_evaluadas": 69,
     "dispersion_por_segmento": [
       {
         "segmento": "Hasta S/600",
-        "n_familias": 12,
-        "spread_promedio_pct": 57.1,
+        "n_familias": 11,
+        "spread_promedio_pct": 62.6,
         "spread_max_pct": 128.9,
         "familia_mas_volatil": {
           "familia": "PLAY 10 64GB",
@@ -17725,7 +18200,7 @@
     {
       "tipo": "dispersion_interna",
       "severidad": "alta",
-      "evidencia": "X5C PLUS 256GB: precio de S/429 en PlazaVea (Plaza Vea) hasta S/899 en Promart (MILLENNIALS MOBILE) -- 108 ofertas activas.",
+      "evidencia": "X5C PLUS 256GB: precio de S/429 en PlazaVea (Plaza Vea) hasta S/899 en Promart (MILLENNIALS MOBILE) -- 106 ofertas activas.",
       "interpretacion": "Dispersión de 109.6% para el mismo SKU. El precio en Promart está 109.6% por encima del más barato del mercado.",
       "accion": "Revisar la estrategia de precio de X5C PLUS 256GB en Promart (MILLENNIALS MOBILE) frente al resto del canal.",
       "confianza": "alta"
@@ -17749,7 +18224,7 @@
     {
       "tipo": "dispersion_interna",
       "severidad": "alta",
-      "evidencia": "PLAY 10 128GB: precio de S/449 en PlazaVea (PRIME MOBILE EIRL) hasta S/799 en Falabella (Rrj Electronics Sac) -- 5 ofertas activas.",
+      "evidencia": "PLAY 10 128GB: precio de S/449 en PlazaVea (PRIME MOBILE EIRL) hasta S/799 en Falabella (Rrj Electronics Sac) -- 6 ofertas activas.",
       "interpretacion": "Dispersión de 78.0% para el mismo SKU. El precio en Falabella está 78.0% por encima del más barato del mercado.",
       "accion": "Revisar la estrategia de precio de PLAY 10 128GB en Falabella (Rrj Electronics Sac) frente al resto del canal.",
       "confianza": "alta"
@@ -17773,24 +18248,8 @@
     {
       "tipo": "cambio_precio",
       "severidad": "media",
-      "evidencia": "Celular HONOR 600 8GB 512GB VKJ-NX9 Negro en Promart (SanyPeru): S/2599 -> S/2399.",
-      "interpretacion": "Bajó 7.7% desde la corrida anterior.",
-      "accion": "Confirmar si es promoción puntual o ajuste de precio de lista.",
-      "confianza": "alta"
-    },
-    {
-      "tipo": "cambio_precio",
-      "severidad": "media",
       "evidencia": "X5D Negro Medianoche + Weird Earb + Liberado +  P(0c) en Claro (Tienda Claro): S/619 -> S/479.",
       "interpretacion": "Bajó 22.6% desde la corrida anterior.",
-      "accion": "Confirmar si es promoción puntual o ajuste de precio de lista.",
-      "confianza": "alta"
-    },
-    {
-      "tipo": "cambio_precio",
-      "severidad": "media",
-      "evidencia": "Celular Honor 600E 5G 256GB Verde + Aud fonos Earbuds en La Curacao (La Curacao): S/9999 -> S/1849.",
-      "interpretacion": "Bajó 81.5% desde la corrida anterior.",
       "accion": "Confirmar si es promoción puntual o ajuste de precio de lista.",
       "confianza": "alta"
     },
@@ -17813,7 +18272,7 @@
     {
       "tipo": "vendedor_sobreprecio",
       "severidad": "alta",
-      "evidencia": "Rrj Electronics Sac vende 6 SKUs Honor a un precio 71.4% por encima del mínimo de mercado, en promedio.",
+      "evidencia": "Rrj Electronics Sac vende 6 SKUs Honor a un precio 76.4% por encima del mínimo de mercado, en promedio.",
       "interpretacion": "Rrj Electronics Sac es sistemáticamente el más caro del canal en los productos Honor que vende, no un caso aislado.",
       "accion": "Evaluar si Rrj Electronics Sac necesita ajuste de precio o si compite en otro factor (servicio, stock, ubicación) que justifique el sobreprecio.",
       "confianza": "alta",
@@ -17833,17 +18292,17 @@
     {
       "tipo": "concentracion_riesgo",
       "severidad": "media",
-      "evidencia": "27 de 71 familias Honor (38%) dependen de un solo vendedor en todo el canal capturado.",
+      "evidencia": "25 de 69 familias Honor (36%) dependen de un solo vendedor en todo el canal capturado.",
       "interpretacion": "Si ese vendedor sube precio, se queda sin stock o deja de listar el producto, no hay alternativa visible en el resto del canal.",
       "accion": "Priorizar que esas familias también estén disponibles con al menos un vendedor más (propio del retailer o marketplace).",
       "confianza": "alta",
-      "evidencia_url": "https://www.plazavea.com.pe/smartphone-honor-x5c-c-plus-6-75--4gb-256gb-50mauxiliary-camera-ocean-cyan-20571419/p",
-      "evidencia_url_texto": "Ver ejemplo: X5C 256GB en PlazaVea (único vendedor visto)"
+      "evidencia_url": "https://www.plazavea.com.pe/tablet-honor-pad-10-256gb-101908807/p",
+      "evidencia_url_texto": "Ver ejemplo: PAD 10 256GB en PlazaVea (único vendedor visto)"
     },
     {
       "tipo": "volatilidad_segmento",
       "severidad": "media",
-      "evidencia": "El segmento Hasta S/600 tiene una dispersión promedio de 57.1% entre vendedores, la más alta de todos los segmentos (12 familias Honor evaluadas).",
+      "evidencia": "El segmento Hasta S/600 tiene una dispersión promedio de 62.6% entre vendedores, la más alta de todos los segmentos (11 familias Honor evaluadas).",
       "interpretacion": "El precio de Honor en esa franja es el menos disciplinado del catálogo -- más margen de maniobra, pero también más riesgo de que un vendedor rompa precio.",
       "accion": "Si hay política de precio mínimo (PVP), reforzarla primero en Hasta S/600.",
       "confianza": "media",
