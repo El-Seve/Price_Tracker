@@ -1,3 +1,17 @@
 requests>=2.31
 curl_cffi>=0.7
 playwright>=1.62
+
+# Respaldo por LLM (Bitel/Movistar/Juntoz, solo cuando el parseo por patrón
+# de texto no encuentra nada) -- ver adapters/scrapegraph_adapter.py y
+# README ("Respaldo por LLM"). Versiones FIJAS a propósito (no ">="): el
+# ecosistema langchain rompe compatibilidad seguido, y ya encontramos un
+# ImportError real con las versiones "latest" del 14/09/2026 -- estas son
+# las que probamos y confirmamos que instalan y arman el pipeline sin
+# error (adapters/_scrapegraph_compat.py tapa un problema puntual que
+# igual queda, ver ese archivo).
+scrapegraphai==1.76.0
+langchain==1.4.0
+langchain-core==1.6.3
+langchain-community==0.4.2
+langchain-google-genai==4.4.0

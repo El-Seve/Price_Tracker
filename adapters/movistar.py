@@ -35,7 +35,7 @@ def extract_rows(textos_por_marca: dict[str, str], categoria: str, retailer: str
     rows = []
     vistos = set()
     for texto in textos_por_marca.values():
-        for oferta in pb.extraer_ofertas_por_patron(texto, target_brands):
+        for oferta in pb.extraer_ofertas_con_fallback(texto, target_brands, retailer):
             key = (oferta["marca"], oferta["modelo"], oferta["precio_oferta"])
             if key in vistos:
                 continue

@@ -1,33 +1,38 @@
 """
-Adaptador para Ripley (simple.ripley.com.pe), protegido por Cloudflare
-Turnstile ("Just a moment..."). Ver adapters/playwright_browser.py para el
-contexto completo de por qué esto necesita un browser real y qué tan
-validado está (poco, todavía -- probar en vivo antes de confiar en el cron).
+Adaptador para Bitel (tienda.bitel.com.pe).
 
-A diferencia de Movistar, el catálogo de Ripley es HTML renderizado en
-servidor (confirmado: no hay JSON embebido) -- una vez que Playwright pasa
-el challenge, no debería hacer falta esperar mucho más JS.
+Estado (14/09/2026): NO VALIDADO EN VIVO todavía -- este sandbox no pudo
+siquiera llegar al sitio (net::ERR_CONNECTION_RESET con Playwright,
+consistente con el bloqueo de reputación de IP que ya estaba documentado
+en retailers.json/no_soportados). Como Ripley y Movistar en su momento,
+esto necesita probarse desde una IP "normal" (la de Seve, o el runner de
+GitHub Actions) con:
+
+    python run.py --retailer Bitel
+
+y revisar con debug_playwright_dump.py si el texto capturado no calza con
+el patrón esperado (marca en mayúscula + precio "S/" debajo).
+
+La ruta de categoría en retailers.json (categorias.Smartphones) es una
+suposición razonable, NO confirmada -- si al probar en vivo la página no
+es esa, hay que corregirla ahí (no hace falta tocar este archivo, solo el
+config). Este adaptador además tiene el respaldo por LLM
+(extraer_ofertas_con_fallback) para el caso en que el parseo por patrón no
+encuentre nada por diferencias de formato -- ver playwright_browser.py.
 """
 from . import playwright_browser as pb
 
-BASE_URL = "https://simple.ripley.com.pe"
+BASE_URL = "https://tienda.bitel.com.pe"
 
 
-def fetch_category(category_path: str, max_pages: int = 5, retailer_nombre: str = "Ripley") -> list[str]:
+def fetch_category(category_path: str, max_pages: int = 3, retailer_nombre: str = "Bitel") -> list[str]:
     """Renderiza hasta `max_pages` páginas de una categoría y devuelve el
-    texto visible de cada una (una entrada por página). Ripley pagina con
-    ?page=N -- si la categoría ya trae otros query params, se agregan con &."""
+    texto visible de cada una. Paginación por ?page=N -- ajustar si Bitel
+    usa otro esquema (revisar en vivo)."""
     separador = "&" if "?" in category_path else "?"
     textos = []
     for pagina in range(1, max_pages + 1):
         url = f"{BASE_URL}{category_path}{separador}page={pagina}"
-        # wait_ms=5000 se quedaba corto: el challenge de Cloudflare solo ya
-        # consume varios segundos, y la grilla de productos carga después --
-        # con 5s se leía la página "vacía" (sin marcas ni precios) y no se
-        # capturaba nada, sin ningún error (confirmado con Seve: 0 filas, sin
-        # avisos). wait_for_text="S/" fuerza a esperar a que exista al menos
-        # un precio real en pantalla antes de leer el texto, en vez de
-        # confiar en un tiempo fijo.
         texto = pb.fetch_rendered_text(url, wait_ms=8000, wait_for_text="S/")
         if pb.parece_challenge_o_mantenimiento(texto):
             raise RuntimeError(f"{retailer_nombre}: sigue mostrando el challenge de Cloudflare en {url}")
@@ -55,6 +60,6 @@ def extract_rows(textos: list[str], categoria: str, retailer: str, target_brands
                 "precio_oferta": oferta["precio_oferta"],
                 "vendedor": retailer,
                 "vendedor_tercero": False,
-                "url": "",  # el parseo por texto no captura el link -- pendiente si hace falta
+                "url": "",
             })
     return rows

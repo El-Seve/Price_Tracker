@@ -292,7 +292,46 @@ documentado, para no repetir la investigación desde cero más adelante.
   tarjeta de producto -- adaptador nuevo `adapters/honor_official.py`, sin
   necesidad de browser, cookies ni token.
 
-### Ripley (Playwright) y el pendiente de Movistar (investigado/destrabado 07/09/2026)
+### Respaldo por LLM (ScrapeGraphAI + Gemini, agregado 14/09/2026)
+
+Para Ripley/Movistar/Bitel/Juntoz (los que necesitan Playwright), el
+parseo por patrón de texto (`playwright_browser.extraer_ofertas_por_patron`)
+es siempre el primer intento -- es gratis y ya probado en vivo. Pero si un
+sitio cambia de estructura de un día para otro, o si un sitio nuevo (Bitel,
+Juntoz) tiene un formato que todavía no conocemos bien, ese parseo puede no
+encontrar nada. Para esos casos existe un respaldo automático:
+`adapters/scrapegraph_adapter.py`, que le pide a un LLM (Gemini 2.5
+Flash-Lite) que extraiga los productos del mismo texto ya renderizado.
+
+**Cómo activarlo**: conseguir una API key gratis de Gemini en
+[aistudio.google.com](https://aistudio.google.com), y agregarla como secret
+del repo en GitHub (`Settings` → `Secrets and variables` → `Actions` →
+`New repository secret`, nombre `GEMINI_API_KEY`). Sin ese secret, el
+respaldo se salta en silencio -- todo sigue funcionando exactamente igual
+que antes, solo que sin ese último recurso.
+
+**Costo**: centavos de dólar al mes (verificado 14/09/2026: menos de
+$0.002 por página con Gemini Flash-Lite). Deliberadamente NO se usa la API
+propia de ScrapeGraphAI (el servicio "hosted" de scrapegraphai.com) porque
+sale carísima para este volumen ($20/mes mínimo de plan pago recurrente,
+contra centavos usando la librería open source + tu propia API key).
+
+**Aviso de fragilidad, para que no sorprenda si un día deja de andar**: el
+paquete `scrapegraphai` de PyPI depende del ecosistema `langchain`, que
+rompe compatibilidad seguido. Al armar esto (14/09/2026) ya nos encontramos
+con que la versión publicada exige `langchain-community>=0.4.0`, pero esa
+misma versión de `langchain-community` ya había retirado una clase
+(`ChatOllama`) que `scrapegraphai` todavía importa a nivel de módulo -- sin
+un parche (`adapters/_scrapegraph_compat.py`), ni siquiera se puede
+importar la librería, aunque acá no se use Ollama para nada (usamos
+Gemini). `requirements.txt` fija las versiones exactas que sí instalan
+limpio, en vez de dejarlas abiertas con `>=`, justamente para no depender
+de que el resolver de pip elija algo compatible por casualidad. Si este
+respaldo puntual deja de funcionar (el resto del tracker no depende de
+él), revisar primero si `scrapegraphai`/`langchain-community` sacaron una
+versión nueva que ya no necesite el parche.
+
+### Ripley (Playwright), Bitel, Juntoz y el pendiente de Movistar (07/09/2026, ampliado 14/09/2026)
 
 Estos dos son distintos a todos los anteriores: no alcanza con `requests` ni
 con `curl_cffi` (fingerprint TLS falso) porque el bloqueo de Cloudflare en
@@ -329,13 +368,28 @@ corriendo cada día en el cron, pero como falla con un aviso `[!] falló`
 capturado (no rompe el resto de la corrida), simplemente no aporta datos
 hasta que esto se resuelva.
 
-**Si algún día Ripley deja de calzar con el patrón de extracción** (cambio
-de diseño del sitio, 0 filas de nuevo, etc.), la herramienta de diagnóstico
-sigue disponible:
+**Bitel y Juntoz: agregados 14/09/2026, NO validados en vivo todavía.**
+Mismo enfoque que Ripley (Playwright + parseo por patrón, con el respaldo
+por LLM de arriba si el patrón no calza). Bitel (`adapters/bitel.py`) tenía
+bloqueo de reputación de IP documentado desde antes (HTTP 401 con
+`requests` simple); no se pudo confirmar en vivo desde el entorno de
+desarrollo (el bloqueo también afectó ahí, `net::ERR_CONNECTION_RESET` con
+Playwright) -- probar con `python run.py --retailer Bitel` y ajustar la
+ruta de categoría en `retailers.json` si no calza. Juntoz
+(`adapters/juntoz.py`) es un marketplace real (confirmado desde afuera que
+menciona "honor" en su buscador) pero carga los productos client-side sin
+API pública visible -- busca por marca con el buscador propio del sitio en
+vez de una categoría fija; probar con `python run.py --retailer Juntoz`.
+
+**Si algún día Ripley/Bitel/Juntoz dejan de calzar con el patrón de
+extracción** (cambio de diseño del sitio, 0 filas de nuevo, etc.), la
+herramienta de diagnóstico sigue disponible:
 
 ```bash
 python debug_playwright_dump.py "https://simple.ripley.com.pe/tecnologia/celulares/celulares-y-smartphones?s=mdco&page=1"
 python debug_playwright_dump.py "https://tienda.movistar.com.pe/celulares/honor"
+python debug_playwright_dump.py "https://tienda.bitel.com.pe/celulares"
+python debug_playwright_dump.py "https://juntoz.com/busqueda?q=honor"
 ```
 
 Esto guarda `debug_dump.html`, `debug_dump_texto.txt` y `debug_dump.png`
@@ -361,10 +415,15 @@ de extracción sin adivinar a ciegas.
   aparecía en el directorio original (`celivery.com`) está parkeado/en venta;
   el real es `celiveryperu.com`. Es WordPress + WooCommerce, se lee con la
   Store API pública (`adapters/woocommerce_store_api.py`).
-- **Ripley**: soportado (Playwright), ver sección "Ripley (Playwright) y el
-  pendiente de Movistar" más abajo -- Cloudflare con challenge JS activo,
-  distinto al bloqueo de Bitel (que es de reputación de IP, sin solución
-  gratis).
+- **Ripley**, **Bitel** y **Juntoz**: soportados (Playwright + respaldo por
+  LLM), ver sección "Ripley (Playwright), Bitel, Juntoz y el pendiente de
+  Movistar" más arriba. Bitel y Juntoz agregados 14/09/2026, sin validar en
+  vivo todavía.
+- **Qué Tal Compra (QTC)**: soportado, agregado 14/09/2026 a pedido de Seve.
+  Hallazgo importante: `quetalcompra.com` redirige a `tienda.qtc.pe` -- es
+  la MISMA tienda de QTC (uno de los dos distribuidores de Honor HES de
+  Seve, junto con Sany), no un competidor nuevo. Corre sobre VTEX estándar,
+  mismo adaptador que PlazaVea/Metro/Wong sin cambios.
 - **Mercado Libre Perú**: NO soportado. Su API pública de búsqueda ahora pide
   token de aplicación (403 sin él) y la web detecta el request como tráfico
   sospechoso. Además es un marketplace gigante -- necesitaría lógica de
@@ -373,10 +432,17 @@ de extracción sin adivinar a ciegas.
   dentro de la app, no hay una URL de categoría pública fija.
 - **Agiletech**: no aplica -- es tienda de laptops/PC/redes, no vende
   celulares (confirmado por búsqueda vacía en su propia API).
-- **Juntoz**, **Memory Kings**, **Pasaje Central** y **LoQuiero**
-  (`loquiero.pe`, no `.com`): sin plataforma identificada con las firmas
-  conocidas (VTEX, Falabella, Magento, Shopify, WooCommerce). Pendientes de
-  una revisión más profunda -- no están descartados, solo sin resolver aún.
+- **Pasaje Central**: descartado 14/09/2026 -- corre sobre Jumpseller
+  (plataforma sí identificable), pero solo vende accesorios/fundas/teclados
+  para Samsung y Apple (tablets/iPad). Cero smartphones de ninguna marca, ni
+  Honor ni competencia -- no aporta nada a este tracker aunque se resuelva
+  la plataforma.
+- **Memory Kings**: sigue pendiente. Sí tiene sección de celulares, pero
+  carga client-side y una lectura simple solo mostró una mención de
+  "Samsung" -- no se pudo confirmar si vende Honor sin probar con
+  Playwright real.
+- **LoQuiero** (`loquiero.pe`, no `.com`): el dominio hoy muestra
+  "Próximamente" (placeholder) -- no es una tienda activa por ahora.
 
 Todo esto queda documentado en `no_soportados` dentro de `retailers.json`,
 con el motivo específico de cada uno, para no repetir la investigación desde

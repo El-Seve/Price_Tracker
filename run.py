@@ -247,6 +247,47 @@ def run_movistar_playwright(retailer_cfg: dict, target_brands: set[str]) -> list
     return movistar.extract_rows(textos_por_marca, "Smartphones", retailer_cfg["nombre"], target_brands)
 
 
+def run_bitel_playwright(retailer_cfg: dict, target_brands: set[str]) -> list[dict]:
+    """NO VALIDADO EN VIVO -- ver adapters/bitel.py. Requiere
+    'pip install playwright' + 'playwright install chromium'; si no está
+    instalado, se salta con un aviso en vez de romper la corrida."""
+    try:
+        from adapters import bitel
+    except ImportError as e:
+        print(f"[!] {retailer_cfg['nombre']}: falta 'playwright' "
+              f"(pip install playwright && playwright install chromium), saltando. ({e})", file=sys.stderr)
+        return []
+    rows = []
+    for categoria, path in retailer_cfg.get("categorias", {}).items():
+        try:
+            textos = bitel.fetch_category(path, max_pages=retailer_cfg.get("max_paginas", 3),
+                                           retailer_nombre=retailer_cfg["nombre"])
+        except Exception as e:
+            print(f"[!] {retailer_cfg['nombre']} / {categoria} falló: {e}", file=sys.stderr)
+            continue
+        rows += bitel.extract_rows(textos, categoria, retailer_cfg["nombre"], target_brands)
+    return rows
+
+
+def run_juntoz_playwright(retailer_cfg: dict, target_brands: set[str]) -> list[dict]:
+    """NO VALIDADO EN VIVO -- ver adapters/juntoz.py. Requiere
+    'pip install playwright' + 'playwright install chromium'; si no está
+    instalado, se salta con un aviso en vez de romper la corrida."""
+    try:
+        from adapters import juntoz
+    except ImportError as e:
+        print(f"[!] {retailer_cfg['nombre']}: falta 'playwright' "
+              f"(pip install playwright && playwright install chromium), saltando. ({e})", file=sys.stderr)
+        return []
+    textos_por_marca = {}
+    for marca in target_brands:
+        try:
+            textos_por_marca[marca] = juntoz.fetch_por_marca(marca, retailer_nombre=retailer_cfg["nombre"])
+        except Exception as e:
+            print(f"[!] {retailer_cfg['nombre']} / {marca} falló: {e}", file=sys.stderr)
+    return juntoz.extract_rows(textos_por_marca, "Smartphones", retailer_cfg["nombre"], target_brands)
+
+
 ADAPTERS = {
     "vtex": run_vtex,
     "falabella_nextjs": run_falabella_nextjs,
@@ -257,6 +298,8 @@ ADAPTERS = {
     "honor_official": run_honor_official,
     "ripley_playwright": run_ripley_playwright,
     "movistar_playwright": run_movistar_playwright,
+    "bitel_playwright": run_bitel_playwright,
+    "juntoz_playwright": run_juntoz_playwright,
     "magento_html": run_magento_html,
     "shopify_json": run_shopify_json,
     "woocommerce_store_api": run_woocommerce_store_api,

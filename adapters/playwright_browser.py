@@ -170,3 +170,26 @@ def extraer_ofertas_por_patron(texto: str, marcas: set[str], max_precios_por_blo
                 marca_contexto = None  # ya se usó, no aplicarlo también al siguiente producto
         i += 1
     return ofertas
+
+
+def extraer_ofertas_con_fallback(texto: str, marcas: set[str], retailer_nombre: str) -> list[dict]:
+    """Primero intenta el parseo por patrón de texto (gratis, sin
+    dependencias externas, el mismo que ya funciona en vivo para Ripley);
+    si no encuentra NADA y hay una API key de LLM configurada
+    (GEMINI_API_KEY), cae a scrapegraph_adapter como respaldo -- por
+    ejemplo para un sitio nuevo cuyo formato todavía no conocemos bien, o
+    si un sitio ya soportado cambia de estructura de un día para otro.
+
+    Se agrega acá (en vez de en cada adaptador por separado) para que
+    Ripley/Movistar/Bitel/Juntoz compartan el mismo criterio: patrón
+    primero siempre, LLM solo como último recurso."""
+    ofertas = extraer_ofertas_por_patron(texto, marcas)
+    if ofertas:
+        return ofertas
+
+    from . import scrapegraph_adapter
+    if not scrapegraph_adapter.disponible():
+        return []
+
+    print(f"    (parseo por patrón no encontró nada en {retailer_nombre}, probando respaldo LLM...)")
+    return scrapegraph_adapter.extraer_via_llm(texto, marcas, retailer_nombre)

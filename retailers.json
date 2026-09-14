@@ -226,14 +226,33 @@
         "HONOR": "honor", "SAMSUNG": "samsung", "XIAOMI": "xiaomi",
         "MOTOROLA": "motorola", "APPLE": "apple", "HUAWEI": "huawei"
       },
-      "nota": "EXPERIMENTAL 07/09/2026 -- NO validado en vivo todavía, no correr en el cron automático hasta confirmarlo. tienda.movistar.com.pe tiene Cloudflare Managed Challenge + una SPA vieja tipo Angular (precios se rellenan client-side, placeholders '{{...}}' visibles en el HTML crudo) -- necesita esperar a que la app termine de pintar antes de leer. Categorías por sub-URL de marca (/celulares/<marca>). Adaptador nuevo con Playwright (adapters/movistar.py + adapters/playwright_browser.py). Requiere 'pip install playwright && playwright install chromium'; si no está instalado, se salta solo con un aviso. Probar primero con 'python run.py --retailer Movistar' y revisar con debug_playwright_dump.py si los resultados no calzan."
+      "nota": "EXPERIMENTAL 07/09/2026, actualizado 14/09/2026 -- NO validado en vivo todavía, no correr en el cron automático hasta confirmarlo. tienda.movistar.com.pe tiene Cloudflare Managed Challenge + una SPA vieja tipo Angular (precios se rellenan client-side, placeholders '{{...}}' visibles en el HTML crudo) -- necesita esperar a que la app termine de pintar antes de leer. Categorías por sub-URL de marca (/celulares/<marca>). Adaptador con Playwright (adapters/movistar.py + adapters/playwright_browser.py). Requiere 'pip install playwright && playwright install chromium'; si no está instalado, se salta solo con un aviso. Probar primero con 'python run.py --retailer Movistar' y revisar con debug_playwright_dump.py si los resultados no calzan. NUEVO 14/09/2026: si el parseo por patrón no encuentra nada (por ejemplo si Movistar cambia el formato de la página cuando salga de mantenimiento), cae automáticamente a un respaldo por LLM (adapters/scrapegraph_adapter.py) SI la variable de entorno GEMINI_API_KEY está configurada -- ver README, sección 'Respaldo por LLM'. Sin esa variable, sigue comportándose igual que antes (se salta en silencio)."
+    },
+    {
+      "nombre": "Bitel",
+      "plataforma": "bitel_playwright",
+      "categorias": {
+        "Smartphones": "/celulares"
+      },
+      "max_paginas": 3,
+      "nota": "NUEVO 14/09/2026 -- NO validado en vivo todavía, no correr en el cron automático hasta confirmarlo. tienda.bitel.com.pe está bloqueado por reputación de IP a nivel de Cloudflare (antes en 'no_soportados': HTTP 401 con requests simple). Se intenta con el mismo enfoque de Ripley (Playwright real + parseo por patrón de texto), con respaldo por LLM si el patrón no calza (ver 'Respaldo por LLM' en el README). La ruta de categoría '/celulares' es una SUPOSICIÓN, no confirmada -- no se pudo verificar desde el entorno de desarrollo (el bloqueo de IP también afecta ahí). Probar con 'python run.py --retailer Bitel' y corregir la ruta en este mismo campo si no calza. Adaptador: adapters/bitel.py."
+    },
+    {
+      "nombre": "Juntoz",
+      "plataforma": "juntoz_playwright",
+      "nota": "NUEVO 14/09/2026 -- NO validado en vivo todavía. Antes en 'no_soportados' por no identificar la plataforma; confirmado desde afuera (14/09/2026) que es un marketplace real sobre Next.js con 'honor' mencionado en el texto de la home y del buscador, pero sin __NEXT_DATA__ ni API pública visible en el HTML crudo -- los datos cargan client-side, necesita browser real. Este adaptador busca por marca con el buscador propio del sitio (juntoz.com/busqueda?q=<marca>) en vez de una categoría fija, con el mismo parseo por patrón + respaldo por LLM que Ripley/Movistar/Bitel. Probar con 'python run.py --retailer Juntoz'. Adaptador: adapters/juntoz.py."
+    },
+    {
+      "nombre": "Qué Tal Compra (QTC)",
+      "plataforma": "vtex",
+      "base_domain": "https://tienda.qtc.pe",
+      "categorias": {
+        "Smartphones": "celulares"
+      },
+      "nota": "AGREGADO 14/09/2026 a pedido de Seve ('busca QTC o Que Tal Compra'). Hallazgo importante: quetalcompra.com redirige a tienda.qtc.pe -- es la MISMA tienda de QTC, uno de los dos distribuidores de Honor HES de Seve (el otro es Sany), no un competidor nuevo. Corre sobre VTEX estándar (confirmado: /api/catalog_system/pub/products/search/celulares trae Honor 600 Pro, Motorola G67/G47 reales). Se agrega acá con el adaptador vtex.py existente sin cambios, solo para tener visibilidad del precio de venta al público de QTC junto con el resto del canal -- no reemplaza el monitoreo aparte de catálogo/precios propios de QTC (qtc_monitor.zip, resumen de los lunes)."
     }
   ],
   "no_soportados": [
-    {
-      "nombre": "Bitel",
-      "motivo": "Bloqueado por Cloudflare (tienda.bitel.com.pe devuelve HTTP 401 con body de 9 bytes 'Server: cloudflare', incluso agregando headers de navegador reales). Necesita browser real o una herramienta tipo Bright Data para pasar el challenge -- no es viable con requests simple."
-    },
     {
       "nombre": "Mercado Libre Perú",
       "motivo": "La API pública de búsqueda (api.mercadolibre.com/sites/MPE/search) ahora devuelve 403 sin token de aplicación, y la web (listado.mercadolibre.com.pe) detecta el request como 'suspicious traffic' y devuelve una página anti-bot en vez del listado. Es un marketplace enorme además -- necesitaría lógica de búsqueda por producto, no un catálogo fijo. Requiere browser real o la API oficial con credenciales."
@@ -251,20 +270,16 @@
       "motivo": "No aplica -- es tienda de laptops/PC/redes, no vende celulares (confirmado buscando 'honor', 'samsung', 'xiaomi', 'motorola' en su API pública de WooCommerce: cero resultados). Queda fuera del tracker por no ser relevante, no por estar bloqueada."
     },
     {
-      "nombre": "Juntoz",
-      "motivo": "Sin plataforma identificada (no es VTEX, Falabella/Next.js, Magento, Shopify ni WooCommerce) y con timeouts intermitentes al acceder. Pendiente de una investigación más profunda."
-    },
-    {
       "nombre": "Memory Kings",
-      "motivo": "Sin plataforma identificada con las firmas conocidas -- parece un carrito de compras a medida. Pendiente de revisión más profunda; además, por el rubro (cómputo/accesorios) es dudoso que tenga celulares Honor."
+      "motivo": "Actualizado 14/09/2026: sí tiene sección de celulares (memorykings.pe/listados/763/smartphone), pero el catálogo carga client-side (parece Next.js/Nuxt) y con una lectura simple (sin browser) solo se ve una mención de 'Samsung' -- no se pudo confirmar si vende Honor. Pendiente de revisar con Playwright real antes de decidir si vale la pena un adaptador."
     },
     {
       "nombre": "Pasaje Central",
-      "motivo": "Sin plataforma identificada con las firmas conocidas. Es tienda de accesorios para móviles/tablets/laptops -- relevante para la categoría Accesorios si se logra identificar la plataforma. Pendiente de revisión más profunda."
+      "motivo": "Descartado 14/09/2026 (antes 'sin plataforma identificada'): corre sobre Jumpseller (plataforma sí identificable). Pero revisando el catálogo real, solo vende accesorios/fundas/teclados para Samsung y Apple (tablets Galaxy Tab, iPad) -- CERO smartphones de ninguna marca, ni Honor ni competencia. No aporta nada a este tracker aunque se resuelva la plataforma."
     },
     {
       "nombre": "LoQuiero",
-      "motivo": "El dominio correcto es loquiero.pe (no loquiero.com, que apunta a otro sitio). Sin plataforma identificada con las firmas conocidas -- sitio pequeño de accesorios. Pendiente de revisión más profunda."
+      "motivo": "Actualizado 14/09/2026: el dominio loquiero.pe hoy muestra una página 'Próximamente' (placeholder de Hostinger) -- no es una tienda activa en este momento. Revisar de nuevo más adelante si reabre."
     }
   ],
   "pendientes_de_investigar": []
