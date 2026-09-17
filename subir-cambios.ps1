@@ -19,13 +19,23 @@
 #   esto. El resto de archivos (código, retailers.json, etc.) se mergean
 #   normal.
 #
+# data/precios.db (la base de datos SQLite) es distinto: es binario, así que
+# Git no lo puede mezclar como texto. Si vos corriste "py run.py --retailer X"
+# en tu compu el mismo día que corrió el bot en GitHub, las dos versiones
+# chocan de verdad. El script detecta ese choque puntual (y SOLO ese) y se
+# queda automáticamente con la versión de GitHub, porque esa es la que se
+# repuebla todos los días desde las webs en vivo -- tus corridas locales de
+# prueba no se pierden en lo importante (el código que las generó ya quedó
+# commiteado), solo se descarta esa captura de prueba puntual de tu compu.
+#
 # Qué hace, en orden:
 #   1. Configura el driver de merge "ours" (una sola vez, no hace nada si ya
 #      está configurado) y agrega/actualiza .gitattributes si hace falta.
 #   2. git add .    -> agrega tus cambios locales
 #   3. git commit   -> los commitea (si no hay nada que commitear, avisa y sigue)
 #   4. git pull     -> trae los commits del bot; docs/dashboard_data.json se
-#      resuelve solo a favor de tu versión si choca, el resto mergea normal
+#      resuelve solo a favor de tu versión si choca, data/precios.db se
+#      resuelve solo a favor de GitHub si choca, el resto mergea normal
 #   5. git push     -> sube todo junto
 #
 # Si el script se detiene con "ERROR", léelo -- significa que algo real pasó
@@ -54,9 +64,29 @@ if ($LASTEXITCODE -ne 0) {
 Write-Host "3/4 Trayendo cambios del repo (incluye commits del bot si los hay)..." -ForegroundColor Cyan
 git pull --no-edit
 if ($LASTEXITCODE -ne 0) {
-    Write-Host "ERROR: el pull falló con un conflicto real (no en dashboard_data.json)." -ForegroundColor Red
-    Write-Host "Revisa el mensaje de arriba, resuelve el conflicto a mano, y recién ahí vuelve a correr el script." -ForegroundColor Red
-    exit 1
+    # data/precios.db es binario (SQLite) -- Git no puede mezclar dos
+    # versiones línea por línea como con texto, así que CUALQUIER choque ahí
+    # (vos corriste "py run.py --retailer X" en tu compu el mismo día que
+    # corrió el bot en GitHub) sale como conflicto real, aunque el resto del
+    # commit esté perfecto. Como esa base de datos la repuebla el bot todos
+    # los días desde las webs en vivo, la versión de GitHub manda: nos
+    # quedamos con esa y de paso avisamos, en vez de trabar el push cada vez.
+    $conflictos = git diff --name-only --diff-filter=U
+    if ($conflictos -and ($conflictos.Trim() -eq "data/precios.db")) {
+        Write-Host "   Conflicto solo en data/precios.db (normal si probaste retailers en tu compu hoy)." -ForegroundColor Yellow
+        Write-Host "   Nos quedamos con la version de GitHub (la del bot diario) y seguimos." -ForegroundColor Yellow
+        git checkout --theirs -- data/precios.db
+        git add data/precios.db
+        git commit --no-edit
+        if ($LASTEXITCODE -ne 0) {
+            Write-Host "ERROR: no se pudo cerrar el merge de data/precios.db. Corre 'git status' y revisa a mano." -ForegroundColor Red
+            exit 1
+        }
+    } else {
+        Write-Host "ERROR: el pull falló con un conflicto real (no solo en data/precios.db)." -ForegroundColor Red
+        Write-Host "Revisa el mensaje de arriba, resuelve el conflicto a mano, y recién ahí vuelve a correr el script." -ForegroundColor Red
+        exit 1
+    }
 }
 
 Write-Host "4/4 Subiendo a GitHub..." -ForegroundColor Cyan
