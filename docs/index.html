@@ -366,15 +366,7 @@ footer { text-align: center; padding: var(--space-8) var(--space-4); color: var(
     <div class="section-toolbar">
       <button class="btn-export" id="sany-export-btn" type="button">Exportar CSV para acción inmediata</button>
     </div>
-    <div class="table-wrap" style="margin-bottom: var(--space-8)">
-      <table>
-        <thead><tr>
-          <th>Familia</th><th>Retailer</th><th class="num">Precio Sany</th>
-          <th class="num">Mínimo mercado</th><th class="num">Diferencia</th>
-        </tr></thead>
-        <tbody id="sany-body"></tbody>
-      </table>
-    </div>
+    <div id="sany-list" style="margin-bottom: var(--space-8)"></div>
 
     <div class="chart-card">
       <div class="chart-head">
@@ -674,30 +666,94 @@ function renderSany(d) {
 
   document.getElementById('sany-fecha').textContent = d.fecha_captura || '—';
 
-  document.getElementById('sany-body').innerHTML = productosFiltrados.map(p => `
-    <tr>
-      <td>${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.familia)}</a>` : esc(p.familia)}</td>
-      <td>${esc(p.retailer)}</td>
-      <td class="num">
-        ${fmtMoney(p.precio_sany)}<br>
-        ${p.en_promocion
-          ? `<span class="pill pill-warn">En promoción</span> <span style="text-decoration:line-through;color:var(--text-muted);font-size:11px;">${fmtMoney(p.precio_regular_sany)}</span>`
-          : `<span class="pill pill-neutral">Precio regular</span>`}
-      </td>
-      <td class="num">${fmtMoney(p.precio_min_resto_mercado)}</td>
-      <td class="num">
-        <span class="pill ${p.sany_es_mas_barato ? 'pill-ok' : (p.diferencia_pct > 5 ? 'pill-risk' : 'pill-neutral')}">
-          ${fmtPct(p.diferencia_pct)}
-        </span>
-      </td>
-    </tr>
-  `).join('') || `<tr><td colspan="5" class="empty-state">${s.total_productos ? 'Sin productos Sany para este filtro.' : 'Sany no aparece en la captura de hoy.'}</td></tr>`;
+  renderSanyList(productosFiltrados, s.total_productos);
 
   const btnExport = document.getElementById('sany-export-btn');
   btnExport.disabled = !productosFiltrados.length;
   btnExport.onclick = () => exportSanyCSV(productosFiltrados, d.fecha_captura);
 
   renderSanyTendencia(s);
+}
+
+/* Agrupa las filas planas de s.productos por familia (mismo producto puede
+   tener varios vendedores/retailers -- ej. Sany vendiendo el mismo modelo
+   en Falabella y en otra tienda) y las despliega como tarjetas expandibles,
+   igual patrón que el Explorador, para que se vea de un vistazo cuántos
+   vendedores tiene cada producto y el detalle de cada uno al abrir. */
+function renderSanyList(productos, totalOriginal) {
+  const container = document.getElementById('sany-list');
+  if (!productos.length) {
+    container.innerHTML = `<div class="empty-state">${totalOriginal ? 'Sin productos Sany para este filtro.' : 'Sany no aparece en la captura de hoy.'}</div>`;
+    return;
+  }
+
+  const grupos = new Map();
+  productos.forEach(p => {
+    if (!grupos.has(p.familia)) grupos.set(p.familia, []);
+    grupos.get(p.familia).push(p);
+  });
+
+  const familias = Array.from(grupos.entries()).map(([familia, ofertas]) => {
+    const mejorDiferencia = ofertas.reduce((min, o) =>
+      (o.diferencia_pct != null && (min == null || o.diferencia_pct < min)) ? o.diferencia_pct : min, null);
+    const algunoMasBarato = ofertas.some(o => o.sany_es_mas_barato);
+    const vendedores = new Set(ofertas.map(o => o.retailer));
+    return { familia, ofertas, mejorDiferencia, algunoMasBarato, nVendedores: vendedores.size };
+  }).sort((a, b) => (a.mejorDiferencia ?? 999) - (b.mejorDiferencia ?? 999));
+
+  container.innerHTML = familias.map((f, idx) => `
+    <div class="familia-card" data-idx="${idx}">
+      <button class="familia-summary" aria-expanded="false">
+        <div>
+          <div class="familia-name">${esc(f.familia)}</div>
+          <div class="familia-meta">${f.ofertas.length} oferta${f.ofertas.length === 1 ? '' : 's'} · ${f.nVendedores} vendedor${f.nVendedores === 1 ? '' : 'es'}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span class="pill ${f.algunoMasBarato ? 'pill-ok' : (f.mejorDiferencia > 5 ? 'pill-risk' : 'pill-neutral')}">
+            ${fmtPct(f.mejorDiferencia)}
+          </span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </button>
+      <div class="familia-detail">
+        <div class="table-wrap">
+          <table>
+            <thead><tr>
+              <th>Retailer</th><th class="num">Precio Sany</th>
+              <th class="num">Mínimo mercado</th><th class="num">Diferencia</th>
+            </tr></thead>
+            <tbody>
+              ${f.ofertas.map(p => `
+                <tr>
+                  <td>${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.retailer)}</a>` : esc(p.retailer)}</td>
+                  <td class="num">
+                    ${fmtMoney(p.precio_sany)}<br>
+                    ${p.en_promocion
+                      ? `<span class="pill pill-warn">En promoción</span> <span style="text-decoration:line-through;color:var(--text-muted);font-size:11px;">${fmtMoney(p.precio_regular_sany)}</span>`
+                      : `<span class="pill pill-neutral">Precio regular</span>`}
+                  </td>
+                  <td class="num">${fmtMoney(p.precio_min_resto_mercado)}</td>
+                  <td class="num">
+                    <span class="pill ${p.sany_es_mas_barato ? 'pill-ok' : (p.diferencia_pct > 5 ? 'pill-risk' : 'pill-neutral')}">
+                      ${fmtPct(p.diferencia_pct)}
+                    </span>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  container.querySelectorAll('.familia-summary').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.familia-card');
+      const open = card.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
 }
 
 document.querySelectorAll('.filtro-sany-tipo').forEach(btn => {
