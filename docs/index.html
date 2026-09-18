@@ -375,19 +375,14 @@ footer { text-align: center; padding: var(--space-8) var(--space-4); color: var(
       </div>
       <div class="filters" style="margin-bottom: var(--space-3)">
         <label style="font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:6px;">
-          Desde
-          <input type="date" id="sany-fecha-desde" class="chart-select" style="min-height:36px;" aria-label="Fecha de inicio del rango">
-        </label>
-        <label style="font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:6px;">
-          Hasta
-          <input type="date" id="sany-fecha-hasta" class="chart-select" style="min-height:36px;" aria-label="Fecha de fin del rango">
+          Mes
+          <select id="sany-mes-select" class="chart-select" style="min-height:36px;" aria-label="Elegir mes (del día 1 al último capturado)"></select>
         </label>
       </div>
       <div class="chart-legend">
-        <span><i class="legend-dot" style="background:var(--is-sky)"></i> Mínimo</span>
-        <span><i class="legend-dot" style="background:var(--is-graphite)"></i> Promedio</span>
-        <span><i class="legend-dot" style="background:var(--is-terracotta)"></i> Máximo</span>
+        <span><i class="legend-dot" style="background:var(--is-graphite)"></i> Precio Sany (promedio del día)</span>
       </div>
+      <div id="sany-comparativo-dia" style="margin-bottom: var(--space-3)"></div>
       <div class="chart-svg-wrap" id="sany-chart-tendencia"></div>
     </div>
   </section>
@@ -766,18 +761,27 @@ document.querySelectorAll('.filtro-sany-tipo').forEach(btn => {
   });
 });
 
-/* Tendencia de precio de Sany por familia, con selector de familia y rango
-   de fechas (desde/hasta) -- reutiliza el mismo motor de gráfico de línea
-   que la pestaña Tendencia, pero filtrado a las fechas elegidas. */
+/* Nombres de mes en español, para el <select> de mes (evita depender de
+   Intl/locale del navegador de Seve, que a veces cae en inglés). */
+const MESES_ES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio',
+  'agosto', 'setiembre', 'octubre', 'noviembre', 'diciembre'];
+
+/* Tendencia de precio de Sany por familia: en vez de un rango de fechas a
+   elegir a mano, Seve filtra por mes completo (del día 1 hasta el último
+   capturado ese mes) y ve, además del gráfico, un comparativo directo del
+   precio de hoy contra el de ayer -- que es lo que realmente necesita para
+   reaccionar rápido, sin tener que leer un rango de min/máx en el gráfico. */
 function renderSanyTendencia(s) {
   const historial = s.historial || {};
   const familias = Object.keys(historial).sort((a, b) => historial[b].length - historial[a].length || a.localeCompare(b));
   const familiaSelect = document.getElementById('sany-familia-select');
-  const desdeInput = document.getElementById('sany-fecha-desde');
-  const hastaInput = document.getElementById('sany-fecha-hasta');
+  const mesSelect = document.getElementById('sany-mes-select');
+  const comparativo = document.getElementById('sany-comparativo-dia');
 
   if (!familias.length) {
     familiaSelect.innerHTML = '';
+    mesSelect.innerHTML = '';
+    comparativo.innerHTML = '';
     document.getElementById('sany-chart-tendencia').innerHTML =
       '<div class="empty-state">Sin historial de precio Sany todavía -- se arma solo con cada corrida diaria nueva.</div>';
     return;
@@ -787,31 +791,55 @@ function renderSanyTendencia(s) {
   familiaSelect.innerHTML = familias.map(f => `<option value="${esc(f)}">${esc(f)}</option>`).join('');
   familiaSelect.value = familias.includes(familiaPrevia) ? familiaPrevia : familias[0];
 
-  // Rango disponible de fechas (todas las familias juntas), para poner
-  // límites razonables en los calendarios sin que Seve tenga que adivinar
-  // qué fechas hay datos.
+  // Meses disponibles (de todas las familias juntas), más recientes primero.
   const todasFechas = [...new Set(Object.values(historial).flat().map(p => p.fecha))].sort();
-  const minFecha = todasFechas[0], maxFecha = todasFechas[todasFechas.length - 1];
-  [desdeInput, hastaInput].forEach(inp => { inp.min = minFecha; inp.max = maxFecha; });
-  if (!desdeInput.value) desdeInput.value = minFecha;
-  if (!hastaInput.value) hastaInput.value = maxFecha;
+  const meses = [...new Set(todasFechas.map(f => f.slice(0, 7)))].sort().reverse();
+  const mesPrevio = mesSelect.value;
+  mesSelect.innerHTML = meses.map(m => {
+    const [anio, mesNum] = m.split('-');
+    return `<option value="${m}">${MESES_ES[parseInt(mesNum, 10) - 1]} ${anio}</option>`;
+  }).join('');
+  mesSelect.value = meses.includes(mesPrevio) ? mesPrevio : meses[0];
 
   function draw() {
     const familia = familiaSelect.value;
-    const desde = desdeInput.value || minFecha;
-    const hasta = hastaInput.value || maxFecha;
-    const puntos = (historial[familia] || []).filter(p => p.fecha >= desde && p.fecha <= hasta);
+    const mes = mesSelect.value;
+    // Del día 1 del mes elegido hasta el último día capturado de ese mes
+    // (que para el mes en curso es "hasta hoy", sin que Seve tenga que
+    // tocar nada).
+    const puntos = (historial[familia] || []).filter(p => p.fecha.startsWith(mes)).sort((a, b) => a.fecha.localeCompare(b.fecha));
     const fechasFam = puntos.map(p => p.fecha);
+    const [anio, mesNum] = mes.split('-');
     svgLineChart(document.getElementById('sany-chart-tendencia'), fechasFam, [
-      { values: puntos.map(p => p.precio_min), color: 'var(--is-sky)' },
       { values: puntos.map(p => p.precio_promedio), color: 'var(--is-graphite)' },
-      { values: puntos.map(p => p.precio_max), color: 'var(--is-terracotta)' },
-    ], { ariaLabel: `Evolución de precio de Sany en ${familia}, del ${desde} al ${hasta}` });
+    ], { ariaLabel: `Evolución de precio de Sany en ${familia}, ${MESES_ES[parseInt(mesNum, 10) - 1]} ${anio}` });
+
+    // Comparativo simple: precio de la última captura del mes vs la del día
+    // anterior a esa (no contra todo el rango, solo día vs día).
+    if (puntos.length >= 2) {
+      const hoy = puntos[puntos.length - 1];
+      const ayer = puntos[puntos.length - 2];
+      const delta = hoy.precio_promedio - ayer.precio_promedio;
+      const deltaPct = ayer.precio_promedio ? (delta / ayer.precio_promedio) * 100 : null;
+      const subio = delta > 0.005;
+      const bajo = delta < -0.005;
+      const pillClase = subio ? 'pill-risk' : (bajo ? 'pill-ok' : 'pill-neutral');
+      const signo = delta > 0 ? '+' : '';
+      comparativo.innerHTML = `
+        <div class="chart-card" style="margin-bottom:0;padding:var(--space-3) var(--space-4);display:flex;flex-wrap:wrap;gap:var(--space-4);align-items:center;">
+          <div><div class="familia-meta">Hoy (${hoy.fecha})</div><div class="familia-spread">${fmtMoney(hoy.precio_promedio)}</div></div>
+          <div><div class="familia-meta">Ayer (${ayer.fecha})</div><div class="familia-spread">${fmtMoney(ayer.precio_promedio)}</div></div>
+          <span class="pill ${pillClase}">${signo}${fmtMoney(delta)} (${signo}${deltaPct != null ? deltaPct.toFixed(1) : '—'}%)</span>
+        </div>`;
+    } else if (puntos.length === 1) {
+      comparativo.innerHTML = `<div class="empty-state">Solo hay una captura este mes para ${esc(familia)} todavía -- el comparativo día vs. día aparece desde la segunda.</div>`;
+    } else {
+      comparativo.innerHTML = '';
+    }
   }
 
   familiaSelect.onchange = draw;
-  desdeInput.onchange = draw;
-  hastaInput.onchange = draw;
+  mesSelect.onchange = draw;
   draw();
 }
 
