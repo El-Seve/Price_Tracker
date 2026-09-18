@@ -5,44 +5,43 @@
 # Uso:
 #   .\subir-cambios.ps1 "Agrega retailer X"
 #
-# Por qué el orden cambió (commit ANTES de pull, no después):
-#   docs/dashboard_data.json lo regenera el bot todos los días, y también lo
-#   regeneras tú al probar el dashboard en tu compu -- las dos versiones casi
-#   nunca son idénticas byte a byte. Si haces "pull" con ese archivo modificado
-#   sin commitear, Git se niega a traer nada ("local changes would be
-#   overwritten by merge") y ahí se traba todo. Commiteando primero, ese
-#   archivo deja de estar "sin commitear" y el pull se puede resolver solo.
+# CAMBIO IMPORTANTE (corregido 18/09/2026): docs/dashboard_data.json YA NO se
+# sube "tal cual está en tu disco" -- se REGENERA siempre, como último paso,
+# a partir de la base de datos ya fusionada (data/precios.db), justo antes de
+# subir. Antes el script tenía una regla ("merge=ours") que en caso de choque
+# con el commit del bot se quedaba con la versión que vos ya tenías commiteada
+# -- el problema es que la mayoría de tus despliegues (código nuevo, sin tocar
+# datos) commitean docs/dashboard_data.json SIN haberlo regenerado, así que
+# "tu versión" muchas veces era una captura vieja de días atrás. Cuando esa
+# versión vieja le ganaba el choque a la fresca del bot, el dashboard volvía
+# atrás en el tiempo sin que nadie lo pidiera (así se descubrió el bug: la
+# pestaña Sany volvió a mostrar "2026-09-07" después de haberse arreglado).
 #
-#   Además, para ESE archivo puntual (que se regenera solo, no se edita a
-#   mano), configuramos a Git para que en caso de choque con el commit del
-#   bot, se quede con tu versión y siga -- así nunca más se traba el push por
-#   esto. El resto de archivos (código, retailers.json, etc.) se mergean
-#   normal.
+# La solución de fondo: dashboard_data.json es un archivo 100% calculado a
+# partir de data/precios.db -- no tiene sentido "elegir cuál versión gana" en
+# un choque, tiene sentido recalcularlo siempre desde la fuente de verdad
+# (la base de datos, que sí se fusiona de verdad con merge_precios_db.py). Por
+# eso ahora el script lo regenera SIEMPRE en el paso 5, tengas o no un choque.
 #
-# data/precios.db (la base de datos SQLite) es distinto: es binario, así que
-# Git no lo puede mezclar como texto. Si vos corriste "py run.py --retailer X"
-# en tu compu el mismo día que corrió el bot en GitHub, las dos versiones
-# chocan de verdad.
-#
-# IMPORTANTE (corregido 18/09/2026): antes esto se resolvía quedándose con la
-# versión de GitHub sin más -- pero descubrimos que GitHub Actions no puede
-# traer datos de Falabella/PlazaVea/Promart/Oechsle (posible bloqueo de IP de
-# nube), mientras que corriendo el mismo código desde tu compu SÍ funciona.
-# Quedarse con la versión de GitHub a ciegas borraba justo esas capturas
-# buenas de tu compu (y con ellas, los datos de Sany, que solo aparece como
-# vendedor dentro de Falabella). Ahora el script SUMA las dos versiones con
-# merge_precios_db.py en vez de descartar una -- ninguna fila real se pierde,
-# venga de tu compu o del bot.
+# data/precios.db (la base de datos SQLite) es binario, así que Git no lo
+# puede mezclar como texto. Si vos corriste "py run.py --retailer X" en tu
+# compu el mismo día que corrió el bot en GitHub, las dos versiones chocan de
+# verdad -- en vez de quedarnos con una sola (lo que borraría en silencio
+# capturas reales del lado descartado, como pasó con Falabella/Sany antes de
+# este fix), las SUMAMOS con merge_precios_db.py. La restricción UNIQUE de la
+# tabla evita duplicados, así que no hay riesgo de "duplicar" precios.
 #
 # Qué hace, en orden:
-#   1. Configura el driver de merge "ours" (una sola vez, no hace nada si ya
-#      está configurado) y agrega/actualiza .gitattributes si hace falta.
-#   2. git add .    -> agrega tus cambios locales
-#   3. git commit   -> los commitea (si no hay nada que commitear, avisa y sigue)
-#   4. git pull     -> trae los commits del bot; docs/dashboard_data.json se
-#      resuelve solo a favor de tu versión si choca, data/precios.db se
-#      SUMA (no se descarta ninguna) si choca, el resto mergea normal
-#   5. git push     -> sube todo junto
+#   1. Configura el driver de merge "ours" (una sola vez) -- solo sirve ahora
+#      para que el "git pull" no se trabe si docs/dashboard_data.json choca;
+#      no importa cuál versión "gane" ahí porque el paso 5 lo regenera igual.
+#   2. git add . + git commit -> tus cambios de código/config quedan guardados
+#   3. git pull  -> trae los commits del bot; data/precios.db se SUMA (no se
+#      descarta ninguna fila) si choca; el resto mergea normal
+#   4. (nada especial -- ver paso 5)
+#   5. Regenera docs/dashboard_data.json desde data/precios.db YA fusionado, y
+#      si cambió algo lo commitea aparte
+#   6. git push -> sube todo junto
 #
 # Si el script se detiene con "ERROR", léelo -- significa que algo real pasó
 # (conflicto en un archivo de código, sin internet, etc.) y hace falta mirarlo
@@ -55,29 +54,25 @@ param(
 
 $ErrorActionPreference = "Continue"
 
-Write-Host "0/4 Preparando reglas de merge (una sola vez)..." -ForegroundColor Cyan
+Write-Host "1/5 Preparando reglas de merge (una sola vez)..." -ForegroundColor Cyan
 git config merge.ours.driver true | Out-Null
 
-Write-Host "1/4 Agregando tus cambios..." -ForegroundColor Cyan
+Write-Host "2/5 Agregando y commiteando tus cambios..." -ForegroundColor Cyan
 git add .
-
-Write-Host "2/4 Creando commit..." -ForegroundColor Cyan
 git commit -m "$Mensaje"
 if ($LASTEXITCODE -ne 0) {
     Write-Host "   (No había nada nuevo que commitear -- seguimos igual)" -ForegroundColor Yellow
 }
 
-Write-Host "3/4 Trayendo cambios del repo (incluye commits del bot si los hay)..." -ForegroundColor Cyan
+Write-Host "3/5 Trayendo cambios del repo (incluye commits del bot si los hay)..." -ForegroundColor Cyan
 git pull --no-edit
 if ($LASTEXITCODE -ne 0) {
-    # data/precios.db es binario (SQLite) -- Git no puede mezclar dos
-    # versiones línea por línea como con texto, así que CUALQUIER choque ahí
-    # (vos corriste "py run.py --retailer X" en tu compu el mismo día que
-    # corrió el bot en GitHub) sale como conflicto real, aunque el resto del
-    # commit esté perfecto. En vez de quedarnos con una sola versión (lo que
-    # borraría en silencio capturas reales del lado descartado), sumamos las
-    # dos con merge_precios_db.py -- la restricción UNIQUE de la tabla evita
-    # duplicados, así que no hay riesgo de "duplicar" precios.
+    # data/precios.db es binario -- Git no puede mezclar dos versiones línea
+    # por línea como con texto, así que CUALQUIER choque ahí (vos corriste
+    # "py run.py --retailer X" en tu compu el mismo día que corrió el bot en
+    # GitHub) sale como conflicto real, aunque el resto del commit esté
+    # perfecto. Sumamos las dos con merge_precios_db.py en vez de descartar
+    # una.
     $conflictos = git diff --name-only --diff-filter=U
     if ($conflictos -and ($conflictos.Trim() -eq "data/precios.db")) {
         Write-Host "   Conflicto solo en data/precios.db (normal si probaste retailers en tu compu hoy)." -ForegroundColor Yellow
@@ -113,7 +108,20 @@ if ($LASTEXITCODE -ne 0) {
     }
 }
 
-Write-Host "4/4 Subiendo a GitHub..." -ForegroundColor Cyan
+Write-Host "4/5 Regenerando docs/dashboard_data.json desde la base ya fusionada..." -ForegroundColor Cyan
+py -m dashboard.build_dashboard_data
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "ERROR: no se pudo regenerar dashboard_data.json. Revisa el mensaje de arriba." -ForegroundColor Red
+    Write-Host "Tus cambios de código YA están commiteados -- podés corregir el problema y volver a correr el script." -ForegroundColor Red
+    exit 1
+}
+git add docs/dashboard_data.json
+git commit -m "Actualizar dashboard_data.json (regenerado automáticamente)" | Out-Null
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "   (dashboard_data.json no cambió -- seguimos igual)" -ForegroundColor Yellow
+}
+
+Write-Host "5/5 Subiendo a GitHub..." -ForegroundColor Cyan
 git push
 if ($LASTEXITCODE -ne 0) {
     Write-Host "ERROR: el push falló. No se subió nada -- revisa el mensaje de arriba." -ForegroundColor Red

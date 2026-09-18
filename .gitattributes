@@ -3,8 +3,12 @@
 * text=auto eol=lf
 
 # docs/dashboard_data.json se regenera solo (a diario por el bot, o local al
-# probar el dashboard) -- nunca se edita a mano. Si un pull encuentra que el
-# bot lo cambió al mismo tiempo que tú, en vez de trabar el merge se queda con
-# TU versión y sigue. Requiere "git config merge.ours.driver true" una vez
-# por máquina -- subir-cambios.ps1 ya lo hace solo en cada corrida.
+# correr subir-cambios.ps1) -- nunca se edita a mano. Si un pull encuentra que
+# el bot lo cambió al mismo tiempo que tú, esta regla evita que el merge se
+# trabe (se queda con cualquiera de las dos versiones sin pelear). CUÁL versión
+# "gane" acá ya no importa -- subir-cambios.ps1 lo REGENERA desde cero justo
+# después del pull, a partir de la base de datos ya fusionada, así que el
+# contenido final siempre es el correcto sin importar qué pasó en el merge.
+# Requiere "git config merge.ours.driver true" una vez por máquina --
+# subir-cambios.ps1 ya lo hace solo en cada corrida.
 docs/dashboard_data.json merge=ours
