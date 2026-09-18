@@ -87,12 +87,12 @@ def _cobertura(conn, fecha_hoy: str) -> dict:
 
 def _filas_honor_hoy(conn, fecha_hoy: str) -> list[dict]:
     cur = conn.execute(
-        "SELECT retailer, categoria, modelo, precio_regular, precio_oferta, "
+        "SELECT retailer, categoria, modelo, precio_regular, precio_oferta, precio_tarjeta, "
         "vendedor, vendedor_tercero, url FROM capturas "
         "WHERE fecha = ? AND marca = 'HONOR'",
         (fecha_hoy,),
     )
-    cols = ["retailer", "categoria", "modelo", "precio_regular", "precio_oferta",
+    cols = ["retailer", "categoria", "modelo", "precio_regular", "precio_oferta", "precio_tarjeta",
             "vendedor", "vendedor_tercero", "url"]
     out = []
     for row in cur.fetchall():
@@ -163,6 +163,8 @@ def _dispersion_interna(filas_honor: list[dict]) -> list[dict]:
                     "vendedor": o["vendedor"],
                     "vendedor_tercero": bool(o["vendedor_tercero"]),
                     "precio": o["precio_oferta"],
+                    "precio_regular": o.get("precio_regular"),
+                    "precio_tarjeta": o.get("precio_tarjeta"),
                     "modelo": o["modelo"],
                     "url": o["url"],
                 }
@@ -300,6 +302,10 @@ def _sany(filas_honor: list[dict]) -> dict:
             "precio_sany": r["precio_oferta"],
             "precio_regular_sany": precio_regular if en_promocion else None,
             "en_promocion": en_promocion,
+            # Precio pagando con la tarjeta propia del retailer (ej. CMR en
+            # Falabella) -- None cuando el retailer no la tiene o no se pudo
+            # capturar (por ahora solo Falabella/Sodimac/Tottus la traen).
+            "precio_tarjeta": r.get("precio_tarjeta"),
             "precio_min_resto_mercado": precio_min_resto,
             "diferencia_pct": diferencia_pct,
             "sany_es_mas_barato": diferencia_pct is not None and diferencia_pct < 0,

@@ -30,10 +30,26 @@ CREATE INDEX IF NOT EXISTS idx_capturas_retailer_fecha ON capturas(retailer, fec
 """
 
 
+def _migrar_columnas_nuevas(conn, tabla: str = "capturas", esquema: str = "main"):
+    """precio_tarjeta se agregó el 18/09/2026 (precio pagando con la tarjeta
+    propia del retailer, ej. CMR de Falabella) -- ALTER TABLE en vez de
+    recrear la tabla, para no perder el histórico ya capturado en bases
+    viejas que no la tenían.
+
+    esquema: "main" para la base principal, o el alias de un ATTACH (ej.
+    "extra") -- PRAGMA usa <esquema>.table_info(<tabla>), no <esquema.tabla>
+    como el resto de sentencias SQL."""
+    cols = {row[1] for row in conn.execute(f"PRAGMA {esquema}.table_info({tabla})").fetchall()}
+    if "precio_tarjeta" not in cols:
+        conn.execute(f"ALTER TABLE {esquema}.{tabla} ADD COLUMN precio_tarjeta REAL")
+        conn.commit()
+
+
 def get_connection():
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(DB_PATH)
     conn.executescript(SCHEMA)
+    _migrar_columnas_nuevas(conn)
     return conn
 
 
@@ -46,11 +62,11 @@ def insert_rows(conn, rows: list[dict], fecha: str | None = None):
             cur.execute(
                 """INSERT OR IGNORE INTO capturas
                    (fecha, retailer, categoria, marca, modelo, precio_regular,
-                    precio_oferta, vendedor, vendedor_tercero, url)
-                   VALUES (?,?,?,?,?,?,?,?,?,?)""",
+                    precio_oferta, precio_tarjeta, vendedor, vendedor_tercero, url)
+                   VALUES (?,?,?,?,?,?,?,?,?,?,?)""",
                 (fecha, r["retailer"], r["categoria"], r["marca"], r["modelo"],
-                 r.get("precio_regular"), r.get("precio_oferta"), r.get("vendedor"),
-                 int(bool(r.get("vendedor_tercero"))), r.get("url")),
+                 r.get("precio_regular"), r.get("precio_oferta"), r.get("precio_tarjeta"),
+                 r.get("vendedor"), int(bool(r.get("vendedor_tercero"))), r.get("url")),
             )
             inserted += cur.rowcount
         except sqlite3.Error:

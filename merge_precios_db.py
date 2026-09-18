@@ -33,6 +33,7 @@ import db as db_module  # reusa el mismo SCHEMA (misma restricción UNIQUE) que 
 def merge(db_base: str, db_extra: str, db_salida: str) -> int:
     conn = sqlite3.connect(db_base)
     conn.executescript(db_module.SCHEMA)
+    db_module._migrar_columnas_nuevas(conn)
     conn.execute("ATTACH DATABASE ? AS extra", (db_extra,))
     conn.executescript("""
         CREATE TABLE IF NOT EXISTS extra.capturas (
@@ -50,12 +51,17 @@ def merge(db_base: str, db_extra: str, db_salida: str) -> int:
             UNIQUE(fecha, retailer, modelo, vendedor, precio_oferta)
         );
     """)
+    # La base "extra" puede venir de antes del 18/09/2026 (sin precio_tarjeta
+    # todavía) -- se migra igual que la base propia antes de leerla, si no
+    # ALTER TABLE de abajo fallaría al no existir la columna en ninguna de
+    # las dos, o el SELECT de precio_tarjeta fallaría si falta solo en extra.
+    db_module._migrar_columnas_nuevas(conn, tabla="capturas", esquema="extra")
     cur = conn.execute("""
         INSERT OR IGNORE INTO capturas
             (fecha, retailer, categoria, marca, modelo, precio_regular,
-             precio_oferta, vendedor, vendedor_tercero, url)
+             precio_oferta, precio_tarjeta, vendedor, vendedor_tercero, url)
         SELECT fecha, retailer, categoria, marca, modelo, precio_regular,
-               precio_oferta, vendedor, vendedor_tercero, url
+               precio_oferta, precio_tarjeta, vendedor, vendedor_tercero, url
         FROM extra.capturas
     """)
     sumadas = cur.rowcount

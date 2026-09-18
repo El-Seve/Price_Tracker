@@ -614,13 +614,14 @@ function renderExplorador(d) {
       <div class="familia-detail">
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Retailer</th><th>Vendedor</th><th class="num">Precio</th><th>Producto</th></tr></thead>
+            <thead><tr><th>Retailer</th><th>Vendedor</th><th class="num">Precio</th><th class="num">Precio tarjeta</th><th>Producto</th></tr></thead>
             <tbody>
               ${x.ofertas.map(o => `
                 <tr>
                   <td>${esc(o.retailer)}</td>
                   <td>${esc(o.vendedor)}${o.vendedor_tercero ? ' <span class="pill pill-neutral">3º</span>' : ''}</td>
                   <td class="num">${fmtMoney(o.precio)}</td>
+                  <td class="num">${o.precio_tarjeta ? fmtMoney(o.precio_tarjeta) : '<span style="color:var(--text-muted);">—</span>'}</td>
                   <td>${o.url ? `<a href="${esc(o.url)}" target="_blank" rel="noopener">${esc(o.modelo)}</a>` : esc(o.modelo)}</td>
                 </tr>
               `).join('')}
@@ -714,7 +715,7 @@ function renderSanyList(productos, totalOriginal) {
         <div class="table-wrap">
           <table>
             <thead><tr>
-              <th>Retailer</th><th class="num">Precio Sany</th>
+              <th>Retailer</th><th class="num">Precio Sany</th><th class="num">Precio tarjeta</th>
               <th class="num">Mínimo mercado</th><th class="num">Diferencia</th>
             </tr></thead>
             <tbody>
@@ -726,6 +727,11 @@ function renderSanyList(productos, totalOriginal) {
                     ${p.en_promocion
                       ? `<span class="pill pill-warn">En promoción</span> <span style="text-decoration:line-through;color:var(--text-muted);font-size:11px;">${fmtMoney(p.precio_regular_sany)}</span>`
                       : `<span class="pill pill-neutral">Precio regular</span>`}
+                  </td>
+                  <td class="num">
+                    ${p.precio_tarjeta
+                      ? `${fmtMoney(p.precio_tarjeta)} <span class="pill pill-ok">Tarjeta</span>`
+                      : `<span style="color:var(--text-muted);">—</span>`}
                   </td>
                   <td class="num">${fmtMoney(p.precio_min_resto_mercado)}</td>
                   <td class="num">
@@ -847,12 +853,13 @@ function renderSanyTendencia(s) {
    quien tenga que actuar (negociación de precio, alerta al canal) sin
    tener que copiar la tabla a mano desde el dashboard. */
 function exportSanyCSV(productos, fecha) {
-  const encabezados = ['Familia', 'Modelo', 'Retailer', 'Tipo', 'Precio Sany', 'Tipo de precio', 'Precio regular Sany', 'Mínimo mercado', 'Diferencia %', 'URL'];
+  const encabezados = ['Familia', 'Modelo', 'Retailer', 'Tipo', 'Precio Sany', 'Tipo de precio', 'Precio regular Sany', 'Precio tarjeta', 'Mínimo mercado', 'Diferencia %', 'URL'];
   const filas = productos.map(p => [
     p.familia, p.modelo, p.retailer, p.tipo,
     p.precio_sany != null ? p.precio_sany.toFixed(2) : '',
     p.en_promocion ? 'Promoción' : 'Regular',
     p.precio_regular_sany != null ? p.precio_regular_sany.toFixed(2) : '',
+    p.precio_tarjeta != null ? p.precio_tarjeta.toFixed(2) : '',
     p.precio_min_resto_mercado != null ? p.precio_min_resto_mercado.toFixed(2) : '',
     p.diferencia_pct != null ? p.diferencia_pct : '',
     p.url || '',

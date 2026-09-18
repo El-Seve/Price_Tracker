@@ -126,14 +126,40 @@ def _get_price(prices: list, price_type: str):
 
 
 def extract_rows(products: list, categoria: str, retailer: str, target_brands: set[str] | None = None):
+    """
+    El array `prices` de cada producto trae hasta 4 tipos, y NO siempre los
+    mismos (revisado en vivo 18/09/2026 contra ~1000 productos Falabella):
+      - normalPrice:   precio de lista (tachado cuando hay descuento) -- SIEMPRE está.
+      - internetPrice: precio público "online", sin tarjeta -- cuando existe.
+      - eventPrice:    precio de evento/flash, reemplaza a internetPrice cuando
+                        ese no viene (nunca aparecen los dos juntos).
+      - cmrPrice:      precio pagando con la tarjeta CMR de Falabella -- siempre
+                        el más bajo de los 4 cuando aparece.
+
+    Bug que esto corrige: antes, cuando no había internetPrice pero sí
+    cmrPrice (pasa en ~14% de los productos), el código usaba cmrPrice como si
+    fuera el precio público general ("oferta") -- mezclando sin darse cuenta
+    el precio con tarjeta dentro del precio que se compara contra el resto del
+    mercado. Ahora cmrPrice se guarda aparte (precio_tarjeta) y el "precio
+    oferta" siempre es el precio público (internetPrice o, si no está,
+    eventPrice), nunca el de tarjeta.
+    """
     rows = []
     for p in products:
         brand = (p.get("brand") or "").upper()
         if target_brands and brand not in target_brands:
             continue
         prices = p.get("prices", [])
-        oferta = _get_price(prices, "internetPrice") or _get_price(prices, "cmrPrice")
-        regular = _get_price(prices, "normalPrice") or oferta
+        regular = _get_price(prices, "normalPrice")
+        oferta = _get_price(prices, "internetPrice") or _get_price(prices, "eventPrice")
+        tarjeta = _get_price(prices, "cmrPrice")
+        if not oferta:
+            # Algunos productos solo traen cmrPrice + normalPrice (sin precio
+            # público separado) -- ahí el precio público efectivo ES el de
+            # tarjeta, no hay otro con qué comparar.
+            oferta = tarjeta
+        if not regular:
+            regular = oferta
         if not oferta:
             continue
         seller_name = p.get("sellerName") or retailer
@@ -144,6 +170,7 @@ def extract_rows(products: list, categoria: str, retailer: str, target_brands: s
             "modelo": p.get("displayName"),
             "precio_regular": regular,
             "precio_oferta": oferta,
+            "precio_tarjeta": tarjeta,
             "vendedor": seller_name,
             "vendedor_tercero": seller_name.lower() != retailer.lower(),
             "url": p.get("url"),
