@@ -22,11 +22,17 @@
 # data/precios.db (la base de datos SQLite) es distinto: es binario, así que
 # Git no lo puede mezclar como texto. Si vos corriste "py run.py --retailer X"
 # en tu compu el mismo día que corrió el bot en GitHub, las dos versiones
-# chocan de verdad. El script detecta ese choque puntual (y SOLO ese) y se
-# queda automáticamente con la versión de GitHub, porque esa es la que se
-# repuebla todos los días desde las webs en vivo -- tus corridas locales de
-# prueba no se pierden en lo importante (el código que las generó ya quedó
-# commiteado), solo se descarta esa captura de prueba puntual de tu compu.
+# chocan de verdad.
+#
+# IMPORTANTE (corregido 18/09/2026): antes esto se resolvía quedándose con la
+# versión de GitHub sin más -- pero descubrimos que GitHub Actions no puede
+# traer datos de Falabella/PlazaVea/Promart/Oechsle (posible bloqueo de IP de
+# nube), mientras que corriendo el mismo código desde tu compu SÍ funciona.
+# Quedarse con la versión de GitHub a ciegas borraba justo esas capturas
+# buenas de tu compu (y con ellas, los datos de Sany, que solo aparece como
+# vendedor dentro de Falabella). Ahora el script SUMA las dos versiones con
+# merge_precios_db.py en vez de descartar una -- ninguna fila real se pierde,
+# venga de tu compu o del bot.
 #
 # Qué hace, en orden:
 #   1. Configura el driver de merge "ours" (una sola vez, no hace nada si ya
@@ -35,7 +41,7 @@
 #   3. git commit   -> los commitea (si no hay nada que commitear, avisa y sigue)
 #   4. git pull     -> trae los commits del bot; docs/dashboard_data.json se
 #      resuelve solo a favor de tu versión si choca, data/precios.db se
-#      resuelve solo a favor de GitHub si choca, el resto mergea normal
+#      SUMA (no se descarta ninguna) si choca, el resto mergea normal
 #   5. git push     -> sube todo junto
 #
 # Si el script se detiene con "ERROR", léelo -- significa que algo real pasó
@@ -68,14 +74,32 @@ if ($LASTEXITCODE -ne 0) {
     # versiones línea por línea como con texto, así que CUALQUIER choque ahí
     # (vos corriste "py run.py --retailer X" en tu compu el mismo día que
     # corrió el bot en GitHub) sale como conflicto real, aunque el resto del
-    # commit esté perfecto. Como esa base de datos la repuebla el bot todos
-    # los días desde las webs en vivo, la versión de GitHub manda: nos
-    # quedamos con esa y de paso avisamos, en vez de trabar el push cada vez.
+    # commit esté perfecto. En vez de quedarnos con una sola versión (lo que
+    # borraría en silencio capturas reales del lado descartado), sumamos las
+    # dos con merge_precios_db.py -- la restricción UNIQUE de la tabla evita
+    # duplicados, así que no hay riesgo de "duplicar" precios.
     $conflictos = git diff --name-only --diff-filter=U
     if ($conflictos -and ($conflictos.Trim() -eq "data/precios.db")) {
         Write-Host "   Conflicto solo en data/precios.db (normal si probaste retailers en tu compu hoy)." -ForegroundColor Yellow
-        Write-Host "   Nos quedamos con la version de GitHub (la del bot diario) y seguimos." -ForegroundColor Yellow
-        git checkout --theirs -- data/precios.db
+        Write-Host "   Sumando tu version y la de GitHub (no se descarta ninguna fila)..." -ForegroundColor Yellow
+
+        # OJO: se usa "cmd /c" para el ">" a propósito -- el redireccionamiento
+        # nativo de PowerShell reinterpreta la salida como texto y corrompe
+        # un archivo binario como un .db de SQLite. cmd.exe lo deja tal cual.
+        cmd /c "git show :2:data/precios.db > precios_ours_temp.db"
+        cmd /c "git show :3:data/precios.db > precios_theirs_temp.db"
+
+        py merge_precios_db.py precios_ours_temp.db precios_theirs_temp.db data/precios.db
+        $mergeOk = ($LASTEXITCODE -eq 0)
+
+        Remove-Item -ErrorAction SilentlyContinue precios_ours_temp.db, precios_theirs_temp.db
+
+        if (-not $mergeOk) {
+            Write-Host "ERROR: merge_precios_db.py falló. Revisa que tengas Python instalado (py) y vuelve a intentar." -ForegroundColor Red
+            Write-Host "Mientras tanto, el merge quedó a medias -- corre 'git status' antes de tocar nada más." -ForegroundColor Red
+            exit 1
+        }
+
         git add data/precios.db
         git commit --no-edit
         if ($LASTEXITCODE -ne 0) {
