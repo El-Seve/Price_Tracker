@@ -1,5 +1,5 @@
 {
-  "generado": "2026-09-17T19:59:52",
+  "generado": "2026-09-19T07:28:41",
   "fecha_captura": "2026-09-17",
   "resumen": {
     "total_ofertas_honor_hoy": 1084,
@@ -17,7 +17,7 @@
     "dias_de_historial": 11
   },
   "cobertura": {
-    "retailers_configurados": 29,
+    "retailers_configurados": 30,
     "retailers_con_datos_hoy": 24,
     "detalle": [
       {
@@ -175,6 +175,12 @@
         "filas": 14,
         "filas_honor": 0,
         "ok": true
+      },
+      {
+        "retailer": "Shopstar",
+        "filas": 0,
+        "filas_honor": 0,
+        "ok": false
       },
       {
         "retailer": "Tottus",
