@@ -371,8 +371,9 @@ def main():
         honor_rows = [r for r in all_rows if r["marca"] == "HONOR"]
         with open(args.export_csv, "w", newline="", encoding="utf-8") as f:
             writer = csv.DictWriter(f, fieldnames=["retailer", "categoria", "marca", "modelo",
-                                                     "precio_regular", "precio_oferta",
-                                                     "vendedor", "vendedor_tercero", "url"])
+                                                     "precio_regular", "precio_oferta", "precio_tarjeta",
+                                                     "vendedor", "vendedor_tercero", "url"],
+                                     extrasaction="ignore")
             writer.writeheader()
             writer.writerows(all_rows)
         print(f"\nExportado a {args.export_csv} ({len(all_rows)} filas, {len(honor_rows)} de Honor)")
