@@ -285,6 +285,12 @@ def run_juntoz_playwright(retailer_cfg: dict, target_brands: set[str]) -> list[d
             textos_por_marca[marca] = juntoz.fetch_por_marca(marca, retailer_nombre=retailer_cfg["nombre"])
         except Exception as e:
             print(f"[!] {retailer_cfg['nombre']} / {marca} falló: {e}", file=sys.stderr)
+    # Tienda de marca dedicada honor.juntoz.com (ver adapters/juntoz.py) -- se
+    # agrega aparte porque la búsqueda genérica de arriba no la encuentra.
+    try:
+        textos_por_marca["HONOR_TIENDA_DEDICADA"] = juntoz.fetch_tienda_honor(retailer_nombre=retailer_cfg["nombre"])
+    except Exception as e:
+        print(f"[!] {retailer_cfg['nombre']} / tienda Honor falló: {e}", file=sys.stderr)
     return juntoz.extract_rows(textos_por_marca, "Smartphones", retailer_cfg["nombre"], target_brands)
 
 

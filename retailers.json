@@ -114,6 +114,15 @@
       "nota": "Confirmado 06/09/2026: VTEX estándar. 46 SKUs Honor en la primera prueba (catálogo grande, 399 filas totales)."
     },
     {
+      "nombre": "Shopstar",
+      "plataforma": "vtex",
+      "base_domain": "https://www.shopstar.pe",
+      "categorias": {
+        "Smartphones": "tecnologia/telefonia/celulares"
+      },
+      "nota": "AGREGADO 18/09/2026 al validar el Excel de links de Sany ('Products Links of SANY.xlsx') -- no estaba en el directorio original. Confirmado VTEX estándar (mismo adaptador vtex.py, sin cambios): 8 SKUs Honor y el vendedor 'Sany Peru' detectados en la primera prueba de la categoría de celulares (794 productos totales). Reusa vtex.py, que ya recorre todos los sellers marketplace por producto -- Sany queda cubierto automáticamente."
+    },
+    {
       "nombre": "Hiraoka",
       "plataforma": "magento_html",
       "categorias": {
@@ -240,7 +249,7 @@
     {
       "nombre": "Juntoz",
       "plataforma": "juntoz_playwright",
-      "nota": "NUEVO 14/09/2026 -- NO validado en vivo todavía. Antes en 'no_soportados' por no identificar la plataforma; confirmado desde afuera (14/09/2026) que es un marketplace real sobre Next.js con 'honor' mencionado en el texto de la home y del buscador, pero sin __NEXT_DATA__ ni API pública visible en el HTML crudo -- los datos cargan client-side, necesita browser real. Este adaptador busca por marca con el buscador propio del sitio (juntoz.com/busqueda?q=<marca>) en vez de una categoría fija, con el mismo parseo por patrón + respaldo por LLM que Ripley/Movistar/Bitel. Probar con 'python run.py --retailer Juntoz'. Adaptador: adapters/juntoz.py."
+      "nota": "ACTUALIZADO 18/09/2026 al validar el Excel de links de Sany. La búsqueda genérica (juntoz.com/busqueda?q=honor) da 0 filas porque los productos Honor de Sany viven en una tienda de marca dedicada aparte: honor.juntoz.com/p/<slug> (confirmado con curl, HTTP 200). El adaptador ahora agrega un fetch extra de esa tienda (adapters/juntoz.py: fetch_tienda_honor), además de seguir buscando otras marcas por el buscador genérico para comparación con la competencia. Sigue sin __NEXT_DATA__ ni JSON-LD -- necesita browser real (Playwright), mismo parseo por patrón + respaldo LLM que Ripley/Movistar/Bitel. NO validado en vivo todavía -- probar con 'python run.py --retailer Juntoz'."
     },
     {
       "nombre": "Qué Tal Compra (QTC)",
