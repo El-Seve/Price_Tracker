@@ -46,6 +46,6 @@ jobs:
         run: |
           git config user.name "price-tracker-bot"
           git config user.email "actions@github.com"
-          git add data/ docs/dashboard_data.json
+          git add "data/captura_$(date +%Y-%m-%d).csv" docs/dashboard_data.json
           git diff --cached --quiet || git commit -m "Captura de precios $(date +%Y-%m-%d)"
           git push
